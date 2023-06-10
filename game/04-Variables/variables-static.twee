@@ -1,18 +1,30 @@
 :: Widgets variablesStatic [widget]
-<<widget "variablesStatic">><<nobr>>
+<<widget "variablesStatic">>
 /*This is for static variables that will not change during gameplay*/
 /*These will not be saved to saves and are best when they are required in multiple location
 and are required for processing for loops, default objects, etc.*/
 /*Can be found at 'SugarCube.setup'*/
 
 <<set setup.test to "testing">>
-<<set setup.baseNPC = {penis : 0, vagina: 0, breastsdesc: 0, chest: 0, lactation: 0, lefthand: 0, righthand: 0, anus: 0, mouth: 0, gender: 0, description: 0, insecurity: 0, pronoun: 0, pronouns: {he: 0, his: 0}, penissize: 0, breastsize: 0, buttsize: 0, ballssize: 0, penisdesc: 0, breastdesc: 0, health: 0, skincolour: 0, teen: 0, adult: 0, intro:0, speechpenisescape: 0, speechvaginaescape: 0, speechanusescape:0}>>
+<<set setup.baseNPC = {
+	"chastity": { penis: "", vagina: "", anus: "" },
+	"location": {},
+	"skills": {},
+	"pronouns": {},
+	"traits": []
+}>>
 
 <<clothing_data>>
 <<init_bodywriting_objects>>
 <<init_plant_objects>>
+<<init_locations>>
+<<init_tips>>
 
-<<set setup.baseNNPC = {penis : 0, vagina: 0, gender: 0, description: 0, title: 0, insecurity: 0, pronoun: 0, penissize: 0, penisdesc: 0, buttsize: 0, ballssize: 0, breastsize: 0, breastdesc: 0, breastsdesc: 0, skincolour: 0, teen: 0, adult: 0, init: 0, intro: 0, type: 0, trust: 0, love: 0, dom: 0, lust: 0, rage: 0, state: 0, trauma: 0, eyeColour: 0, hairColour: 0}>>
+<<set setup.baseNNPC = {penis : 0, vagina: 0, gender: "none", description: 0, title: 0, insecurity: 0, pronoun: "none", penissize: 0, penisdesc: "none", bottomsize: 0, ballssize: 0, breastsize: 0, breastdesc: 0, breastsdesc: 0, skincolour: 0, teen: 0, adult: 0, init: 0, intro: 0, type: "human", trust: 0, love: 0, dom: 0, lust: 0, rage: 0, state: "", trauma: 0, eyeColour: 0, hairColour: 0, chastity: {penis: "", vagina: "", anus: ""}}>>
+<<set setup.NPCNameList = ["Avery","Bailey","Briar","Charlie","Darryl","Doren","Eden","Gwylan","Harper","Jordan","Kylar","Landry","Leighton","Mason","Morgan","River","Robin","Sam","Sirris","Whitney","Winter","Black Wolf","Niki","Quinn","Remy","Alex","Great Hawk","Wren","Sydney","Ivory Wraith"]>>
+
+/* this initialises the C.npc object */
+<<run initCNPC()>>
 
 <<set setup.skinColor to {
 	"light": {"hStart": 30, "hEnd": 47, "sStart": 0.15, "sEnd": 0.30,"bStart": 4.3, "bEnd": 3.4},
@@ -23,7 +35,7 @@ and are required for processing for loops, default objects, etc.*/
 		{"hStart": 47, "hEnd": 50, "sStart": 0.30, "sEnd": 0.32,"bStart": 3.4, "bEnd": 1.55},
 		{"hStart": 50, "hEnd": 50, "sStart": 0.32, "sEnd": 0.4,"bStart": 1.55, "bEnd": 0.6},
 	],
-	"ylight": {"hStart": 60, "hEnd": 60, "sStart": 0.25, "sEnd": 0.25,"bStart": 4.4, "bEnd": 3.6},
+	"ylight": {"hStart": 50, "hEnd": 55, "sStart": 0.20, "sEnd": 0.20,"bStart": 4.4, "bEnd": 3.6},
 	"ymedium": {"hStart": 60, "hEnd": 60, "sStart": 0.25, "sEnd": 0.25,"bStart": 3.6, "bEnd": 2.0},
 	"ydark": {"hStart": 60, "hEnd": 60, "sStart": 0.25, "sEnd": 0.25,"bStart": 2.0, "bEnd": 1.0},
 	"ygyaru": [
@@ -55,7 +67,7 @@ and are required for processing for loops, default objects, etc.*/
 			"breasts1":"img/bodyRed/breasts/breasts1.png",
 			"breasts1_clothed":"img/bodyRed/breasts/breasts1.png",
 			"breasts2":"img/bodyRed/breasts/breasts2.png",
-			"breasts2_clothed":"img/bodyRed/breasts/breasts1.png",
+			"breasts2_clothed":"img/bodyRed/breasts/breasts2.png",
 			"breasts3":"img/bodyRed/breasts/breasts3.png",
 			"breasts3_clothed":"img/bodyRed/breasts/breasts3_clothed.png",
 			"breasts4":"img/bodyRed/breasts/breasts4.png",
@@ -64,22 +76,34 @@ and are required for processing for loops, default objects, etc.*/
 			"breasts5_clothed":"img/bodyRed/breasts/breasts6_clothed.png",
 			"breasts6":"img/bodyRed/breasts/breasts6.png",
 			"breasts6_clothed":"img/bodyRed/breasts/breasts6_clothed.png",
+			"penis-2":"img/bodyRed/penis/penis-2.png",
+			"penis-1":"img/bodyRed/penis/penis-1.png",
+			"penis0":"img/bodyRed/penis/penis0.png",
 			"penis1":"img/bodyRed/penis/penis1.png",
 			"penis2":"img/bodyRed/penis/penis2.png",
 			"penis3":"img/bodyRed/penis/penis3.png",
 			"penis4":"img/bodyRed/penis/penis4.png",
 			"penis5":"img/bodyRed/penis/penis5.png",
+			"penisnoballs-2":"img/bodyRed/penisnoballs/penis-2.png",
+			"penisnoballs-1":"img/bodyRed/penisnoballs/penis-1.png",
+			"penisnoballs0":"img/bodyRed/penisnoballs/penis0.png",
 			"penisnoballs1":"img/bodyRed/penisnoballs/penis1.png",
 			"penisnoballs2":"img/bodyRed/penisnoballs/penis2.png",
 			"penisnoballs3":"img/bodyRed/penisnoballs/penis3.png",
 			"penisnoballs4":"img/bodyRed/penisnoballs/penis4.png",
 			"penisnoballs5":"img/bodyRed/penisnoballs/penis5.png",
 			"penis_chastity":"img/bodyRed/penis/penis_chastity.png",
+			"penis_virgin-2":"img/bodyRed/penis/penis_virgin-2.png",
+			"penis_virgin-1":"img/bodyRed/penis/penis_virgin-1.png",
+			"penis_virgin0":"img/bodyRed/penis/penis_virgin0.png",
 			"penis_virgin1":"img/bodyRed/penis/penis_virgin1.png",
 			"penis_virgin2":"img/bodyRed/penis/penis_virgin2.png",
 			"penis_virgin3":"img/bodyRed/penis/penis_virgin3.png",
 			"penis_virgin4":"img/bodyRed/penis/penis_virgin4.png",
 			"penis_virgin5":"img/bodyRed/penis/penis_virgin5.png",
+			"penis_virginnoballs-2":"img/bodyRed/penis/penis_virgin-2.png",
+			"penis_virginnoballs-1":"img/bodyRed/penis/penis_virgin-1.png",
+			"penis_virginnoballs0":"img/bodyRed/penis/penis_virgin0.png",
 			"penis_virginnoballs1":"img/bodyRed/penis/penis_virgin1.png",
 			"penis_virginnoballs2":"img/bodyRed/penisnoballs/penis_virgin2.png",
 			"penis_virginnoballs3":"img/bodyRed/penisnoballs/penis_virgin3.png",
@@ -110,7 +134,7 @@ and are required for processing for loops, default objects, etc.*/
 			"breasts1":"img/body/breasts/breasts1.png",
 			"breasts1_clothed":"img/body/breasts/breasts1.png",
 			"breasts2":"img/body/breasts/breasts2.png",
-			"breasts2_clothed":"img/body/breasts/breasts1.png",
+			"breasts2_clothed":"img/body/breasts/breasts2.png",
 			"breasts3":"img/body/breasts/breasts3.png",
 			"breasts3_clothed":"img/body/breasts/breasts3_clothed.png",
 			"breasts4":"img/body/breasts/breasts4.png",
@@ -119,22 +143,34 @@ and are required for processing for loops, default objects, etc.*/
 			"breasts5_clothed":"img/body/breasts/breasts6_clothed.png",
 			"breasts6":"img/body/breasts/breasts6.png",
 			"breasts6_clothed":"img/body/breasts/breasts6_clothed.png",
+			"penis-2":"img/body/penis/penis-2.png",
+			"penis-1":"img/body/penis/penis-1.png",
+			"penis0":"img/body/penis/penis0.png",
 			"penis1":"img/body/penis/penis1.png",
 			"penis2":"img/body/penis/penis2.png",
 			"penis3":"img/body/penis/penis3.png",
 			"penis4":"img/body/penis/penis4.png",
 			"penis5":"img/body/penis/penis5.png",
+			"penisnoballs-2":"img/body/penisnoballs/penis-2.png",
+			"penisnoballs-1":"img/body/penisnoballs/penis-1.png",
+			"penisnoballs0":"img/body/penisnoballs/penis0.png",
 			"penisnoballs1":"img/body/penisnoballs/penis1.png",
 			"penisnoballs2":"img/body/penisnoballs/penis2.png",
 			"penisnoballs3":"img/body/penisnoballs/penis3.png",
 			"penisnoballs4":"img/body/penisnoballs/penis4.png",
 			"penisnoballs5":"img/body/penisnoballs/penis5.png",
 			"penis_chastity":"img/body/penis/penis_chastity.png",
+			"penis_virgin-2":"img/body/penis/penis_virgin-2.png",
+			"penis_virgin-1":"img/body/penis/penis_virgin-1.png",
+			"penis_virgin0":"img/body/penis/penis_virgin0.png",
 			"penis_virgin1":"img/body/penis/penis_virgin1.png",
 			"penis_virgin2":"img/body/penis/penis_virgin2.png",
 			"penis_virgin3":"img/body/penis/penis_virgin3.png",
 			"penis_virgin4":"img/body/penis/penis_virgin4.png",
 			"penis_virgin5":"img/body/penis/penis_virgin5.png",
+			"penis_virginnoballs-2":"img/body/penisnoballs/penis_virgin-2.png",
+			"penis_virginnoballs-1":"img/body/penisnoballs/penis_virgin-1.png",
+			"penis_virginnoballs0":"img/body/penisnoballs/penis_virgin0.png",
 			"penis_virginnoballs1":"img/body/penisnoballs/penis_virgin1.png",
 			"penis_virginnoballs2":"img/body/penisnoballs/penis_virgin2.png",
 			"penis_virginnoballs3":"img/body/penisnoballs/penis_virgin3.png",
@@ -153,6 +189,7 @@ and are required for processing for loops, default objects, etc.*/
 			"doggyactiveblush3":"img/sex/doggyRed/active/body/doggyactiveblush3.png",
 			"doggyactiveblush4":"img/sex/doggyRed/active/body/doggyactiveblush4.png",
 			"doggyactiveblush5":"img/sex/doggyRed/active/body/doggyactiveblush5.png",
+			"doggyactivemouth":"img/sex/doggyRed/active/body/doggyactivemouth.png",
 			"freckles":"img/sex/doggyRed/active/body/freckles.png",
 			"breastsTiny":"img/sex/doggyRed/active/body/doggyactivebreaststiny.png",
 			"breastsSmall":"img/sex/doggyRed/active/body/doggyactivebreastssmall.png",
@@ -188,7 +225,8 @@ and are required for processing for loops, default objects, etc.*/
 			"activedolphinrighthand":"img/sex/doggyRed/frontbeast/dolphin/activedolphinrighthand.png",
 			"activedolphinrighthandpenis":"img/sex/doggyRed/frontbeast/dolphin/activedolphinrighthandpenis.png",
 			"doggyactiveshadow":"img/sex/doggyRed/active/body/doggyactiveshadow.png",
-			"doggyactivechastitycagepenis":"img/sex/doggyRed/active/body/doggyactivechastitycagepenis.png"
+			"doggyactivechastitycagepenis":"img/sex/doggyRed/active/body/doggyactivechastitycagepenis.png",
+			"doggyactivestrapon":"img/sex/doggyRed/active/body/doggyactivepenisvirgin.png"
 		},
 		"f":{
 			"doggyactivebase":"img/sex/doggy/active/body/doggyactivebase.png",
@@ -201,6 +239,7 @@ and are required for processing for loops, default objects, etc.*/
 			"doggyactiveblush3":"img/sex/doggy/active/body/doggyactiveblush3.png",
 			"doggyactiveblush4":"img/sex/doggy/active/body/doggyactiveblush4.png",
 			"doggyactiveblush5":"img/sex/doggy/active/body/doggyactiveblush5.png",
+			"doggyactivemouth":"img/sex/doggy/active/body/doggyactivemouth.png",
 			"freckles":"img/sex/doggy/active/body/freckles.png",
 			"breastsSmall":"img/sex/doggy/active/body/doggyactivebreastssmall.png",
 			"breastsLarge":"img/sex/doggy/active/body/doggyactivebreastslarge.png",
@@ -254,6 +293,7 @@ and are required for processing for loops, default objects, etc.*/
 			"activeblush3":"img/sex/missionaryRed/active/body/activeblush3.png",
 			"activeblush4":"img/sex/missionaryRed/active/body/activeblush4.png",
 			"activeblush5":"img/sex/missionaryRed/active/body/activeblush5.png",
+			"activemouth":"img/sex/missionaryRed/active/body/activemouth.png",
 			"freckles":"img/sex/missionaryRed/active/body/freckles.png",
 			"breastsTiny":"img/sex/missionaryRed/active/body/activebreaststiny.png",
 			"breastsSmall":"img/sex/missionaryRed/active/body/activebreastssmall.png",
@@ -276,7 +316,9 @@ and are required for processing for loops, default objects, etc.*/
 			"activeshadow":"img/sex/missionaryRed/active/body/activeshadow.png",
 			"activechastitycagepenis":"img/sex/missionaryRed/active/body/activechastitycagepenis.png",
 			"activechastitycagedownpenis":"img/sex/missionaryRed/active/body/activechastitycagedownpenis.png",
-			"activeclosedmouth":"img/sex/missionaryRed/active/body/activeclosedmouth.png"
+			"activeclosedmouth":"img/sex/missionaryRed/active/body/activeclosedmouth.png",
+			"activestrapon":"img/sex/missionaryRed/active/body/activestrapon.png",
+			"activestrapondown":"img/sex/missionaryRed/active/body/activestrapondown.png"
 		},
 		"f":{
 			"activearmsbound":"img/sex/missionary/active/body/activearmsbound.png",
@@ -293,6 +335,7 @@ and are required for processing for loops, default objects, etc.*/
 			"activeblush3":"img/sex/missionary/active/body/activeblush3.png",
 			"activeblush4":"img/sex/missionary/active/body/activeblush4.png",
 			"activeblush5":"img/sex/missionary/active/body/activeblush5.png",
+			"activemouth":"img/sex/missionary/active/body/activemouth.png",
 			"freckles":"img/sex/missionary/active/body/freckles.png",
 			"breastsTiny":"img/sex/missionary/active/body/activebreaststiny.png",
 			"breastsSmall":"img/sex/missionary/active/body/activebreastssmall.png",
@@ -315,7 +358,9 @@ and are required for processing for loops, default objects, etc.*/
 			"activeshadow":"img/sex/missionary/active/body/activeshadow.png",
 			"activechastitycagepenis":"img/sex/missionary/active/body/activechastitycagepenis.png",
 			"activechastitycagedownpenis":"img/sex/missionary/active/body/activechastitycagedownpenis.png",
-			"activeclosedmouth":"img/sex/missionary/active/body/activeclosedmouth.png"
+			"activeclosedmouth":"img/sex/missionary/active/body/activeclosedmouth.png",
+			"activestrapon":"img/sex/missionary/active/body/activestrapon.png",
+			"activestrapondown":"img/sex/missionary/active/body/activestrapondown.png"
 		}
 	},
 	"close":{
@@ -340,7 +385,8 @@ and are required for processing for loops, default objects, etc.*/
 				"penisimminent1":"img/sex/closeRed/missionary/beast/penisimminent1.png",
 				"penisnoballs":"img/sex/closeRed/missionary/beast/penisnoballs.png",
 				"penisentrancenoballs":"img/sex/closeRed/missionary/beast/penisentrancenoballs.png",
-				"penisimminentnoballs":"img/sex/closeRed/missionary/beast/penisimminentnoballs.png"
+				"penisimminentnoballs":"img/sex/closeRed/missionary/beast/penisimminentnoballs.png",
+				"chest":"img/sex/closeRed/chest/"
 			},
 			"f":{
 				"anus":"img/sex/close/missionary/anus.png",
@@ -362,7 +408,8 @@ and are required for processing for loops, default objects, etc.*/
 				"penisimminent1":"img/sex/close/missionary/beast/penisimminent1.png",
 				"penisnoballs":"img/sex/close/missionary/beast/penisnoballs.png",
 				"penisentrancenoballs":"img/sex/close/missionary/beast/penisentrancenoballs.png",
-				"penisimminentnoballs":"img/sex/close/missionary/beast/penisimminentnoballs.png"
+				"penisimminentnoballs":"img/sex/close/missionary/beast/penisimminentnoballs.png",
+				"chest":"img/sex/close/chest/"
 			}
 
 		},
@@ -387,7 +434,8 @@ and are required for processing for loops, default objects, etc.*/
 				"penisimminent1":"img/sex/closeRed/doggy/beast/penisimminent1.png",
 				"penisnoballs":"img/sex/closeRed/doggy/beast/penisnoballs.png",
 				"penisentrancenoballs":"img/sex/closeRed/doggy/beast/penisentrancenoballs.png",
-				"penisimminentnoballs":"img/sex/closeRed/doggy/beast/penisimminentnoballs.png"
+				"penisimminentnoballs":"img/sex/closeRed/doggy/beast/penisimminentnoballs.png",
+				"chest":"img/sex/closeRed/chest/"
 			},
 			"f":{
 				"anus":"img/sex/close/doggy/anus.png",
@@ -409,10 +457,215 @@ and are required for processing for loops, default objects, etc.*/
 				"penisimminent1":"img/sex/close/doggy/beast/penisimminent1.png",
 				"penisnoballs":"img/sex/close/doggy/beast/penisnoballs.png",
 				"penisentrancenoballs":"img/sex/close/doggy/beast/penisentrancenoballs.png",
-				"penisimminentnoballs":"img/sex/close/doggy/beast/penisimminentnoballs.png"
+				"penisimminentnoballs":"img/sex/close/doggy/beast/penisimminentnoballs.png",
+				"chest":"img/sex/close/chest/"
 			}
 		}
 	}
 }>>
 
-<</nobr>><</widget>>
+<<set setup.shadowImage to {
+	"doggy": [
+		"sexbase", "sexlegsdoggy", "sexbasefront", "beastforeground", "shadowman", "shadowmanbackground", "shadowmanforeground"
+	],
+	"missionary": [
+		"sexbase", "sexlower", "sexhair", "sexbasefront", "layer-sexwings", "halo-front", "sexrightleg", "sexarmsbound", "sexaboveclothes", "foreground", "sexbaseoverlay", "beastforeground", "shadowman", "shadowmanbackground", "shadowmanforeground"
+	]
+}>>
+
+<<set setup.bodyliquid to {
+	/* edit the bodyparts list to add a new bodypart, or the liquidtypes list to add a new liquid */
+	"bodyparts": [
+		"neck","rightarm","leftarm","thigh","bottom","tummy","chest","face","hair","feet","vaginaoutside","vagina","penis","anus","mouth"
+	],
+	"innerbodyparts": [
+		"vagina","anus","mouth"
+	],
+	"liquidtype": [
+		"goo", "semen", "nectar"
+	],
+	combined(bodypart){
+		return $player.bodyliquid[bodypart].goo + $player.bodyliquid[bodypart].semen + $player.bodyliquid[bodypart].nectar;
+	}
+}>>
+
+<<set setup.bodyparts to ["forehead", "left_cheek", "right_cheek", "left_shoulder", "right_shoulder", "breasts", "back", "left_bottom", "right_bottom", "pubic", "left_thigh", "right_thigh"]>>
+
+<<set setup.clothingLayer to {
+	"all": ["over_upper","over_lower","over_head","upper","lower","under_upper","under_lower","head","face","neck","hands","legs","feet"],
+	"body": ["upper","lower","under_upper","under_lower","head","face","neck","hands","legs","feet"],
+	"torso": ["over_upper","over_lower","upper","lower","under_upper","under_lower"],
+	"torso_inner": ["upper","lower","under_upper","under_lower"],
+	"torso_outer": ["over_upper","over_lower","upper","lower"],
+	"over": ["over_upper","over_lower","over_head"],
+	"upper": ["upper", "under_upper"],
+	"lower": ["lower","under_lower"]
+}>>
+
+<<set setup.actionsTypes to {
+	'personTypes': [
+		'Everyone', 'Strangers', 'Acquaintances', 'Alternative', 'Defiant', 'Submissive', 'Animals', 'Tentacles', 'Bailey', 'Robin', 'Whitney', 'Kylar', 'Sydney', 'Eden', 'Avery', 'Leighton'
+	],
+	'combatTypes': [
+		'rape', 'consensual'
+	],
+	'actionTypes': [
+		'leftaction', 'rightaction', 'feetaction', 'mouthaction', 'penisaction', 'vaginaaction', 'anusaction', 'askActions', 'regrab'
+	]
+}>>
+
+<<set setup.majorAreas to [
+	"Orphanage", "Bedroom", "Barb Street", "Cliff Street", "Connudatus Street", "Danube Street", "Domus Street", "Elk Street",
+	"Harvest Street", "High Street", "Mer Street", "Nightingale Street", "Oxford Street", "Starfish Street", "Wolf Street",
+	"Residential alleyways", "Commercial alleyways", "Industrial alleyways", "Park", "Hallways", "Brothel", "Strip Club",
+	"Beach", "Ocean Breeze", "Docks Work", "Residential Drain", "Commercial Drain", "Industrial Drain", "Forest", "Farmland",
+	"Livestock Field", "Moor", "Forest Wolf Cave", "Wolf Cave", "Wolf Cave Clearing", "Asylum", "Asylum Cell", "Underground Cell", "Prison Cell"
+]>>
+
+<<set setup.clothingStateIndex to {"chest": 6, "midriff": 5, "waist": 4, "thighs": 3, "knees": 2, "ankles": 1}>>
+<<set setup.clothingStateNextDown to {
+	"chest": "midriff",
+	"midriff": "waist",
+	"waist": "thighs",
+	"thighs": "knees",
+	"knees": "ankles",
+	"ankles": 0,
+}>>
+<<set setup.clothingStateNextUp to {
+	"chest": 0,
+	"midriff": "chest",
+	"waist": "midriff",
+	"thighs": "waist",
+	"knees": "thighs",
+	"ankles": "knees",
+}>>
+
+<<set setup.npcPenisRemarks to {
+	"big": ["그것을 보고 당신의 몸에서 힘이 빠지는 것을 느낀다.","그것을 보고 당신은 몸서리친다.","그 크기를 보고 무의식중에 신음소리를 낸다.","그 거대한 두께에 헉 소리를 낸다.","그것을 보고 있자니 당신의 넓적다리에 힘이 풀리는 것을 느낀다."],
+	"small": ["그것을 보고 당신은 비웃음을 꾹 참는다.","그것을 보고 당신은 실실 웃는다.","그것을 보고 당신은 나오려는 웃음을 꾹 참는다.","그것을 보고 당신은 킥킥 웃으려는 것을 꾹 참는다.","당신은 웃지 않으려 노력한다."]
+}>>
+
+<<set setup.breastsizes to ["", "약간 솟아오른", "조그마한", "작은", "앙증맞은", "평범한", "봉긋한", "큰", "풍만한", "커다란", "매우 큰", "엄청난", "거대한"]>>
+
+<<set setup.NPCVirginityTypes to {"anal": false, "oral": false, "penile": false, "vaginal": false, "handholding": false, "temple": false, "kiss": false}>>
+<<set setup.NPCVirginityTypesVirgin to {"anal": true, "oral": true, "penile": true, "vaginal": true, "handholding": true, "temple": false, "kiss": true}>>
+
+<<set setup.pharmacyItems to {
+	"penis_reduction": {
+		"type": "penis reduction",
+		"name": "penis reduction pills",
+		"price": 15000,
+	},
+	"penis_growth": {
+		"type": "penis growth",
+		"name": "penis growth pills",
+		"price": 15000,
+	},
+	"penis_blocker": {
+		"type": "penis blocker",
+		"name": "penis growth blocker pills",
+		"price": 20000,
+	},
+	"breast_reduction": {
+		"type": "breast reduction",
+		"name": "breast reduction pills",
+		"price": 15000,
+	},
+	"breast_growth": {
+		"type": "breast growth",
+		"name": "breast growth pills",
+		"price": 15000,
+	},
+	"breast_blocker": {
+		"type": "breast blocker",
+		"name": "breast growth blocker pills",
+		"price": 20000,
+	},
+	"bottom_reduction": {
+		"type": "bottom reduction",
+		"name": "bottom reduction pills",
+		"price": 15000,
+	},
+	"bottom_growth": {
+		"type": "bottom growth",
+		"name": "bottom growth pills",
+		"price": 15000,
+	},
+	"bottom_blocker": {
+		"type": "bottom blocker",
+		"name": "bottom growth blocker pills",
+		"price": 20000,
+	},
+	"condoms": {
+		"type": "condoms",
+		"name": "condoms",
+		"price": 5000,
+	},
+	"pregnancy_test": {
+		"type": "pregnancy test",
+		"name": "pregnancy test",
+		"price": 2500,
+	},
+	"fertility_pills": {
+		"type": "fertility booster",
+		"name": "fertility booster",
+		"price": 50000,
+	},
+	"contraceptive_pills": {
+		"type": "contraceptive",
+		"name": "contraceptive",
+		"price": 25000,
+	},
+	"Morning_After_pill": {
+		"type": "Morning After pill",
+		"name": "Morning After pill",
+		"price": 200,
+	},
+}>>
+
+<<set setup.estateBlackjack to {
+	/*
+	stats don't go down, so you can consider the money to be a temporary bypass ("I have £452501558102 so I'll be fine if I lose"),
+	  while the stat checks give a "I have won 21958125 games, I won't lose" confidence boost
+	 */
+	/* primary requirements given which the player can choose a given ante */
+	"primaryRequirements": [
+		{
+			"message": "최소한 블랙잭 10판을 이기거나, £2,500를 소유하자.",
+			"check": "$estatePersistent.totalRoundsWon gte 10"
+		},
+		{
+			"message": "최소한 £500가 걸린 판에서 이기거나, £5,000를 소유하자.",
+			"check": "$estatePersistent.totalBetMoneyMade gte 50000"
+		},
+		{
+			"message": "최소한 £1,000가 걸린 판에서 이기거나, £10,000를 소유하자.",
+			"check": "$estatePersistent.totalBetMoneyMade gte 100000"
+		}
+	],
+	/* alternatively, the minimum amount of money you need to have for PC to be confident enough to risk betting it */
+	"confidenceMoney": [250000, 500000, 1000000],
+	/*
+	low max bet usually is used by casinos to make sure players don't make more than the casino can pay out (or rather, makes it safer for the casino)
+	however, there's also the fact that you can use low bets, or a small ratio between the min and max bet prevents the usage of the martingale strategy
+	 */
+	"betSteps":    [100,   200,   500   ],
+	"baseMaxBets": [2500,  5000,  10000 ],
+	"anteSizes":   [25000, 50000, 100000],
+}>>
+
+<<set setup.parasiteTypesPerBodypart to {
+	"nipples": ["none", "urchin", "slime"],
+	"penis": ["none", "urchin", "slime"],
+	"clit": ["none", "urchin", "slime"],
+	"bottom": ["none", "urchin", "slime", "maggot"],
+	"left_thigh": ["none", "maggot"],
+	"right_thigh": ["none", "maggot"],
+	"left_arm": ["none", "maggot"],
+	"right_arm": ["none", "maggot"],
+	"left_ear": ["none", "slime"],
+	"right_ear": ["none", "slime"],
+	"tummy": ["none", "maggot"],
+}>>
+
+<</widget>>

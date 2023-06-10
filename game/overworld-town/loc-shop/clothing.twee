@@ -1,126 +1,182 @@
-:: Clothing Shop [nobr]
-<<if $tryOn.autoReset isnot false>><<tryOnReset>><</if>><<unset $tempDisable>>
-<<set $outside to 0>><<set $location to "shopping_centre">><<effects>>
-<input type="button" value="DEFAULT OPTIONS" onclick="Wikifier.wikifyEval('<<shopDefaultOptionsToggle>>');">
-<input type="button" value="FILTERS" onclick="Wikifier.wikifyEval('<<shopClothingFilterToggle>>');">
-<div id="shopDefault" class="hidden">
-	<<shopDefaultOptions>>
+:: Clothing Shop [exitCheckBypass]
+<div id="clothingShop-div" class="main-shop-div">
+	<<clothingShop-main>>
 </div>
-<br>
-<div id="shopClothingFilter" class="hidden no-numberify">
-	<<shopClothingFilterSettings>>
-</div>
-<br>
-당신은 옷가게에 있다. 다양한 종류의 평범한 옷들이 있지만, 이국적인 것을 찾는다면 다른 곳으로 가야 한다.
-<br><br>
 
-<<if $stress gte 10000>>
-<<passoutshop>>
-<<else>>
-	<<if $hour is 21>>
-		닫힌 시간이다. 보안요원이 모두를 밖으로 이동시킨다.<<if $exposed gte 1>>이런 차림새의 당신이 보안요원에게 얼마나 노출되어 있는지를 깨닫는 순간 공포가 일어난다.<</if>>
-		<br><br>
+:: Clothing Shop Widgets [widget]
 
-		<<if $exposed lte 0>>
-			<<link [[밖으로 나간다.|High Street]]>><</link>>
-			<br>
-		<<else>>
-			<<link [[끝날때까지 숨는다. (1:00)|Clothing Shop]]>><<pass 1 hour>><</link>>
-		<</if>>
+<<widget "clothingShop-main">>
+	<<if $tryOn.autoReset isnot false>><<tryOnReset>><</if>><<unset $tempDisable>>
+	<<set $outside to 0>><<set $location to "shopping_centre">><<effects>>
+	<<set $shopName = "clothing">>
+
+	당신은 옷가게에 있다. 다양한 종류의 평범한 옷들이 있지만, 이국적인 것을 찾는다면 다른 곳으로 가야 한다.
+	<br><br>
+
+	<<if $stress gte $stressmax>>
+	<<passoutshop>>
 	<<else>>
-		<<tryOnStats>><<unset $shopListStartCount>>
-
-		<<if $daystate is "night">>
-			당신은 어둠 속에서 혼자 있다.
+		<<if $hour is 21>>
+			폐점 시간이다. 보안요원이 모두를 밖으로 이동시킨다.<<if $exposed gte 1>>당신은 이렇게 노출된 차림으로 보안요원에게 발각된다면 당신이 얼마나 부끄러울지를 깨닫자 공포가 일어난다..<</if>>
 			<br><br>
-		<<elseif $exposed gte 1>>
-			당신은 자신의 존엄을 지키기 위해 옷가게 안에 숨어있다.
-			<br><br>
-		<</if>>
-		<<warmth_description>>
-		<br><br>
-		<<if $debug is 1>>
-			<img id="icon" src="img/misc/icon/clothes/categories/overoutfit.png">
-			[[한 벌 겉옷 보기|Over Outfit Shop]]
-			<br><br>
-		<</if>>
-		<img id="icon" src="img/misc/icon/clothes/categories/outfit.png">
-		[[한 벌 옷 보기|Outfit Shop]]
-		<br>
-		<img id="icon" src="img/misc/icon/clothes/categories/upper.png">
-		[[상의 보기|Top Shop]]
-		<br>
-		<img id="icon" src="img/misc/icon/clothes/categories/lower.png">
-		[[하의 보기|Bottom Shop]]
-		<br><br>
-		<img id="icon" src="img/misc/icon/clothes/categories/underoutfit.png">
-		[[한 벌 속옷 보기|Under Outfit Shop]]
-		<br>
-		<img id="icon" src="img/misc/icon/clothes/categories/underupper.png">
-		[[속옷 상의 보기|Under Top Shop]]
-		<br>
-		<img id="icon" src="img/misc/icon/clothes/categories/underlower.png">
-		[[속옷 하의 보기|Under Bottom Shop]]
-		<br><br>
-		<img id="icon" src="img/misc/icon/clothes/categories/head.png">
-		[[머리 악세서리 보기|Head Shop]]
-		<br>
-		<img id="icon" src="img/misc/icon/clothes/categories/face.png">
-		[[얼굴 악세서리 보기|Face Shop]]
-		<br>
-		<img id="icon" src="img/misc/icon/clothes/categories/neck.png">
-		[[목 악세서리 보기|Neck Shop]]
-		<br>
-		<img id="icon" src="img/misc/icon/clothes/categories/hand.png">
-		[[손 악세서리 보기|Hands Shop]]
-		<br>
-		<img id="icon" src="img/misc/icon/clothes/categories/legs.png">
-		[[레그웨어 보기|Legs Shop]]
-		<br>
-		<img id="icon" src="img/misc/icon/clothes/categories/feet.png">
-		[[신발 보기|Shoe Shop]]
-		<br><br>
-		<<if $clothingrebuy is 1>>
-			[[의류 자동구입 비활성화|Rebuy Shop]]
-			<br>
-		<<else>>
-			[[의류 자동구입 활성화|Rebuy Shop]]
-			<br>
-		<</if>>
 
-		<<if $daystate is "night" and $hour isnot $closinghour and $clothingshoptheft isnot 1>>
-			<<link [[Examine the cash register|Clothing Shop Register]]>><</link>>
-			<br>
-		<</if>>
-
-		<br>
-
-		<<if $daystate is "night" or $tryOn.value is 0>>
-			<<if $daystate is "night" and $clothingShop.spotted is true and $clothingShop.stolenClothes gt 0>>
-				<<link[[떠난다|Clothing Shop Night Guard Found]]>><<shopClothingFilterReset>><<ShowUnderEquip "normal">><<ShowUnderEquip "over">><<set $tryOn.autoReset to true>><</link>>
+			<<if $exposed lte 0>>
+				<<link [[밖으로 나간다|High Street]]>><</link>>
+				<br>
 			<<else>>
-				<<link[[떠난다|Shopping Centre Top]]>><<shopClothingFilterReset>><<ShowUnderEquip "normal">><<ShowUnderEquip "over">><<set $tryOn.autoReset to true>><</link>>
+				<<link [[끝날때까지 숨는다 (1:00)|Clothing Shop]]>><<pass 1 hour>><</link>>
 			<</if>>
+		<<else>>
+			<div id="tryonstats-div"><<tryOnStats>></div>
+			<<unset $shopListStartCount>>
+			<<unset $clothes_choice>>
+			<<set $shopPage = 0>>
+
+			<<if $daystate is "night">>
+				당신은 어둠 속에서 혼자 있다.
+				<br><br>
+			<<elseif $exposed gte 1>>
+				당신은 자신의 존엄을 지키기 위해 옷가게 안에 숨어있다.
+				<br><br>
+			<</if>>
+
+			<span>따뜻함:</span>
+			<<warmthscale>>
+			<div id="warmth-description">
+				<<warmth_description>>
+			</div>
 			<br><br>
-		<<elseif $tryOn.value gt 0>>
-			<<link[[원래 옷을 입는다|$passage]]>><<clothingReset>><</link>>
+			<<clothingcategoryicon "all">>
+			<<link "전부 보기">><<replace "#clothingShop-div">><<AllShop>><</replace>><</link>>
+			<br><br>
+			<<if $debug is 1>>
+				<<clothingcategoryicon "overoutfit">>
+				<<link "원피스 외투 보기">><<replace "#clothingShop-div">><<OverOutfitShop>><</replace>><</link>>
+				<br><br>
+			<</if>>
+			<<clothingcategoryicon "outfit">>
+			<<link "원피스 겉옷 보기">><<replace "#clothingShop-div">><<OutfitShop>><</replace>><</link>>
 			<br>
-			<<if $tryOn.value lt $money>>
-				<<link[[옷을 산다|$passage]]>><<buyTryOnClothes "wear">><</link>>
+			<<clothingcategoryicon "upper">>
+			<<link "상의 보기">><<replace "#clothingShop-div">><<TopShop>><</replace>><</link>>
+			<br>
+			<<clothingcategoryicon "lower">>
+			<<link "하의 보기">><<replace "#clothingShop-div">><<BottomShop>><</replace>><</link>>
+			<br><br>
+			<<clothingcategoryicon "underoutfit">>
+			<<link "원피스 속옷 보기">><<replace "#clothingShop-div">><<UnderOutfitShop>><</replace>><</link>>
+			<br>
+			<<clothingcategoryicon "underupper">>
+			<<link "속옷 상의 보기">><<replace "#clothingShop-div">><<UnderTopShop>><</replace>><</link>>
+			<br>
+			<<clothingcategoryicon "underlower">>
+			<<link "속옷 하의 보기">><<replace "#clothingShop-div">><<UnderBottomShop>><</replace>><</link>>
+			<br><br>
+			<<clothingcategoryicon "head">>
+			<<link "머리 악세서리 보기">><<replace "#clothingShop-div">><<HeadShop>><</replace>><</link>>
+			<br>
+			<<clothingcategoryicon "face">>
+			<<link "얼굴 악세서리 보기">><<replace "#clothingShop-div">><<FaceShop>><</replace>><</link>>
+			<br>
+			<<clothingcategoryicon "neck">>
+			<<link "목 악세서리 보기">><<replace "#clothingShop-div">><<NeckShop>><</replace>><</link>>
+			<br>
+			<<clothingcategoryicon "hand">>
+			<<link "손 악세서리 보기">><<replace "#clothingShop-div">><<HandsShop>><</replace>><</link>>
+			<br>
+			<<clothingcategoryicon "legs">>
+			<<link "레그웨어 보기">><<replace "#clothingShop-div">><<LegsShop>><</replace>><</link>>
+			<br>
+			<<clothingcategoryicon "feet">>
+			<<link "신발 보기">><<replace "#clothingShop-div">><<FeetShop>><</replace>><</link>>
+			/*<br>
+			*<<clothingcategoryicon "strapon">> <!-- disable for now-->
+			*<<link "View Genital wear">><<replace "#clothingShop-div">><<GenitalShop>><</replace>><</link>>*/
+			<br><br>
+			<<run linkifyDivs('.button-back-to-shop')>>
+
+			<<if $clothingrebuy is 1>>
+				<<link [[의류 자동구입 비활성화|Rebuy Shop]]>><</link>>
 				<br>
-				<<link[[옷을 사고 옷장에 보낸다|$passage]]>><<buyTryOnClothes "wardrobe">><</link>>
+			<<else>>
+				<<link [[의류 자동구입 활성화|Rebuy Shop]]>><</link>>
 				<br>
 			<</if>>
-			<<link[[옷을 훔쳐 떠난다|Stolen Clothing Shop Result]]>><<shopClothingFilterReset>><</link>>
+
+			<<if $daystate is "night" and $hour isnot $closinghour and $clothingshoptheft isnot 1>>
+				<<link [[금전등록기를 살펴본다|Clothing Shop Register]]>><</link>>
+				<br>
+			<</if>>
+
 			<br>
+
+			<<if $daystate is "night" or $tryOn.value is 0>>
+				<<if $daystate is "night" and $clothingShop.spotted is true and $clothingShop.stolenClothes gt 0>>
+					<<link [[나간다|Clothing Shop Night Guard Found]]>>
+						<<shopClothingFilterReset>>
+						<<ShowUnderEquip "normal">>
+						<<ShowUnderEquip "over">>
+						<<set $tryOn.autoReset to true>>
+						<<crimeup `$tryOn.value / 100`>>
+						<<shopHoodCheck>>
+					<</link>>
+				<<else>>
+					<<link [[나간다|Shopping Centre Top]]>>
+						<<shopClothingFilterReset>>
+						<<ShowUnderEquip "normal">>
+						<<ShowUnderEquip "over">>
+						<<set $tryOn.autoReset to true>>
+						<<crimeup `$tryOn.value / 100`>>
+						<<shopHoodCheck>>
+					<</link>>
+				<</if>>
+				<<if $tryOn.value gt 0>>
+					<<crime>>
+				<</if>>
+				<br><br>
+			<<elseif $tryOn.value gt 0>>
+				<<link "옷을 반납한다">><<clothingReset>>
+					<<updatesidebarimg>>
+					<<updatesidebardescription>>
+					<<updateallure>>
+					<<updatewarmthscale>>
+					<<updatewarmthdescription>>
+					<<updateclothingshop>>
+					<<run updateMoment()>>
+				<</link>>
+				<br>
+				<<if $tryOn.value lt $money>>
+					<<sendItemsToDropdown>>
+					<<link "옷을 산다">><<buyTryOnClothes "wear">><<updateclothingshop>><</link>>
+					<br>
+					<<link "옷을 사서 옷장에 보낸다">>
+						<<buyTryOnClothes "wardrobe">>
+						<<updatesidebarmoney>>
+						<<updatesidebarimg>>
+						<<updatesidebardescription>>
+						<<updateallure>>
+						<<updatewarmthscale>>
+						<<updatewarmthdescription>>
+						<<updateclothingshop>>
+						<<run updateMoment()>>
+					<</link>>
+					<br>
+				<</if>>
+				<<link [[옷을 훔쳐 떠난다|Stolen Clothing Shop Result]]>><<shopClothingFilterReset>><<shopHoodCheck>><</link>>
+				<br>
+			<</if>>
 		<</if>>
 	<</if>>
-<</if>>
+<</widget>>
 
-:: Clothing Shop Sneak [nobr]
+<<widget "clothingcategoryicon">>
+	<<icon `"clothes/categories/" + _args[0] + ".png"`>>
+<</widget>>
+
+:: Clothing Shop Sneak
 <<set $outside to 0>><<effects>><<set $lock to 0>>
 
-	<<if $skulduggery gte $lock>>
+	<<if currentSkillValue('skulduggery') gte $lock>>
 	<span class="green">문을 따기 쉬워 보인다.</span>
 	<br><br>
 
@@ -141,7 +197,7 @@
 <<link [[떠난다|Shopping Centre Top]]>><</link>>
 <br>
 
-:: Rebuy Shop [nobr]
+:: Rebuy Shop
 <<set $outside to 0>><<effects>>
 
 <<if $clothingrebuy is 1>>
@@ -169,224 +225,3 @@
 <</if>>
 <<link [[아니오|Clothing Shop]]>><</link>>
 <br>
-
-:: Over Outfit Shop [nobr]
-<<set $outside to 0>><<effects>>
-
-<<if $clothes_choice and $clothes_choice_previous>>
-	<<if $clothes_choice is $clothes_choice_previous>>
-		<<shopbuy "over_upper">>
-	<<else>>
-		<<shopbuy "over_upper" "reset">>
-	<</if>>
-<<else>>
-	<<shopbuy "over_upper" "reset">>
-<</if>>
-<<clothingShop "over_upper" "outfits">>
-<br>
-
-<<link [[돌아가기|Clothing Shop]]>><<unset $clothes_choice>><</link>>
-
-:: Outfit Shop [nobr]
-<<set $outside to 0>><<effects>>
-
-<<if $clothes_choice and $clothes_choice_previous>>
-	<<if $clothes_choice is $clothes_choice_previous>>
-		<<shopbuy "upper">>
-	<<else>>
-		<<shopbuy "upper" "reset">>
-	<</if>>
-<<else>>
-	<<shopbuy "upper" "reset">>
-<</if>>
-<<clothingShop "upper" "outfits">>
-<br>
-
-<<link [[돌아가기|Clothing Shop]]>><<unset $clothes_choice>><</link>>
-
-:: Top Shop [nobr]
-<<set $outside to 0>><<effects>>
-
-<<if $clothes_choice and $clothes_choice_previous>>
-	<<if $clothes_choice is $clothes_choice_previous>>
-		<<shopbuy "upper">>
-	<<else>>
-		<<shopbuy "upper" "reset">>
-	<</if>>
-<<else>>
-	<<shopbuy "upper" "reset">>
-<</if>>
-<<clothingShop "upper" "non-outfits">>
-<br>
-
-<<link [[돌아가기|Clothing Shop]]>><<unset $clothes_choice>><</link>>
-
-:: Bottom Shop [nobr]
-<<set $outside to 0>><<effects>>
-
-<<if $clothes_choice and $clothes_choice_previous>>
-	<<if $clothes_choice is $clothes_choice_previous>>
-		<<shopbuy "lower">>
-	<<else>>
-		<<shopbuy "lower" "reset">>
-	<</if>>
-<<else>>
-	<<shopbuy "lower" "reset">>
-<</if>>
-<<clothingShop "lower">>
-<br>
-
-<<link [[돌아가기|Clothing Shop]]>><<unset $clothes_choice>><</link>>
-
-:: Under Outfit Shop [nobr]
-<<set $outside to 0>><<effects>>
-
-<<if $clothes_choice and $clothes_choice_previous>>
-	<<if $clothes_choice is $clothes_choice_previous>>
-		<<shopbuy "under_upper">>
-	<<else>>
-		<<shopbuy "under_upper" "reset">>
-	<</if>>
-<<else>>
-	<<shopbuy "under_upper" "reset">>
-<</if>>
-<<clothingShop "under_upper" "outfits">>
-<br>
-
-<<link [[돌아가기|Clothing Shop]]>><<unset $clothes_choice>><</link>>
-
-:: Under Top Shop [nobr]
-<<set $outside to 0>><<effects>>
-
-<<if $clothes_choice and $clothes_choice_previous>>
-	<<if $clothes_choice is $clothes_choice_previous>>
-		<<shopbuy "under_upper">>
-	<<else>>
-		<<shopbuy "under_upper" "reset">>
-	<</if>>
-<<else>>
-	<<shopbuy "under_upper" "reset">>
-<</if>>
-<<clothingShop "under_upper" "non-outfits">>
-<br>
-
-<<link [[돌아가기|Clothing Shop]]>><<unset $clothes_choice>><</link>>
-
-:: Under Bottom Shop [nobr]
-<<set $outside to 0>><<effects>>
-
-<<if $clothes_choice and $clothes_choice_previous>>
-	<<if $clothes_choice is $clothes_choice_previous>>
-		<<shopbuy "under_lower">>
-	<<else>>
-		<<shopbuy "under_lower" "reset">>
-	<</if>>
-<<else>>
-	<<shopbuy "under_lower" "reset">>
-<</if>>
-<<clothingShop "under_lower">>
-<br>
-
-<<link [[돌아가기|Clothing Shop]]>><<unset $clothes_choice>><</link>>
-
-:: Head Shop [nobr]
-<<set $outside to 0>><<effects>>
-
-<<if $clothes_choice and $clothes_choice_previous>>
-	<<if $clothes_choice is $clothes_choice_previous>>
-		<<shopbuy "head">>
-	<<else>>
-		<<shopbuy "head" "reset">>
-	<</if>>
-<<else>>
-	<<shopbuy "head" "reset">>
-<</if>>
-<<clothingShop "head">>
-<br>
-
-<<link [[돌아가기|Clothing Shop]]>><<unset $clothes_choice>><</link>>
-
-:: Face Shop [nobr]
-<<set $outside to 0>><<effects>>
-
-<<if $clothes_choice and $clothes_choice_previous>>
-	<<if $clothes_choice is $clothes_choice_previous>>
-		<<shopbuy "face">>
-	<<else>>
-		<<shopbuy "face" "reset">>
-	<</if>>
-<<else>>
-	<<shopbuy "face" "reset">>
-<</if>>
-<<clothingShop "face">>
-<br>
-
-<<link [[돌아가기|Clothing Shop]]>><<unset $clothes_choice>><</link>>
-
-:: Neck Shop [nobr]
-<<set $outside to 0>><<effects>>
-
-<<if $clothes_choice and $clothes_choice_previous>>
-	<<if $clothes_choice is $clothes_choice_previous>>
-		<<shopbuy "neck">>
-	<<else>>
-		<<shopbuy "neck" "reset">>
-	<</if>>
-<<else>>
-	<<shopbuy "neck" "reset">>
-<</if>>
-<<clothingShop "neck">>
-<br>
-
-<<link [[돌아가기|Clothing Shop]]>><<unset $clothes_choice>><</link>>
-
-:: Hands Shop [nobr]
-<<set $outside to 0>><<effects>>
-
-<<if $clothes_choice and $clothes_choice_previous>>
-	<<if $clothes_choice is $clothes_choice_previous>>
-		<<shopbuy "hands">>
-	<<else>>
-		<<shopbuy "hands" "reset">>
-	<</if>>
-<<else>>
-	<<shopbuy "hands" "reset">>
-<</if>>
-<<clothingShop "hands">>
-<br>
-
-<<link [[돌아가기|Clothing Shop]]>><<unset $clothes_choice>><</link>>
-
-:: Legs Shop [nobr]
-<<set $outside to 0>><<effects>>
-
-<<if $clothes_choice and $clothes_choice_previous>>
-	<<if $clothes_choice is $clothes_choice_previous>>
-		<<shopbuy "legs">>
-	<<else>>
-		<<shopbuy "legs" "reset">>
-	<</if>>
-<<else>>
-	<<shopbuy "legs" "reset">>
-<</if>>
-<<clothingShop "legs">>
-<br>
-
-<<link [[돌아가기|Clothing Shop]]>><<unset $clothes_choice>><</link>>
-
-:: Shoe Shop [nobr]
-<<set $outside to 0>><<effects>>
-
-<<if $clothes_choice and $clothes_choice_previous>>
-	<<if $clothes_choice is $clothes_choice_previous>>
-		<<shopbuy "feet">>
-	<<else>>
-		<<shopbuy "feet" "reset">>
-	<</if>>
-<<else>>
-	<<shopbuy "feet" "reset">>
-<</if>>
-<<clothingShop "feet">>
-<br>
-
-<<link [[돌아가기|Clothing Shop]]>><<unset $clothes_choice>><</link>>

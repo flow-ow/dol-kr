@@ -1,15 +1,18 @@
 :: Widgets Version Info [widget]
-<<widget "versioninfo">><<nobr>>
+<<widget "versioninfo">>
 
 <br><br>
 
 Degrees of Lewdity <<print StartConfig.version>>
-<br><br>
+<br><<if StartConfig.sneaky>>SNEAKY BUILD<</if>><br>
 
-"언젠가 완성" 에디션 
+"It's Planned" edition
 <br><br>
 
 한국어 번역판<br><<print "v"+Customconfig.version>><br><br>업데이트와 더 많은 정보는 블로그 참조 [[https://vrelnir.blogspot.com/| "https://vrelnir.blogspot.com/"]]
 <br><br>
 
-<</nobr>><</widget>>
+제작 후원은 [[https://subscribestar.adult/vrelnir| "https://subscribestar.adult/vrelnir"]]에서 받고 있습니다.
+<br><br>
+
+<</widget>>

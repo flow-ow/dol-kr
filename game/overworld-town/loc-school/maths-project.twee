@@ -1,4 +1,4 @@
-:: Maths Project [nobr]
+:: Maths Project
 
 <<effects>>
 <<if $mathschance is 0>>
@@ -43,7 +43,7 @@
 	<br>
 <</if>>
 
-:: Maths Project Work [nobr]
+:: Maths Project Work
 
 <<effects>>
 당신은 자리에 앉아 작업에 착수한다.
@@ -150,10 +150,24 @@
 	<</if>>
 <</if>>
 <br><br>
-<<link [[다음|Maths Project]]>><</link>>
-<br>
+<<if $mathsproject is "ongoing">>
+	<<link [[다음|Maths Project]]>><</link>>
+	<br>
+<<else>>
+	당신은 시간을 흘낏 본다. 당신은 갑자기 <span class="red">수학 경시대회가 벌써 끝났다는 것을 알아차린다.</span>
+	<br><br>
+	이 시점에서 당신의 작업을 계속하는 것은 바보같은 짓이다. 당신은 이제 더 이상 필요가 없는 프로젝트를 쓰레기통에 버리면서, 낭비된 노력에 대해 어느정도 씁쓸함을 느낀다.
+	<br><br>
 
-:: Maths Project Stim [nobr]
+	<<if $location is "home">>
+		<<link [[다음|Bedroom]]>><</link>>
+	<<else>>
+		<<link [[다음|School Library]]>><</link>>
+	<</if>>
+	<br>
+<</if>>
+
+:: Maths Project Stim
 
 <<effects>>
 당신은 각성제를 복용하고, 자리에 앉아 작업에 착수한다.
@@ -228,7 +242,7 @@
 		<<elseif $hour lte 18>>
 			작업하는 동안 시간은 빠르게 지나간다.
 		<<elseif $hour lte 21>>
-			당신은 작업하는 동안 도서관 창문으로 아침 햇살이 새어들어온다는 걸 눈치채지 못한다.
+			당신은 작업하는 동안 도서관 창문이 어두워지는 것을 거의 눈치채지 못한다.
 		<<else>>
 			당신은 밤새도록 작업을 계속한다. 이따금 경비원을 피하기 위해 책상 밑에 숨긴 해도 집중이 깨지진 않는다.
 		<</if>>
@@ -259,7 +273,7 @@
 <br><br>
 <<if $mathsstimused is 2 or $mathsstimused gte 4 and $rng gte 75>>
 	당신은 뒤로 등을 기대고 작업물을 감상한다. 피부 바로 밑에서 기이한 열기가 느껴진다. 열기는 더욱 커지더니 몸 전체로 퍼져나가다가, 사타구니 쪽에 모인다. 머릿속에 음란한 환상이 강제로 쑤셔박아진 것처럼 떠오른다. 순식간에 볼이 빨갛게 물들고, 당신은 욕망에 가득 차서 몸을 꼼지락거린다. 각성제가 농축된 미약에 오염된 것이 분명하다.
-	<<gggarousal>><<arousal 10000>><<set $drugged += 500>>
+	<<gggarousal>><<arousal 10000>><<drugs 500>>
 	<br><br>
 	타오르는 듯한 욕망을 만족시키고자 하는 본능으로 손이 다리 사이에서 방황한다. 하지만 제 몸을 만지는 것에서 올 자극은 견디기 힘든 것이다. 고통스러울 정도로 강력한 쾌락이 몸을 관통한다. 손이 움찔거리고, 전신이 경련하며 시야가 하얗게 변해간다. 그 후폭풍에 몸이 덜덜 떨린다. 스스로를 만족시키기 위해 손을 쓸 수는 없어 보인다.
 	<br><br>
@@ -277,10 +291,10 @@
 		<br>
 	<</if>>
 <<elseif $mathsstimused is 3 or $mathsstimused gte 4 and $rng gte 50>>
-	당신은 뒤로 등을 기대고 작업물을 감상하나, 무언가 잘못되었다. 방에 놓인 물건들이 움직이고 비틀리기 시작하더니, 곧 기이한 문양들로 뒤덮힌다. 당신은 균형감각을 잃고 몸이 흔들리기 시작하며, 넘어질 뻔한다. 각성제가 농축된 환각제에 오염된 것이 분명하다. 그렇지만 그걸 안다고 해도 당장의 경험이 현실이 아니게 되진 않는다.
-	<<set $hallucinogen += 500>>
+	당신은 뒤로 등을 기대고 작업물을 감상하나, 무언가 잘못되었다. <<if $location is "home">>방에<<else>>도서관에<</if>> 놓인 물건들이 움직이고 비틀리기 시작하더니, 곧 기이한 문양들로 뒤덮힌다. 당신은 균형감각을 잃고 몸이 흔들리기 시작하며, 넘어질 뻔한다. 각성제가 농축된 환각제에 오염된 것이 분명하다. 그렇지만 그걸 안다고 해도 당장의 경험이 현실이 아니게 되진 않는다.
+	<<hallucinogen 500>>
 	<br><br>
-	당신은 누우려 하나, 침대에 가기도 전에 주변이 비틀리며 낯설게 변한다. 검고 위협적인 형상들이 주변을 돌아다니고, 당신은 현실에 남아있을 수 있게 의존할만한 무언가 익숙한 물건을 찾다가 그만 앞으로 넘어진다. 커다란 눈과 셀 수 없이 많은, 허우적거리는 혀를 가진 기괴한 생물이 아득히 먼 곳에서 당신을 바라보고 있다. 그 생물의 입에서 횡설수설하며 나오는 소리가 배경에 울려퍼진다. 바닥이 녹아내리기 시작하고, 당신은 어떻게든 움직이려 해보나 곧 발목까지 가라앉고, 이어서 무릎까지, 곧 허리까지 가라앉는다. 마침내, 몸 전체가 바닥 밑으로 가라앉고, 당신은 끝없는 시커먼 무저갱 속으로 떨어져내린다.
+	<<if $location is "home">>당신은 누우려 하나, 침대에 가기도 전에,<<else>>당신은 머리를 식히기 위해 산책을 하려 하지만, 의자에서 일어나자마자,<</if>> 주변이 비틀리며 낯설게 변한다. 검고 위협적인 형상들이 주변을 돌아다니고, 당신은 현실에 남아있을 수 있게 의존할만한 무언가 익숙한 물건을 찾다가 그만 앞으로 넘어진다. 커다란 눈과 셀 수 없이 많은, 허우적거리는 혀를 가진 기괴한 생물이 아득히 먼 곳에서 당신을 바라보고 있다. 그 생물의 입에서 횡설수설하며 나오는 소리가 배경에 울려퍼진다. 바닥이 녹아내리기 시작하고, 당신은 어떻게든 움직이려 해보나 곧 발목까지 가라앉고, 이어서 무릎까지, 곧 허리까지 가라앉는다. 마침내, 몸 전체가 바닥 밑으로 가라앉고, 당신은 끝없는 시커먼 무저갱 속으로 떨어져내린다.
 	<br><br>
 	<<if $location is "home">>
 		<<set $bus to "residential">>
@@ -289,11 +303,11 @@
 	<</if>>
 	<<link [[다음|Maths Project Void]]>><</link>>
 	<br>
-<<elseif $mathsstimrobin isnot 1 and $schoolday is 0 and $daystate isnot "night" and $robinmissing isnot 1 and $NPCName[$NPCNameList.indexOf("Robin")].init is 1 and $location is "home">>
+<<elseif $mathsstimrobin isnot 1 and $schoolday is 0 and $daystate isnot "night" and $robinmissing is 0 and $NPCName[$NPCNameList.indexOf("Robin")].init is 1 and $location is "home">>
 	<<set $mathsstimrobin to 1>>
 	<<npc Robin>><<person1>>
 	당신은 뒤로 등을 기대고 작업물을 감상한다. 피부 바로 밑에서 기이한 열기가 느껴진다. 시야가 흐려지더니, 곧 모든 것이 암흑 속으로 사라진다.
-	<<ggarousal>><<arousal 1800>><<set $drugged += 120>><<set $hallucinogen += 120>>
+	<<ggarousal>><<arousal 1800>><<drugs 120>><<hallucinogen 120>>
 	<br><br>
 	누군가 팔을 잡고 흔드는 것에 당신은 정신을 차린다. 당신은 여전히 방에 있다. 정신을 잃기 전과의 차이점이라면, 침대 위에 누워있다는 점이다. 옆을 보니 로빈이 얼굴을 찌푸린 채로 앉아있다.
 	<br><br>
@@ -309,13 +323,27 @@
 	<br>
 <<else>>
 	당신은 뒤로 등을 기대고 작업물을 감상한다. 피부 바로 밑에서 기이한 열기가 느껴진다.
-	<<ggarousal>><<arousal 1800>><<set $drugged += 120>><<set $hallucinogen += 120>>
+	<<ggarousal>><<arousal 1800>><<drugs 120>><<hallucinogen 120>>
 	<br><br>
-	<<link [[다음|Maths Project]]>><</link>>
-	<br>
+	<<if $mathsproject is "ongoing">>
+		<<link [[다음|Maths Project]]>><</link>>
+		<br>
+	<<else>>
+		당신은 시간을 흘낏 본다. 당신은 갑자기 <span class="red">수학 경시대회가 벌써 끝났다는 것을 알아차린다.</span>
+		<br><br>
+		이 시점에서 당신의 작업을 계속하는 것은 바보같은 짓이다. 당신은 이제 더 이상 필요가 없는 프로젝트를 쓰레기통에 버리면서, 낭비된 노력에 대해 어느정도 씁쓸함을 느낀다.
+		<br><br>
+
+		<<if $location is "home">>
+			<<link [[다음|Bedroom]]>><</link>>
+		<<else>>
+			<<link [[다음|School Library]]>><</link>>
+		<</if>>
+		<br>
+	<</if>>
 <</if>>
 
-:: Maths Project Robin [nobr]
+:: Maths Project Robin
 
 <<effects>>
 당신은 로빈에게 괜찮다고 말하며, 침대로 데려다 주어서 고맙다고 한다. <<HePost "은">> 마음이 놓인 것처럼 보이지는 않으나, 고개를 끄덕이고는 자리에서 일어난다. 문 앞에서 <<hePost "은">> 고개를 돌린다. "어디 안 좋은 거 같으면 의사 선생님께 가도록 해." <<hePost "이">> 말한다. "원한다면 같이 가줄 테니까."
@@ -323,7 +351,7 @@
 <<link [[다음|Bedroom]]>><<endevent>><</link>>
 <br>
 
-:: Maths Project Robin Sex [nobr]
+:: Maths Project Robin Sex
 
 <<if $sexstart is 1>>
 	<<set $sexstart to 0>>
@@ -331,26 +359,25 @@
 	<<set $consensual to 1>>
 	<<neutral 1>>
 	<<maninit>>
-	<<set $enemytrust += 500>><<set $speechdisable to 1>>
+	<<set $enemytrust += 500>>
 	<<set $enemyarousalmax to 600>>
 <</if>>
+
 <<set $enemyanger to 0>>
 <<effects>>
-<<effectsman>><<man>>
+<<effectsman>>
+<<man>>
 <<stateman>>
 <br><br>
 <<actionsman>>
-<<if $finish is 1>>
-	<span id="next"><<link [[다음|Maths Project Robin Sex Finish]]>><</link>></span><<nexttext>>
-<<elseif $enemyhealth lte 0>>
-	<span id="next"><<link [[다음|Maths Project Robin Sex Finish]]>><</link>></span><<nexttext>>
-<<elseif $enemyarousal gte $enemyarousalmax>>
+
+<<if _combatend>>
 	<span id="next"><<link [[다음|Maths Project Robin Sex Finish]]>><</link>></span><<nexttext>>
 <<else>>
 	<span id="next"><<link [[다음|Maths Project Robin Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Maths Project Robin Sex Finish [nobr]
+:: Maths Project Robin Sex Finish
 
 <<set $outside to 0>><<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
@@ -373,7 +400,7 @@
 <<link [[다음|Bedroom]]>><</link>>
 <br>
 
-:: Maths Project Void [nobr]
+:: Maths Project Void
 
 <<effects>>
 <<generate1>><<person1>>
@@ -388,7 +415,7 @@
 <<link [[다음|Maths Project Void Rape]]>><<set $molestationstart to 1>><</link>>
 <br>
 
-:: Maths Project Void Rape [nobr]
+:: Maths Project Void Rape
 
 <<if $molestationstart is 1>>
 	<<set $molestationstart to 0>>
@@ -398,20 +425,21 @@
 	<<molested>>
 	<<maninit>>
 <</if>>
+
 <<effects>>
-<<effectsman>><<man>>
+<<effectsman>>
+<<man>>
 <<stateman>>
 <br><br>
 <<actionsman>>
-<<if $enemyhealth lte 0>>
-	<span id="next"><<link [[다음|Maths Project Void Rape Finish]]>><</link>></span><<nexttext>>
-<<elseif $enemyarousal gte $enemyarousalmax>>
+
+<<if _combatend>>
 	<span id="next"><<link [[다음|Maths Project Void Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
 	<span id="next"><<link [[다음|Maths Project Void Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Maths Project Void Rape Finish [nobr]
+:: Maths Project Void Rape Finish
 
 <<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
@@ -443,11 +471,11 @@
 	<<destinationeventend>>
 <</if>>
 
-:: Maths Project Endure Home [nobr]
+:: Maths Project Endure Home
 
 <<effects>>
 
-당신은 침대에 누워 어떻게든 견뎌보려 한다. 당장 뭔가 생산적인 일을 하는 것은 완전히 논외다. 사고를 분명하게 유지하는 것만으로도 힘들기에, 당신은 뭔가를 세는 것으로 정신을 명료하게 유지하고자 한다. 잘 되는 것 같았으나, 시계를 보고는 고작 몇 분 밖에 지나지 않았음을 깨닫는다.
+당신은 침대에 누워 어떻게든 그 느낌을 견뎌보려 한다. 당장 뭔가 생산적인 일을 하는 것은 불가능하다. 사고를 분명하게 유지하는 것만으로도 힘들기에, 당신은 뭔가를 세는 것으로 정신을 명료하게 유지하고자 한다. 잘 되는 것 같았으나 당신은 시계를 보고는 고작 몇 분 밖에 지나지 않았음을 깨닫는다.
 <br><br>
 
 고통이 사라질 즈음이 되자, 긴장했던 탓에 이번에는 근육이 아프다. 이도 악물고 있었다는 걸 지금에서야 깨닫는다. 당신은 여전히 성적으로 흥분하고 만족하지 못한 상태다. 그래도 머릿속만은 분명하다.
@@ -456,7 +484,7 @@
 <<link [[다음|Bedroom]]>><</link>>
 <br>
 
-:: Maths Project Endure Library [nobr]
+:: Maths Project Endure Library
 <<effects>>
 
 당신은 의자에 기대어 앉아 어떻게든 견뎌보려 한다. 당장 뭔가 생산적인 일을 하는 것은 완전히 논외다. 사고를 분명하게 유지하는 것만으로도 힘들기에, 당신은 뭔가를 세는 것으로 정신을 명료하게 유지하고자 한다. 잘 되는 것 같았으나, 시계를 보고는 고작 몇 분 밖에 지나지 않았음을 깨닫는다.
@@ -468,7 +496,7 @@
 <<link [[다음|School Library]]>><</link>>
 <br>
 
-:: Maths Project Outside Home [nobr]
+:: Maths Project Outside Home
 
 <<effects>><<set $bus to "residential">>
 <<generate1>><<person1>>
@@ -480,12 +508,12 @@
 <br><br>
 <<HisPost "의">> 손이 당신의 다리 사이를 휘젓고, 그 바람에 쾌락이 다시 한 번 몸 전체를 관통한다. 이번에는 몸이 경련한다고 자극이 멈추지 않는다. <<HisPost "의">> 손가락이 멈추지 않는 이상, 당신이 할 수 있는 일이라고는 무력하게 몸을 떠는 것 뿐이다.
 <br><br>
-"정말이지 짖궂은 녀석이네." <<hePost "이">> 말한다. "걱정하지 마. 네게 필요한게 뭔지 알고 있으니까."
+"정말이지 짓궂은 녀석이네." <<hePost "이">> 말한다. "걱정하지 마. 네게 필요한게 뭔지 알고 있으니까."
 <br><br>
 <<link [[다음|Maths Project Outside Rape]]>><<set $molestationstart to 1>><</link>>
 <br>
 
-:: Maths Project Outside Library [nobr]
+:: Maths Project Outside Library
 
 <<effects>><<set $bus to "industrial">>
 <<generate1>><<person1>>
@@ -501,40 +529,36 @@
 <<HisPost "의">> 손이 당신의 다리 사이를 휘젓고, 그 바람에 쾌락이 다시 한 번 몸 전체를 관통한다. 이번에는 몸이 경련한다고 자극이 멈추지 않는다. <<HisPost "의">> 손가락이 멈추지 않는 이상, 당신이 할 수 있는 일이라고는 무력하게 몸을 떠는 것 뿐이다.
 <br><br>
 
-"정말이지 짖궂은 녀석이네." <<hePost "이">> 말한다. "걱정하지 마. 네게 필요한게 뭔지 알고 있으니까."
+"정말이지 짓궂은 녀석이네." <<hePost "이">> 말한다. "걱정하지 마. 네게 필요한게 뭔지 알고 있으니까."
 <br><br>
 
 <<link [[다음|Maths Project Outside Rape]]>><<set $molestationstart to 1>><</link>>
 <br>
 
-:: Maths Project Outside Rape [nobr]
+:: Maths Project Outside Rape
 <<if $molestationstart is 1>>
-<<set $molestationstart to 0>>
-<<controlloss>>
-<<violence 1>>
-<<neutral 1>>
-<<molested>>
-
-<<maninit>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
 <</if>>
 
 <<effects>>
-
-<<effectsman>><<man>>
-
+<<effectsman>>
+<<man>>
 <<stateman>>
 <br><br>
 <<actionsman>>
 
-<<if $enemyhealth lte 0>>
-	<span id="next"><<link [[다음|Maths Project Outside Rape Finish]]>><</link>></span><<nexttext>>
-<<elseif $enemyarousal gte $enemyarousalmax>>
+<<if _combatend>>
 	<span id="next"><<link [[다음|Maths Project Outside Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
 	<span id="next"><<link [[다음|Maths Project Outside Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Maths Project Outside Rape Finish [nobr]
+:: Maths Project Outside Rape Finish
 <<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
 <<ejaculation>>
@@ -565,7 +589,7 @@
 
 <</if>>
 
-:: Stim Dealer [nobr]
+:: Stim Dealer
 <<effects>>
 
 <<generate1>><<person1>>당신은 그림자 속에 숨어있는 인영 쪽으로 다가간다. 가까이 다가가자, 두꺼운 코트 속에 숨어있는 <<personPost "이">> 보인다.
@@ -585,13 +609,13 @@
 <<link [[각성제를 훔친다|Stim Dealer Steal]]>><</link>><<skulduggerydifficulty>>
 <br>
 	<<if $hallucinations gte 1>>
-	<<link [[일부러 훔치다가 걸린다|Stim Dealer Steal]]>><<set $skulduggerydifficulty to 10000>><<trauma -60>><</link>> | <span class="red">Dangerous</span><<llltrauma>>
+	<<link [[일부러 훔치다가 걸린다|Stim Dealer Steal]]>><<set $skulduggerydifficulty to 10000>><<trauma -60>><</link>><<dangerousText>><<llltrauma>>
 	<br>
 	<</if>>
 <<link [[돌아나온다|Oxford Street]]>><<endevent>><</link>>
 <br>
 
-:: Stim Dealer Buy [nobr]
+:: Stim Dealer Buy
 <<effects>>
 
 <<personPost "은">> 조소를 띠며 당신을 바라본다.
@@ -626,7 +650,7 @@
 <<link [[돌아나온다|Oxford Street]]>><<endevent>><</link>>
 <br>
 
-:: Stim Dealer Buy 2 [nobr]
+:: Stim Dealer Buy 2
 <<effects>>
 
 당신은 돈을 건네고는 형형색색의 알약이 담긴 작은 봉투를 받는다. "1회 분량이야." <<personPost "이">> 말한다. <<HePost "은">> 몸을 돌려 골목기 안쪽으로 들어가더니, 모퉁이를 돌아 사라진다.
@@ -635,7 +659,7 @@
 <<link [[다음|Oxford Street]]>><<endevent>><</link>>
 <br>
 
-:: Stim Dealer Steal [nobr]
+:: Stim Dealer Steal
 <<effects>>
 
 <<if $mathsstimcaught isnot 1>>
@@ -644,146 +668,113 @@
 
 	<<skulduggerycheck>>
 	<<if $skulduggerysuccess is 1>><<set $mathsstim += 1>><<set $mathsstimstolen += 1>>
-
-	손에 알약 봉지가 잡히나, 손가락 사이에서 조용히 짤그락거리는 소리가 나는 바람에 당신은 숨을 참는다. 딜러는 듣지 못한 모양이다. 너무 빨리 자리를 뜨면 되려 수상하게 보일 것을 걱정하여 당신은 한동안 무리 안에 있다가, 훔친 약을 안전하게 숨긴 뒤에 근처를 지나가는 인파에 섞여 자리를 뜬다.
-<br><br>
-
-		<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-		<<else>>
-		<span class="blue">너무 쉬웠다. 아무 것도 배우지 못했다.</span>
+		손에 알약 봉지가 잡히나, 손가락 사이에서 조용히 짤그락거리는 소리가 나는 바람에 당신은 숨을 참는다. 딜러는 듣지 못한 모양이다. 너무 빨리 자리를 뜨면 되려 수상하게 보일 것을 걱정하여 당신은 한동안 무리 안에 있다가, 훔친 약을 안전하게 숨긴 뒤에 근처를 지나가는 인파에 섞여 자리를 뜬다.
 		<br><br>
-		<</if>>
 
-	<<endevent>>
-	<<link [[다음|Oxford Street]]>><</link>>
-	<br>
+		<<skulduggeryuse>>
 
+		<<endevent>>
+		<<link [[다음|Oxford Street]]>><</link>>
+		<br>
 	<<else>>
-	<<set $mathsstimcaught to 1>>
-	딜러가 당신을 쳐다보고는 밀친다. 다른 학생들은 혼란스러워 하지만, 딜러의 눈이 당신에게 고정된 채로 가늘어지고는, 곧 심술궂게 히죽거린다.
-	<br><br>
-
-	"방금 아주 큰 실수를 한 거야." <<hePost "이">> 말한다. <<HePost "은">> 다른 학생들을 바라본다. "다들 잘 들어. 쟤를 가장 먼저 비명지르게 만드는 녀석한테 공짜로 하나를 주마. 생각이 바뀌기 전에 서둘러."
-	<br><br>
-
-	다른 학생들은 당신에게로 다가오며, 그 제안을 생각해본다. 다행히 충분히 심사숙고해주는 덕에 당신은 그 틈을 타서 달아나나, 이걸로 끝이라고는 확신할 수가 없다. 근처에 오는 딜러들은 이제부터 당신을 경계할 것이다.
-	<br><br>
-
-		<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-		<<else>>
-		<span class="blue">너무 쉬웠다. 아무 것도 배우지 못했다.</span>
+		<<set $mathsstimcaught to 1>>
+		딜러가 당신을 쳐다보고는 밀친다. 다른 학생들은 혼란스러워 하지만, 딜러의 눈이 당신에게 고정된 채로 가늘어지고는, 곧 심술궂게 히죽거린다.
 		<br><br>
-		<</if>>
 
-	<<endevent>>
-	<<link [[다음|Oxford Street]]>><</link>>
-	<br>
+		"방금 아주 큰 실수를 한 거야." <<hePost "이">> 말한다. <<HePost "은">> 다른 학생들을 바라본다. "다들 잘 들어. 쟤를 가장 먼저 비명지르게 만드는 녀석한테 공짜로 하나를 주마. 생각이 바뀌기 전에 서둘러."
+		<br><br>
 
+		다른 학생들은 당신에게로 다가오며, 그 제안을 생각해본다. 다행히 충분히 심사숙고해주는 덕에 당신은 그 틈을 타서 달아나나, 이걸로 끝이라고는 확신할 수가 없다. 근처에 오는 딜러들은 이제부터 당신을 경계할 것이다.
+		<br><br>
+
+		<<skulduggeryuse>>
+
+		<<endevent>>
+		<<link [[다음|Oxford Street]]>><</link>>
+		<br>
 	<</if>>
-
 <<else>>
 	딜러들이 이제 당신을 경계할 것이니, 더욱 조심해야 한다. 당신은 학생들이 딜러에게 접근하는 걸 기다리며, 먼 곳에서 지켜본다. 딜러가 자리를 뜨자, 당신은 그 뒤를 밟는다. 딜러가 골목길로 들어가자, 당신은 그 뒤를 서둘러 따라가며 행동에 나선다.
 	<br><br>
 
 	<<skulduggerycheck>>
 	<<if $skulduggerysuccess is 1>><<set $mathsstim += 1>><<set $mathsstimstolen += 1>>
-
-	당신은 딜러의 코트에 손을 뻗어서 알약 봉지를 붙잡는다. 그 뒤에, 당신은 바로 달아난다. 딜러가 눈치챘는지 확인하려 멈출 일은 없다. 잠시라도 머뭇거리다가는 상황은 최악으로 치달을 수도 있다.
-<br><br>
-
-		<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-		<<else>>
-		<span class="blue">너무 쉬웠다. 아무 것도 배우지 못했다.</span>
+		당신은 딜러의 코트에 손을 뻗어서 알약 봉지를 붙잡는다. 그 뒤에, 당신은 바로 달아난다. 딜러가 눈치챘는지 확인하려 멈출 일은 없다. 잠시라도 머뭇거리다가는 상황은 최악으로 치달을 수도 있다.
 		<br><br>
-		<</if>>
 
-	<<endevent>>
-	<<link [[다음|Oxford Street]]>><</link>>
-	<br>
+		<<skulduggeryuse>>
 
-	<<else>>
-	<<set $mathsstimcaught to 1>><<generate2>><<generate3>>
-	하지만 모퉁이를 돌자마자 당신은 미끄러지듯 발을 멈춘다. 딜러가 거기 서서, 고용한 경비원 한 명과 어깨를 나란히한 채로 당신을 바라본다. 돌아서서 달아나려 해보지만, 뒤쪽은 더 험악하게 생긴 사람들로 길이 막혀있다.
-	<br><br>
-
-	"이미 너에 대해서는 다 들어봤어." 딜러가 조롱한다. "우리가 교훈을 좀 주도록 하지."
-	<br><br>
-
-	딜러 패거리가 다가온다.
-	<br><br>
-
-		<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-		<<else>>
-		<span class="blue">너무 쉬웠다. 아무 것도 배우지 못했다.</span>
-		<br><br>
-		<</if>>
-
-	<<link [[조용히 있는다|Maths Abduction]]>><<set $phase to 0>><</link>>
-	<br>
-	<<link [[비명지른다|Maths Abduction]]>><<set $phase to 1>><</link>>
-	<br>
-		<<if $submissive gte 1500>>
-		<<link [[빈다|Maths Beg]]>><</link>><<submissivetext>>
+		<<endevent>>
+		<<link [[다음|Oxford Street]]>><</link>>
 		<br>
-		<</if>>
+	<<else>>
+		<<set $mathsstimcaught to 1>><<generate2>><<generate3>>
+		하지만 모퉁이를 돌자마자 당신은 미끄러지듯 발을 멈춘다. 딜러가 거기 서서, 고용한 경비원 한 명과 어깨를 나란히한 채로 당신을 바라본다. 돌아서서 달아나려 해보지만, 뒤쪽은 더 험악하게 생긴 사람들로 길이 막혀있다.
+		<br><br>
 
+		"이미 너에 대해서는 다 들어봤어." 딜러가 조롱한다. "우리가 교훈을 좀 주도록 하지."
+		<br><br>
+
+		딜러 패거리가 다가온다.
+		<br><br>
+
+		<<skulduggeryuse>>
+
+		<<link [[조용히 있는다|Maths Abduction]]>><<set $phase to 0>><</link>>
+		<br>
+		<<link [[비명지른다|Maths Abduction]]>><<set $phase to 1>><</link>>
+		<br>
+		<<if $submissive gte 1500>>
+			<<link [[빈다|Maths Beg]]>><<sub 1>><</link>><<submissivetext>>
+			<br>
+		<</if>>
 	<</if>>
 <</if>>
 
-:: Maths Beg [nobr]
+:: Maths Beg
 <<effects>>
 
 <<if $mathsstimbeg isnot 1>><<set $mathsstimbeg to 1>>
-당신은 무릎을 꿇고는 바닥에 머리를 댄다. "부-부탁이에요." 당신이 훌쩍거린다. "해치지 마세요. 돈은 없지만 약이 정말 필요했어요."
-<br><br>
+	당신은 무릎을 꿇고는 바닥에 머리를 댄다. "부-부탁이에요." 당신이 훌쩍거린다. "해치지 마세요. 돈은 없지만 약이 정말 필요했어요."
+	<br><br>
 
-패거리들이 불편한 기색을 내비친다. "얜 그냥 꼬맹이잖아." 그중 한 명이 말한다. "이렇게까지 할 필요가 있을까?"
-<br><br>
+	패거리들이 불편한 기색을 내비친다. "<<pShe_ nun>> 그냥 꼬맹이잖아." 그중 한 명이 말한다. "<<pShe_ rul>> 이렇게까지 할 필요가 있을까?"
+	<br><br>
 
-"또 잡혔다가는 말이야." 딜러가 말한다. "제아무리 울어도 또 봐주는 일은 없을 거야" 그들은 당신을 골목길에 두고 떠난다.
-<br><br>
+	"또 잡혔다가는 말이야." 딜러가 말한다. "제아무리 울어도 또 봐주는 일은 없을 거야" 그들은 당신을 골목길에 두고 떠난다.
+	<br><br>
 
-<<link [[다음|Oxford Street]]>><<endevent>><</link>>
-<br>
-
+	<<link [[다음|Oxford Street]]>><<endevent>><</link>>
+	<br>
 <<else>>
+	당신은 무릎을 꿇고는 바닥에 머리를 댄다. "부-부탁이에요." 당신이 훌쩍거린다. "해치지 마세요. 돈은 없지만 약이 정말 필요했어요."
+	<br><br>
 
-당신은 무릎을 꿇고는 바닥에 머리를 댄다. "부-부탁이에요." 당신이 훌쩍거린다. "해치지 마세요. 돈은 없지만 약이 정말 필요했어요."
-<br><br>
+	딜러가 크게 웃음을 터트린다. "그런다고 속을 것 같아?" <<hePost "은">> 그렇게 말하고는 패거리들에게 고개를 끄덕여보인다. 그들은 당신을 뒤에서 붙잡는다. <<bind>>양팔이 묶인 채로, 그들은 당신을 끌고 골목길을 걸어내려가다가 트렁크가 열려있는 검은색 자동차가 나온다. 패거리는 당신을 그 안에 밀어넣고는 문을 쾅 닫는다.
+	<br><br>
 
-딜러가 크게 웃음을 터트린다. "그런다고 속을 것 같아?" <<hePost "은">> 그렇게 말하고는 패거리들에게 고개를 끄덕여보인다. 그들은 당신을 뒤에서 붙잡는다. <<bind>>양팔이 묶인 채로, 그들은 당신을 끌고 골목길을 걸어내려가다가 트렁크가 열려있는 검은색 자동차가 나온다. 패거리는 당신을 그 안에 밀어넣고는 문을 쾅 닫는다.
-<br><br>
-
-<<link [[다음|Maths Boot]]>><</link>>
-<br>
-
+	<<link [[다음|Maths Boot]]>><</link>>
+	<br>
 <</if>>
 
-:: Maths Abduction [nobr]
+:: Maths Abduction
 <<effects>>
 <<bind>>
 <<if $phase is 0>>
-
-양팔이 묶인 채로, 그들은 당신을 끌고 골목길을 걸어내려가다가 트렁크가 열려있는 검은색 자동차가 나온다. 패거리는 당신을 그 안에 밀어넣고는 문을 쾅 닫는다.
-<br><br>
-
+	양팔이 묶인 채로, 그들은 당신을 끌고 골목길을 걸어내려가다가 트렁크가 열려있는 검은색 자동차가 나온다. 패거리는 당신을 그 안에 밀어넣고는 문을 쾅 닫는다.
+	<br><br>
 <<else>>
-당신은 비명을 지른다. 패거리 중 한 명이 앞으로 나와서는 손으로 당신의 입을 막는다. 두 명은 당신의 팔을 붙잡아, 등 뒤로 묶어버린다. 그들은 당신을 끌고 골목길을 걸어내려가다가 트렁크가 열려있는 검은색 자동차가 나온다. 패거리는 당신을 그 안에 밀어넣고는 문을 쾅 닫는다.
-<br><br>
-
+	당신은 비명을 지른다. 패거리 중 한 명이 앞으로 나와서는 손으로 당신의 입을 막는다. 두 명은 당신의 팔을 붙잡아, 등 뒤로 묶어버린다. 그들은 당신을 끌고 골목길을 걸어내려가다가 트렁크가 열려있는 검은색 자동차가 나온다. 패거리는 당신을 그 안에 밀어넣고는 문을 쾅 닫는다.
+	<br><br>
 <</if>>
 
 <<link [[다음|Maths Boot]]>><</link>>
 <br>
 
-:: Maths Boot [nobr]
+:: Maths Boot
 <<effects>><<set $outside to 0>>
 
-당신은 묶인 채로 어둠 속에 있다. 곧 엔진에 시동이 거리는 소리가 들려오더니, 자동차가 움직이는 것이 느껴진다.
+당신은 묶인 채로 어둠 속에 있다. 곧 엔진에 시동이 걸리는 소리가 들려오더니, 자동차가 움직이는 것이 느껴진다.
 <br><br>
 
 <<link [[기다린다 (0:30)|Maths Boot Wait]]>><<pass 30>><<stress 6>><<trauma 6>><</link>><<gtrauma>><<gstress>>
@@ -791,7 +782,7 @@
 <<link [[몸부림친다 (0:30)|Maths Boot Struggle]]>><<pass 30>><<tiredness 6>><<stress 18>><<trauma 6>><</link>><<gtrauma>><<ggstress>><<gtiredness>>
 <br>
 
-:: Maths Boot Wait [nobr]
+:: Maths Boot Wait
 <<effects>><<set $location to "moor">>
 
 도시의 소리가 곧 흐려지다가 사라지나, 자동차는 멈추지 않는다. 어둠 속에 홀로 있으니, 얼마나 시간이 흘렀는지 가늠하기가 어렵다. 곧 자동차가 멈추고, 엔진 소리가 조용해진다. 여러 목소리가 들려온다. <<personPost "이">> 트렁크 문을 활짝 연다. 혼자가 아니다. 그 뒤에 여러 <<peoplePost "이">> 서서 당신을 지켜보고 있다.
@@ -801,31 +792,31 @@
 <br>
 "얘가 너한테서 약을 훔치려 했다고? 이렇게 귀여운 애가 그랬단 말이지."
 <br>
-"너 참 운 좋은 <<girl>><<if $player.gender_appearance is "f">>구나<<elseif $player.gender_appearance is "m">>이구나<</if>>."
+"너 참 운 좋은 <<girl_ iguna>>."
 <br><br>
 
 <<personPost "은">> 트렁크에서 당신을 끌어낸다. <<peoplePost "이">> 다가오기 전에 당신은 언뜻 주변을 둘러본다.
 
 <<if $daystate is "night">>
-근처에 있는 건물에서 나오는 빛에 기다란 풀들과 들꽃들이 보인다. 그 외에는 너무 어두워서 보이지 않아, 도시 밖의 어딘가라는 것만 알 수 있다.
-<br><br>
+	근처에 있는 건물에서 나오는 빛에 기다란 풀들과 들꽃들이 보인다. 그 외에는 너무 어두워서 보이지 않아, 도시 밖의 어딘가라는 것만 알 수 있다.
+	<br><br>
 <<else>>
-당신은 언덕 위의, 낡은 건물 옆에 있다. 사방이 돌투성이에 풀과 들꽃이 피어있는 평지이다. 도시에서 멀리 떨어진 장소이다.
-<br><br>
+	당신은 언덕 위의, 낡은 건물 옆에 있다. 사방이 돌투성이에 풀과 들꽃이 피어있는 평지이다. 도시에서 멀리 떨어진 장소이다.
+	<br><br>
 <</if>>
 
 패거리는 당신을 건물 쪽으로 밀며, 문을 열고 들어간다.
 <br><br>
 
 <<if $leftarm isnot "bound" or $rightarm isnot "bound">>
-당신의 양팔이 자유로워진 것은 눈치채지 못했다.
-<br><br>
+	당신의 양팔이 자유로워진 것은 눈치채지 못했다.
+	<br><br>
 <</if>>
 
 <<link [[다음|Maths Abduction 2]]>><</link>>
 <br>
 
-:: Maths Boot Struggle [nobr]
+:: Maths Boot Struggle
 <<effects>><<set $location to "moor">>
 
 당신은 양팔을 단단히 묶고 있는 구속구에 몸부림을 친다. 집요하게 하자, 뭔가 느슨해지는 느낌이 난다. 계속해서 몸부림을 치고 있자니 곧 양팔이 자유로와진다.
@@ -837,13 +828,13 @@
 <<link [[기다린다|Maths Boot Wait]]>><</link>>
 <br>
 
-:: Maths Abduction 2 [nobr]
+:: Maths Abduction 2
 <<effects>><<set $location to "moor">>
 
 안에는 사과주 캔과 트럼프 카드가 널부러진 탁자가 있다. 마치 게임을 하다가 멈춘 모습이다. 그들은 탁자를 지나쳐, 한 무더기의 상자 옆에 놓인 침대 쪽으로 당신을 데려간다.
 <br><br>
 
-"한 번에 세 명씩." <<personPost "이">> 말한다. "우리 모두가 할 만큼 <<if $player.gender_appearance is "f">>여자애들<<elseif $player.gender_appearance is "m">>남자애들<</if>>은 충분해. 그 전에." <<HePost "은">> 쪼그려 앉더니, 침대 밑에서 족쇄를 꺼낸다. 족쇄가 당신의 다리에 채워지고, 짧은 사슬이 두 족쇄를 연결한다.<<feetwear 3>>
+"한 번에 세 명씩." <<personPost "이">> 말한다. "우리 모두가 할 만큼 <<girl_ un>> 충분해. 그 전에." <<HePost "은">> 쪼그려 앉더니, 침대 밑에서 족쇄를 꺼낸다. 족쇄가 당신의 다리에 채워지고, 짧은 사슬이 두 족쇄를 연결한다.<<shackle_feet>>
 <br><br>
 
 <<HePost "은">> 제대로 채워졌는지 확인하기 위해 사슬을 한 번 잡아당긴 뒤, 당신의 위에 올라탄다.
@@ -852,176 +843,155 @@
 <<link [[다음|Maths Abduction Rape]]>><<set $molestationstart to 1>><<set $mathsab to 0>><</link>>
 <br>
 
-:: Maths Abduction Rape [nobr]
+:: Maths Abduction Rape
 <<if $molestationstart is 1>>
-<<set $molestationstart to 0>>
-<<controlloss>>
-<<violence 1>>
-<<neutral 1>>
-<<molested>>
-
-<<maninit>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
 
 	<<if $pain gt 90>>
-	"혼절할 것 같은데." 누군가 말하는 소리가 들려온다. "약 좀 줘봐." 누군가의 손이 당신의 머리를 뒤로 홱 젖히더니, 다른 손이 강제로 분홍색 알약을 당신의 입에 밀어넣는다.
-	<<garousal>><<lpain>><<set $drugged += 60>><<set $pain to 90>>
-	<br><br>
+		"혼절할 것 같은데." 누군가 말하는 소리가 들려온다. "약 좀 줘봐." 누군가의 손이 당신의 머리를 뒤로 홱 젖히더니, 다른 손이 강제로 분홍색 알약을 당신의 입에 밀어넣는다.
+		<<garousal>><<lpain>><<drugs 60>><<set $pain to 90>>
+		<br><br>
 	<</if>>
 <</if>>
 
 <<effects>>
-
-<<effectsman>><<man>>
-
+<<effectsman>>
+<<alarmstate "<span class='red'>당신의 불량학생으로서의 명성 때문에, 누구도 당신을 도우러 오지 않는다.</span>">>
+<<man>>
 <<audience>>
-
 <<stateman>>
 <br><br>
 <<actionsman>>
 
-<<if $enemyhealth lte 0>>
-	<span id="next"><<link [[다음|Maths Abduction Rape Finish]]>><</link>></span><<nexttext>>
-<<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[다음|Maths Abduction Rape Finish]]>><</link>></span><<nexttext>>
-<<elseif $alarm is 1 and $rescue is 1>>
+<<if _combatend>>
 	<span id="next"><<link [[다음|Maths Abduction Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
 	<span id="next"><<link [[다음|Maths Abduction Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Maths Abduction Rape Finish [nobr]
+:: Maths Abduction Rape Finish
 <<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
-<<ejaculation>>
+	<<ejaculation>>
 
-<<tearful>> 당신은 이어질 폭행에 대비한다.
-<br><br>
+	<<tearful>> 당신은 이어질 폭행에 대비한다.
+	<br><br>
 
 	<<if $mathsab is 0>>
-	"좋은 생각이 있어." <<person1>><<personPost "이">> 말한다.
+		"좋은 생각이 있어." <<person1>><<personPost "이">> 말한다.
 	<</if>>
-
 <<else>>
-
 	<<if $worn.feet.name is "ankle cuffs">>
-	당신은 그들을 밀쳐내나, 다리가 묶인 상태이고 상대의 수가 너무 많아 도망치지 모한다.
-	<br><br>
+		당신은 그들을 밀쳐내나, 다리가 묶인 상태이고 <<group_ yi>> 수가 너무 많아 도망치지 못한다.
+		<br><br>
 	<<else>>
-	당신은 그들을 밀쳐내나, 상대의 수가 너무 많아 도망치지 모한다.
-	<br><br>
+		당신은 그들을 밀쳐내나, <<group_ yi>> 수가 너무 많아 도망치지 못한다.
+		<br><br>
 	<</if>>
-<<tearful>> 당신은 이어질 폭행에 대비한다.
-<br><br>
+	<<tearful>> 당신은 이어질 폭행에 대비한다.
+	<br><br>
 
 	<<if $mathsab is 0>>
-	"기백 하나는 좋은걸." <<person1>><<personPost "이">> 말한다. "망가진 모습이 정말 기대가 되네."
+		"기백 하나는 좋은걸." <<person1>><<personPost "이">> 말한다. "망가진 모습이 정말 기대가 되네."
 	<</if>>
-
 <</if>>
 
 <<if $mathsab is 0>><<set $mathsab += 1>>
-
 	<<if $leftarm is "bound" or $rightarm is "bound">>
-	<<HePost "은">> 칼을 한 자루 꺼내, 양팔을 묶고 있던 걸 잘라낸다.
+		<<HePost "은">> 칼을 한 자루 꺼내, 양팔을 묶고 있던 걸 잘라낸다.
 	<</if>>
 
-"다들 핸드폰 꺼내." <<hePost "이">> 당신의 뒤에 앉으며 말한다. <<HePost "은">> 당신의 양팔을 붙잡는다. "웃어. 뭐가 네게 좋은 일인지 잘 파악하라고."
-<br><br>
+	"다들 핸드폰 꺼내." <<hePost "이">> 당신의 뒤에 앉으며 말한다. <<HePost "은">> 당신의 양팔을 붙잡는다. "웃어. 뭐가 네게 좋은 일인지 잘 파악하라고."
+	<br><br>
 
-<<endcombat>>
+	<<endcombat>>
 
-<<link [[웃으며 손가락으로 브이 자를 그려보인다|Maths Abduction Smile]]>><<fameexhibitionism 50>><<trauma 6>><<stress -6>><</link>><<gtrauma>><<lstress>>
-<br>
-<<link [[얼굴을 찌푸리고 가운데 손가락을 치켜든다|Maths Abduction Frown]]>><<fameexhibitionism 50>><<trauma -6>><<stress 6>><</link>><<gstress>><<ltrauma>>
-<br>
-<<link [[얼굴을 가린다|Maths Abduction Cover]]>><<trauma 6>><<stress 6>><<pain 6>><</link>><<gtrauma>><<gstress>><<gpain>>
-<br>
-
+	<<link [[웃으며 손가락으로 브이 자를 그려보인다|Maths Abduction Smile]]>><<fameexhibitionism 50 "pic">><<trauma 6>><<stress -6>><</link>><<gtrauma>><<lstress>>
+	<br>
+	<<link [[얼굴을 찌푸리고 가운데 손가락을 치켜든다|Maths Abduction Frown]]>><<fameexhibitionism 50 "pic">><<trauma -6>><<stress 6>><</link>><<gstress>><<ltrauma>>
+	<br>
+	<<link [[얼굴을 가린다|Maths Abduction Cover]]>><<trauma 6>><<stress 6>><<pain 6>><</link>><<gtrauma>><<gstress>><<gpain>>
+	<br>
 <<elseif $mathsab is 1>><<set $mathsab += 1>>
+	"누가 이 사진들로 광고 좀 올려놔봐." <<personPost "이">> 말한다. "얘 가지고 좀 벌어볼 수 있을 것 같은데."
+	<br><br>
 
-"누가 이 사진들로 광고 좀 올려놔봐." <<personPost "이">> 말한다. "얘 가지고 좀 벌어볼 수 있을 것 같은데."
-<br><br>
+	<<endcombat>>
 
-<<endcombat>>
+	<<generate1>><<generate2>><<generate3>>
+	세 명의 <<peoplePost "이">> 침대 위로 올라온다. 다들 자기 턴이 되길 기대하고 있다.
+	<br><br>
 
-<<generate1>><<generate2>><<generate3>>
-세 명의 <<peoplePost "이">> 침대 위로 올라온다. 다들 자기 턴이 되길 기대하고 있다.
-<br><br>
-
-<<link [[다음|Maths Abduction Rape]]>><<set $molestationstart to 1>><</link>>
-
+	<<link [[다음|Maths Abduction Rape]]>><<set $molestationstart to 1>><</link>>
 <<elseif $mathsab is 2>><<set $mathsab += 1>>
+	<<person1>><<personPost "이">> 핸드폰을 확인한다. "벌써 흥미를 보이는 사람이 있는데." <<hePost "이">> 말한다. "할 수 있는 동안 이 녀석을 이용하자고."
+	<br><br>
 
-<<person1>><<personPost "이">> 핸드폰을 확인한다. "벌써 흥미를 보이는 사람이 있는데." <<hePost "이">> 말한다. "할 수 있는 동안 이 녀석을 이용하자고."
-<br><br>
+	<<endcombat>>
 
-<<endcombat>>
+	<<generate1>><<generate2>><<generate3>>
+	세 명의 <<peoplePost "이">> 침대 위로 올라온다. 다들 자기 턴이 되길 기대하고 있다.
+	<br><br>
 
-<<generate1>><<generate2>><<generate3>>
-세 명의 <<peoplePost "이">> 침대 위로 올라온다. 다들 자기 턴이 되길 기대하고 있다.
-<br><br>
-
-<<link [[다음|Maths Abduction Rape]]>><<set $molestationstart to 1>><</link>>
-
+	<<link [[다음|Maths Abduction Rape]]>><<set $molestationstart to 1>><</link>>
 <<elseif $mathsab is 3>><<set $mathsab += 1>>
+	"얘 꼭 팔아야 해?" <<person1>><<personPost "이">> 묻는다. "그냥 여기 묶어둬도 되잖아. 누가 여길 찾아낼 것 같지도 않고."
+	<br><br>
 
-"얘 꼭 팔아야 해?" <<person1>><<personPost "이">> 묻는다. "그냥 여기 묶어둬도 되잖아. 누가 여길 찾아낼 것 같지도 않고."
-<br><br>
+	"한 일주일 정도 되면 벌써 질릴걸." <<personPost "이">> 핸드폰을 확인하며 말한다. "구매자가 벌써 이쪽으로 오고 있어. 되게 고약한 양반들 같던데."
+	<br><br>
 
-"한 일주일 정도 되면 벌써 질릴걸." <<personPost "이">> 핸드폰을 확인하며 말한다. "구매자가 벌써 이쪽으로 오고 있어. 되게 고약한 양반들 같던데."
-<br><br>
+	<<endcombat>>
 
-<<endcombat>>
+	<<generate1>><<generate2>><<generate3>>
+	세 명의 <<peoplePost "이">> 침대 위로 올라온다. 다들 자기 턴이 되길 기대하고 있다.
+	<br><br>
 
-<<generate1>><<generate2>><<generate3>>
-세 명의 <<peoplePost "이">> 침대 위로 올라온다. 다들 자기 턴이 되길 기대하고 있다.
-<br><br>
-
-<<link [[다음|Maths Abduction Rape]]>><<set $molestationstart to 1>><</link>>
-
+	<<link [[다음|Maths Abduction Rape]]>><<set $molestationstart to 1>><</link>>
 <<else>>
+	"포즈 좀 취해보는 건 어때?" <<personPost "이">> 말한다. "우리가 널 기억할만한 사진 한 장 남겨보자고."
+	<br><br>
 
-"포즈 좀 취해보는 건 어때?" <<personPost "이">> 말한다. "우리가 널 기억할만한 사진 한 장 남겨보자고."
-<br><br>
+	<<endcombat>>
 
-<<endcombat>>
-
-<<link [[웃으며 손가락으로 브이 자를 그려보인다|Maths Abduction Smile 2]]>><<famerape 50>><<trauma 6>><<stress -6>><</link>><<gtrauma>><<lstress>>
-<br>
-<<link [[얼굴을 찌푸리고 가운데 손가락을 들어보인다|Maths Abduction Frown 2]]>><<famerape 50>><<trauma -6>><<stress 6>><</link>><<gstress>><<ltrauma>>
-<br>
-<<link [[얼굴을 가린다|Maths Abduction Cover 2]]>><<trauma 6>><<stress 6>><<pain 6>><</link>><<gtrauma>><<gstress>><<gpain>>
-<br>
-
+	<<link [[웃으며 손가락으로 브이 자를 그려보인다|Maths Abduction Smile 2]]>><<famerape 50 "pic">><<trauma 6>><<stress -6>><</link>><<gtrauma>><<lstress>>
+	<br>
+	<<link [[얼굴을 찌푸리고 가운데 손가락을 치켜든다|Maths Abduction Frown 2]]>><<famerape 50 "pic">><<trauma -6>><<stress 6>><</link>><<gstress>><<ltrauma>>
+	<br>
+	<<link [[얼굴을 가린다|Maths Abduction Cover 2]]>><<trauma 6>><<stress 6>><<pain 6>><</link>><<gtrauma>><<gstress>><<gpain>>
+	<br>
 <</if>>
 
-:: Maths Abduction Smile [nobr]
+:: Maths Abduction Smile
 <<effects>><<set $location to "moor">>
 
 <<if $pain gte 40>>
-<<set $mathsab1 to "tearsmile">>
-당신은 눈물을 흘리는 와중에도 미소를 지으며, 관중을 향해 손바닥을 내보이고는 검지와 중지로 브이 자를 그려보인다. 모두 사진을 찍기 시작한다.
-<br><br>
+	<<set $mathsab1 to "tearsmile">>
+	당신은 눈물을 흘리는 와중에도 미소를 지으며, 관중을 향해 손바닥을 내보이고는 검지와 중지로 브이 자를 그려보인다. 모두 사진을 찍기 시작한다.
+	<br><br>
 
-"완전히 걸레로구만."
-<br>
-"아아, 벌써 울고 있어."
-<br>
-"얼마나 버틸지 궁금하네."
-<br>
-
+	"완전히 걸레로구만."
+	<br>
+	"아아, 벌써 울고 있어."
+	<br>
+	"얼마나 버틸지 궁금하네."
+	<br>
 <<else>>
-<<set $mathsab1 to "smile">>
-당신은 미소를 지으며, 관중을 향해 손바닥을 내보이고는 검지와 중지로 브이 자를 그려보인다. 모두 사진을 찍기 시작한다.
-<br><br>
+	<<set $mathsab1 to "smile">>
+	당신은 미소를 지으며, 관중을 향해 손바닥을 내보이고는 검지와 중지로 브이 자를 그려보인다. 모두 사진을 찍기 시작한다.
+	<br><br>
 
-"완전히 걸레로구만."
-<br>
-"방금 강간당한 것 같은 모습이 전혀 아니야."
-<br>
-"저 미소가 얼마나 갈지 궁금하네."
-<br>
-
+	"완전히 걸레로구만."
+	<br>
+	"방금 강간당한 것 같은 모습이 전혀 아니야."
+	<br>
+	"저 미소가 얼마나 갈지 궁금하네."
+	<br>
 <</if>>
 <br>
 
@@ -1032,33 +1002,31 @@
 <<link [[다음|Maths Abduction Rape]]>><<set $molestationstart to 1>><</link>>
 <br>
 
-:: Maths Abduction Frown [nobr]
+:: Maths Abduction Frown
 <<effects>><<set $location to "moor">>
 
 <<if $pain gte 40>>
-<<set $mathsab1 to "tearfrown">>
-당신은 화난 표정을 지어보이나, 눈물을 참아내진 못한다. 그러고는 손바닥을 내보인 뒤, 검지와 중지로 브이 자를 그려보인다. 모두 사진을 찍기 시작한다.
-<br><br>
+	<<set $mathsab1 to "tearfrown">>
+	당신은 화난 표정을 지어보이나, 눈물을 참아내진 못한다. 그러고는 손바닥을 내보인 뒤, 검지와 중지로 브이 자를 그려보인다. 모두 사진을 찍기 시작한다.
+	<br><br>
 
-"오래 저항하진 못할 거야."
-<br>
-"아아, 강한 척을 하고 있어."
-<br>
-"이 상황에 놓인 녀석 치고는 아주 혈기왕성한걸."
-<br>
-
+	"오래 저항하진 못할 거야."
+	<br>
+	"아아, 강한 척을 하고 있어."
+	<br>
+	"이 상황에 놓인 녀석 치고는 아주 혈기왕성한걸."
+	<br>
 <<else>>
-<<set $mathsab1 to "frown">>
-당신은 화난 표정을 지어보이며, 손바닥을 내보이며 검지와 중지로 브이 자를 그려보인다. 모두 사진을 찍기 시작한다.
-<br><br>
+	<<set $mathsab1 to "frown">>
+	당신은 화난 표정을 지어보이며, 손바닥을 내보이며 검지와 중지로 브이 자를 그려보인다. 모두 사진을 찍기 시작한다.
+	<br><br>
 
-"오래 저항하진 못할 거야."
-<br>
-"좋아하게 될 때까지 강간하자고."
-<br>
-"아주 혈기왕성한걸."
-<br>
-
+	"오래 저항하진 못할 거야."
+	<br>
+	"<<pshe_ ga>> 그걸 좋아하게 될 때까지 <<phim_ ul>> 강간하자고."
+	<br>
+	"아주 혈기왕성한걸."
+	<br>
 <</if>>
 <br>
 
@@ -1069,32 +1037,31 @@
 <<link [[다음|Maths Abduction Rape]]>><<set $molestationstart to 1>><</link>>
 <br>
 
-:: Maths Abduction Cover [nobr]
+:: Maths Abduction Cover
 <<effects>><<set $location to "moor">>
 
 <<if $pain gte 40>>
-<<set $mathsab1 to "tearcover">>
-당신은 양손으로 눈물범벅인 얼굴을 가린다. 누군가 당신의 머리를 후려치나, 다들 상관하지 않고 사진을 찍기 시작한다.
-<br><br>
+	<<set $mathsab1 to "tearcover">>
+	당신은 양손으로 눈물범벅인 얼굴을 가린다. 누군가 당신의 머리를 후려치나, 다들 상관하지 않고 사진을 찍기 시작한다.
+	<br><br>
 
-"아아, 부끄러워 하는 것 좀 봐."
-<br>
-"숨으려고 하고 있어."
-<br>
-"어쩌면 학교 친구들이 자기가 우는 모습을 보지 않았으면 하나봐."
-<br>
+	"아아, 부끄러워 하는 것 좀 봐."
+	<br>
+	"숨으려고 하고 있어."
+	<br>
+	"어쩌면 학교 친구들이 자기가 우는 모습을 보지 않았으면 하나봐."
+	<br>
 <<else>>
-<<set $mathsab1 to "cover">>
-당신은 양손으로 얼굴을 가린다. 누군가 당신의 머리를 후려치나, 다들 상관하지 않고 사진을 찍기 시작한다.
-<br><br>
+	<<set $mathsab1 to "cover">>
+	당신은 양손으로 얼굴을 가린다. 누군가 당신의 머리를 후려치나, 다들 상관하지 않고 사진을 찍기 시작한다.
+	<br><br>
 
-"아아, 부끄러워 하는 것 좀 봐."
-<br>
-"숨으려고 하고 있어."
-<br>
-"학교 친구들이 사진을 보게 될지도 모른다고 생각하나봐."
-<br>
-
+	"아아, 부끄러워 하는 것 좀 봐."
+	<br>
+	"숨으려고 하고 있어."
+	<br>
+	"학교 친구들이 사진을 보게 될지도 모른다고 생각하나봐."
+	<br>
 <</if>>
 <br>
 
@@ -1105,33 +1072,31 @@
 <<link [[다음|Maths Abduction Rape]]>><<set $molestationstart to 1>><</link>>
 <br>
 
-:: Maths Abduction Smile 2 [nobr]
+:: Maths Abduction Smile 2
 <<effects>><<set $location to "moor">>
 
 <<if $pain gte 40>>
-<<set $mathsab2 to "tearsmile">>
-당신은 눈물을 흘리는 와중에도 미소를 지으며, 관중을 향해 손바닥을 내보이고는 검지와 중지로 브이 자를 그려보인다. 모두 사진을 찍기 시작한다.
-<br><br>
+	<<set $mathsab2 to "tearsmile">>
+	당신은 눈물을 흘리는 와중에도 미소를 지으며, 관중을 향해 손바닥을 내보이고는 검지와 중지로 브이 자를 그려보인다. 모두 사진을 찍기 시작한다.
+	<br><br>
 
-"이거 완전 숙련자잖아."
-<br>
-"여전히 태연한 표정이구만."
-<br>
-"이미 조교라도 당한 것 같아."
-<br>
-
+	"이거 완전 숙련자잖아."
+	<br>
+	"여전히 태연한 표정이구만."
+	<br>
+	"이미 조교라도 당한 것 같아."
+	<br>
 <<else>>
-<<set $mathsab2 to "smile">>
-당신은 미소 지으며, 관중을 향해 손바닥을 내보이고는 검지와 중지로 브이 자를 그려보인다. 모두 사진을 찍기 시작한다.
-<br><br>
+	<<set $mathsab2 to "smile">>
+	당신은 미소 지으며, 관중을 향해 손바닥을 내보이고는 검지와 중지로 브이 자를 그려보인다. 모두 사진을 찍기 시작한다.
+	<br><br>
 
-"이거 완전 숙련자잖아."
-<br>
-"여전히 태연한 표정이구만."
-<br>
-"아주 환상적인 성노예가 될 거야."
-<br>
-
+	"이거 완전 숙련자잖아."
+	<br>
+	"여전히 태연한 표정이구만."
+	<br>
+	"아주 환상적인 성노예가 될 거야."
+	<br>
 <</if>>
 <br>
 
@@ -1143,32 +1108,30 @@
 <<link [[다음|Maths Abduction 3]]>><</link>>
 <br>
 
-:: Maths Abduction Frown 2 [nobr]
+:: Maths Abduction Frown 2
 <<effects>><<set $location to "moor">>
 
 <<if $pain gte 40>><<set $mathsab2 to "tearfrown">>
-당신은 화난 표정을 지어보이나, 눈물을 참아내진 못한다. 그러고는 손바닥을 내보인 뒤, 검지와 중지로 브이 자를 그려보인다. 모두 사진을 찍기 시작한다.
-<br><br>
+	당신은 화난 표정을 지어보이나, 눈물을 참아내진 못한다. 그러고는 손바닥을 내보인 뒤, 검지와 중지로 브이 자를 그려보인다. 모두 사진을 찍기 시작한다.
+	<br><br>
 
-"강인한 거 하나만큼은 칭찬 해야 하겠는걸."
-<br>
-"구매자들이 자기가 어떤 애를 사가는지 알아야 할텐데 말이야."
-<br>
-"예전에는 이 녀석 같은 걸레년들은 잔뜩 망가뜨리고 다녔지."
-<br>
-
+	"강인한 거 하나만큼은 칭찬 해야 하겠는걸."
+	<br>
+	"구매자들이 자기가 어떤 애를 사가는지 알아야 할텐데 말이야."
+	<br>
+	"예전에는 이 녀석 같은 걸레년들은 잔뜩 망가뜨리고 다녔지."
+	<br>
 <<else>>
 <<set $mathsab2 to "frown">>
-당신은 화난 표정을 지어보이며, 손바닥을 내보이며 검지와 중지로 브이 자를 그려보인다. 모두 사진을 찍기 시작한다.
-<br><br>
+	당신은 화난 표정을 지어보이며, 손바닥을 내보이며 검지와 중지로 브이 자를 그려보인다. 모두 사진을 찍기 시작한다.
+	<br><br>
 
-"강인한 거 하나만큼은 칭찬 해야 하겠는걸."
-<br>
-"구매자들이 자기가 어떤 애를 사가는지 알아야 할텐데 말이야."
-<br>
-"예전에는 이 녀석 같은 걸레년들은 잔뜩 망가뜨리고 다녔지."
-<br>
-
+	"강인한 거 하나만큼은 칭찬 해야 하겠는걸."
+	<br>
+	"구매자들이 자기가 어떤 애를 사가는지 알아야 할텐데 말이야."
+	<br>
+	"예전에는 이 녀석 같은 걸레년들은 잔뜩 망가뜨리고 다녔지."
+	<br>
 <</if>>
 <br>
 
@@ -1180,32 +1143,30 @@
 <<link [[다음|Maths Abduction 3]]>><</link>>
 <br>
 
-:: Maths Abduction Cover 2 [nobr]
+:: Maths Abduction Cover 2
 <<effects>><<set $location to "moor">>
 
 <<if $pain gte 40>><<set $mathsab2 to "tearcover">>
-당신은 양손으로 눈물범벅인 얼굴을 가린다. 누군가 당신의 머리를 후려치나, 다들 상관하지 않고 사진을 찍기 시작한다.
-<br><br>
+	당신은 양손으로 눈물범벅인 얼굴을 가린다. 누군가 당신의 머리를 후려치나, 다들 상관하지 않고 사진을 찍기 시작한다.
+	<br><br>
 
-"이런 일을 당하고도 체면치례 하려나봐."
-<br>
-"강한 척 하는 거야."
-<br>
-"이렇게 사진을 많이 찍었는데, 자길 알아보는 사람이 없을 거라 생각하진 않겠지."
-<br>
-
+	"이런 일을 당하고도 체면치례 하려나봐."
+	<br>
+	"강한 척 하는 거야."
+	<br>
+	"이렇게 사진을 많이 찍었는데, 자길 알아보는 사람이 없을 거라 생각하진 않겠지."
+	<br>
 <<else>>
-<<set $mathsab2 to "cover">>
-당신은 양손으로 얼굴을 가린다. 누군가 당신의 머리를 후려치나, 다들 상관하지 않고 사진을 찍기 시작한다.
-<br><br>
+	<<set $mathsab2 to "cover">>
+	당신은 양손으로 얼굴을 가린다. 누군가 당신의 머리를 후려치나, 다들 상관하지 않고 사진을 찍기 시작한다.
+	<br><br>
 
-"이런 일을 당하고도 체면치례 하려나봐."
-<br>
-"강한 척 하는 거야."
-<br>
-"이렇게 사진을 많이 찍었는데, 자길 알아보는 사람이 없을 거라 생각하진 않겠지."
-<br>
-
+	"이런 일을 당하고도 체면치례 하려나봐."
+	<br>
+	"강한 척 하는 거야."
+	<br>
+	"이렇게 사진을 많이 찍었는데, 자길 알아보는 사람이 없을 거라 생각하진 않겠지."
+	<br>
 <</if>>
 <br>
 
@@ -1217,7 +1178,7 @@
 <<link [[다음|Maths Abduction 3]]>><</link>>
 <br>
 
-:: Maths Abduction 3 [nobr]
+:: Maths Abduction 3
 <<effects>><<set $location to "moor">>
 <<generate1>><<generate2>><<person1>>
 당신은 침대 위에서 몸을 웅크리고 있고, 패거리의 대부분은 중단했던 카드 게임을 하러 돌아간다. 나머지는 그냥 술을 마시며 잡담을 나눈다. 얼마 뒤에 승합차 한 대가 바깥에 멈춘다. 상당히 높은 차라 창문을 통해 승합차 지붕이 보일 정도이다. 하지만 당신을 데리러 온 자동차는 아니다. 패거리 중 몇 명이 승합차 뒤에서 상자들을 가져와, 다른 상자 위에 쌓는다.
@@ -1243,7 +1204,7 @@
 <<link [[다음 (0:30)|Maths Abduction 4]]>><<pass 30>><</link>>
 <br>
 
-:: Maths Abduction 4 [nobr]
+:: Maths Abduction 4
 <<effects>><<set $location to "moor">>
 <<unset $mathsab>><<unset $mathsab1>><<unset $mathsab2>>
 
@@ -1255,7 +1216,7 @@
 "빨리 오셨네." <<hePost "이">> 말하는 소리가 들려온다. "아직 씻길 시간도 없었-"
 <br><br>
 
-"<<if $player.gender_appearance is "f">>여자애<<elseif $player.gender_appearance is "m">>남자애<</if>>나 보여줘." 익숙한 목소리가 말을 자른다. 베일리다.
+"그 <<girl_ ina>> 보여줘." 익숙한 목소리가 말을 자른다. <span class="purple">베일리다.</span>
 <br><br>
 
 <<person2>>베일리는 <<personPost "을">> 따라 건물 안으로 들어온다. <<person1>>험한 인상의 세 명이 <<hePost "을">> 따라 들어온다.
@@ -1264,13 +1225,13 @@
 <<link [[다음|Maths Abduction 5]]>><</link>>
 <br>
 
-:: Maths Abduction 5 [nobr]
+:: Maths Abduction 5
 <<effects>><<set $location to "moor">>
 
 베일리는 당신을 쳐다보고는, <<person2>><<personPost "을">> 돌아본다. "오천."
 <br><br>
 
-"그래." <<personPost "은">> 그렇게 대답하며, 한 손을 내민다. 베일리가 데려온 이들 중 한 명인 <<person3>><<personPost "이">> 다가오더니, 침대에 당신을 묶어두고 있던 쇠사슬을 풀고는 당신을 일으켜 세운다.<<if $worn.feet.name is "ankle cuffs">><<set $worn.feet.type.push("broken")>><<feetruined>><</if>>
+"그래." <<personPost "은">> 그렇게 대답하며, 한 손을 내민다. 베일리가 데려온 이들 중 한 명인 <<person3>><<personPost "이">> 다가오더니, 침대에 당신을 묶어두고 있던 쇠사슬을 풀고는 당신을 일으켜 세운다.<<if $worn.feet.name is "ankle cuffs">><<remove_shackle>><</if>>
 <br><br>
 
 "이해가 안 되나 본데." 베일리가 말한다. <<person1>><<hisPost "의">> 옆에 서있던 깡패인 <<person4>><<personPost "과">> <<person5>><<personPost "이">> 자켓 안쪽에서 권총을 꺼내든다. "네놈들이 내 소유물을 사용했잖아. 그 값은 치러야지."
@@ -1288,10 +1249,10 @@
 <<link [[다음 (0:30)|Maths Abduction 6]]>><</link>>
 <br>
 
-:: Maths Abduction 6 [nobr]
+:: Maths Abduction 6
 <<effects>><<set $location to "moor">>
 <<clothesontowel>><<earnFeat "Sour Dealing">>
-시골 지역을 지나 집으로 돌아가는 길까지는 아무런 일도 일어나지 않았다. 당신은 <<person4>><<personPost "과">> <<person5>><<person>> 사이에 껴서 중앙에 앉아있다. 둘은 당신을 쳐다보지 않는다. 베일리가 운전석에 앉아있고, 그 옆의 조수석에 <<person3>><<personPost "이">> 앉아있다.
+시골 지역을 지나 집으로 돌아가는 길까지는 아무런 일도 일어나지 않았다. 당신은 <<person4>><<personPost "과">> <<person5>><<personPost>> 사이에 껴서 중앙에 앉아있다. 둘은 당신을 쳐다보지 않는다. 베일리가 운전석에 앉아있고, <<person1>><<himPost>> 옆의 조수석에 <<person3>><<personPost "이">> 앉아있다.
 <br><br>
 
 <<link [[구해준 것에 대해 감사를 표한다|Maths Abduction Thank]]>><</link>>
@@ -1299,13 +1260,13 @@
 <<link [[소유물이라 부른 것에 화를 낸다|Maths Abduction Insist]]>><</link>>
 <br>
 <<if $promiscuity gte 35>>
-<<link [[깡패들을 애태운다|Maths Abduction Tease]]>><</link>><<promiscuous3>>
-<br>
+	<<link [[깡패들을 애태운다|Maths Abduction Tease]]>><</link>><<promiscuous3>>
+	<br>
 <</if>>
 <<link [[입을 다물고 있는다|Maths Abduction Silent]]>><</link>>
 <br>
 
-:: Maths Abduction Thank [nobr]
+:: Maths Abduction Thank
 <<effects>><<set $location to "town">>
 
 "구해줘서 고마워요." 당신은 말한다. <<person5>><<personPost "이">> 당신에게 미소를 지어보인다. 다른 사람들은 아무런 말이 없다.
@@ -1316,7 +1277,7 @@
 <<link [[입을 다물고 있는다|Maths Abduction Silent]]>><</link>>
 <br>
 
-:: Maths Abduction Ask [nobr]
+:: Maths Abduction Ask
 <<effects>><<set $location to "town">>
 <<person1>>
 "저한테 화나셨어요?" 당신은 그렇게 물으며, 백미러를 통해 베일리를 본다.
@@ -1331,7 +1292,7 @@
 <<link [[다음|Domus Street]]>><<endevent>><<set $eventskip to 1>><<set $stress -= 200>><</link>>
 <br>
 
-:: Maths Abduction Insist [nobr]
+:: Maths Abduction Insist
 <<effects>><<set $location to "town">>
 <<person1>>
 "전 당신의 소유물이 아녜요." 당신은 그렇게 말하며 백미러를 통해 베일리를 노려본다.
@@ -1346,16 +1307,16 @@
 <<link [[다음|Domus Street]]>><<endevent>><<set $eventskip to 1>><<set $stress -= 200>><</link>>
 <br>
 
-:: Maths Abduction Tease [nobr]
+:: Maths Abduction Tease
 <<effects>><<set $location to "town">>
 
-당신은 <<person4>><<personPost "과">> <<person5>><<personPost "의">> 허벅지 위에 손을 올린 뒤, 한 손가락을 가랑이에 얹어 쓰다듬기 시작한다.
+당신은 <<person4>><<personPost "과">> <<person5>><<personPost "의">> 넓적다리 위에 손을 올린 뒤, 한 손가락을 가랑이에 얹어 쓰다듬기 시작한다.
 <<promiscuity3>>
 
-<<person4>><<personPost "은">> 얼굴을 붉히나, 반응하지 않는다. <<person5>><<personPost "은">> 자신의 손을 당신의 허벅지 위에 얹고는 당신을 따라한다.
+<<person4>><<personPost "은">> 얼굴을 붉히나, 반응하지 않는다. <<person5>><<personPost "은">> 자신의 손을 당신의 넓적다리 위에 얹고는 당신을 따라한다.
 <br><br>
 
-"너도 돈 내려고?" 베일리가 말한다. <<HisPost "의">> 눈은 도로를 계속 쳐다보고 있다. <<person5>><<personPost "은">> 당신의 팔을 붙잡고는 가랑이에서 치운다. <<HePost "은">> 아무 일도 없었다는 듯 창문 밖을 쳐다본다.
+"너도 돈 내려고?" 베일리가 말한다. <<person1>><<HisPost "의">> 눈은 도로를 계속 쳐다보고 있다. <<person5>><<personPost "은">> 당신의 팔을 붙잡고는 가랑이에서 치운다. <<HePost "은">> 아무 일도 없었다는 듯 창문 밖을 쳐다본다.
 <br><br>
 
 모두가 아무 말도 하지 않는 상태로 베일리는 도시 안으로 차를 몰고 들어가, 고아원으로 돌아간다.
@@ -1364,7 +1325,7 @@
 <<link [[다음|Domus Street]]>><<endevent>><<set $eventskip to 1>><<set $stress -= 200>><</link>>
 <br>
 
-:: Maths Abduction Silent [nobr]
+:: Maths Abduction Silent
 <<effects>><<set $location to "town">>
 
 베일리가 도시 안으로 차를 몰고 들어가, 고아원으로 돌아가는 동안 당신은 입을 다물고 있는다.
@@ -1373,7 +1334,7 @@
 <<link [[다음|Domus Street]]>><<endevent>><<set $eventskip to 1>><<set $stress -= 200>><</link>>
 <br>
 
-:: Maths Library Student [nobr]
+:: Maths Library Student
 <<effects>>
 
 <<generatey1>><<person1>>당신은 해답 작업에 열중하고 있는 <<personPost "에게">> 다가간다. <<HePost "은">> 매우 열중하고 있어서 당신을 알아차리지 못한다. 뭘 쓰고 있는지 볼 수 있을 정도로 가까이 다가가면 뭔가를 배울 수도 있으리라.
@@ -1384,18 +1345,18 @@
 <<link [[떠난다|School Library]]>><<endevent>><</link>>
 <br>
 
-:: Maths Library Student Seduce [nobr]
+:: Maths Library Student Seduce
 <<effects>>
 
-당신은 느긋하게 <<personPost "에게로">> 다가가 책상 위로 몸을 기울인다. <<if $worn.upper.type.includes("naked")>><<HisPost "의">> 눈이 당신의 맨가슴을 향한다<<else>><<HePost "은">> 당신이 일부러 단정치 못하게 입은 <<trClothes "upper" $worn.upper.name "name" "을">>_trResult 제대로 쳐다본다<</if>>. 당신은 <<trClothes "lower" $worn.lower.name "name" "을">>_trResult <<if $worn.under_lower.type.includes("naked")>> 속옷을 입고 있지 않다는 걸<<else>> <<trClothes "under_lower" $worn.under_lower.name "name" "을">>_trResult<</if>> 얼핏 볼 수 있을 정도로만 <<if $skirt is 1>>옆쪽을 들춘다<<else>>내린다<</if>>.
+당신은 느긋하게 <<personPost "에게로">> 다가가, <<his_ yi>> 책상 위로 몸을 기울인다. <<if $worn.upper.type.includes("naked")>><<HisPost "의">> 눈이 당신의 맨가슴을 향한다<<else>><<HePost "은">> 당신이 일부러 단정치 못하게 입은 <<trClothes "upper" $worn.upper.name "name" "을">>_trResult 제대로 쳐다본다<</if>>. 당신은 <<trClothes "lower" $worn.lower.name "name" "을" "sep">>_trResult<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt>>의 옆을 살짝 들어올려<<else>>_trPost 살짝 잡아내려<</if>> <<if $worn.under_lower.type.includes("naked")>>속옷을 입고 있지 않다는 걸 암시한다<<else>><<trClothes "under_lower" $worn.under_lower.name "name" "을">>_trResult 얼핏 보여준다<</if>>.
 <<exhibitionism1>>
 
 <<if $submissive gte 1150>>
-"계속 보고 싶어?" 당신이 묻는다. "난 괜찮은데."
+	"계속 보고 싶어?" 당신이 묻는다. "난 괜찮은데."
 <<elseif $submissive lte 850>>
-"계속 보게 해줄게." 당신이 말한다. "이번 한 번 뿐이야."
+	"계속 보게 해줄게." 당신이 말한다. "이번 한 번 뿐이야."
 <<else>>
-"여기 너무 덥다." 당신이 말한다.
+	"여기 너무 덥다." 당신이 말한다.
 <</if>>
 <br><br>
 
@@ -1406,27 +1367,25 @@
 <br><br>
 
 <<if $seductionrating gte $seductionrequired>><<set $mathslibraryknown to 1>><<set $mathsinfo += 1>>
+	<<HePost "은">> 고개를 끄덕이고 당신은 쇼를 시작한다. 당신은 <<hisPost "의">> 프로젝트를 읽어내려가고, <<bottomPost "을">> 이리저리 흔드는 와중에도 눈을 떼지 않는다. 당신은 거의 <<hePost "과">> 맞닿을 정도까지 몸을 가까이 한다.
+	<br><br>
 
-<<HePost "은">> 고개를 끄덕이고 당신은 쇼를 시작한다. 당신은 <<hisPost "의">> 프로젝트를 읽어내려가고, <<bottomPost "을">> 이리저리 흔드는 와중에도 눈을 떼지 않는다. 당신은 거의 <<hePost "과">> 맞닿을 정도까지 몸을 가까이 한다.
-<br><br>
+	<<personPost "은">> 당신을 붙잡으려 손을 뻗는다. 당신은 <<hisPost "의">> 팔에서 빠져나온다. 이미 필요한 건 전부 외워뒀다. 당신은 장난스럽게 손을 흔들며 떠난다.<<note "+ 수학적 영감" "green">>
+	<br><br>
 
-<<personPost "은">> 당신을 붙잡으려 손을 뻗는다. 당신은 <<hisPost "의">> 팔에서 빠져나온다. 이미 필요한 건 전부 외워뒀다. 당신은 장난스럽게 손을 흔들며 떠난다. | <span class="green">+ 수학적 영감</span>
-<br><br>
+	<<else>>
 
-<<else>>
-
-<<HePost "은">> 얼굴을 붉히며, 작업하던 것을 집어들고는 다른 자리로 간다.
-<br><br>
-
+	<<HePost "은">> 얼굴을 붉히며, 작업하던 것을 집어들고는 다른 자리로 간다.
+	<br><br>
 <</if>>
 
 <<link [[다음|School Library]]>><<endevent>><</link>>
 <br>
 
-:: Maths Drugged Help [nobr]
+:: Maths Drugged Help
 <<effects>>
 
-당신은 교직원실로 달려가 문을 두드린다. 도렌이 답한다. "내가 도와줄 일이라도 있니, <<if $player.gender_appearance is "m">>친구<<else>>아가씨<</if>>?"
+당신은 교직원실로 달려가 문을 두드린다. 도렌이 답한다. "내가 도와줄 일이라도 있니, <<lassPost>>?"
 <br><br>
 
 "복도에 쓰러진 학생이 있어요." 당신이 말한다. "뭔가 약을 한 것 같아요."
@@ -1443,7 +1402,7 @@
 <<link [[다음|Hallways]]>><<set $eventskip to 1>><</link>>
 <br>
 
-:: Maths Drugged Copy [nobr]
+:: Maths Drugged Copy
 <<effects>>
 
 당신은 <<personPost "의">> 작업을 읽고는 유용한 계산 몇 개를 발견한다. 그걸 옮겨적자 사서가 모퉁이를 돌아 온다.<<generate2>><<person2>><<HePost "은">> <<person1>><<personPost "의">> 옆으로 달려온다.
@@ -1456,7 +1415,7 @@
 <<link [[다음|Hallways]]>><<set $eventskip to 1>><</link>>
 <br>
 
-:: Maths Drugged Rob [nobr]
+:: Maths Drugged Rob
 <<effects>>
 
 당신은 <<person1>><<personPost "의">> 주머니를 뒤진다. <<HePost "은">> 촉수에 대해 웅얼거리며 몸을 꿈틀거리나, 당신을 멈추려들지는 않는다. 주머니에서 형형색색의 알약이 담긴 봉투를 찾아내자 사서가 모퉁이를 돌아 온다. <<generate2>><<person2>><<HePost "은">> <<person1>><<personPost "의">> 옆으로 달려온다.
@@ -1470,7 +1429,7 @@
 <<link [[다음|Hallways]]>><<set $eventskip to 1>><</link>>
 <br>
 
-:: Maths Competition [nobr]
+:: Maths Competition
 <<set $outside to 0>><<set $location to "town">><<effects>>
 
 당신은 시청에 들어간다. 여러 개의 의자가 줄지어서 반대편에 있는 단상을 향하고 있다. 프로젝터도 하나 설치되어 있다. 교실의 다른 학우들도 보이고, 저마다 가슴팍에 자신의 해답을 들고 있다. 레이턴과 리버는 단상 옆에 서서, 정장을 입고 있는 두 명과 이야기를 하고 있다. 처음 보는 사람들이다.
@@ -1479,20 +1438,20 @@
 자신의 해답을 제출하거나, 그냥 지켜보기만 해도 좋다. 참가한다면 수상을 하든 말든 선생님들의 시선이 조금은 달라질 것이다.
 <br><br>
 <<set $mathschance = Math.clamp($mathschance, 0, 100)>>
-<<link [[경시대회에 참가한다 (3:00)|Maths Competition Enter]]>><<pass 1 hour>><<pass 2 hours>><</link>> <span class="gold">$mathschance% 우승 찬스.</span>
+<<link [[경시대회에 참가한다 (3:00)|Maths Competition Enter]]>><<pass 3 hours>><</link>><<note "우승할 확률 $mathschance%." "gold">>
 <br>
-<<link [[그냥 지켜본다 (3:00)|Maths Competition Watch]]>><<set $mathschancestart to $mathschance>><<pass 1 hour>><<pass 2 hours>><</link>>
+<<link [[그냥 지켜본다 (3:00)|Maths Competition Watch]]>><<set $mathschancestart to $mathschance>><<pass 3 hour>><</link>>
 <br>
-<<link [[나간다 (0:05)|Cliff Street]]>><<pass 5>><<endevent>><</link>>
+<<link [[떠난다 (0:05)|Cliff Street]]>><<pass 5>><<endevent>><</link>>
 <br>
 
-:: Maths Competition Watch [nobr]
+:: Maths Competition Watch
 <<set $outside to 0>><<set $location to "town">><<effects>>
 
 당신은 자리에 앉는다. 곧 더 많은 학생들이 들어온다. 몇 명은 종이를 들고 있고, 다른 이들은 그냥 보러 온다. 레이턴은 참가자들에게 맨 앞줄에 앉으라고 지시한다.
 <br><br>
 <<npc Leighton>><<person1>>
-교장은 단상 위로 올라가 마이크를 톡톡 두드린다. 리버는 그 옆에 서있는다. "와주셔서 감사합니다, 학생 여러분, 신사숙녀 여러분." <<hePost "이">> 말한다. "짧게 말하도록 하죠. 저, 리버와 도시 밖에서 온 두 분께서 심사를 할 것입니다. 참가자들은 저마다 자신의 해답을 단상 위에서 발표하게 될 겁니다."
+<<nnpc_title_ un "Leighton">> 단상 위로 올라가 마이크를 톡톡 두드린다. 리버는 <<himPost>> 옆에 서있는다. "와주셔서 감사합니다, 학생 여러분, 신사숙녀 여러분." <<hePost "이">> 말한다. "짧게 말하도록 하죠. 저, 리버와 도시 밖에서 온 두 분께서 심사를 할 것입니다. 참가자들은 저마다 자신의 해답을 단상 위에서 발표하게 될 겁니다."
 <br><br>
 
 맨 앞줄에서 당황한듯한 웅성거림이 터져나온다. 리버는 얼굴을 찡그린다. "내가 그 말을 안 했던가?"
@@ -1514,48 +1473,48 @@
 <<link [[다음|Cliff Street]]>><<endevent>><<set $eventskip to 1>><</link>>
 <br>
 
-:: Maths Competition Enter [nobr]
+:: Maths Competition Enter
 <<set $outside to 0>><<set $location to "town">><<effects>>
 
 <<if $leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound">><<unbind>>
-구속구가 느슨해진다. "그런 꼴로는 경시대회에 참가할 수 없어." 리버가 뒤에서 그렇게 말하더니, 다른 이를 도와주러 달려간다.
-<br><br>
+	구속구가 느슨해진다. "그런 꼴로는 경시대회에 참가할 수 없어." 리버가 뒤에서 그렇게 말하더니, 다른 이를 도와주러 달려간다.
+	<br><br>
 <</if>>
 
 레이턴은 당신과 다른 참가자들에게 맨 앞줄에 앉으라고 지시한다.
 
 <<if $NPCName[$NPCNameList.indexOf("Whitney")].state is "active" or $NPCName[$NPCNameList.indexOf("Whitney")].state is "rescued" and $NPCName[$NPCNameList.indexOf("Whitney")].init is 1>><<set $mathsprojectwhitney to 1>>
-<<npc Whitney>><<person1>>하지만 앉기도 전에, 누군가의 손이 당신의 <<bottomPost "을">> 만지는 것이 느껴진다. 범인의 얼굴을 보려 고개를 돌리나, 손이 당신의 왼쪽 어깨쪽으로 뱀처럼 타고 올라와서는 당신의 손아귀에서 해답을 낚아채간다. 휘트니다.
-<br><br>
+	<<npc Whitney>><<person1>>하지만 앉기도 전에, 누군가의 손이 당신의 <<bottomPost "을">> 만지는 것이 느껴진다. 범인의 얼굴을 보려 고개를 돌리나, 손이 당신의 왼쪽 어깨쪽으로 뱀처럼 타고 올라와서는 당신의 손아귀에서 해답을 낚아채간다. 휘트니다.
+	<br><br>
 
-당신은 해답을 돌려받으려 하나, <<hePost "이">> 당신을 밀쳐낸다. "그러니까 이걸 하느라 그렇게 바빴던 거였군." <<hePost "은">> 종이의 내용을 들여다보며 말한다. "뭐 이런 시간낭비가 다 있담. 그냥 찢어버리는 건 어떨까?"
-<<gstress>><<stress 6>>
-<br><br>
+	당신은 해답을 돌려받으려 하나, <<hePost "이">> 당신을 밀쳐낸다. "그러니까 이걸 하느라 그렇게 바빴던 거였군." <<hePost "은">> 종이의 내용을 들여다보며 말한다. "뭐 이런 시간낭비가 다 있담. 그냥 찢어버리는 건 어떨까?"
+	<<gstress>><<stress 6>>
+	<br><br>
 
-<<link [[화를 낸다|Maths Competition Angry]]>><<npcincr Whitney dom -1>><</link>><<ldom>>
-<br>
-<<link [[빈다|Maths Competition Beg]]>><<npcincr Whitney dom 1>><</link>><<gdom>>
-<br>
-<<link [[도움을 요청한다|Maths Competition Help]]>><<npcincr Whitney love -1>><</link>><<llove>>
-<br>
+	<<link [[화를 낸다|Maths Competition Angry]]>><<npcincr Whitney dom -1>><</link>><<ldom>>
+	<br>
+	<<link [[빈다|Maths Competition Beg]]>><<npcincr Whitney dom 1>><<sub 1>><</link>><<gdom>>
+	<br>
+	<<link [[도움을 요청한다|Maths Competition Help]]>><<npcincr Whitney love -1>><</link>><<llove>>
+	<br>
 
 <<else>>
-당신은 자리에 앉고, 다른 학생들도 자리에 앉길 기다린다.
-<br><br>
+	당신은 자리에 앉고, 다른 학생들도 자리에 앉길 기다린다.
+	<br><br>
 
-<<link [[다음|Maths Competition Intro]]>><</link>>
-<br>
+	<<link [[다음|Maths Competition Intro]]>><</link>>
+	<br>
 <</if>>
 
-:: Maths Competition Angry [nobr]
+:: Maths Competition Angry
 <<set $outside to 0>><<set $location to "town">><<effects>>
 
 <<if $submissive gte 1150>>
-"그러지 마." 당신이 말한다. "정말 열심히 했단 말이야."
+	"그러지 마." 당신이 말한다. "정말 열심히 했단 말이야."
 <<elseif $submissive lte 850>>
-"그러지 마." 당신이 말한다. "하기만 해봐."
+	"그러지 마." 당신이 말한다. "하기만 해봐."
 <<else>>
-"돌려줘." 당신이 말한다. "안 그러면 후회하게 만들어줄 거야."
+	"돌려줘." 당신이 말한다. "안 그러면 후회하게 만들어줄 거야."
 <</if>>
 <br><br>
 휘트니가 웃는다. "그 입 때문에 넌 곤경에 빠질 거야." <<HePost "은">> 종이를 들여다보며 생각에 잠기더니, 당신에게 넘겨준다. "곧 만회하게 만들어줄게."
@@ -1567,15 +1526,15 @@
 <<link [[다음|Maths Competition Intro]]>><</link>>
 <br>
 
-:: Maths Competition Beg [nobr]
+:: Maths Competition Beg
 <<set $outside to 0>><<set $location to "town">><<effects>>
 
 <<if $submissive gte 1150>>
-"제-제발, 그러지 마." 당신이 말한다. "정말 열심히 했단 말이야."
+	"제-제발, 그러지 마." 당신이 말한다. "정말 열심히 했단 말이야."
 <<elseif $submissive lte 850>>
-"그러기만 해봐." 당신이 말한다. "정말 열심히 했단 말이야."
+	"그러기만 해봐." 당신이 말한다. "정말 열심히 했단 말이야."
 <<else>>
-"제발 그러지 말아줘." 당신이 말한다. "정말 열심히 했단 말이야."
+	"제발 그러지 말아줘." 당신이 말한다. "정말 열심히 했단 말이야."
 <</if>>
 <br><br>
 
@@ -1588,10 +1547,10 @@
 <<link [[다음|Maths Competition Intro]]>><</link>>
 <br>
 
-:: Maths Competition Help [nobr]
+:: Maths Competition Help
 <<set $outside to 0>><<set $location to "town">><<effects>>
 
-당신은 리버를 부르고, <<if $NPCName[$NPCNameList.indexOf("River")].pronoun is "m">>그는<<else>>그녀는<</if>> 그 푸른 눈으로 휘트니를 쏘아본다.
+당신은 리버를 부르고, <<nnpc_he_ nun "River">> 그 푸른 눈으로 휘트니를 쏘아본다.
 <br><br>
 
 "그냥 장난치는 거였어요." 휘트니는 당신의 해답으로 종이비행기를 접으며 비웃는다. <<HePost "은">> 그걸 당신에게 날린다. "곧 만회하게 만들어줄게."
@@ -1603,20 +1562,20 @@
 <<link [[다음|Maths Competition Intro]]>><</link>>
 <br>
 
-:: Maths Competition Intro [nobr]
+:: Maths Competition Intro
 <<set $outside to 0>><<set $location to "town">><<effects>>
 
 곧 더 많은 학생들이 들어온다. 몇 명은 종이를 들고 있고, 다른 이들은 그냥 보러 온다. 레이턴은 참가자들에게 맨 앞줄에 앉으라고 지시한다.
 <br><br>
 <<npc Leighton>><<person1>>
-교장은 단상 위로 올라가 마이크를 톡톡 두드린다. 리버는 그 옆에 서있는다. "와주셔서 감사합니다, 학생 여러분, 신사숙녀 여러분." <<hePost "이">> 말한다. "예상보다 더 많은 관중들이 모이셨군요. 짧게 말하도록 하죠. 저, 리버와 도시 밖에서 온 두 분께서 심사를 할 것입니다. 참가자들은 저마다 단상 위에서 프로젝터로 작업을 보여주며 자신의 해답을 발표하게 될 겁니다."
+<<nnpc_title_ un "Leighton">> 단상 위로 올라가 마이크를 톡톡 두드린다. 리버는 <<himPost>> 옆에 서있는다. "와주셔서 감사합니다, 학생 여러분, 신사숙녀 여러분." <<hePost "이">> 말한다. "짧게 말하도록 하죠. 저, 리버와 도시 밖에서 온 두 분께서 심사를 할 것입니다. 참가자들은 저마다 자신의 해답을 단상 위에서 발표하게 될 겁니다."
 
 <<if $anxiety gte 2>>
-속이 조금 안 좋아진다.
-<<ggstress>><<stress 18>>
+	속이 조금 안 좋아진다.
+	<<ggstress>><<stress 18>>
 <<elseif $anxiety gte 1>>
-당신은 불안해진다.
-<<gstress>><<stress 6>>
+	당신은 불안해진다.
+	<<gstress>><<stress 6>>
 <</if>>
 <br><br>
 맨 앞줄에서 당황한듯한 웅성거림이 터져나온다. 리버는 얼굴을 찡그린다. "내가 그 말을 안 했던가?"
@@ -1635,14 +1594,14 @@
 <<link [[다음|Maths Competition Stage]]>><</link>>
 <br>
 
-:: Maths Competition Stage [nobr]
+:: Maths Competition Stage
 <<set $outside to 0>><<set $location to "town">><<effects>>
 
 당신은 프로젝터 옆에 서서 관중을 바라본다. 학생들과 성인 관중들이 섞여있다.
 
 <<if $mathsprojectwhitney is 1>>
-<<npc Whitney>><<person1>>
-휘트니가 한 쪽에 앉아있다. <<HisPost "의">>는 무표정하나, 친구들이 히죽거리고 있다.
+	<<npc Whitney>><<person1>>
+	휘트니가 한 쪽에 앉아있다. <<HisPost "는">> 무표정하나, 친구들이 히죽거리고 있다.
 <<else>>
 
 <</if>>
@@ -1656,11 +1615,11 @@
 <<link [[진행한다|Maths Competition Proceed]]>><</link>>
 <br>
 <<if $exhibitionism gte 35>>
-<<link [[애태운다|Maths Competition Flirt]]>><<set $mathschance += 10>><</link>><<exhibitionist3>> | <span class="gold">+ 10% 우승 기회</span>
-<br>
+	<<link [[희롱한다|Maths Competition Flirt]]>><<set $mathschance += 10>><</link>><<exhibitionist3>><<note "+ 우승할 확률" "gold">>
+	<br>
 <</if>>
 
-:: Maths Competition Flirt [nobr]
+:: Maths Competition Flirt
 
 <<set $outside to 0>><<set $location to "town">><<effects>>
 당신은 종이를 바닥에 떨어트린다. 그 바람에 허공을 가로질러 레이턴의 앞에 떨어진다. "이런." 당신이 말한다. 당신은 한가로이 단상 가장자리로 가, 몸을 돌린 뒤에 앞으로 숙인다. 당신은 종이가 잘 안 집히는 척을 하며 주워보려는 "노력"을 하는 동안 관중을 향해 <<bottomPost "을">> 씰룩거린다.
@@ -1672,7 +1631,7 @@
 <<link [[다음|Maths Competition Proceed]]>><</link>>
 <br>
 
-:: Maths Competition Proceed [nobr]
+:: Maths Competition Proceed
 
 <<set $outside to 0>><<set $location to "town">><<effects>>
 <<npc River>><<person1>>
@@ -1696,7 +1655,7 @@
 <br><br>
 <<endevent>>
 <<if $mathsprojectwhitney is 1 and $worn.lower.name isnot "naked">>
-	<<if $worn.lower.set is $worn.upper.set and $worn.lower.skirt isnot 1>>
+	<<if $worn.lower.set is $worn.upper.set and setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt isnot 1>>
 		당신은 심사위원들을 지나쳐 단상에서 내려온다. 그러고는 자리에 앉아 결정을 기다린다.
 		<br><br>
 		<<link [[다음|Maths Competition End]]>><</link>>
@@ -1712,10 +1671,10 @@
 	<br>
 <</if>>
 
-:: Maths Competition Exposure [nobr]
+:: Maths Competition Exposure
 
 <<set $outside to 0>><<set $location to "town">><<effects>>
-<<if $worn.lower.skirt is 1>>
+<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
 	무언가 <<trClothes "lower" $worn.lower.name "name" "을">>_trResult 잡아당기는 것이 느껴진다. 뭔지 보려고 내려다보자 갑자기 보이지 않는 힘이 잡아당겨 <<trClothes "lower" $worn.lower.name "name" "이">>_trResult 뒤집힌다. 당신은 재빠르게 단 앞쪽을 붙잡아 <<undiesPost "이">> 노출되는 것은 막으나, <<bottomPost>> 쪽에서 시원한 공기가 느껴진다.
 	<br><br>
 	관중으로부터 키득거리는 소리와 웅성거리는 소리가 들려온다. <<npc River>><<person1>>리버는 양손으로 눈을 가린다. 정장 입은 심사위원 중 한 명이 손으로 입을 막는다. 다른 한 명을 얼굴을 붉히고는 시선을 돌린다. 레이턴은 웃고 있다.
@@ -1738,7 +1697,7 @@
 	<br><br>
 	<<link [[자존심을 지킨다|Maths Competition Protect Skirt]]>><<stress 6>><</link>><<gstress>>
 	<br>
-	<<link [[발표를 마무리한다|Maths Competition Finish Skirt]]>><<stress 12>><<trauma 6>><<set $mathschance += 10>><</link>><<gtrauma>><<ggstress>> | <span class="gold">+ Success chance</span>
+	<<link [[발표를 마무리한다|Maths Competition Finish Skirt]]>><<stress 12>><<trauma 6>><<set $mathschance += 10>><</link>><<gtrauma>><<ggstress>><<note "+ 우승할 확률" "gold">>
 	<br>
 <<else>>
 	무언가 <<trClothes "lower" $worn.lower.name "name" "을">>_trResult 잡아당기는 것이 느껴진다. 뭔지 보려고 내려다보자 갑자기 보이지 않는 힘이 잡아당겨 <<trClothes "lower" $worn.lower.name "name" "이">>_trResult 밑으로 내려버린다. 당신은 재빠르게 단 앞쪽을 붙잡아 <<undiesPost "이">> 노출되는 것은 막으나, <<bottomPost>> 쪽에서 시원한 공기가 느껴진다.
@@ -1763,11 +1722,11 @@
 	<br><br>
 	<<link [[자존심을 지킨다|Maths Competition Protect Shorts]]>><<stress 6>><</link>><<gstress>>
 	<br>
-	<<link [[발표를 마무리한다|Maths Competition Finish Shorts]]>><<stress 12>><<trauma 6>><<set $mathschance += 10>><</link>><<gtrauma>><<ggstress>> | <span class="gold">+ 우승 기회</span>
+	<<link [[발표를 마무리한다|Maths Competition Finish Shorts]]>><<stress 12>><<trauma 6>><<set $mathschance += 10>><</link>><<gtrauma>><<ggstress>><<note "+ 우승할 확률" "gold">>
 	<br>
 <</if>>
 
-:: Maths Competition Protect Skirt [nobr]
+:: Maths Competition Protect Skirt
 
 <<set $outside to 0>><<set $location to "town">><<effects>>
 
@@ -1792,11 +1751,11 @@
 <br><br>
 
 <<if $submissive gte 1150>>
-"그-그치만 아직 안 끝났는 걸요." 당신이 말한다.
+	"그-그치만 아직 안 끝났는 걸요." 당신이 말한다.
 <<elseif $submissive lte 850>>
-"아직 안 끝났어요." 당신이 말한다.
+	"아직 안 끝났어요." 당신이 말한다.
 <<else>>
-"그치만 아직 할게-" 당신은 항의하려 하나, 레이턴이 말을 끊는다.
+	"그치만 아직 할게-" 당신은 항의하려 하나, 레이턴이 말을 끊는다.
 <br><br>
 <</if>>
 
@@ -1809,7 +1768,7 @@
 <<link [[다음|Maths Competition End]]>><</link>>
 <br>
 
-:: Maths Competition Protect Shorts [nobr]
+:: Maths Competition Protect Shorts
 <<set $outside to 0>><<set $location to "town">><<effects>>
 
 <<set $mathsexposed to "safe">>
@@ -1833,11 +1792,11 @@
 <br><br>
 
 <<if $submissive gte 1150>>
-"그-그치만 아직 안 끝났는 걸요." 당신이 말한다.
+	"그-그치만 아직 안 끝났는 걸요." 당신이 말한다.
 <<elseif $submissive lte 850>>
-"아직 안 끝났어요." 당신이 말한다.
+	"아직 안 끝났어요." 당신이 말한다.
 <<else>>
-"그치만 아직 할게-" 당신은 항의하려 하나, 레이턴이 말을 끊는다.
+	"그치만 아직 할게-" 당신은 항의하려 하나, 레이턴이 말을 끊는다.
 <</if>>
 <br><br>
 "그만하면 됐다고 했지." <<hePost "이">> 말한다. "나도 바쁜 몸이야."
@@ -1849,13 +1808,13 @@
 <<link [[다음|Maths Competition End]]>><</link>>
 <br>
 
-:: Maths Competition Finish Skirt [nobr]
+:: Maths Competition Finish Skirt
 <<set $outside to 0>><<set $location to "town">><<effects>>
 
 <<if $worn.under_lower.type.includes("naked")>>
-<<fameexhibitionism 60>><<set $mathsexposed to "genitals">>
+	<<fameexhibitionism 60 "pic">><<set $mathsexposed to "genitals">>
 <<else>>
-<<fameexhibitionism 30>><<set $mathsexposed to "undies">>
+	<<fameexhibitionism 30 "pic">><<set $mathsexposed to "undies">>
 <</if>>
 
 당신은 한 손으로 치마를 누른 상태로 발표를 계속한다. 휘트니의 친구들도 동참해 당기기 시작한다. <<trClothes "lower" $worn.lower.name "name" "이">>_trResult 더욱 팽팽해지더니, 당신이 손으로 잡고 있는 부분만이 관중으로부터 <<genitalsPost "을">> 가리고 있다.
@@ -1867,7 +1826,7 @@
 헉 하고 숨을 들이쉬는 소리와 웃음소리가 시청 내부를 가득 채운다. 몇몇은 시선을 돌리나, 대부분은 놀라서 쳐다보거나, 주머니에서 핸드폰을 꺼낸다. 리버는 정신을 잃은 것 같다.
 <br><br>
 
-<<if $player.gender is "h">>
+<<if $player.gender is "h" and !$worn.genitals.type.includes("hidden")>>
 	"두 성기가 다 있어!" 누군가 외친다.
 	<br>
 	"믿기지가 않아."
@@ -1878,8 +1837,13 @@
 	<br>
 	"스스로 박고 박힐 수 있을까?"
 	<br>
+	<<if pregnancyBellyVisible()>>
+		"그 배... <<pshe_ ga>> 말 그대로 <<pherself_ rul>> 임신시킨 거야?"
+		<br>
+		<<famepregnancy 1>>
+	<</if>>
 	<<schoolrep herm 1>>
-<<elseif $player.gender isnot $player.gender_appearance>>
+<<elseif $player.gender isnot $player.gender_appearance and !$worn.genitals.type.includes("hidden")>>
 	<<if $player.gender is "m">>
 		"남자잖아!" 누군가 외친다.
 		<br>
@@ -1898,7 +1862,7 @@
 <br><<schoolrep crossdress 1>>
 <</if>>
 
-떨리는 목소리로 당신은 아무 일도 없었다는 듯 해답을 설명하려 한다. <<if $worn.under_lower.type.includes("naked")>>마치 모두가 <<if $penisexist is 1>><<penisPost "을">><<else>><<pussyPost "을">><</if>> 주목하고 있지 않은 것처럼 말이다. <</if>>사진사가 단상 앞으로 달려나와, 온갖 각도에서 당신의 모습을 찍는다.
+떨리는 목소리로 당신은 아무 일도 없었다는 듯 해답을 설명하려 한다. <<if $worn.under_lower.type.includes("naked")>>마치 모두가 당신의 <<genitals_ rul>> 주목하고 있지 않은 것처럼 말이다. <</if>>사진사가 단상 앞으로 달려나와, 온갖 각도에서 당신의 모습을 찍는다.
 <br><br>
 
 발표도 막바지에 치다른다. 관중은 환호하며 박수를 친다. 당신은 주변을 더듬어보며 갈고리를 하나 하나 제거한다. 곧 치마가 다시 내려와, <<undiesPost "을">> 덮는다. 휘트니는 뒤로 등을 기대고 앉아 히죽거린다.
@@ -1914,13 +1878,13 @@
 <<link [[다음|Maths Competition End]]>><</link>>
 <br>
 
-:: Maths Competition Finish Shorts [nobr]
+:: Maths Competition Finish Shorts
 <<set $outside to 0>><<set $location to "town">><<effects>>
 
 <<if $worn.under_lower.type.includes("naked")>>
-<<fameexhibitionism 60>><<set $mathsexposed to "genitals">>
+	<<fameexhibitionism 60 "pic">><<set $mathsexposed to "genitals">>
 <<else>>
-<<fameexhibitionism 30>><<set $mathsexposed to "undies">>
+	<<fameexhibitionism 30 "pic">><<set $mathsexposed to "undies">>
 <</if>>
 
 당신은 한 손으로 옷을 누른 상태로 발표를 계속한다. 휘트니의 친구들도 동참해 당기기 시작한다. <<trClothes "lower" $worn.lower.name "name" "이">>_trResult 더욱 팽팽해지더니, 당신이 손으로 잡고 있는 부분만이 관중으로부터 <<genitalsPost "을">> 가리고 있다.
@@ -1932,7 +1896,7 @@
 헉 하고 숨을 들이쉬는 소리와 웃음소리가 시청 내부를 가득 채운다. 몇몇은 시선을 돌리나, 대부분은 놀라서 쳐다보거나, 주머니에서 핸드폰을 꺼낸다. 리버는 정신을 잃은 것 같다.
 <br><br>
 
-<<if $player.gender is "h">>
+<<if $player.gender is "h" and !$worn.genitals.type.includes("hidden")>>
 	"두 성기가 다 있어!" 누군가 외친다.
 	<br>
 	"믿기지가 않아."
@@ -1943,8 +1907,13 @@
 	<br>
 	"스스로 박고 박힐 수 있을까?"
 	<br>
+	<<if pregnancyBellyVisible()>>
+		"그 배... <<pshe_ ga>> 말 그대로 <<pherself_ rul>> 임신시킨 거야?"
+		<br>
+		<<famepregnancy 1>>
+	<</if>>
 	<<schoolrep herm 1>>
-<<elseif $player.gender isnot $player.gender_appearance>>
+<<elseif $player.gender isnot $player.gender_appearance and !$worn.genitals.type.includes("hidden")>>
 	<<if $player.gender is "m">>
 		"남자잖아!" 누군가 외친다.
 		<br>
@@ -1960,10 +1929,10 @@
 		"일부러 저런게 분명해."
 		<br>
 	<</if>>
-<br><<schoolrep crossdress 1>>
+	<br><<schoolrep crossdress 1>>
 <</if>>
 
-떨리는 목소리로 당신은 아무 일도 없었다는 듯 해답을 설명하려 한다. <<if $worn.under_lower.type.includes("naked")>>마치 모두가 <<if $penisexist is 1>><<penisPost "을">><<else>><<pussyPost "을">><</if>> 주목하고 있지 않은 것처럼 말이다. <</if>>사진사가 단상 앞으로 달려나와, 온갖 각도에서 당신의 모습을 찍는다.
+떨리는 목소리로 당신은 아무 일도 없었다는 듯 해답을 설명하려 한다. <<if $worn.under_lower.type.includes("naked")>>마치 모두가 당신의 <<if $player.penisExist>><<penisPost "을">><<else>><<pussyPost "을">><</if>> 주목하고 있지 않은 것처럼 말이다. <</if>>사진사가 단상 앞으로 달려나와, 온갖 각도에서 당신의 모습을 찍는다.
 <br><br>
 
 발표도 막바지에 치다른다. 관중은 환호하며 박수를 친다. 당신은 쪼그려앉아 주변을 더듬어보며 갈고리를 하나 하나 제거한다. 당신은 <<trClothes "lower" $worn.lower.name "name" "을">>_trResult 다시 추켜올려, <<undiesPost "을">> 가린다. 휘트니는 뒤로 등을 기대고 앉아 히죽거린다.
@@ -1979,70 +1948,67 @@
 <<link [[다음|Maths Competition End]]>><</link>>
 <br>
 
-:: Maths Competition End [nobr]
+:: Maths Competition End
 <<set $outside to 0>><<set $location to "town">><<effects>>
 <<endevent>>
 <<npc Leighton>><<person1>>
 레이턴, 리버와 다른 두 심사위원은 단상 위에서 잠시 상의를 한다.
 <<if $mathschance gte 1 and $mathschancestart is 0>>
-레이턴이 다른 심사위원들과 말다툼을 하고 있는것 같다.
+	레이턴이 다른 심사위원들과 말다툼을 하고 있는것 같다.
 	<<if $mathschance gte $rng>>
-	리버가 격분하여 단념하듯 손을 내던지고, 레이턴은 앞으로 나와 마이크를 붙잡고는 헛기침을 한다.
+		리버가 격분하여 단념하듯 <<nnpc_his_ yi "River">> 손을 내던지고, 레이턴은 앞으로 나와 마이크를 붙잡고는 헛기침을 한다.
 	<<else>>
-	<<HePost "은">> 머리를 흔들고는, 앞으로 나와 마이크를 잡고는 헛기침을 한다.
-	<br><br>
+		<<HePost "은">> 머리를 흔들고는, 앞으로 나와 마이크를 잡고는 헛기침을 한다.
+		<br><br>
 	<</if>>
 <</if>>
 
 "결정 되었습니다." <<hePost "이">> 말한다.
 
 <<if $mathschance gte $rng>>
-<span class="green">"우승자는 <<haircolourtext>> 머리카락의 학생입니다." <<HePost "은">> 당신을 가리킨다.</span> "이리 올라와."
-<br><br>
+	<span class="green">"우승자는 <<haircolourtext>> 머리카락의 학생입니다." <<HePost "은">> 당신을 가리킨다.</span> "이리 올라와."
+	<br><br>
 
-당신은 단상 위로 올라가 레이턴과 악수를 하고, <<hePost "은">> 기다리고 있던 사진사를 향해 미소를 짓는다. <<HePost "은">> 당신에게 트로피를 건네준다. 안에는 <span class="gold">£2000</span>가 들어있다.
-<<set $money += 200000>>
-관중은 환호하며 박수를 친다.
-<<npcincr River love 5>><<llltrauma>><<trauma -120>><<famebusiness 100>>
-<br><br>
+	당신은 단상 위로 올라가 레이턴과 악수를 하고, <<hePost "은">> 기다리고 있던 사진사를 향해 미소를 짓는다. <<HePost "은">> 당신에게 트로피를 건네준다. 안에는 <<moneyGain 2000>>가 들어있다.
+	관중은 환호하며 박수를 친다.
+	<<npcincr River love 5>><<llltrauma>><<trauma -120>><<famebusiness 100 "pic">>
+	<br><br>
 
-<<if $mathsexposed isnot undefined>>
-<<endevent>><<npc River>><<person1>>리버는 겨우 당신과 눈을 마주친다. "이제부터 모든 시험에서 A*를 받길 바란다." <<hePost "이">> 말한다. "그럴 실력이 된다는 걸 보였으니까 말이야." <<HePost "과">> 레이턴은 당신과 다른 학생들은 데리고 시청에서 나온다. 나오는 길에 몇몇 사람들이 당신의 몸을 더듬으려 한다.
-<<lldelinquency>><<detention -54>>
-<br><br>
+	<<if $mathsexposed isnot undefined>>
+		<<endevent>><<npc River>><<person1>>리버는 겨우 당신과 눈을 마주친다. "이제부터 모든 시험에서 A*를 받길 바란다." <<hePost "이">> 말한다. "그럴 실력이 된다는 걸 보였으니까 말이야." <<HePost "과">> 레이턴은 당신과 다른 학생들은 데리고 시청에서 나온다. 나오는 길에 몇몇 사람들이 당신의 몸을 더듬으려 한다.
+		<<lldelinquency>><<detention -54>>
+		<br><br>
+	<<else>>
+		<<endevent>><<npc River>><<person1>>리버가 미소 짓는다. "이제부터 모든 시험에서 A*를 받길 바란다." <<hePost "이">> 말한다. "그럴 실력이 된다는 걸 보였으니까 말이야." <<HePost "과">> 레이턴은 당신과 다른 학생들은 데리고 시청에서 나온다.
+		<<lldelinquency>><<detention -54>>
+		<br><br>
+	<</if>>
+
+	<<set $mathsproject to "won">><<set $mathsprojectwon to 1>><<earnFeat "Maths Competition Winner">>
+	<<mathsprojectfinish>>
+
+	<<link [[다음|Cliff Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
 <<else>>
-<<endevent>><<npc River>><<person1>>리버가 미소 짓는다. "이제부터 모든 시험에서 A*를 받길 바란다." <<hePost "이">> 말한다. "그럴 실력이 된다는 걸 보였으니까 말이야." <<HePost "과">> 레이턴은 당신과 다른 학생들은 데리고 시청에서 나온다.
-<<lldelinquency>><<detention -54>>
-<br><br>
-<</if>>
+	<<generate2>>
+	<span class="red"><<HePost "은">> <<person2>><<personPost "이">> 우승자라고 발표한다.</span> <<HePost "은">> 단상 위로 달려나가 트로피를 받는다.
+	<br><br>
 
-<<set $mathsproject to "won">><<set $mathsprojectwon to 1>><<earnFeat "Maths Competition Winner">>
-<<mathsprojectfinish>>
+	<<if $mathsexposed isnot undefined>>
+		레이턴은 당신과 다른 학생들은 데리고 시청에서 나온다. "노력한 것은 보이더구나." 리버가 나가는 길에 말한다. <<HePost "은">> 겨우 당신과 눈을 마주친다.
+		<<ldelinquency>><<detention -18>>
+		<br><br>
+		나오는 길에 몇몇 사람들이 당신의 몸을 더듬으려 한다.
+		<br><br>
+	<<else>>
+		레이턴은 당신과 다른 학생들은 데리고 시청에서 나온다. "노력한 것은 보이더구나." 리버는 나가는 길에 그렇게 말하고는 정장 입은 심사위원 중 한 명에게 이끌려 간다.
+		<<ldelinquency>><<detention -18>>
+		<br><br>
+	<</if>>
 
-<<link [[다음|Cliff Street]]>><<endevent>><<set $eventskip to 1>><</link>>
-<br>
+	<<set $mathsproject to "done">>
+	<<mathsprojectfinish>>
 
-<<else>>
-<<generate2>>
-<span class="red"><<HePost "은">> <<person2>><<personPost "이">> 우승자라고 발표한다.</span> <<HePost "은">> 단상 위로 달려나가 트로피를 받는다.
-<br><br>
-
-<<if $mathsexposed isnot undefined>>
-레이턴은 당신과 다른 학생들은 데리고 시청에서 나온다. "노력한 것은 보이더구나." 리버가 나가는 길에 말한다. <<HePost "은">> 겨우 당신과 눈을 마주친다.
-<<ldelinquency>><<detention -18>>
-<br><br>
-나오는 길에 몇몇 사람들이 당신의 몸을 더듬으려 한다.
-<br><br>
-<<else>>
-레이턴은 당신과 다른 학생들은 데리고 시청에서 나온다. "노력한 것은 보이더구나." 리버는 나가는 길에 그렇게 말하고는 정장 입은 심사위원 중 한 명에게 이끌려 간다.
-<<ldelinquency>><<detention -18>>
-<br><br>
-<</if>>
-
-<<set $mathsproject to "done">>
-<<mathsprojectfinish>>
-
-<<link [[다음|Cliff Street]]>><<endevent>><<set $eventskip to 1>><</link>>
-<br>
-
+	<<link [[다음|Cliff Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
 <</if>>

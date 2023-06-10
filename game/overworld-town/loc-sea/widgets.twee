@@ -1,5 +1,5 @@
 :: Widgets Events Sea [widget]
-<<widget "eventsseabeach">><<nobr>>
+<<widget "eventsseabeach">>
 
 <<if $daystate isnot "night" and $weather is "clear">>
 
@@ -59,9 +59,9 @@
 
 <</if>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "eventssea">><<nobr>>
+<<widget "eventssea">>
 	<<set _dangerevent to random(1, 80)>>
 	<<if _dangerevent lte 10>>
 		<<if $swarmdisable is "f">>
@@ -81,10 +81,10 @@
 		<<sea2>>
 	<</if>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "eventsdeepsea">><<nobr>>
-	<<set _dangerevent to random(1, 90)>>
+<<widget "eventsdeepsea">>
+	<<set _dangerevent to random(1, 96)>>
 	<<if _dangerevent lte 10>>
 		<<if $swarmdisable is "f">>
 			<<sea3>>
@@ -107,50 +107,55 @@
 		<<seaflotsam>>
 	<<elseif _dangerevent lte 90>>
 		<<sea_struggle>>
+	<<elseif _dangerevent lte 91>>
+		<<sea_eye>>
+	<<elseif _dangerevent lte 96>>
+		<<sea_chest>>
 	<</if>>
-<</nobr>><</widget>>
+<</widget>>
 
 :: Widgets Sea [widget]
-<<widget "seabeach1">><<nobr>>
-<<set $rng to random(1, 100)>>
+<<widget "seabeach1">>
+<<rng>>
 
 <<generate1>><<person1>>A <<person>> swims up to you and grabs your butt.<<if $worn.under_lower.type.includes("naked") and $worn.lower.type.includes("naked")>> "Not wearing anything down here? You're such a naughty <<girl>>."<</if>> <<He>> fondles you with increasing passion.
 <br><br>
 
 <<if $rng gte 81>>
-<<link [[Pull away|Sea Beach Molestation]]>><<set $molestationstart to 1>><</link>>
+<<link [[끌어당긴다|Sea Beach Molestation]]>><<set $molestationstart to 1>><</link>>
 <<else>>
-<<link [[Pull away|Sea Beach Molestation Finish]]>><<set $finish to 1>><</link>>
+<<link [[끌어당긴다|Sea Beach Molestation Finish]]>><<set $finish to 1>><</link>>
 <</if>>
 <br>
 
 <<link [[Allow it|Sea Beach Molestation]]>><<set $sexstart to 1>><</link>><<promiscuous1>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "seabeach2">><<nobr>>
-<<set $rng to random(1, 100)>>
+<<widget "seabeach2">>
+<<rng>>
 A large wave heads towards you. Before it reaches you however, a <<generate1>><<person1>><<person>> on a surf board plucks you from the water as <<he>> sails past. <<He>> holds down your arms with one hand and muzzles you with the other.
 <br><br>
 
-<<link [[Next|Sea Beach Molestation]]>><<set $molestationstart to 1>><<set $phase to 1>><</link>>
+<<link [[다음|Sea Beach Molestation]]>><<set $molestationstart to 1>><<set $phase to 1>><</link>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "sea1">><<nobr>>
+<<widget "sea1">>
 <<beastNEWinit 3 dolphin>>
-<<set $rng to random(1, 100)>>
-<<if $rng gte 81>><!-- Modified for Beast People -->
-Three <<beastsplural>> swim up to you and nudge you playfully. You pet them back, but they're persistent. One of them starts rubbing against you while the other two prevent you from moving away.
-<br><br>
+<<rng>>
+<<if $rng gte 81 and ($monster is 1 or $bestialitydisable is "f")>><!-- Modified for Beast People -->
+	Three <<beastsplural>> swim up to you and nudge you playfully. You pet them back, but they're persistent. One of them starts rubbing against you while the other two prevent you from moving away.
+	<br><br>
 
-<<link [[Next|Sea Dolphins]]>><<set $molestationstart to 1>><</link>>
+	<<link [[다음|Sea Dolphins]]>><<set $molestationstart to 1>><</link>>
+	<br>
 <<else>>
-Three <<beastsplural>> swim up to you and nudge you playfully. You pet them back.
-<<lstress>><<ltrauma>><<stress -12>><<trauma -6>>
-<br><br>
+	Three <<beastsplural>> swim up to you and nudge you playfully. You pet them back.
+	<<lstress>><<ltrauma>><<stress -12>><<trauma -6>>
+	<br><br>
 
-	<<if $deviancy gte 35>><!-- Modified for Beast People -->
+	<<if $deviancy gte 35 and ($monster is 1 or $bestialitydisable is "f")>><!-- Modified for Beast People -->
 		<<link [[Pet them lewdly|Sea Dolphins Sex]]>><<set $sexstart to 1>><</link>><<deviant3>>
 		<br><br>
 	<</if>>
@@ -158,10 +163,10 @@ Three <<beastsplural>> swim up to you and nudge you playfully. You pet them back
 	<<destinationeventend>>
 <</if>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "sea2">><<nobr>>
-<<set $rng to random(1, 100)>>
+<<widget "sea2">>
+<<rng>>
 A large wave rolls towards you.
 
 <<if $uncladtest isnot 1>>
@@ -191,54 +196,54 @@ After the wave has passed you look around for your missing clothing, and see it 
 <br><br>
 <<destinationeventend>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "sea3">><<nobr>>
-<<set $rng to random(1, 100)>>
+<<widget "sea3">>
+<<rng>>
 You feel something rub against your leg. You look down and see the culprit, an eel. More arrive; they twirl around you, their slimy caresses at once disgusting you and inciting shameful feelings. Swarms of them are rising from the depths beneath you. You look around and see a buoy not too far away. If you could swim to it, you could climb to safety.
 <br><br>
 
-<<link [[Next|Sea Eels]]>><<set $molestationstart to 1>><</link>>
+<<link [[다음|Sea Eels]]>><<set $molestationstart to 1>><</link>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "sea4">><<nobr>>
+<<widget "sea4">>
 <<generate1>><<generate2>>
 A fishing boat turns towards you, and heads in your direction. The net envelops you, and you are hoisted onto the deck.
 <br><br>
-A <<person1>><<person>> and <<person2>><<person>> smile down at you. "We got ourselves a lively one," says the <<person1>><<person>>.
+A <<fullGroup>> smile down at you. "We got ourselves a lively one," says the <<person1>><<person>>.
 <br><br>
 
-<<link [[Next|Boat Molestation]]>><<set $molestationstart to 1>><</link>>
+<<link [[다음|Boat Molestation]]>><<set $molestationstart to 1>><</link>>
 <br>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "sea5">><<nobr>>
+<<widget "sea5">>
 
 <<if $bestialitydisable is "f">>
 	<<if $squidcount is 0>>
 
 	You feel something soft touch your <<genitals>>. You look beneath the water and see a small squid rubbing you with its tentacles.
-	<<garousal>><<arousal 600>>
+	<<garousal>><<arousal 600 "genitals">>
 	<br>
 
 	<<elseif $squidcount is 1>>
 
 	You feel something soft touch your <<breasts>>. You look beneath the water and see a small squid rubbing you with its tentacles.
-	<<garousal>><<arousal 600>>
+	<<garousal>><<arousal 600 "breasts">>
 	<br>
 
 	<<elseif $squidcount is 2>>
 
 	You feel something soft touch your <<breasts>>. You look beneath the water and see a small squid rubbing you with its tentacles.
-	<<garousal>><<arousal 600>>
+	<<garousal>><<arousal 600 "breasts">>
 	<br>
 
 	<<elseif $squidcount is 3>>
 
 	You feel something soft touch your <<bottom>>. You look beneath the water and see a small squid rubbing you with its tentacles.
-	<<garousal>><<arousal 600>>
+	<<garousal>><<arousal 600 "bottom">>
 	<br>
 
 	<<else>>
@@ -257,187 +262,214 @@ A <<person1>><<person>> and <<person2>><<person>> smile down at you. "We got our
 <<else>>
 <<sea2>>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "sea6">><<nobr>>
+<<widget "sea6">>
 A fishing boat passes by. No one on board notices you.
 <br><br>
 Perhaps they could help you get to shore.
 <br><br>
-<<link [[Call for help|Sea Boat Call]]>><</link>>
+<<link [[도움을 요청한다|Sea Boat Call]]>><</link>>
 <br>
-<<link [[Ignore|Sea Boat Ignore]]>><</link>>
+<<link [[무시한다|Sea Boat Ignore]]>><</link>>
 <br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "seavore">><<nobr>>
+<<widget "seavore">>
 <<if $voredisable is "f">>
 	A large creature emerges from the depths, drawn by your scent. Before you even know it's there, it grabs your legs with its maw, gripping you tight.
 	<br><br>
-	<<link [[Next|Sea Vore]]>><<set $molestationstart to 1>><</link>>
+	<<link [[다음|Sea Vore]]>><<set $molestationstart to 1>><</link>>
 <<else>>
 	<<sea1>>
 <</if>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "seatangle">><<nobr>>
+<<widget "seatangle">>
 <<if !$worn.lower.type.includes("naked")>>
-	Your waist becomes tangled in seaweed. It would be easier to untangle if you removed your <<bottoms>> first, and there's no one else around...
+	당신의 허리에 해초줄기가 엉켰다. 만약 <<bottoms_ rul>> 먼저 벗는다면 쉽게 풀 수 있을 것 같고, 주변에 다른 사람이 아무도 없다...
 	<br><br>
-	<<link [[Undress|Sea Tangle Undress]]>><</link>><<exhibitionist1>>
+	<<link [[벗는다|Sea Tangle Undress]]>><</link>><<exhibitionist1>>
 	<br>
-	<<link [[Don't undress (0:01)|Sea Tangle]]>><<pass 1>><<stress 6>><</link>><<gstress>>
+	<<link [[벗지 않는다 (0:01)|Sea Tangle]]>><<pass 1>><<stress 6>><</link>><<gstress>>
 	<br>
 <<else>>
-	Your waist becomes tangled in seaweed. It takes a minute to free yourself.
+	당신의 허리에 해초줄기가 엉켰다. 푸는 것만으로도 1분이 걸렸다.
 	<<pass 1>><<stress 1>><<gstress>>
 	<br><br>
 	<<destinationeventend>>
 	<br><br>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "searape">><<nobr>>
-<<generate1>><<person1>>
+<<widget "searape">>
+<<generate1>><<person1>><<npcClothesType $NPCList[0] "beachDive">>
 Something grabs you firmly by the ankle, and drags you beneath the water. A <<person>> rises from the murk, wearing a diving mask.
 <br><br>
 
-<<link [[Next|Sea Rape]]>><<set $molestationstart to 1>><</link>>
+<<link [[다음|Sea Rape]]>><<set $molestationstart to 1>><</link>>
 <br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "seatentacles">><<nobr>>
-<<if $tentacledisable is "f">>
+<<widget "seatentacles">>
+<<if $tentacledisable is "f" and $hallucinations gte 2>>
 Something brushes against your leg, then grabs you by the waist. Several tentacles rise from the water.
 <br><br>
 
-<<link [[Next|Sea Tentacles]]>><<set $molestationstart to 1>><</link>>
+<<link [[다음|Sea Tentacles]]>><<set $molestationstart to 1>><</link>>
 <br>
 <<else>>
 <<seavore>>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "seaflotsam">><<nobr>>
-	Wood and detritus float by, covered in seaweed. You think you see something glint within.
+<<widget "seaflotsam">>
+	나무와 부스러기가 해초와 뒤덮혀 떠다닌다. You think you see something glint within.
 	<br><br>
 
 	<<link [[Reach in|Sea Flotsam Reach]]>><</link>>
 	<br>
-	<<link [[Ignore|Sea Flotsam Ignore]]>><</link>>
+	<<link [[무시한다|Sea Flotsam Ignore]]>><</link>>
 	<br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "sea_struggle">><<nobr>>
+<<widget "sea_struggle">>
 <<if $bestialitydisable is "f">>
 	You feel something wrap around your leg. You peer beneath the water, and see a flurry of tentacles.
 	<br><br>
 
-	<<link [[Next|Sea Struggle]]>><<set $struggle_start to 1>><</link>>
+	<<link [[다음|Sea Struggle]]>><<set $struggle_start to 1>><</link>>
 	<br>
 <<else>>
 	<<seaflotsam>>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "passoutsea">><<nobr>>
+<<widget "sea_eye">>
+<<if $hallucinations gte 2>>
+	당신은 아래에서 무언가의 시선을 느꼈다. 당신은 갑작스러운 공포에 휩싸인다.<<gstress>><<stress 6>>
+	<br><br>
 
-<<link [[Everything fades to black|Passout Sea]]>><</link>>
+	<<link [[아래를 본다|Sea Eye]]>><<awareness 1>><<stress 6>><</link>><<gstress>><<gawareness>>
+	<br>
+	<<link [[보지 않는다|Sea Eye Refuse]]>><</link>>
+	<br>
+<<else>>
+	<<seaflotsam>>
+<</if>>
+<</widget>>
 
-<</nobr>><</widget>>
+<<widget "sea_chest">>
+A cluster of seaweed-covered rocks appear as you crest a wave, worn to smoothness by the sea.
+<br><br>
+
+<<link [[조사한다 (0:10)|Sea Chest]]>><<pass 10>><</link>><<swimmingdifficulty 1 1000>>
+<br>
+<<link [[무시한다|Sea]]>><<set $eventskip to 1>><</link>>
+<br>
+<</widget>>
+
+<<widget "passoutsea">>
+/*ToDo: Pregnancy, remove $pregnancyTesting to properly enable*/
+<<if $sexStats.vagina.pregnancy.waterBreaking is true and $pregnancyTesting>>
+	<<pregnancyWatersBrokenPassout "sea">>
+<<else>>
+	<<link [[모든 것이 암흑 속으로 사라져간다...|Passout Sea]]>><</link>>
+<</if>>
+<</widget>>
 
 :: Widgets Sea Beach [widget]
-<<widget "seabeach">><<nobr>>
+<<widget "seabeach">>
 
-<<link [[Swim to the beach (0:10)|Sea Beach]]>><<pass 10>><<tiredness 2>><</link>><<gtiredness>>
+<<link [[해변 쪽으로 헤엄친다 (0:10)|Sea Beach]]>><<pass 10>><<tiredness 2>><</link>><<gtiredness>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "seabeachquick">><<nobr>>
+<<widget "seabeachquick">>
 
-<<link [[Swim to the beach|Sea Beach]]>><</link>>
+<<link [[해변 쪽으로 헤엄친다|Sea Beach]]>><</link>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "seabeacheventend">><<nobr>>
+<<widget "seabeacheventend">>
 
-<<link [[Next|Sea Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+<<link [[다음|Sea Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
 
-<</nobr>><</widget>>
+<</widget>>
 
 :: Widgets Sea Docks [widget]
-<<widget "seadocks">><<nobr>>
+<<widget "seadocks">>
 
-<<link [[Swim to the docks (0:10)|Sea Docks]]>><<pass 10>><<tiredness 2>><</link>><<gtiredness>>
+<<docksicon>><<link [[부두 쪽으로 헤엄친다 (0:10)|Sea Docks]]>><<pass 10>><<tiredness 2>><</link>><<gtiredness>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "seadocksquick">><<nobr>>
+<<widget "seadocksquick">>
 
-<<link [[Swim to the docks|Sea Docks]]>><</link>>
+<<docksicon>><<link [[부두 쪽으로 헤엄친다|Sea Docks]]>><</link>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "seadockseventend">><<nobr>>
+<<widget "seadockseventend">>
 
-<<link [[Next|Sea Docks]]>><<set $eventskip to 1>><<endevent>><</link>>
+<<link [[다음|Sea Docks]]>><<set $eventskip to 1>><<endevent>><</link>>
 
-<</nobr>><</widget>>
+<</widget>>
 
 :: Widgets Sea Cliffs [widget]
-<<widget "seacliffs">><<nobr>>
+<<widget "seacliffs">>
 
-<<link [[Swim to the cliffs (0:10)|Sea Cliffs]]>><<pass 10>><<tiredness 2>><</link>><<gtiredness>>
+<<link [[절벽을 향해 헤엄친다 (0:10)|Sea Cliffs]]>><<pass 10>><<tiredness 2>><</link>><<gtiredness>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "seacliffsquick">><<nobr>>
+<<widget "seacliffsquick">>
 
-<<link [[Swim to the cliffs|Sea Cliffs]]>><</link>>
+<<link [[절벽을 향해 헤엄친다|Sea Cliffs]]>><</link>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "seacliffseventend">><<nobr>>
+<<widget "seacliffseventend">>
 
-<<link [[Next|Sea Cliffs]]>><<set $eventskip to 1>><<endevent>><</link>>
+<<link [[다음|Sea Cliffs]]>><<set $eventskip to 1>><<endevent>><</link>>
 
-<</nobr>><</widget>>
+<</widget>>
 
 :: Widgets Deep Sea [widget]
-<<widget "seamove">><<nobr>>
+<<widget "seamove">>
 
-<<link [[Next (0:10)|Sea]]>><<pass 10>><<tiredness 2>><</link>><<gtiredness>>
+<<link [[다음 (0:10)|Sea]]>><<pass 10>><<tiredness 2>><</link>><<gtiredness>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "seamovequick">><<nobr>>
+<<widget "seamovequick">>
 
-<<link [[Next|Sea]]>><</link>>
+<<link [[다음|Sea]]>><</link>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "seamoveeventend">><<nobr>>
+<<widget "seamoveeventend">>
 
-<<link [[Next|Sea]]>><<set $eventskip to 1>><<endevent>><</link>>
+<<link [[다음|Sea]]>><<set $eventskip to 1>><<endevent>><</link>>
 
-<</nobr>><</widget>>
+<</widget>>
 
 :: Widgets Sea Rocks [widget]
-<<widget "searocks">><<nobr>>
+<<widget "searocks">>
 
-<<link [[Swim to the rocks (0:10)|Sea Rocks]]>><<pass 10>><<tiredness 2>><</link>><<gtiredness>>
+<<link [[바위를 향해 헤엄친다 (0:10)|Sea Rocks]]>><<pass 10>><<tiredness 2>><</link>><<gtiredness>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "searocksquick">><<nobr>>
+<<widget "searocksquick">>
 
-<<link [[Swim to the rocks|Sea Rocks]]>><</link>>
+<<link [[바위를 향해 헤엄친다|Sea Rocks]]>><</link>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "searockseventend">><<nobr>>
+<<widget "searockseventend">>
 
-<<link [[Next|Sea Rocks]]>><<set $eventskip to 1>><<endevent>><</link>>
+<<link [[다음|Sea Rocks]]>><<set $eventskip to 1>><<endevent>><</link>>
 
-<</nobr>><</widget>>
+<</widget>>

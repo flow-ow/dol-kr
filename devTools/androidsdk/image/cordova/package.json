@@ -1,12 +1,14 @@
 {
   "name": "degrees-of-lewdity-android-app",
-  "version": "0.2.22.7",
+  "version": "0.2.25.0",
   "description": "This sub-project exists to build DoL as an Android app",
-  "main": "Degrees of Lewdity kr.html",
+  "main": "Degrees of Lewdity.html",
   "scripts": {
     "build-debug-ci": "cordova build --debug",
     "build-debug": "npm run update-version && cordova build --debug",
     "build-release": "npm run update-version && node scripts/releaseBuildAskForPassword.js",
+    "sign-build-debug": "npm run update-version && cordova build android --debug --buildConfig=/cordovasrc/build.json",
+    "sign-build-release": "npm run update-version && cordova build android --release --buildConfig=/cordovasrc/build.json",
     "update-version": "node scripts/updateVersion.js"
   },
   "repository": {

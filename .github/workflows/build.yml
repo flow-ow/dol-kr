@@ -1,0 +1,128 @@
+name: Build
+
+on:
+  push:
+
+jobs:
+  html:
+    name: Build HTML
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Get devTools/tweego and images from original repository (with specific commit)
+      run: |
+        git clone -c core.symlinks=false https://gitgud.io/Vrelnir/degrees-of-lewdity.git _originalRepository
+        cd _originalRepository
+        git checkout $(cat ../version.git | xargs)
+        cd ..
+        cp -rf ./_originalRepository/devTools/tweego ./devTools/tweego
+        cp -rf ./_originalRepository/img ./img
+
+    - name: Run compile.sh
+      run: |
+        chmod +x ./compile.sh 
+        chmod +x ./devTools/tweego/tweego_linux64
+        FORCE_VERSION=kr-$(git describe --tags --always) ./compile.sh
+
+    # - name: Upload Artifact
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: dol-kr
+    #     path: Degrees of Lewdity kr-*.html
+
+  debug_apk:
+    name: Build APK (Debug)
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Get devTools/tweego from original repository
+      run: |
+        git clone -c core.symlinks=false https://gitgud.io/Vrelnir/degrees-of-lewdity.git _originalRepository
+        cd _originalRepository
+        git checkout $(cat ../version.git | xargs)
+        cd ..
+        cp -rf ./_originalRepository/devTools/tweego ./devTools/tweego
+        cp -rf ./_originalRepository/img ./img
+
+    - name: Apply patch for APK build
+      run: |
+        sed -i 's/\"enableLinkNumberify\"\: true/\"enableLinkNumberify\"\: false/g' game/01-config/sugarcubeConfig.js
+        chmod +x ./keys/initKeys.sh && ./keys/initKeys.sh
+      env:
+        KEYSTORE_FILE_B64: ${{ secrets.KEYSTORE_FILE_B64 }}
+        KEYSTORE_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
+        KEYSTORE_STORE_PASS: ${{ secrets.KEYSTORE_STORE_PASS }}
+        KEYSTORE_KEY_PASS: ${{ secrets.KEYSTORE_KEY_PASS }}
+
+    - name: Run compile.sh
+      run: |
+        chmod +x ./compile.sh 
+        chmod +x ./devTools/tweego/tweego_linux64
+        FORCE_VERSION='' ./compile.sh
+
+    - name: Build Cordova docker image
+      run: |
+        cd devTools/androidsdk/image
+        docker build -t cordova-android:latest .
+
+    - name: Build debug apk
+      run: docker run -v "$GITHUB_WORKSPACE":"/src" -t cordova-android npm run sign-build-debug
+
+    # - name: Upload Artifact
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: dol-kr-debug_apk
+    #     path: dist/*-debug.apk
+
+  release_apk:
+    name: Build APK (Release)
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Get devTools/tweego from original repository
+      run: |
+        git clone -c core.symlinks=false https://gitgud.io/Vrelnir/degrees-of-lewdity.git _originalRepository
+        cd _originalRepository
+        git checkout $(cat ../version.git | xargs)
+        cd ..
+        cp -rf ./_originalRepository/devTools/tweego ./devTools/tweego
+        cp -rf ./_originalRepository/img ./img
+
+    - name: Apply patch for APK build
+      run: |
+        sed -i 's/\"enableLinkNumberify\"\: true/\"enableLinkNumberify\"\: false/g' game/01-config/sugarcubeConfig.js
+        chmod +x ./keys/initKeys.sh && ./keys/initKeys.sh
+      env:
+        KEYSTORE_FILE_B64: ${{ secrets.KEYSTORE_FILE_B64 }}
+        KEYSTORE_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
+        KEYSTORE_STORE_PASS: ${{ secrets.KEYSTORE_STORE_PASS }}
+        KEYSTORE_KEY_PASS: ${{ secrets.KEYSTORE_KEY_PASS }}
+
+    - name: Run compile.sh
+      run: |
+        chmod +x ./compile.sh 
+        chmod +x ./devTools/tweego/tweego_linux64
+        FORCE_VERSION='' ./compile.sh
+
+    - name: Build Cordova docker image
+      run: |
+        cd devTools/androidsdk/image
+        docker build -t cordova-android:latest .
+
+    - name: Build release apk
+      run: docker run -v "$GITHUB_WORKSPACE":"/src" -t cordova-android npm run sign-build-release
+
+    # - name: Upload Artifact
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: dol-kr-release-apk
+    #     path: |
+    #       dist/*.apk
+    #       !dist/*-debug.apk

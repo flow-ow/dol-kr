@@ -1,19 +1,39 @@
-:: Starfish Street [nobr]
+:: Starfish Street
 
-<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "starfish">>
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "starfish">><<getTarget true>>
 당신은 스타피쉬 가에 있다. 바다에서 바람이 불어온다.
 <<if $daystate is "day">>
 	<<if $weather is "rain">>
-		도로의 일부가 젖은 모래로 덮여있다.
+		A few tourists walk the promenade, braving the rain.
+	<<elseif $weather is "snow">>
+		Salt keeps snow from settling, but few tourists brave the cold.
 	<<else>>
-		부두에서 소음이 계속 들려온다.
+		Tourists fill the promenade, and flow in and out of the various amusements.
 	<</if>>
 <<elseif $daystate is "dawn">>
-	이미 부두에선 일을 시작했는지 일하는 소리가 들려온다.
+	<<if $weather is "rain">>
+		Morning rain arrives with it.
+	<<elseif $weather is "snow">>
+		The promande is wet with fallen snow.
+	<<else>>
+		Tourists watch the sunrise along the promenade.
+	<</if>>
 <<elseif $daystate is "dusk">>
-	이 시간에도 부두에선 소음이 들려온다.
+	<<if $weather is "rain">>
+		Rain keeps tourists away.
+	<<elseif $weather is "snow">>
+		Slurry forms in sheltered patches along the promenade.
+	<<else>>
+		Tourists watch the sunset along the promenade.
+	<</if>>
 <<elseif $daystate is "night">>
-	바닷소리만이 들려온다.
+	<<if $weather is "rain">>
+		Sheets of rain arrive with it.
+	<<elseif $weather is "snow">>
+		Patches of slush cover the ground.
+	<<else>>
+		You see small lights on the horizon.
+	<</if>>
 <</if>>
 <<streeteffects>>
 <br><br>
@@ -24,24 +44,30 @@
 		<br><br>
 	<</if>>
 <</if>>
-<<if $arousal gte 10000>>
+<<if $arousal gte $arousalmax>>
 	<<orgasmstreet>>
 <</if>>
 
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax and !$possessed>>
 	<<passoutstreet>>
+<<elseif $bailey_pound is 2>>
+	<<set $bailey_pound to 3>>
+	구급차 두 대가 동물 보호소 바깥에 주차해 있다. <<generate1>><<person1>><<person_ i>> 덮개로 가려진 들것을 그 중 하나의 뒤로 밀고 가더니, 구급차들이 출발해 멀어진다.
+	<br><br>
+	<<link [[다음|Starfish Street]]>><<endevent>><</link>>
+	<br>
 <<else>>
 	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
 		<<eventsstreet>>
 	<<else>>
-		<<if $map.top is true>>
+		<<if $options.mapTop is true>>
 			<<map "starfish">>
 			<br>
 		<</if>>
 		주요 장소
 		<br>
-		<<link [[해변 (0:05)|Beach]]>><<pass 5>><</link>>
+		<<beachicon>><<link [[해변 (0:05)|Beach]]>><<pass 5>><</link>>
 		<br>
 		<<if $daystate is "day" or $daystate is "dusk">>
 		<<arcadeicon>><<link [[오락실 (0:01)|Arcade]]>><<pass 1>><</link>>
@@ -49,6 +75,16 @@
 		<<else>>
 		<<arcadeicon>><<link [[오락실 (0:01)|Arcade Lock]]>><<pass 1>><</link>>
 		<br>
+		<</if>>
+		<<if $openinghours is 1>>
+			<<poundicon>><<link [[개 보호소 (0:01)|Pound]]>><<pass 1>><</link>>
+			<br>
+		<<elseif $hour is $closinghour>>
+			<span class="blue">사람들이 개 보호소에서 나오고 있다.</span> 아마 닫을 시간인 듯 하다.
+			<br>
+		<<else>>
+			<<poundicon>><<link [[개 보호소 (0:01)|Pound Lock]]>><<pass 1>><</link>>
+			<br>
 		<</if>>
 		<br>
 		<<if $exposed gte 1 and $daystate isnot "night">>
@@ -67,7 +103,7 @@
 		<<park>>
 		<<stormdrain>>
 		<<displayLinks>>
-		<<if $map.top isnot true>>
+		<<if $options.mapTop isnot true>>
 			<br>
 			<<map "starfish">>
 		<</if>>

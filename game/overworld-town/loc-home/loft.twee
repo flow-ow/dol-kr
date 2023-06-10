@@ -1,4 +1,4 @@
-:: Orphanage Loft [nobr]
+:: Orphanage Loft
 
 <<set $outside to 0>><<set $location to "home">><<effects>>
 당신은 고아원 다락에 있다. 중앙에는 넓은 현관에 위치해 있다. 그 옆으로는 다른 방으로 향하는 복도들이 연결되어 있다. 먼지투성이 상자들이 높게 쌓여있다.
@@ -19,10 +19,10 @@
 <<link [[떠난다|Orphanage]]>><</link>>
 <br>
 
-:: Orphanage Loft Spray [nobr]
+:: Orphanage Loft Spray
 
 <<set $outside to 0>><<set $location to "home">><<effects>>
-당신은 화학 연구실에 들어간다. 비커 여러 개에서 거품이 끓어오른다. <<generatey1>><<person1>><<person>><<if $pronoun is "m">>이<<else>>가<</if>> 부산스럽게 움직인다. <<hePost "이">> 당신에게 방금 막 만든 후추 스프레이 충전제를 건네준다.
+당신은 화학 연구실에 들어간다. 비커 여러 개에서 거품이 끓어오른다. <<generateyv1>><<person1>><<person_ i>> 부산스럽게 움직인다. <<hePost "이">> 당신에게 방금 막 만든 후추 스프레이 충전제를 건네준다.
 <br><br>
 <<link [[다음|Orphanage Loft]]>><<endevent>><</link>>
 <br>

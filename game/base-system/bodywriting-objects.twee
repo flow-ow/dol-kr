@@ -1,5 +1,5 @@
 :: Widgets Bodywriting Objects [widget]
-<<widget "init_bodywriting_objects">><<nobr>>
+<<widget "init_bodywriting_objects">>
 /*fuckdoll isn't used yet.*/
 <<set setup.bodywriting to {
 	rape_me: {
@@ -10,7 +10,9 @@
 		special: "rape",
 		gender: "n",
 		lewd: 1,
-		degree: 0
+		degree: 0,
+		key: "rape_me",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
 		},
 
 	slut: {
@@ -21,7 +23,9 @@
 		special: "none",
 		gender: "n",
 		lewd: 1,
-		degree: 0
+		degree: 0,
+		key: "slut",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
 		},
 
 	fucktoy: {
@@ -32,7 +36,9 @@
 		special: "none",
 		gender: "n",
 		lewd: 1,
-		degree: 0
+		degree: 0,
+		key: "fucktoy",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
 		},
 
 	rapetoy: {
@@ -43,7 +49,9 @@
 		special: "rape",
 		gender: "n",
 		lewd: 1,
-		degree: 0
+		degree: 0,
+		key: "rapetoy",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
 		},
 
 	worthless: {
@@ -54,7 +62,9 @@
 		special: "none",
 		gender: "n",
 		lewd: 1,
-		degree: 0
+		degree: 0,
+		key: "worthless",
+		sprites: ["breasts", "left_thigh", "pubic", "right_thigh"]
 		},
 
 	free_use: {
@@ -65,7 +75,9 @@
 		special: "none",
 		gender: "n",
 		lewd: 1,
-		degree: 0
+		degree: 0,
+		key: "free_use",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
 		},
 
 	slave: {
@@ -76,7 +88,9 @@
 		special: "slave",
 		gender: "n",
 		lewd: 1,
-		degree: 0
+		degree: 0,
+		key: "slave",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
 		},
 
 	use_me: {
@@ -87,7 +101,9 @@
 		special: "none",
 		gender: "n",
 		lewd: 1,
-		degree: 0
+		degree: 0,
+		key: "use_me",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
 		},
 
 	hit_me: {
@@ -98,8 +114,10 @@
 		special: "violence",
 		gender: "n",
 		lewd: 1,
-		degree: 0
-		},
+		degree: 0,
+		key: "hit_me",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
+	},
 
 	cum_rag: {
 		index: 9,
@@ -109,8 +127,10 @@
 		special: "none",
 		gender: "n",
 		lewd: 1,
-		degree: 0
-		},
+		degree: 0,
+		key: "cum_rag",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
+	},
 
 	walking_dildo: {
 		index: 10,
@@ -120,7 +140,9 @@
 		special: "none",
 		gender: "n",
 		lewd: 1,
-		degree: 0
+		degree: 0,
+		key: "walking_dildo",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
 		},
 
 	rape_bait: {
@@ -131,7 +153,9 @@
 		special: "rape",
 		gender: "n",
 		lewd: 1,
-		degree: 0
+		degree: 0,
+		key: "rape_bait",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
 		},
 
 	bitch: {
@@ -142,7 +166,9 @@
 		special: "none",
 		gender: "n",
 		lewd: 1,
-		degree: 0
+		degree: 0,
+		key: "bitch",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
 		},
 
 	fuck_me: {
@@ -153,7 +179,9 @@
 		special: "none",
 		gender: "n",
 		lewd: 1,
-		degree: 0
+		degree: 0,
+		key: "fuck_me",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
 		},
 
 	hurt_me: {
@@ -164,7 +192,9 @@
 		special: "violence",
 		gender: "n",
 		lewd: 1,
-		degree: 0
+		degree: 0,
+		key: "hurt_me",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
 		},
 
 	enslave_me: {
@@ -263,7 +293,9 @@
 		special: "rape",
 		gender: "n",
 		lewd: 1,
-		degree: 0
+		degree: 0,
+		key: "no_means_yes",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
 		},
 
 	public_toy: {
@@ -274,7 +306,9 @@
 		special: "rape",
 		gender: "n",
 		lewd: 1,
-		degree: 0
+		degree: 0,
+		key: "public_toy",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
 		},
 
 	public_property: {
@@ -406,7 +440,9 @@
 		special: "prostitution",
 		gender: "n",
 		lewd: 1,
-		degree: 500
+		degree: 500,
+		key: "five_pound_whore",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
 		},
 
 	ten_pound_a_pop: {
@@ -417,7 +453,9 @@
 		special: "prostitution",
 		gender: "n",
 		lewd: 1,
-		degree: 1000
+		degree: 1000,
+		key: "ten_pound_a_pop",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
 		},
 
 	twenty_five_pound_per_fuck: {
@@ -428,7 +466,9 @@
 		special: "prostitution",
 		gender: "n",
 		lewd: 1,
-		degree: 2500
+		degree: 2500,
+		key: "twenty_five_pound_per_fuck",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
 		},
 
 	one_hundred_pound: {
@@ -439,7 +479,9 @@
 		special: "prostitution",
 		gender: "n",
 		lewd: 1,
-		degree: 10000
+		degree: 10000,
+		key: "one_hundred_pound",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
 		},
 
 	its_not_rape_if_you_pay_me: {
@@ -582,7 +624,9 @@
 		special: "none",
 		gender: "n",
 		lewd: 1,
-		degree: 0
+		degree: 0,
+		key: "hot",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
 		},
 
 	beautiful: {
@@ -604,7 +648,9 @@
 		special: "none",
 		gender: "m",
 		lewd: 1,
-		degree: 0
+		degree: 0,
+		key: "cute_boy",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
 		},
 
 	cute_girl: {
@@ -615,7 +661,9 @@
 		special: "none",
 		gender: "f",
 		lewd: 1,
-		degree: 0
+		degree: 0,
+		key: "cute_girl",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
 		},
 
 	stud: {
@@ -700,7 +748,7 @@
 		writing: "Whitney's slut",
 		type: "text",
 		arrow: 0,
-		special: "whitney",
+		special: "Whitney",
 		gender: "f",
 		lewd: 1,
 		degree: 0,
@@ -712,7 +760,7 @@
 		writing: "Whitney's boyslut",
 		type: "text",
 		arrow: 0,
-		special: "whitney",
+		special: "Whitney",
 		gender: "m",
 		lewd: 1,
 		degree: 0,
@@ -724,7 +772,7 @@
 		writing: "Property of Whitney",
 		type: "text",
 		arrow: 0,
-		special: "whitney",
+		special: "Whitney",
 		gender: "n",
 		lewd: 1,
 		degree: 0,
@@ -736,7 +784,7 @@
 		writing: "Whitney's toy",
 		type: "text",
 		arrow: 0,
-		special: "whitney",
+		special: "Whitney",
 		gender: "n",
 		lewd: 1,
 		degree: 0,
@@ -1226,7 +1274,898 @@
 		gender: "f",
 		lewd: 1,
 		degree: 0
-		}
+		},
+	cats_toy: {
+		index: 111,
+		writing: "Cat's toy",
+		type: "text",
+		arrow: 0,
+		special: "bestiality",
+		gender: "n",
+		lewd: 1,
+		degree: 0
+		},
 
+	cat_fucker: {
+		index: 112,
+		writing: "Cat fucker",
+		type: "text",
+		arrow: 0,
+		special: "bestiality",
+		gender: "n",
+		lewd: 1,
+		degree: 0
+		},
+
+	cat_slut: {
+		index: 113,
+		writing: "Cat's slut",
+		type: "text",
+		arrow: 0,
+		special: "bestiality",
+		gender: "n",
+		lewd: 1,
+		degree: 0
+		},
+
+	criminal_scum: {
+		index: 114,
+		writing: "Criminal scum",
+		type: "text",
+		arrow: 0,
+		special: "criminal",
+		gender: "n",
+		lewd: 1,
+		degree: 0
+		},
+
+	criminal: {
+		index: 115,
+		writing: "Criminal",
+		type: "text",
+		arrow: 0,
+		special: "criminal",
+		gender: "n",
+		lewd: 1,
+		degree: 0
+		},
+
+	law_breaker: {
+		index: 116,
+		writing: "Law breaker",
+		type: "text",
+		arrow: 0,
+		special: "criminal",
+		gender: "n",
+		lewd: 1,
+		degree: 0
+		},
+
+	criminal_whore: {
+		index: 117,
+		writing: "Criminal whore",
+		type: "text",
+		arrow: 0,
+		special: "criminal",
+		gender: "n",
+		lewd: 1,
+		degree: 0
+		},
+
+	in_debt_to_society: {
+		index: 118,
+		writing: "In debt to society",
+		type: "text",
+		arrow: 1,
+		special: "criminal",
+		gender: "n",
+		lewd: 1,
+		degree: 0
+		},
+
+	deserves_prison: {
+		index: 119,
+		writing: "Deserves prison",
+		type: "text",
+		arrow: 0,
+		special: "criminal",
+		gender: "n",
+		lewd: 1,
+		degree: 0
+		},
+
+	threat_to_society: {
+		index: 120,
+		writing: "Threat to society",
+		type: "text",
+		arrow: 0,
+		special: "criminal",
+		gender: "n",
+		lewd: 1,
+		degree: 0
+		},
+	dumb_bitch: {
+		index: 121,
+		writing: "Dumb bitch",
+		type: "text",
+		arrow: 0,
+		special: "none",
+		gender: "n",
+		lewd: 1,
+		degree: 0
+		},
+
+	kick_me: {
+		index: 122,
+		writing: "Kick me",
+		type: "text",
+		arrow: 0,
+		special: "violence",
+		gender: "n",
+		lewd: 1,
+		degree: 0
+		},
+
+	buttslut: {
+		index: 123,
+		writing: "Buttslut",
+		type: "text",
+		arrow: 0,
+		special: "none",
+		gender: "n",
+		lewd: 1,
+		degree: 0
+		},
+
+	anal_whore: {
+		index: 124,
+		writing: "Anal whore",
+		type: "text",
+		arrow: 0,
+		special: "none",
+		gender: "n",
+		lewd: 1,
+		degree: 0
+		},
+
+	public_pet: {
+		index: 125,
+		writing: "Public pet",
+		type: "text",
+		arrow: 0,
+		special: "none",
+		gender: "n",
+		lewd: 1,
+		degree: 0
+		},
+
+	oh_no: {
+		index: 126,
+		writing: "Oh no",
+		type: "text",
+		arrow: 0,
+		special: "violence",
+		gender: "n",
+		lewd: 1,
+		degree: 0
+		},
+
+	robins_protector: {
+		index: 127,
+		writing: "Robin's Protector",
+		type: "text",
+		arrow: 0,
+		special: "Robin",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	robin_and_i: {
+		index: 128,
+		writing: "Robin & I",
+		type: "text",
+		arrow: 0,
+		special: "Robin",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true,
+		key: "robin_and_i",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
+		},
+
+	the_orphan_lover: {
+		index: 129,
+		writing: "The Orphan Lover",
+		type: "text",
+		arrow: 0,
+		special: "Robin",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	robins_boyfriend: {
+		index: 130,
+		writing: "Robin's Boyfriend",
+		type: "text",
+		arrow: 0,
+		special: "Robin",
+		gender: "m",
+		lewd: 0,
+		degree: 0,
+		featSkip: true,
+		key: "robins_boyfriend",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
+		},
+
+	robins_girlfriend: {
+		index: 131,
+		writing: "Robin's Girlfriend",
+		type: "text",
+		arrow: 0,
+		special: "Robin",
+		gender: "f",
+		lewd: 0,
+		degree: 0,
+		featSkip: true,
+		key: "robins_girlfriend",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
+		},
+
+	whitneys_pet: {
+		index: 132,
+		writing: "Whitney's Pet",
+		type: "text",
+		arrow: 0,
+		special: "Whitney",
+		gender: "n",
+		lewd: 1,
+		degree: 0,
+		featSkip: true,
+		key: "whitneys_pet",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
+		},
+
+	kylars_obsession: {
+		index: 133,
+		writing: "Kylar's Obsession",
+		type: "text",
+		arrow: 0,
+		special: "Kylar",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	love_kylar_forever: {
+		index: 134,
+		writing: "Love Kylar Forever",
+		type: "text",
+		arrow: 0,
+		special: "Kylar",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	reserved_for_kylar: {
+		index: 135,
+		writing: "Reserved for Kylar",
+		type: "text",
+		arrow: 1,
+		special: "Kylar",
+		gender: "n",
+		lewd: 1,
+		degree: 0,
+		featSkip: true
+		},
+
+	just_kylar: {
+		index: 136,
+		writing: "Just Kylar",
+		type: "text",
+		arrow: 0,
+		special: "Kylar",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	edens_companion: {
+		index: 137,
+		writing: "Eden's Companion",
+		type: "text",
+		arrow: 0,
+		special: "Eden",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	hunter_and_prey: {
+		index: 138,
+		writing: "Hunter and Prey",
+		type: "text",
+		arrow: 0,
+		special: "Eden",
+		gender: "n",
+		lewd: 1,
+		degree: 0,
+		featSkip: true
+		},
+
+	its_lonely_in_the_woods: {
+		index: 139,
+		writing: "It's Lonely in the Woods",
+		type: "text",
+		arrow: 0,
+		special: "Eden",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	something_is_hunting_you: {
+		index: 140,
+		writing: "Something is Hunting You",
+		type: "text",
+		arrow: 0,
+		special: "Eden",
+		gender: "n",
+		lewd: 1,
+		degree: 0,
+		featSkip: true
+		},
+
+	averys_trophy: {
+		index: 141,
+		writing: "Avery's Trophy",
+		type: "text",
+		arrow: 0,
+		special: "Avery",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	uptown_boy: {
+		index: 142,
+		writing: "Uptown Boy",
+		type: "text",
+		arrow: 0,
+		special: "Avery",
+		gender: "m",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	uptown_girl: {
+		index: 143,
+		writing: "Uptown Girl",
+		type: "text",
+		arrow: 0,
+		special: "Avery",
+		gender: "f",
+		Lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	averys_monopoly: {
+		index: 144,
+		writing: "Avery's Monopoly",
+		type: "text",
+		arrow: 0,
+		special: "Avery",
+		gender: "n",
+		lewd: 1,
+		degree: 0,
+		featSkip: true
+		},
+
+	endearing: {
+		index: 145,
+		writing: "Endearing",
+		type: "text",
+		arrow: 0,
+		special: "Avery",
+		gender: "n",
+		lewd: 1,
+		degree: 0,
+		featSkip: true
+		},
+
+	alexs_partner: {
+		index: 146,
+		writing: "Alex's Partner",
+		type: "text",
+		arrow: 0,
+		special: "Alex",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	sunrise_to_sunset: {
+		index: 147,
+		writing: "Sunrise to Sunset",
+		type: "text",
+		arrow: 0,
+		special: "Alex",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	hay_baler: {
+		index: 148,
+		writing: "Hay Baler",
+		type: "text",
+		arrow: 0,
+		special: "Alex",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	cowboy: {
+		index: 149,
+		writing: "Cowboy",
+		type: "text",
+		arrow: 0,
+		special: "Alex",
+		gender: "m",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	cowgirl: {
+		index: 150,
+		writing: "Cowgirl",
+		type: "text",
+		arrow: 0,
+		special: "Alex",
+		gender: "f",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	sydneys_savior: {
+		index: 151,
+		writing: "Sydney's Saviour",
+		type: "text",
+		arrow: 0,
+		special: "Sydney",
+		gender: "n",
+		lewd: 1,
+		degree: 0,
+		featSkip: true
+		},
+
+	bound_to_sydney: {
+		index: 152,
+		writing: "Bound to Sydney",
+		type: "text",
+		arrow: 0,
+		special: "Sydney",
+		gender: "n",
+		lewd: 1,
+		degree: 0,
+		featSkip: true
+		},
+
+	sydney_makes_me_smile: {
+		index: 153,
+		writing: "Sydney makes me :)",
+		type: "text",
+		arrow: 0,
+		special: "Sydney",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	purest_love: {
+		index: 154,
+		writing: "Purest Love",
+		type: "text",
+		arrow: 0,
+		special: "Sydney",
+		gender: "n",
+		lewd: 1,
+		degree: 0,
+		featSkip: true
+		},
+
+	lusty_sinners: {
+		index: 155,
+		writing: "Lusty Sinners",
+		type: "text",
+		arrow: 0,
+		special: "Sydney",
+		gender: "n",
+		lewd: 1,
+		degree: 0,
+		featSkip: true
+		},
+
+	black_wolfs_bitch: {
+		index: 156,
+		writing: "Black Wolf's Bitch",
+		type: "text",
+		arrow: 0,
+		special: "Black Wolf",
+		gender: "n",
+		lewd: 1,
+		degree: 0,
+		featSkip: true
+		},
+
+	all_for_my_alpha: {
+		index: 157,
+		writing: "All for my Alpha",
+		type: "text",
+		arrow: 0,
+		special: "Black Wolf",
+		gender: "n",
+		lewd: 1,
+		degree: 0,
+		featSkip: true
+		},
+
+	leader_of_the_pack: {
+		index: 158,
+		writing: "Leader of the Pack",
+		type: "text",
+		arrow: 0,
+		special: "Black Wolf",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	runs_with_wolves: {
+		index: 159,
+		writing: "Runs with Wolves",
+		type: "text",
+		arrow: 0,
+		special: "Black Wolf",
+		gender: "n",
+		lewd: 1,
+		degree: 0,
+		featSkip: true
+		},
+
+	great_hawks_spouse: {
+		index: 160,
+		writing: "Great Hawk's Spouse",
+		type: "text",
+		arrow: 0,
+		special: "Great Hawk",
+		gender: "n",
+		lewd: 1,
+		degree: 0,
+		featSkip: true
+		},
+
+	soaring_with_love: {
+		index: 161,
+		writing: "Soaring with Love",
+		type: "text",
+		arrow: 0,
+		special: "Great Hawk",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	terrors_mate: {
+		index: 162,
+		writing: "Terror's Mate",
+		type: "text",
+		arrow: 0,
+		special: "Great Hawk",
+		gender: "n",
+		lewd: 1,
+		degree: 0,
+		featSkip: true
+		},
+
+	free_bird: {
+		index: 163,
+		writing: "Free Bird",
+		type: "text",
+		arrow: 0,
+		special: "Great Hawk",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	book_criminal_frown: {
+		index: 164,
+		writing: "Book Criminal >:(",
+		type: "text",
+		arrow: 0,
+		special: "Sydney",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true,
+		key: "book_criminal_frown",
+		sprites: ["forehead", "left_cheek", "right_cheek"]
+
+		},
+
+	book_criminal_heart: {
+		index: 165,
+		writing: "Book Criminal <3",
+		type: "text",
+		arrow: 0,
+		special: "Sydney",
+		gender: "n",
+		lewd: 1,
+		degree: 0,
+		featSkip: true,
+		key: "book_criminal_heart",
+		sprites: ["forehead", "left_cheek", "right_cheek"]
+		},
+
+	best_friend: {
+		index: 166,
+		writing: "Best Friend",
+		type: "text",
+		arrow: 0,
+		special: "Sydney",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	interesting: {
+		index: 167,
+		writing: "Interesting",
+		type: "text",
+		arrow: 0,
+		special: "Sydney",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	inspiring: {
+		index: 168,
+		writing: "Inspiring",
+		type: "text",
+		arrow: 0,
+		special: "Sydney",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	study_fiend: {
+		index: 169,
+		writing: "Study Fiend",
+		type: "text",
+		arrow: 0,
+		special: "Sydney",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	lazybones: {
+		index: 170,
+		writing: "Lazybones",
+		type: "text",
+		arrow: 0,
+		special: "Sydney",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	copycat: {
+		index: 171,
+		writing: "Copycat >:(",
+		type: "text",
+		arrow: 0,
+		special: "Sydney",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	attractive_force: {
+		index: 172,
+		writing: "Attractive force = 8.19 × 10-",
+		type: "text",
+		arrow: 0,
+		special: "Sydney",
+		gender: "n",
+		lewd: 1,
+		degree: 0,
+		featSkip: true
+		},
+
+	reproductive_system: {
+		index: 173,
+		writing: "Reproductive System",
+		type: "text",
+		arrow: 0,
+		special: "Sydney",
+		gender: "n",
+		lewd: 1,
+		degree: 0,
+		featSkip: true
+		},
+
+	breeding_cycle: {
+		index: 174,
+		writing: "The Breeding Cycle of-",
+		type: "text",
+		arrow: 0,
+		special: "Sydney",
+		gender: "n",
+		lewd: 1,
+		degree: 0,
+		featSkip: true
+		},
+
+	water_tables: {
+		index: 175,
+		writing: "Water Tables",
+		type: "text",
+		arrow: 0,
+		special: "Sydney",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	cytoplasm: {
+		index: 176,
+		writing: "Cytoplasm",
+		type: "text",
+		arrow: 0,
+		special: "Sydney",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	atomic_weight: {
+		index: 177,
+		writing: "Atomic Weight 196.96657",
+		type: "text",
+		arrow: 0,
+		special: "Sydney",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+		},
+
+	stupid_little_fucking_sextease_bitch_fucker: {
+		index: 178,
+		writing: "Stupid little fucking sextease bitch fucker",
+		type: "text",
+		arrow: 0,
+		special: "Sydney",
+		gender: "n",
+		lewd: 1,
+		degree: 0,
+		featSkip: true
+		},
+
+	sleepyhead: {
+		index: 179,
+		writing: "Sleepyhead",
+		type: "text",
+		arrow: 0,
+		special: "Sydney",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true
+	},
+
+	sinner: {
+		index: 180,
+		writing: "Sinner",
+		type: "text",
+		arrow: 0,
+		special: "Sydney",
+		gender: "n",
+		lewd: 0,
+		degree: 0,
+		featSkip: true,
+		key: "sinner",
+		sprites: ["breasts", "forehead", "left_thigh", "pubic", "right_thigh"]
+	},
+
+	brood_mother: {
+		index: 181,
+		writing: "Brood mother",
+		type: "text",
+		arrow: 0,
+		special: "pregnancy",
+		gender: "f",
+		lewd: 1,
+		degree: 0
+	},
+	inseminate_me: {
+		index: 182,
+		writing: "Inseminate me",
+		type: "text",
+		arrow: 0,
+		special: "pregnancy",
+		gender: "f",
+		lewd: 1,
+		degree: 0
+	},
+	impregnate_me: {
+		index: 183,
+		writing: "Impregnate me",
+		type: "text",
+		arrow: 0,
+		special: "pregnancy",
+		gender: "f",
+		lewd: 1,
+		degree: 0
+	},
+	pregnancy_slut: {
+		index: 184,
+		writing: "Pregnancy slut",
+		type: "text",
+		arrow: 0,
+		special: "pregnancy",
+		gender: "f",
+		lewd: 1,
+		degree: 0
+	},
+	breeding_ground: {
+		index: 185,
+		writing: "Breeding ground",
+		type: "text",
+		arrow: 0,
+		special: "pregnancy",
+		gender: "f",
+		lewd: 1,
+		degree: 0
+	}
 }>>
-<</nobr>><</widget>>
+<<set setup.bodywriting_namebyindex to []>>
+<<for _label, _value range setup.bodywriting>>
+	<<set setup.bodywriting_namebyindex[_value.index] to _label>>
+<</for>>
+<</widget>>

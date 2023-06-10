@@ -1,13 +1,28 @@
 :: Widgets pregnancyVar [widget]
-<<widget "pregnancyVar">><<nobr>>
+<<widget "pregnancyVar">>
 	<<containersInit>>
 	<<if $objectVersion.prenancyObjectRepair isnot 2>>
 		<<prenancyObjectRepair>>
 		<<set $objectVersion.prenancyObjectRepair to 2>>
 	<</if>>
-<</nobr>><</widget>>
+	<<if $pregnancyStats is undefined>>
+		<<set $pregnancyStats to {
+			playerChildren:0,
+			humanChildren:0,
+			wolfChildren:0,
+			npcChildren:0,
+			npcChildrenUnrelatedToPlayer:0,
+			npcTotalBirthEvents:0,
+			humanToysUnlocked: false,
+			wolfToysUnlocked: false,
+			mother: 0,
+			aftermorningpills: 0,
+			pregnancyTestsTaken: 0,
+		}>>
+	<</if>>
+<</widget>>
 
-<<widget "containersInit">><<nobr>>
+<<widget "containersInit">>
 <<if $container is undefined>>
 	<<set $container to {
 		"lastLocation": null,
@@ -18,7 +33,7 @@
 				"foodStorage":0,
 				"luxury":0
 			},
-			"name": "Tiny Fish Tank",
+			"name": "조그마한 수조",
 			"count": 0,
 			"maxCount": 1,
 			"daysSinceFed": 0,
@@ -59,9 +74,60 @@
 	<<set $container.home.kylarFed to false>>
 	<<set $container.home.kylarHelp to false>>
 <</if>>
-<</nobr>><</widget>>
+<<if $container.farm is undefined>>
+	<<set $container.farm to {
+		"upgrades":{
+			"capacity":0,
+			"foodStorage":0,
+			"luxury":0
+		},
+		"name": "기생충 우리",
+		"count": 0,
+		"maxCount": 5,
+		"daysSinceFed": 0,
+		"maxDaysWithoutFood": 14,
+		"creatures":{
+			0: null
+		},
+		"deadCreatures": 0,
+		"visited": false,
+		"leaveLink": "Farm Work"
+	}>>
+	<<set $container.list.pushUnique("farm")>>
+<</if>>
 
-<<widget "prenancyObjectRepair">><<nobr>>
+<<if $sexStats.anus.pregnancy.typesSeen is undefined or $sexStats.anus.pregnancy.variantsSeen is undefined>>
+	<<set $sexStats.anus.pregnancy.typesSeen to []>><<set $sexStats.anus.pregnancy.variantsSeen to []>>
+	<<for _i range $container.list>>
+		<<for _o to 0; _o lt $container[_i].maxCount; _o++>>
+			<<if $container[_i].creatures[_o] isnot undefined and $container[_i].creatures[_o] isnot null>>
+				<<if $container[_i].creatures[_o].creature.includes("Tentacle")>>
+					<<set $sexStats.anus.pregnancy.typesSeen.pushUnique("Tentacle")>>
+				<<elseif $container[_i].creatures[_o].creature.includes("Vine")>>
+					<<set $sexStats.anus.pregnancy.typesSeen.pushUnique("Vine")>>
+				<<elseif $container[_i].creatures[_o].creature.includes("Slime")>>
+					<<set $sexStats.anus.pregnancy.typesSeen.pushUnique("Slime")>>
+				<<else>>
+					<<set $sexStats.anus.pregnancy.typesSeen.pushUnique($container[_i].creatures[_o].creature)>>
+				<</if>>
+				<<if $container[_i].creatures[_o].creature.includes("Pale")>>
+					<<set $sexStats.anus.pregnancy.variantsSeen.pushUnique("Pale")>>
+				<<elseif $container[_i].creatures[_o].creature.includes("Metal")>>
+					<<set $sexStats.anus.pregnancy.variantsSeen.pushUnique("Metal")>>
+				<</if>>
+			<<else>>
+				<<break>>
+			<</if>>
+		<</for>>
+	<</for>>
+<</if>>
+
+<<if $containerVine or $containerMetal or $containerPale>>
+	<<unset $containerVine, $containerMetal, $containerPale>>
+<</if>>
+<</widget>>
+
+<<widget "prenancyObjectRepair">>
 	<<set _pregnancy to $sexStats.anus.pregnancy>>
 	<<set _trueCount to 0>>
 	<<for _i to 0; _i lt 4; _i++>>
@@ -75,7 +141,7 @@
 	<<if _trueCount isnot _pregnancy.count>>
 		<<set _pregnancy.count to clone(_trueCount)>>
 	<</if>>
-	<<set _list to ["home", "lake", "portable"]>>
+	<<set _list to ["home", "lake", "farm", "portable"]>>
 	<<for _i to 0; _i lt _list.length; _i++>>
 		<<set _container to $container[_list[_i]]>>
 		<<for _j to 0; _j lt _container.maxCount; _j++>>
@@ -93,4 +159,4 @@
 		<<set _pregnancy.seenDoctor to 2>>
 		<<set _pregnancy.maxCount to 4>>
 	<</if>>
-<</nobr>><</widget>>
+<</widget>>

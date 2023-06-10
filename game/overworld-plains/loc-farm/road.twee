@@ -1,4 +1,4 @@
-:: Farm Road 1 [nobr]
+:: Farm Road 1
 <<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "farmroad1">>
 
 <<if $phase is 1>>
@@ -12,8 +12,15 @@
 <</if>>
 <br><br>
 
+<<if $farm>>
+	<<if $farm.steed>>
+		Your $farm.steed steed grazes in an empty field.
+		<br><br>
+	<</if>>
+<</if>>
+
 <<set $danger to random(1, 10000)>>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	<<passoutfarmroad>>
 <<elseif $danger gte (9900 - $allure) and $eventskip is 0>>
 	<<if $rng gte 51>>
@@ -30,19 +37,39 @@
 		<<hitchhike>>
 	<</if>>
 <<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "countryside">>
+	<</if>>
 	<<if $exposed lte 0>>
-		<<ind>><<link [[Hitchhike (0:15)|Farm Hitchhike]]>><<pass 15>><</link>>
+		<<ind>><<link [[히치하이킹 (0:15)|Farm Hitchhike]]>><<pass 15>><</link>>
+		<br>
+	<<elseif $exposed lte 1>>
+		<<ind>><<link [[히치하이킹 (0:15)|Farm Hitchhike Undies]]>><<pass 15>><</link>>
+		<br>
+	<<else>>
+		<span class="blue">You're too exposed to hitchhike!</span>
 		<br>
 	<</if>>
-	<<roadicon>><<link [[Walk into the countryside (0:30)|Farm Road 2]]>><<pass 30>><<set $phase to 1>><<tiredness 3>><</link>><<gtiredness>>
+	<<roadicon>><<link [[농장지대를 향해 걸어간다 (0:30)|Farm Road 2]]>><<pass 30>><<set $phase to 1>><<tiredness 3>><</link>><<gtiredness>>
 	<br>
-	<<ind>><<link [[Enter Town (0:05)|Harvest Street]]>><<pass 5>><</link>>
+	<<if $farm>>
+		<<if $farm.steed>>
+			<<if $farm.stable gte 1>>
+				<<ind>><<link [[Ride to the farm (0:15)|Farm Ride Farm]]>><<tiredness 2>><<loadNPC 0 "saddled_steed">><<pass 15>><</link>><<gtiredness>>
+				<br>
+			<<else>>
+				<<ind>><<link [[Ride to the farm (0:30)|Farm Ride Farm]]>><<tiredness 2>><<loadNPC 0 "saddled_steed">><<pass 30>><</link>><<gtiredness>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+	<<ind>><<link [[마을로 돌아간다 (0:05)|Harvest Street]]>><<pass 5>><</link>>
 	<br>
 <</if>>
 
 <<set $eventskip to 0>>
 
-:: Farm Road 2 [nobr]
+:: Farm Road 2
 <<set $outside to 1>><<set $location to "moor">><<effects>><<set $bus to "farmroad2">>
 
 <<if $phase is 1>>
@@ -57,7 +84,7 @@
 <br><br>
 
 <<set $danger to random(1, 10000)>>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	<<passoutfarmroad>>
 <<elseif $danger gte (9900 - $allure) and $eventskip is 0>>
 	<<if $rng gte 51>>
@@ -69,20 +96,29 @@
 		<<hitchhike>>
 	<</if>>
 <<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "countryside">>
+	<</if>>
 	<<if $exposed lte 0>>
-		<<ind>><<link [[Hitchhike (0:15)|Farm Hitchhike]]>><<pass 15>><</link>>
+		<<ind>><<link [[히치하이킹 (0:15)|Farm Hitchhike]]>><<pass 15>><</link>>
+		<br>
+	<<elseif $exposed lte 1>>
+		<<ind>><<link [[히치하이킹 (0:15)|Farm Hitchhike Undies]]>><<pass 15>><</link>>
+		<br>
+	<<else>>
+		<span class="blue">You're too exposed to hitchhike!</span>
 		<br>
 	<</if>>
 	<<roadicon>><<link [[Walk deeper into the countryside (0:30)|Farm Road 3]]>><<pass 30>><<set $phase to 1>><<tiredness 3>><</link>><<gtiredness>>
 	<br>
-	<<ind>><<link [[Walk towards town (0:30)|Farm Road 1]]>><<pass 30>><<set $phase to 2>><<tiredness 3>><</link>><<gtiredness>>
+	<<ind>><<link [[마을을 향해 걷는다 (0:30)|Farm Road 1]]>><<pass 30>><<set $phase to 2>><<tiredness 3>><</link>><<gtiredness>>
 	<br>
 <</if>>
 
 <<set $eventskip to 0>>
 
-:: Farm Road 3 [nobr]
-<<set $outside to 1>><<set $location to "forest">><<effects>><<set $bus to "farmroad3">>
+:: Farm Road 3
+<<location "farmroad3">><<effects>>
 
 <<if $phase is 1>>
 	<<set $phase to 0>>
@@ -96,7 +132,7 @@
 <br><br>
 
 <<set $danger to random(1, 10000)>>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	<<passoutfarmroad>>
 <<elseif $danger gte (9900 - $allure) and $eventskip is 0>>
 	<<if $rng gte 51>>
@@ -108,19 +144,28 @@
 		<<hitchhike>>
 	<</if>>
 <<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "countryside">>
+	<</if>>
 	<<if $exposed lte 0>>
-		<<ind>><<link [[Hitchhike (0:15)|Farm Hitchhike]]>><<pass 15>><</link>>
+		<<ind>><<link [[히치하이킹 (0:15)|Farm Hitchhike]]>><<pass 15>><</link>>
+		<br>
+	<<elseif $exposed lte 1>>
+		<<ind>><<link [[히치하이킹 (0:15)|Farm Hitchhike Undies]]>><<pass 15>><</link>>
+		<br>
+	<<else>>
+		<span class="blue">You're too exposed to hitchhike!</span>
 		<br>
 	<</if>>
 	<<roadicon>><<link [[Walk deeper into the countryside (0:30)|Farm Road 4]]>><<pass 30>><<set $phase to 1>><<tiredness 3>><</link>><<gtiredness>>
 	<br>
-	<<ind>><<link [[Walk towards town (0:30)|Farm Road 2]]>><<pass 30>><<set $phase to 2>><<tiredness 3>><</link>><<gtiredness>>
+	<<ind>><<link [[마을을 향해 걷는다 (0:30)|Farm Road 2]]>><<pass 30>><<set $phase to 2>><<tiredness 3>><</link>><<gtiredness>>
 	<br>
 <</if>>
 
 <<set $eventskip to 0>>
 
-:: Farm Road 4 [nobr]
+:: Farm Road 4
 <<set $outside to 1>><<set $location to "moor">><<effects>><<set $bus to "farmroad4">>
 
 <<if $phase is 1>>
@@ -135,19 +180,19 @@
 <br><br>
 
 <<set $danger to random(1, 10000)>>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	<<passoutfarmroad>>
 <<elseif $danger gte (9900 - $allure) and $eventskip is 0>>
 	<<if $rng gte 51>>
 		A strong wind rushes over the crest, almost blowing you over.
 
-		<<if $worn.head.name isnot "naked">>
+		<<if $worn.head.name isnot "naked" and (!$worn.head.outfitSecondary or !$worn.head.outfitSecondary.includes("upper"))>>
 			It snatches the $worn.head.name from your head!<<headstrip>>
 			<br><br>
 
 			<<link [[Chase after it|Farm Road Chase]]>><</link>>
 			<br>
-			<<link [[Leave it|Farm Road Leave]]>><</link>>
+			<<link [[놔둔다|Farm Road Leave]]>><</link>>
 			<br>
 		<<else>>
 			<br><br>
@@ -158,19 +203,28 @@
 		<<hitchhike>>
 	<</if>>
 <<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "countryside">>
+	<</if>>
 	<<if $exposed lte 0>>
-		<<ind>><<link [[Hitchhike (0:15)|Farm Hitchhike]]>><<pass 15>><</link>>
+		<<ind>><<link [[히치하이킹 (0:15)|Farm Hitchhike]]>><<pass 15>><</link>>
+		<br>
+	<<elseif $exposed lte 1>>
+		<<ind>><<link [[히치하이킹 (0:15)|Farm Hitchhike Undies]]>><<pass 15>><</link>>
+		<br>
+	<<else>>
+		<span class="blue">You're too exposed to hitchhike!</span>
 		<br>
 	<</if>>
 	<<roadicon>><<link [[Walk deeper into the countryside (0:30)|Farm Road 5]]>><<pass 30>><<set $phase to 1>><<tiredness 3>><</link>><<gtiredness>>
 	<br>
-	<<ind>><<link [[Walk towards town (0:30)|Farm Road 3]]>><<pass 30>><<set $phase to 2>><<tiredness 3>><</link>><<gtiredness>>
+	<<ind>><<link [[마을을 향해 걷는다 (0:30)|Farm Road 3]]>><<pass 30>><<set $phase to 2>><<tiredness 3>><</link>><<gtiredness>>
 	<br>
 <</if>>
 
 <<set $eventskip to 0>>
 
-:: Farm Road 5 [nobr]
+:: Farm Road 5
 <<set $outside to 1>><<set $location to "moor">><<effects>><<set $bus to "farmroad5">>
 
 <<if $phase is 1>>
@@ -185,11 +239,11 @@
 <br><br>
 
 <<set $danger to random(1, 10000)>>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	<<passoutfarmroad>>
 <<elseif $danger gte (9900 - $allure) and $eventskip is 0>>
 	<<if $rng gte 51>>
-		You hear a terrible screech. <<if $syndromebird isnot 1>><<gstress>><<stress>><</if>>
+		You hear a terrible screech. <<if $syndromebird isnot 1>><<gstress>><<stress 6>><</if>>
 		<br><br>
 
 		<<destinationfarmroad>>
@@ -197,19 +251,28 @@
 		<<hitchhike>>
 	<</if>>
 <<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "countryside">>
+	<</if>>
 	<<if $exposed lte 0>>
-		<<ind>><<link [[Hitchhike (0:15)|Farm Hitchhike]]>><<pass 15>><</link>>
+		<<ind>><<link [[히치하이킹 (0:15)|Farm Hitchhike]]>><<pass 15>><</link>>
+		<br>
+	<<elseif $exposed lte 1>>
+		<<ind>><<link [[히치하이킹 (0:15)|Farm Hitchhike Undies]]>><<pass 15>><</link>>
+		<br>
+	<<else>>
+		<span class="blue">You're too exposed to hitchhike!</span>
 		<br>
 	<</if>>
 	<<roadicon>><<link [[Walk deeper into the countryside (0:30)|Farm Road 6]]>><<pass 30>><<set $phase to 1>><<tiredness 3>><</link>><<gtiredness>>
 	<br>
-	<<ind>><<link [[Walk towards town (0:30)|Farm Road 4]]>><<pass 30>><<set $phase to 2>><<tiredness 3>><</link>><<gtiredness>>
+	<<ind>><<link [[마을을 향해 걷는다 (0:30)|Farm Road 4]]>><<pass 30>><<set $phase to 2>><<tiredness 3>><</link>><<gtiredness>>
 	<br>
 <</if>>
 
 <<set $eventskip to 0>>
 
-:: Farm Road 6 [nobr]
+:: Farm Road 6
 
 <<set $outside to 1>><<set $location to "farm">><<effects>><<set $bus to "farmroad6">>
 <<if $phase is 1>>
@@ -223,46 +286,48 @@
 <</if>>
 <br><br>
 <<set $danger to random(1, 10000)>>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	<<passoutfarmroad>>
 <<elseif $danger gte (9900 - $allure) and $eventskip is 0>>
 	<<if $rng gte 51>>
+		<<beastNEWinit 1 cow>><<person1>>
 		<!-- Modified for monster people -->
-		<<if ($monsterchance gte 1 and $hallucinations gte 1) or ($monsterchance gte 1 and $monsterhallucinations is "f") or ($bestialitydisable is "t")>>
-			<<if $malechance lt random(1, 100)>>
-				A naked girl with cow ears, horns and tail stops grazing and walks up to the fence around her field. She moos at you.
-				<br><br>
-				<<set $road_pet to "cowgirl">>
-			<<else>>
-				A naked boy with bull ears, horns and tail stops grazing and walks up to the fence around his field. He moos at you.
-				<br><br>
-				<<set $road_pet to "bullboy">>
-			<</if>>
-		<<else>>
-			A cow stops grazing and walks up to the fence around its field. It moos at you.
+		<<if $monster is 1>>
+			A naked <<print ($pronoun is "f" ? "girl" : "boy")>> with cow ears, horns and tail stops grazing and walks up to the fence around her field. <<bHe>> moos at you.
 			<br><br>
-			<<set $road_pet to "cow">>
+		<<else>>
+			A <<beasttype>> stops grazing and walks up to the fence around its field. It moos at you.
+			<br><br>
 		<</if>>
 		<<link [[Pet|Farm Road Pet]]>><<stress -6>><</link>><<lstress>>
 		<br>
-		<<link [[Ignore|Farm Road 6]]>><<unset $road_pet>><</link>>
+		<<link [[무시한다|Farm Road 6]]>><<endevent>><<set $eventskip to 1>><</link>>
 		<br>
 	<<else>>
 		<<hitchhike>>
 	<</if>>
 <<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "countryside">>
+	<</if>>
 	<<if $exposed lte 0>>
-		<<ind>><<link [[Hitchhike (0:15)|Farm Hitchhike]]>><<pass 15>><</link>>
+		<<ind>><<link [[히치하이킹 (0:15)|Farm Hitchhike]]>><<pass 15>><</link>>
+		<br>
+	<<elseif $exposed lte 1>>
+		<<ind>><<link [[히치하이킹 (0:15)|Farm Hitchhike Undies]]>><<pass 15>><</link>>
+		<br>
+	<<else>>
+		<span class="blue">You're too exposed to hitchhike!</span>
 		<br>
 	<</if>>
-	<<roadicon>><<link [[Enter the farmlands (0:05)|Farmland]]>><<pass 5>><</link>>
+	<<roadicon>><<link [[농장지대에 들어간다 (0:05)|Farmland]]>><<pass 5>><</link>>
 	<br>
-	<<ind>><<link [[Walk towards town (0:30)|Farm Road 5]]>><<pass 30>><<set $phase to 2>><<tiredness 3>><</link>><<gtiredness>>
+	<<ind>><<link [[마을을 향해 걷는다 (0:30)|Farm Road 5]]>><<pass 30>><<set $phase to 2>><<tiredness 3>><</link>><<gtiredness>>
 	<br>
 <</if>>
 <<set $eventskip to 0>>
 
-:: Farm Hitchhike [nobr]
+:: Farm Hitchhike
 
 <<effects>>
 <<if $daystate is "night" and random(1, 5) lte 4>>
@@ -277,11 +342,26 @@
 	<<hitchhike>>
 <</if>>
 
-:: Farm Hitchhike Run [nobr]
+:: Farm Hitchhike Undies
+<<effects>>
+
+<<if $daystate is "night" and random(1, 5) lte 4>>
+	You stand at the side of the road and wait for a car to pass. No one drives by. Few travel the countryside at night.
+	<br><br>
+
+	<<destinationfarmroad>>
+	<br>
+<<else>>
+	You stand at the side of the road and stick out your thumb.
+	<br><br>
+	<<hitchhike_undies>>
+<</if>>
+
+:: Farm Hitchhike Run
 <<effects>>
 
 <<if $athleticsSuccess>>
-	You dodge the <<persons>> grasp and run off the road. They chase after you, <span class="green">but you manage to loose them</span> in the wild.
+	You dodge the <<persons>> grasp and run off the road. They chase after you, <span class="green">but you manage to lose them</span> in the wild.
 	<br><br>
 
 	<<pass 10>>
@@ -294,11 +374,11 @@
 	You dodge the <<persons>> grasp and run off the road. They chase after you, <span class="red">and tackle you to the dirt.</span>
 	<br><br>
 
-	<<link [[Next|Farm Hitchhike Rape]]>><<set $molestationstart to 1>><</link>>
+	<<link [[다음|Farm Hitchhike Rape]]>><<set $molestationstart to 1>><</link>>
 	<br>
 <</if>>
 
-:: Farm Hitchhike Rape [nobr]
+:: Farm Hitchhike Rape
 
 <<if $molestationstart is 1>>
 	<<set $molestationstart to 0>>
@@ -306,30 +386,24 @@
 	<<violence 1>>
 	<<neutral 1>>
 	<<molested>>
-
 	<<maninit>>
-
 <</if>>
 
 <<effects>>
-
-<<effectsman>><<man>>
-
+<<effectsman>>
+<<alarmstate>>
+<<man>>
 <<stateman>>
 <br><br>
 <<actionsman>>
 
-<<if $enemyhealth lte 0>>
-<span id="next"><<link [[Next|Farm Hitchhike Rape Finish]]>><</link>></span><<nexttext>>
-<<elseif $enemyarousal gte $enemyarousalmax>>
-<span id="next"><<link [[Next|Farm Hitchhike Rape Finish]]>><</link>></span><<nexttext>>
-<<elseif $alarm is 1 and $rescue is 1>>
-<span id="next"><<link [[Next|Farm Hitchhike Rape Finish]]>><</link>></span><<nexttext>>
+<<if _combatend>>
+	<span id="next"><<link [[다음|Farm Hitchhike Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-<span id="next"><<link [[Next|Farm Hitchhike Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Farm Hitchhike Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Farm Hitchhike Rape Finish [nobr]
+:: Farm Hitchhike Rape Finish
 <<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
@@ -340,7 +414,6 @@
 	<<clotheson>>
 	<<endcombat>>
 	<<destinationfarmroad>>
-
 <<else>>
 	You shove the <<person1>><<person>> into a ditch, and leap over <<him>>, disappearing into a thicket.
 	<br><br>
@@ -349,10 +422,9 @@
 	<<clotheson>>
 	<<endcombat>>
 	<<destinationfarmroad>>
-
 <</if>>
 
-:: Farm Hitchhike Pair [nobr]
+:: Farm Hitchhike Pair
 <<effects>>
 
 You climb over the <<person1>><<person>>, and sit above the gearbox. It's not a comfortable position, and the driver puts <<his>> hand awfully close to your <<genitals>> whenever <<he>> changes gear.
@@ -368,7 +440,7 @@ Despite the awkward position, the journey is smooth. The <<person2>><<person>> w
 <</if>>
 <br>
 
-:: Farm Hitchhike Pair Handjob [nobr]
+:: Farm Hitchhike Pair Handjob
 <<effects>>
 
 <<person1>>
@@ -403,18 +475,11 @@ Despite the awkward position, the journey is smooth. The <<person2>><<person>> w
 <</if>>
 
 <<person2>>
-<<if $pronoun is "f">>
-	<<if $NPCList[1].penis isnot "none">>
-		You rest your other hand on the <<person2>><<persons>> thigh. <<He>> lifts <<his>> skirt in anticipation, revealing <<his>> $NPCList[1].penisdesc. You don't disappoint, and take <<his>> shaft in your hand.
-	<<else>>
-		You rest your other hand on the <<person2>><<persons>> thigh. <<He>> lifts <<his>> skirt in anticipation, revealing <<his>> pussy. You don't disappoint, and press a finger against <<his>> clit.
-	<</if>>
+You rest your other hand on the <<person2>><<persons>> thigh. <<He>> <<npcUndressText $NPCList[1] "lower" "self">> in anticipation, revealing <<his>>
+<<if $NPCList[1].penis isnot "none">>
+	$NPCList[1].penisdesc. You don't disappoint, and take <<his>> shaft in your hand.
 <<else>>
-	<<if $NPCList[1].penis isnot "none">>
-		You rest your other hand on the <<person2>><<persons>> thigh. <<He>> unzips <<his>> fly in anticipation, revealing <<his>> $NPCList[1].penisdesc. You don't disappoint, and take <<his>> shaft in your hand.
-	<<else>>
-		You rest your other hand on the <<person2>><<persons>> thigh. <<He>> unzips <<his>> fly in anticipation, revealing <<his>> pussy. You don't disappoint, and press a finger against <<his>> clit.
-	<</if>>
+	pussy. You don't disappoint, and press a finger against <<his>> clit.
 <</if>>
 
 <<promiscuity3>>
@@ -429,54 +494,54 @@ The <<person1>><<persons>> control of the wheel becomes unsteady as <<he>> appro
 	<br>
 <</if>>
 
-:: Farm Hitchhike Pair Gear [nobr]
+:: Farm Hitchhike Pair Gear
 <<effects>>
 <<earnFeat "Rear Passenger">>
 You bounce your <<bottom>> against the gear stick as you fondle the pair. You bounce a little too hard, and the stick shifts downward.
 <<promiscuity4>>
 
-The engine roars and the car speeds up. Frantic, both the <<person1>><<person>> and <<person2>><<person>> grope for the stick, but their rough fondling finds your <<genitals>> instead.<<ggarousal>><<arousal 2000>>
+The engine roars and the car speeds up. Frantic, both the <<fullGroup>> grope for the stick, but their rough fondling finds your <<genitals>> instead.<<ggarousal>><<arousal 2000 "genitals">>
 <br><br>
-<<if $arousal gte 10000>>
-	<<orgasmpassage>> The pair withdraw their hands as you lean forward, gripping their thighs for support. Your movement shifts the gear stick again, and the car returns to a more reasonable pace.
+<<if $arousal gte $arousalmax>>
+	<<orgasm>> The pair withdraw their hands as you lean forward, gripping their thighs for support. Your movement shifts the gear stick again, and the car returns to a more reasonable pace.
 <<else>>
 	You withdraw from their clumsy probing, shifting the gear back into its proper place, just in time for the <<person1>><<person>> to avoid swerving into a ditch.
 <</if>>
 <br><br>
 
-<<link [[Next|Farm Hitchhike Pair Finish]]>><</link>>
+<<link [[다음|Farm Hitchhike Pair Finish]]>><</link>>
 <br>
 
-:: Farm Hitchhike Pair Finish [nobr]
+:: Farm Hitchhike Pair Finish
 <<effects>>
 
 You continue the assault, playing with the pair until they shudder into orgasm. The <<person2>><<person>> clutches <<his>> seat. The <<person1>><<person>> almost swerves off the road.
 
 <<if $NPCList[0].penis isnot "none">>
-	<<set $rightarmsemen += 1>>
+	<<bodyliquid "rightarm" "semen">>
 <</if>>
 
 <<if $NPCList[1].penis isnot "none">>
-	<<set $leftarmsemen += 1>>
+	<<bodyliquid "leftarm" "semen">>
 <</if>>
 They seem satisfied. The <<person2>><<person>> spends the rest of the journey in a quiet daze.
 <br><br>
-
+<<pass 15>>
 <<if $phase is 1>>
 	You are driven into town. You give the pair a sly wink as you bid them farewell.
 	<br><br>
 
-	<<link [[Next|Harvest Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<<link [[다음|Harvest Street]]>><<endevent>><<set $eventskip to 1>><</link>>
 	<br>
 <<else>>
 	You arrive in the farmlands. You give the pair a sly wink as you bid them farewell.
 	<br><br>
 
-	<<link [[Next|Farmland]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<<link [[다음|Farmland]]>><<endevent>><<set $eventskip to 1>><</link>>
 	<br>
 <</if>>
 
-:: Farm Hitchhike Pair Journey [nobr]
+:: Farm Hitchhike Pair Journey
 <<effects>>
 
 <<pass 15>>
@@ -484,17 +549,17 @@ They seem satisfied. The <<person2>><<person>> spends the rest of the journey in
 	You are driven into town, and bid the pair farewell.
 	<br><br>
 
-	<<link [[Next|Harvest Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<<link [[다음|Harvest Street]]>><<endevent>><<set $eventskip to 1>><</link>>
 	<br>
 <<else>>
 	You arrive in the farmlands, and bid the pair farewell.
 	<br><br>
 
-	<<link [[Next|Farmland]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<<link [[다음|Farmland]]>><<endevent>><<set $eventskip to 1>><</link>>
 	<br>
 <</if>>
 
-:: Farm Hitchhike Pair Refuse [nobr]
+:: Farm Hitchhike Pair Refuse
 <<effects>>
 
 You step away from the car. "Suit yourself," the <<person>> says. The window shuts, and they drive away.
@@ -503,7 +568,16 @@ You step away from the car. "Suit yourself," the <<person>> says. The window shu
 <<endevent>>
 <<destinationfarmroad>>
 
-:: Farm Hitchhike Exposed [nobr]
+:: Farm Hitchhike Pair Refuse 2
+<<effects>>
+
+You step away from the car. The <<person1>><<person>> laughs. "Where'd you think you're going?" <<he>> says as <<he>> and the <<person2>><<person>> climb from the car. "We don't bite. Much."
+<br><br>
+
+<<link [[다음|Farm Hitchhike Rape]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+:: Farm Hitchhike Exposed
 <<effects>>
 
 "I can take you there," the <<person>> says. "But first,
@@ -526,7 +600,7 @@ You step away from the car. "Suit yourself," the <<person>> says. The window shu
 				<<link [[Give up your clothes (0:15)|Farm Hitchhike Exposed Full]]>><</link>><<exhibitionist2>>
 				<br>
 			<</if>>
-			<<link [[Refuse|Farm Hitchhike Exposed Refuse]]>><</link>>
+			<<link [[거절한다|Farm Hitchhike Exposed Refuse]]>><</link>>
 			<br>
 		<<else>>
 			and you're not wearing underwear beneath.
@@ -536,7 +610,7 @@ You step away from the car. "Suit yourself," the <<person>> says. The window shu
 				<<link [[Give up your clothes (0:15)|Farm Hitchhike Exposed Full]]>><</link>><<exhibitionist3>>
 				<br>
 			<</if>>
-			<<link [[Refuse|Farm Hitchhike Exposed Refuse]]>><</link>>
+			<<link [[거절한다|Farm Hitchhike Exposed Refuse]]>><</link>>
 			<br>
 		<</if>>
 	<<elseif $player.gender is "f" or $player.gender_appearance is "f" or $player.gender is "h">>
@@ -548,7 +622,7 @@ You step away from the car. "Suit yourself," the <<person>> says. The window shu
 				<<link [[Give up your clothes (0:15)|Farm Hitchhike Exposed Full]]>><</link>><<exhibitionist2>>
 				<br>
 			<</if>>
-			<<link [[Refuse|Farm Hitchhike Exposed Refuse]]>><</link>>
+			<<link [[거절한다|Farm Hitchhike Exposed Refuse]]>><</link>>
 			<br>
 		<<else>>
 			and you're not wearing anything beneath.
@@ -558,7 +632,7 @@ You step away from the car. "Suit yourself," the <<person>> says. The window shu
 				<<link [[Give up your clothes (0:15)|Farm Hitchhike Exposed Full]]>><</link>><<exhibitionist3>>
 				<br>
 			<</if>>
-			<<link [[Refuse|Farm Hitchhike Exposed Refuse]]>><</link>>
+			<<link [[거절한다|Farm Hitchhike Exposed Refuse]]>><</link>>
 			<br>
 		<</if>>
 	<<else>>
@@ -570,7 +644,7 @@ You step away from the car. "Suit yourself," the <<person>> says. The window shu
 				<<link [[Give up your clothes (0:15)|Farm Hitchhike Exposed Full]]>><</link>><<exhibitionist2>>
 				<br>
 			<</if>>
-			<<link [[Refuse|Farm Hitchhike Exposed Refuse]]>><</link>>
+			<<link [[거절한다|Farm Hitchhike Exposed Refuse]]>><</link>>
 			<br>
 		<<else>>
 		and you're not wearing anything beneath.
@@ -580,7 +654,7 @@ You step away from the car. "Suit yourself," the <<person>> says. The window shu
 				<<link [[Give up your clothes (0:15)|Farm Hitchhike Exposed Full]]>><</link>><<exhibitionist3>>
 				<br>
 			<</if>>
-			<<link [[Refuse|Farm Hitchhike Exposed Refuse]]>><</link>>
+			<<link [[거절한다|Farm Hitchhike Exposed Refuse]]>><</link>>
 			<br>
 		<</if>>
 	<</if>>
@@ -595,27 +669,27 @@ You step away from the car. "Suit yourself," the <<person>> says. The window shu
 		but at least you're wearing something underneath.
 		<br><br>
 
-		<<link [[Give up your top (0:15)|Farm Hitchhike Exposed Top]]>><</link>>
+		<<link [[상의를 벗어준다 (0:15)|Farm Hitchhike Exposed Top]]>><</link>>
 		<br>
-		<<link [[Refuse|Farm Hitchhike Exposed Refuse]]>><</link>>
+		<<link [[거절한다|Farm Hitchhike Exposed Refuse]]>><</link>>
 		<br>
 	<<elseif $player.gender is "f" or $player.gender_appearance is "f" or $player.gender is "h">>
 		and you're not wearing anything underneath.
 		<br><br>
 
 		<<if $exhibitionism gte 15>>
-			<<link [[Give up your top (0:15)|Farm Hitchhike Exposed Top]]>><</link>><<exhibitionist2>>
+			<<link [[상의를 벗어준다 (0:15)|Farm Hitchhike Exposed Top]]>><</link>><<exhibitionist2>>
 			<br>
 		<</if>>
-			<<link [[Refuse|Farm Hitchhike Exposed Refuse]]>><</link>>
+			<<link [[거절한다|Farm Hitchhike Exposed Refuse]]>><</link>>
 			<br>
 	<<else>>
 		but <<he>> does say <<he>> will return it.
 		<br><br>
 
-		<<link [[Give up your top (0:15)|Farm Hitchhike Exposed Top]]>><</link>>
+		<<link [[상의를 벗어준다 (0:15)|Farm Hitchhike Exposed Top]]>><</link>>
 		<br>
-		<<link [[Refuse|Farm Hitchhike Exposed Refuse]]>><</link>>
+		<<link [[거절한다|Farm Hitchhike Exposed Refuse]]>><</link>>
 		<br>
 	<</if>>
 <<else>>
@@ -632,7 +706,7 @@ You step away from the car. "Suit yourself," the <<person>> says. The window shu
 			<<link [[Give up your bottoms (0:15)|Farm Hitchhike Exposed Bottom]]>><</link>><<exhibitionist2>>
 			<br>
 		<</if>>
-		<<link [[Refuse|Farm Hitchhike Exposed Refuse]]>><</link>>
+		<<link [[거절한다|Farm Hitchhike Exposed Refuse]]>><</link>>
 		<br>
 	<<else>>
 		and you're wearing nothing beneath.
@@ -642,12 +716,50 @@ You step away from the car. "Suit yourself," the <<person>> says. The window shu
 			<<link [[Give up your bottoms (0:15)|Farm Hitchhike Exposed Bottom]]>><</link>><<exhibitionist3>>
 			<br>
 		<</if>>
-		<<link [[Refuse|Farm Hitchhike Exposed Refuse]]>><</link>>
+		<<link [[거절한다|Farm Hitchhike Exposed Refuse]]>><</link>>
 		<br>
 	<</if>>
 <</if>>
 
-:: Farm Hitchhike Exposed Refuse [nobr]
+:: Farm Hitchhike Exposed Undies
+<<effects>>
+
+"I can take you there," the <<person>> says. "But first, give me your clothes. Don't worry, I'll let you dress before we part." <<Hes>> serious.
+<br><br>
+
+<<if $exhibitionism gte 35>>
+	<<link [[Give up your clothes (0:15)|Farm Hitchhike Exposed Undies 2]]>><</link>><<exhibitionist3>>
+	<br>
+<</if>>
+<<link [[거절한다|Farm Hitchhike Exposed Refuse]]>><</link>>
+<br>
+
+:: Farm Hitchhike Exposed Undies 2
+<<effects>>
+
+You remove your clothing, and hold it out for the <<person>>, naked.
+<<exhibitionism3>>
+<<clothesstrip>>
+
+<<if $rng gte 81>>
+	"Thanks," <<he>> says. "See ya." <<He>> drives away, still holding your clothes.
+	<br><br>
+	You run after <<him>>, but <<he>> doesn't stop. <<if $leftarm is "bound" and $rightarm is "bound">><<else>>You cover your <<undies>> with your hands.<</if>><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+	<br><br>
+	<<endevent>><<upperruined>><<lowerruined>>
+	<<destinationfarmroad>>
+	<br>
+<<else>>
+	"Thanks," <<he>> says. "See ya." <<He>> drives away, still holding your clothes.
+	<br><br>
+	You run after <<him>>, until <<he>> slows to a stop. You hear <<him>> laughing. "Get in," <<he>> says, opening the door to the seat beside <<him>>.<<gstress>><<stress 6>>
+	<br><br>
+
+	<<link [[다음|Farm Hitchhike Exposed Journey]]>><</link>>
+	<br>
+<</if>>
+
+:: Farm Hitchhike Exposed Refuse
 <<effects>>
 
 You step away from the <<person>>. "Suit yourself," <<he>> says, before driving away.
@@ -656,7 +768,7 @@ You step away from the <<person>>. "Suit yourself," <<he>> says, before driving 
 <<endevent>>
 <<destinationfarmroad>>
 
-:: Farm Hitchhike Exposed Full [nobr]
+:: Farm Hitchhike Exposed Full
 <<effects>>
 
 <<if $worn.under_upper.exposed lte 0>>
@@ -701,11 +813,11 @@ You step away from the <<person>>. "Suit yourself," <<he>> says, before driving 
 	You run after <<him>>, until <<he>> slows to a stop. You hear <<him>> laughing. "Get in," <<he>> says, opening the door to the seat beside <<him>>.<<gstress>><<stress 6>>
 	<br><br>
 
-	<<link [[Next|Farm Hitchhike Exposed Journey]]>><</link>>
+	<<link [[다음|Farm Hitchhike Exposed Journey]]>><</link>>
 	<br>
 <</if>>
 
-:: Farm Hitchhike Exposed Bottom [nobr]
+:: Farm Hitchhike Exposed Bottom
 <<effects>>
 
 <<if $worn.under_lower.exposed lte 0>>
@@ -727,18 +839,18 @@ You step away from the <<person>>. "Suit yourself," <<he>> says, before driving 
 	"Thanks," <<he>> says. "See ya." <<He>> drives away, still holding your bottoms. You run after <<him>>, until <<he>> slows to a stop. You hear <<him>> laughing. "Get in," <<he>> says, opening the door to the seat beside <<him>>.<<gstress>><<stress 6>>
 	<br><br>
 
-	<<link [[Next|Farm Hitchhike Exposed Journey]]>><</link>>
+	<<link [[다음|Farm Hitchhike Exposed Journey]]>><</link>>
 	<br>
 <</if>>
 
-:: Farm Hitchhike Exposed Top [nobr]
+:: Farm Hitchhike Exposed Top
 <<effects>>
 
 <<if $worn.under_upper.exposed lte 0>>
 	You tug off your $worn.upper.name, exposing your $worn.under_upper.name. The <<person>> ogles you, and snatches the top from your hands.
 	<br><br>
 
-<<elseif $player.gender is "f" or $player.gender_apperance is "f" or $player.gender is "h">>
+<<elseif $player.gender is "f" or $player.gender_appearance is "f" or $player.gender is "h">>
 	You tug off your $worn.upper.name, exposing your <<breasts>>. The <<person>> ogles you, and snatches the top from your hands.<<covered>><<exhibitionism2>>
 
 <<else>>
@@ -758,14 +870,14 @@ You step away from the <<person>>. "Suit yourself," <<he>> says, before driving 
 	"Thanks," <<he>> says. "See ya." <<He>> drives away, still holding your top. You run after <<him>>, until <<he>> slows to a stop. You hear <<him>> laughing. "Get in," <<he>> says, opening the door to the seat beside <<him>>.<<gstress>><<stress 6>>
 	<br><br>
 
-	<<link [[Next|Farm Hitchhike Exposed Journey]]>><</link>>
+	<<link [[다음|Farm Hitchhike Exposed Journey]]>><</link>>
 	<br>
 <</if>>
 
-:: Farm Hitchhike Exposed Journey [nobr]
+:: Farm Hitchhike Exposed Journey
 <<effects>>
 
-You sit beside the <<person>> as <<he>> drives, though <<he>> spends almost much time looking at your <<lewdness>> as at the road.
+You sit beside the <<person>> as <<he>> drives, though <<he>> spends almost as much time looking at your <<lewdness>> as at the road.
 <br><br>
 
 <<He>> comes to a stop, and turns to you.
@@ -784,7 +896,7 @@ You sit beside the <<person>> as <<he>> drives, though <<he>> spends almost much
 		<<link [[Give up your bottom|Farm Hitchhike Exposed Bottom 2]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
 		<br>
 	<</if>>
-	<<link [[Refuse|Farm Hitchhike Exposed Refuse 2]]>><</link>>
+	<<link [[거절한다|Farm Hitchhike Exposed Refuse 2]]>><</link>>
 	<br>
 
 <<elseif $worn.under_upper.exposed is 0>>
@@ -795,13 +907,13 @@ You sit beside the <<person>> as <<he>> drives, though <<he>> spends almost much
 		<<link [[Give up your underwear|Farm Hitchhike Exposed Full 2]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
 		<br>
 	<<elseif $player.gender is "f" or $player.gender_appearance is "f" or $player.gender is "h">>
-		<<link [[Give up your top|Farm Hitchhike Exposed Top 2]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+		<<link [[상의를 벗어준다|Farm Hitchhike Exposed Top 2]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
 		<br>
 	<<else>>
-		<<link [[Give up your top|Farm Hitchhike Exposed Top 2]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+		<<link [[상의를 벗어준다|Farm Hitchhike Exposed Top 2]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
 		<br>
 	<</if>>
-	<<link [[Refuse|Farm Hitchhike Exposed Refuse 2]]>><</link>>
+	<<link [[거절한다|Farm Hitchhike Exposed Refuse 2]]>><</link>>
 	<br>
 
 <<elseif $worn.under_lower.exposed is 0>>
@@ -810,7 +922,7 @@ You sit beside the <<person>> as <<he>> drives, though <<he>> spends almost much
 
 	<<link [[Give up your bottoms|Farm Hitchhike Exposed Under Bottom]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
 	<br>
-	<<link [[Refuse|Farm Hitchhike Exposed Refuse 2]]>><</link>><<physiquedifficulty 1 $physiquemax>>
+	<<link [[거절한다|Farm Hitchhike Exposed Refuse 2]]>><</link>><<physiquedifficulty 1 $physiquemax>>
 	<br>
 <<else>>
 	"It's a long journey," <<he>> says while leaning over you to open the door on your side "Step outside a moment."
@@ -821,7 +933,7 @@ You sit beside the <<person>> as <<he>> drives, though <<he>> spends almost much
 
 <</if>>
 
-:: Farm Hitchhike Exposed Full 2 [nobr]
+:: Farm Hitchhike Exposed Full 2
 <<effects>>
 
 You shuffle out of your $worn.under_upper.name, and hand it to the <<person>>.
@@ -832,10 +944,10 @@ You shuffle out of your $worn.under_upper.name, and hand it to the <<person>>.
 
 <<link [[Get out|Farm Hitchhike Exposed Step]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
 <br>
-<<link [[Refuse|Farm Hitchhike Exposed Refuse 2]]>><</link>><<physiquedifficulty 1 $physiquemax>>
+<<link [[거절한다|Farm Hitchhike Exposed Refuse 2]]>><</link>><<physiquedifficulty 1 $physiquemax>>
 <br>
 
-:: Farm Hitchhike Exposed Top 2 [nobr]
+:: Farm Hitchhike Exposed Top 2
 <<effects>>
 
 You shuffle out of your $worn.under_upper.name, and hand it to the <<person>>.
@@ -846,10 +958,10 @@ You shuffle out of your $worn.under_upper.name, and hand it to the <<person>>.
 
 <<link [[Get out|Farm Hitchhike Exposed Step]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
 <br>
-<<link [[Refuse|Farm Hitchhike Exposed Refuse 2]]>><</link>><<physiquedifficulty 1 $physiquemax>>
+<<link [[거절한다|Farm Hitchhike Exposed Refuse 2]]>><</link>><<physiquedifficulty 1 $physiquemax>>
 <br>
 
-:: Farm Hitchhike Exposed Bottom 2 [nobr]
+:: Farm Hitchhike Exposed Bottom 2
 <<effects>>
 
 You shuffle out of your $worn.lower.name, and hand it to the <<person>>.
@@ -860,10 +972,10 @@ You shuffle out of your $worn.lower.name, and hand it to the <<person>>.
 
 <<link [[Get out|Farm Hitchhike Exposed Step]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
 <br>
-<<link [[Refuse|Farm Hitchhike Exposed Refuse 2]]>><</link>><<physiquedifficulty 1 $physiquemax>>
+<<link [[거절한다|Farm Hitchhike Exposed Refuse 2]]>><</link>><<physiquedifficulty 1 $physiquemax>>
 <br>
 
-:: Farm Hitchhike Exposed Under Bottom [nobr]
+:: Farm Hitchhike Exposed Under Bottom
 <<effects>>
 
 You shuffle out of your $worn.under_lower.name, and hand it to the <<person>>.
@@ -874,10 +986,10 @@ You shuffle out of your $worn.under_lower.name, and hand it to the <<person>>.
 
 <<link [[Get out|Farm Hitchhike Exposed Step]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
 <br>
-<<link [[Refuse|Farm Hitchhike Exposed Refuse 2]]>><</link>><<physiquedifficulty 1 $physiquemax>>
+<<link [[거절한다|Farm Hitchhike Exposed Refuse 2]]>><</link>><<physiquedifficulty 1 $physiquemax>>
 <br>
 
-:: Farm Hitchhike Exposed Step [nobr]
+:: Farm Hitchhike Exposed Step
 <<effects>>
 
 You climb from the car. "Close it." You do so, leaving you outside. <<covered>>
@@ -888,7 +1000,7 @@ The <<person>> observes you for a moment. <<He>> beats the wheel with the tips o
 
 <<hitchhike_journey_nude>>
 
-:: Farm Hitchhike Exposed Refuse 2 [nobr]
+:: Farm Hitchhike Exposed Refuse 2
 <<effects>>
 
 <<if $submissive gte 1150>>
@@ -913,7 +1025,7 @@ The <<person>> observes you for a moment. <<He>> beats the wheel with the tips o
 	<<He>> wipes the blood away while you get dressed.
 	<br><br>
 
-	<<link [[Next|Farm Hitchhike Defiant]]>><</link>>
+	<<link [[다음|Farm Hitchhike Defiant]]>><</link>>
 	<br>
 <<else>>
 	<span class="red"><<He>> shoves you from the car,</span> where you roll onto the dusty road. <<He>> slams the door shut, and drives away. <<stealclothes>>
@@ -923,12 +1035,12 @@ The <<person>> observes you for a moment. <<He>> beats the wheel with the tips o
 	<<destinationfarmroad>>
 <</if>>
 
-:: Farm Hitchhike Defiant [nobr]
+:: Farm Hitchhike Defiant
 <<effects>>
 
 <<hitchhike_journey>>
 
-:: Farm Hitchhike Exposed Journey 2 [nobr]
+:: Farm Hitchhike Exposed Journey 2
 <<effects>>
 
 <<if $phase is 1>>
@@ -936,7 +1048,7 @@ The <<person>> observes you for a moment. <<He>> beats the wheel with the tips o
 	<<He>> lets you dress as you drive into town. You're still adjusting your clothes when you exist <<his>> car. <<He>> drives away.
 	<br><br>
 
-	<<link [[Next|Harvest Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<<link [[다음|Harvest Street]]>><<endevent>><<set $eventskip to 1>><</link>>
 	<br>
 
 <<else>>
@@ -944,12 +1056,12 @@ The <<person>> observes you for a moment. <<He>> beats the wheel with the tips o
 	<<He>> lets you dress as you arrive at the farmlands. You're still adjusting your clothes when you exist <<his>> car. <<He>> drives away.
 	<br><br>
 
-	<<link [[Next|Farmland]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<<link [[다음|Farmland]]>><<endevent>><<set $eventskip to 1>><</link>>
 	<br>
 
 <</if>>
 
-:: Farm Hitchhike Kneel Refuse [nobr]
+:: Farm Hitchhike Kneel Refuse
 <<effects>>
 
 "Suit yourself," the <<person>> says. <<He>> closes the door and drives away.
@@ -958,41 +1070,48 @@ The <<person>> observes you for a moment. <<He>> beats the wheel with the tips o
 <<endevent>>
 <<destinationfarmroad>>
 
-:: Farm Hitchhike Kneel [nobr]
+:: Farm Hitchhike Kneel Refuse 2
+<<effects>>
+
+The <<person>> glances over <<his>> shoulder, then steps from the car. "Wandering around dressed like that," <<he>> says. <<He>> grasps your arm and tries to wrestle you to the ground.
+<br><br>
+
+<<link [[다음|Farm Hitchhike Rape]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+:: Farm Hitchhike Kneel
 <<effects>>
 
 You kneel in front of the <<person>>. <<He>> grasps your hair with one hand while <<if $pronoun is "m">>unzipping <<his>> fly<<else>>lifting <<his>> skirt<</if>> with the other. <<He>> pushes your face against <<his>> <<if $NPCList[0].penis isnot "none">>erect <<print $NPCList[0].penisdesc>><<else>>pussy<</if>>.<<promiscuity4>>
 
-<<link [[Next|Farm Hitchhike Oral]]>><<set $sexstart to 1>><</link>>
+<<link [[다음|Farm Hitchhike Oral]]>><<set $sexstart to 1>><</link>>
 <br>
 
-:: Farm Hitchhike Oral [nobr]
+:: Farm Hitchhike Oral
 
 <<if $sexstart is 1>>
 	<<set $sexstart to 0>>
 	<<consensual>>
 	<<set $consensual to 1>>
 	<<neutral 1>>
-
 	<<maninit>>
 	<<set $enemytrust += 100>><<npcoral>>
 <</if>>
+
 <<effects>>
-<<effectsman>><<man>>
+<<effectsman>>
+<<man>>
 <<stateman>>
 <br><br>
 <<actionsman>>
-<<if $finish is 1>>
-	<span id="next"><<link [[Next|Farm Hitchhike Oral Finish]]>><</link>></span><<nexttext>>
-<<elseif $enemyhealth lte 0>>
-	<span id="next"><<link [[Next|Farm Hitchhike Oral Finish]]>><</link>></span><<nexttext>>
-<<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[Next|Farm Hitchhike Oral Finish]]>><</link>></span><<nexttext>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Farm Hitchhike Oral Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Farm Hitchhike Oral]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Farm Hitchhike Oral]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Farm Hitchhike Oral Finish [nobr]
+:: Farm Hitchhike Oral Finish
 
 <<set $outside to 0>><<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
@@ -1028,12 +1147,12 @@ You kneel in front of the <<person>>. <<He>> grasps your hair with one hand whil
 	<<destinationfarmroad>>
 <</if>>
 
-:: Farm Hitchhike Oral End [nobr]
+:: Farm Hitchhike Oral End
 <<effects>>
 
 <<hitchhike_journey>>
 
-:: Farm Hitchhike Ask [nobr]
+:: Farm Hitchhike Ask
 <<effects>>
 
 <<if $rng gte 51>>
@@ -1044,7 +1163,7 @@ You kneel in front of the <<person>>. <<He>> grasps your hair with one hand whil
 	<</if>>
 	<br><br>
 	<<He>> leans back and opens a door.
-	<<set $rng to random(1, 100)>>
+	<<rng>>
 	<<if $rng gte 81>>
 		The backseat is covered in empty pizza boxes. "Just shove them to the floor," <<he>> adds, sheepish.
 	<<elseif $rng gte 61>>
@@ -1060,21 +1179,21 @@ You kneel in front of the <<person>>. <<He>> grasps your hair with one hand whil
 
 	<<link [[Get in (0:15)|Farm Hitchhike Journey]]>><</link>>
 	<br>
-	<<link [[Refuse|Farm Hitchhike Refuse]]>><</link>>
+	<<link [[거절한다|Farm Hitchhike Refuse]]>><</link>>
 	<br>
 <<else>>
 	"I'm going in the opposite direction," the <<person>> says. "Sorry." <<He>> closes <<his>> window.
 	<br><br>
 
-	<<link [[Step away|Farm Hitchhike Step]]>><</link>>
+	<<link [[물러난다|Farm Hitchhike Step]]>><</link>>
 	<br>
 	<<if $submissive gte 1500>>
-		<<link [[Beg (0:15)|Farm Hitchhike Beg]]>><</link>><<submissivetext>>
+		<<link [[Beg (0:15)|Farm Hitchhike Beg]]>><<sub 1>><</link>><<submissivetext>>
 		<br>
 	<</if>>
 <</if>>
 
-:: Farm Hitchhike Beg [nobr]
+:: Farm Hitchhike Beg
 <<effects>>
 
 You rush forward <<if $pain gte 40>>, tears streaming down your cheeks,<<else>> and bang on the window<</if>>. "Please don't leave me out here!" you say. "There are horrible people out, and I'm all alone, and, and..."
@@ -1091,17 +1210,17 @@ You thank the <<person>> and climb in the back.
 	You stare out the window as the <<person>> drives, watching the hills roll by. <<He>> takes a peculiar route down a side road, but emerges on Harvest Street all the same. You climb from the car, and <<he>> drives away.
 	<br><br>
 
-	<<link [[Next|Harvest Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<<link [[다음|Harvest Street]]>><<endevent>><<set $eventskip to 1>><</link>>
 	<br>
 <<else>>
 	You stare out the window as the <<person>> drives, watching the hills roll by. <<He>> takes a peculiar route down a side road, but emerges in the farmlands all the same. You climb from the car, and <<he>> drives away.
 	<br><br>
 
-	<<link [[Next|Farmland]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<<link [[다음|Farmland]]>><<endevent>><<set $eventskip to 1>><</link>>
 	<br>
 <</if>>
 
-:: Farm Hitchhike Step [nobr]
+:: Farm Hitchhike Step
 <<effects>>
 
 You step away from the car, and the <<person>> drives away.
@@ -1110,7 +1229,7 @@ You step away from the car, and the <<person>> drives away.
 <<endevent>>
 <<destinationfarmroad>>
 
-:: Farm Hitchhike Refuse [nobr]
+:: Farm Hitchhike Refuse
 <<effects>>
 
 You step away from the car. The <<person>> shrugs and drives away.
@@ -1119,7 +1238,7 @@ You step away from the car. The <<person>> shrugs and drives away.
 <<endevent>>
 <<destinationfarmroad>>
 
-:: Farm Hitchhike Journey [nobr]
+:: Farm Hitchhike Journey
 <<effects>>
 
 You climb in. The <<person>> pulls away as soon as the door closes.
@@ -1127,7 +1246,7 @@ You climb in. The <<person>> pulls away as soon as the door closes.
 
 <<hitchhike_journey>>
 
-:: Farm Road Passout [nobr]
+:: Farm Road Passout
 <<effects>>
 
 <<generate1>><<generate2>><<generate3>><<generate4>><<person1>>
@@ -1138,20 +1257,20 @@ You're jolted awake by a rumble. You're in a back of a van. You struggle to your
 You see the interior of a barn. The <<person>> isn't alone. Three others stand with <<him>>, examining you.
 <br><br>
 
-<<person2>>"You weren't lying," a <<person>> says. "Good stock. Would make a fine breeder."
+<<person2>>"You weren't lying," a <<person>> says. "Good stock.<<if $speechpregnancydisable is "f">> Would make a fine breeder.<</if>>"
 <br><br>
 
-<<person3>>"Breeder?" a <<person>> interjects. "I'm more interested in the produce. Gonna make a killing." <<He>> advances on you, a metal chain and collar in <<his>> hand.
+<<person3>><<if $speechpregnancydisable is "f">>"Breeder?"<<else>>"Personally,"<</if>> a <<person>> interjects. "I'm more interested in the produce. Gonna make a killing." <<He>> advances on you, a metal chain and collar in <<his>> hand.
 <br><br>
 
-<<link [[Protest|Street Van Protest]]>><<def 1>><<stress 6>><<trauma -6>><</link>><<gstress>><<ltrauma>>
+<<link [[항의한다|Street Van Protest]]>><<def 1>><<stress 6>><<trauma -6>><</link>><<gstress>><<ltrauma>>
 <br>
-<<link [[Fight|Street Van Fight]]>><<def 1>><<set $fightstart to 1>><</link>>
+<<link [[싸운다|Street Van Fight]]>><<def 1>><<set $fightstart to 1>><</link>>
 <br>
-<<link [[Submit|Street Van Submit]]>><<sub 1>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+<<link [[굴복한다|Street Van Submit]]>><<sub 1>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
 <br>
 
-:: Farm Road Jump [nobr]
+:: Farm Road Jump
 <<effects>>
 
 You leap aside, avoiding the speeding vehicle.
@@ -1167,7 +1286,7 @@ You leap aside, avoiding the speeding vehicle.
 
 <<destinationfarmroad>>
 
-:: Farm Road Stand [nobr]
+:: Farm Road Stand
 <<effects>>
 
 You turn to face the oncoming vehicle. It flashes its lights. You hold up your middle finger, and force it to drive around you.
@@ -1175,7 +1294,7 @@ You turn to face the oncoming vehicle. It flashes its lights. You hold up your m
 
 <<destinationfarmroad>>
 
-:: Farm Road Chase [nobr]
+:: Farm Road Chase
 <<effects>>
 
 You chase after your headwear, off the road and down the ridge of a hill. It settles on a tree branch.
@@ -1200,7 +1319,7 @@ You chase after your headwear, off the road and down the ridge of a hill. It set
 	<<destinationfarmroad>>
 <</if>>
 
-:: Farm Road Leave [nobr]
+:: Farm Road Leave
 <<effects>>
 
 You decide not to run off the road in pursuit, and continue without your headwear.
@@ -1209,18 +1328,799 @@ You decide not to run off the road in pursuit, and continue without your headwea
 
 <<destinationfarmroad>>
 
-:: Farm Road Pet [nobr]
+:: Farm Road Pet
 <<effects>>
 
-<<if $road_pet is "cowgirl">>
-	You pet the cowgirl's head. She moos again and licks your fingers.
-<<elseif $road_pet is "bullboy">>
-	You pet the bullboy's head. He moos again and licks your fingers.
-<<else>>
-	You pet the cow's head. It moos again and licks your fingers.
-<</if>>
+You pet the <<beasttypes>> head. <<bHe>> moos again and licks your fingers.
 
 
 <br><br>
-<<unset $road_pet>>
+<<endevent>>
 <<destinationfarmroad>>
+
+
+:: Farm Saddle
+<<effects>>
+
+<<loadNPC 0 "saddled_steed">>
+
+You saddle your $farm.steed <<beasttype>>, and climb atop.
+<br><br>
+
+<<if $farm.stable gte 1>>
+	<<link [[Ride to town (0:15)|Farm Ride Town]]>><<tiredness 2>><<pass 15>><</link>><<gtiredness>>
+	<br>
+<<else>>
+	<<link [[Ride to town (0:30)|Farm Ride Town]]>><<tiredness 3>><<pass 30>><</link>><<gtiredness>>
+	<br>
+<</if>>
+<<link [[Saddle a different horse (0:10)|Farm Steed]]>><<pass 10>><<endevent>><</link>>
+<br>
+<<link [[Dismount|Farm Work]]>><<endevent>><</link>>
+<br>
+
+:: Farm Saddle New
+<<effects>>
+
+<<if $farm.steed>>
+	<<clearNPC "saddled_steed">>
+	<<set $farm.steed to 0>>
+<</if>>
+
+You saddle the <<beasttype>>.
+<<if $farm.beasts.horses gte 20>>
+	<<if $monster is 1>>
+		"I'm grateful for your trust," <<bhe>> says, bowing <<bhis>> head. "It'll be nice to stretch my legs."
+	<<else>>
+		<<bHe>> licks your shoulder.
+	<</if>>
+<<elseif $farm.beasts.horses gte 5>>
+	<<if $monster is 1>>
+		"As you wish," <<bhe>> says. "Don't expect me to enter that hive the humans live in. The smell is unbearable."
+	<<else>>
+		<<bHe>> remains passive as you work.
+	<</if>>
+<<else>>
+	<<if $monster is 1>>
+		"Careful <<girl>>," <<bhe>> says. "Or I'll be riding you."
+	<<else>>
+		<<bHe>> bites at you, but allows you to finish.
+	<</if>>
+<</if>>
+
+<br><br>
+
+<<if $thighskill gte 200>>
+	<<saveNPC 0 "saddled_steed">>
+	<<set $farm.steed to clone($NPCList[0].hair)>>
+	You climb upon <<bhis>> back, and spur <<bhim>> to a trot. The force surprises you, <span class="green">but you manage to hold on.</span> The wind blows your hair as you circle the yard.
+	<br><br>
+
+	<<if $farm.stable gte 1>>
+		<<link [[Ride to town (0:15)|Farm Ride Town]]>><<tiredness 2>><<pass 15>><</link>><<gtiredness>>
+		<br>
+	<<else>>
+		<<link [[Ride to town (0:30)|Farm Ride Town]]>><<tiredness 3>><<pass 30>><</link>><<gtiredness>>
+		<br>
+	<</if>>
+	<<link [[Dismount|Farm Work]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	You climb upon <<bhis>> back, and spur <<bhim>> to a trot. <span class="red">The force jolts you from your seat.</span>
+
+	<<if $monster gte 1>>
+		The centaur laughs.
+	<<else>>
+		The horse whinnies.
+	<</if>>
+	<<gpain>><<pain 4>>
+	<br><br>
+	<i><span class="purple">D</span> Thigh Skill or higher required. There's a riding school nearby.</i>
+	<br><br>
+
+	<<link [[다음|Farm Work]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Farm Steed
+<<effects>>
+
+<<if $farm_work.horses_out is 1>>
+	You enter the field to observe the <<farm_text_many horse>>.
+	<br><br>
+<<else>>
+	You approach the stable to observe the <<farm_text_many horse>>.
+<</if>>
+
+ Perhaps you could ride one to town.
+ <br><br>
+
+<<beastNEWinit 1 horse>>
+ Your eyes fall on one <<beasttype>> in particular. <<bHe>> looks back, and shakes <<bhis>> <<print $NPCList[0].hair>> mane.
+<br><br>
+
+<<link [[Choose another (0:10)|Farm Steed Choose]]>><<endevent>><<pass 10>><</link>>
+<br>
+<<link [[Saddle (0:10)|Farm Saddle New]]>><<pass 10>><</link>>
+<br>
+<<link [[떠난다|Farm Work]]>><<endevent>><</link>>
+<br>
+
+:: Farm Steed Choose
+<<effects>>
+
+<<beastNEWinit 1 horse>>
+You examine another steed, a <<beasttype>> with a <<print $NPCList[0].hair>> mane.
+<br><br>
+
+<<link [[Choose another (0:10)|Farm Steed Choose]]>><<endevent>><<pass 10>><</link>>
+<br>
+<<link [[Saddle (0:10)|Farm Saddle New]]>><<pass 10>><</link>>
+<br>
+<<link [[떠난다|Farm Work]]>><<endevent>><</link>>
+<br>
+
+
+:: Farm Ride Town
+<<set $location to "moor">><<set $bus to "town">><<effects>>
+
+You spur your steed to a trot, and ride for town with the wind in your hair.<<physique 2>>
+<br><br>
+
+<<farm_ride_events>>
+
+
+:: Farm Ride Farm
+<<set $location to "moor">><<set $bus to "farm">><<effects>>
+
+You spur your steed to a trot, and ride into the countryside.
+<br><br>
+
+<<farm_ride_events>>
+
+
+:: Farm Ride Soothe
+<<effects>>
+
+
+
+<<if $tendingSuccess>>
+	You pat the <<beasttype>>'s head. "It's okay," you say. "It's just a car."
+
+	<<if $monster is 1>>
+		<br><br>
+		<span class="green">"Sorry,"</span> <<bhe>> replies. "I'm acting like a foal. Thank you."
+	<<else>>
+		<span class="green"><<bHe>> seems less agitated.</span>
+	<</if>>
+	<<ggrespect>><<farm_horses 3>>
+	<br><br>
+
+<<else>>
+	You pat the <<beasttype>>'s head, hoping to calm it, <span class="red">but your touch startles it further.</span><<llrespect>><<farm_horses -3>>
+
+	<<if $monster is 1>>
+		"J-just leave me alone," <<bhe>> says.
+	<</if>>
+	<br><br>
+
+<</if>>
+
+<<destination_farm_ride>>
+
+:: Farm Ride Charge
+<<effects>>
+
+<<if $thighskill gte random(1, 1200)>>
+	You direct the horse away from the ditch with your knees, <span class="green">and your surety calms <<bhim>>.</span>
+	<<if $monster is 1>>
+		"Sorry," <<bhe>> says. "I'm acting like a foal. Thank you."
+	<</if>>
+	<<ggrespect>><<farm_horses 3>>
+	<br><br>
+<<else>>
+	You pull on the bridle, trying to direct it away from the ditch. <span class="red"><<bHe>> doesn't appreciate your interference.</span>
+	<<if $monster is 1>>
+		"Don't test my patience," <<bhe>> says. "Don't think I won't throw you off."
+		<br><br>
+	<<else>>
+		<<bHe>> rears on <<his>> hind legs, threatening to throw you off, before continuing the journey.<<llrespect>><<farm_horses -3>>
+		<br><br>
+	<</if>>
+<</if>>
+
+<<destination_farm_ride>>
+
+
+:: Farm Ride Ignore
+<<effects>>
+
+You ignore your <<beasttype>>'s agitation. <<bHe>> calms down, but remains on edge.
+<br><br>
+<<destination_farm_ride>>
+
+
+:: Farm Ride Break
+<<effects>>
+
+You let the <<beasttype>> munch on some grass at the side of the road until <<bhe>> is ready to continue.
+<br><br>
+
+<<destination_farm_ride>>
+
+:: Farm Ride Push
+<<effects>>
+
+
+<<if $thighskill gte random(1, 1000)>>
+	You spur your <<beasttype>> into keeping up the pace. <<bHe>> manages it, <span class="green">finding a second wind.</span>
+	<br><br>
+<<else>>
+	You spur your <<beasttype>> into keeping up the pace. <<bHe>> manages it,
+	<<if $monster is 1>>
+		<span class="green">but voices a complaint.</span>
+	<<else>>
+		<span class="red">but neighs a complaint.</span>
+	<</if>><<llrespect>><<farm_horses -3>>
+	<br><br>
+<</if>>
+
+<<destination_farm_ride>>
+
+:: Farm Ride Hand
+<<effects>>
+
+You dismount the <<beasttype>>, and kneel beneath <<bhim>>.
+
+<<if $NPCList[0].penis isnot "none">>
+	<<bHis>> <<print $NPCList[0].penisdesc>> is already erect and waiting. You cup one of <<bhis>> testes, then run your fingers along the shaft before grasping it.
+	<<deviancy3>>
+	<<if $monster is 1>>
+		"That's it," the <<beasttype>> sighs. "It won't take long. I've been pent up all day."
+	<<else>>
+		The <<beasttype>> neighs <<bhis>> approval.
+	<</if>>
+<<else>>
+	<<bHis>> pussy glistens in anticipation. You push a finger between the folds, then another.
+	<<if $monster is 1>>
+		"That's it," the <<beasttype>> sighs. "It won't take long. I've been pent up all day."
+	<<else>>
+		The <<beasttype>> neighs <<bhis>> approval.
+	<</if>>
+<</if>>
+<br><br>
+
+<<if random(1, 3) is 3>>
+	The <<beasttype>>'s body spasms. Not long now. <span class="pink">You hear an engine.</span> A car approaches, and will arrive any moment.
+	<br><br>
+	<<if $monster is 1>>
+		"D-don't stop," the <<beasttype>> says. "I'm almost there."
+		<br><br>
+	<</if>>
+	<<link [[Keep going|Farm Ride Hand 2]]>><<farm_horses 1>><</link>><<skill_difficulty "$handskill" "Hand Skill" 1 1000>><<grespect>>
+	<br>
+	<<link [[그만둔다|Farm Ride Hand Stop]]>><<farm_horses -3>><</link>><<llrespect>>
+	<br>
+<<else>>
+	The <<beasttype>>'s body spasms, and it reaches <<bhis>> peak.
+	<<if $NPCList[0].penis isnot "none">>
+		Voluminous ejaculate shoots from <<bhis>> tip, splattering over the floor, then pooling beneath it. Job done, you climb back in the saddle.
+		<br><br>
+	<<else>>
+		Your fingers slick, you climb back in the saddle, and spur <<bhim>> to a trot.
+		<br><br>
+	<</if>>
+
+	<<destination_farm_ride>>
+<</if>>
+
+
+
+:: Farm Ride Hand 2
+<<effects>>
+
+Your fingers work as fast as they can,
+<<if $handskill gte random(1, 1000)>>
+	<<if $NPCList[0].penis isnot "none">>
+		<span class="green">and you manage to milk the <<print $NPCList[0].penisdesc>> of its cum</span> before the car arrives.
+	<<else>>
+		<span class="green">and you manage to have the <<beasttype>> shuddering in orgasm</span> before the car arrives.
+	<</if>>
+	You climb back in the saddle, and spur <<bhim>> to a trot.
+	<br><br>
+<<else>>
+	<<if $NPCList[0].penis isnot "none">>
+		<span class="red">and only manage to milk the <<print $NPCList[0].penisdesc>> of its cum just as the car arrives.</span>
+	<<else>>
+		<span class="red">and only manage to have the <<beasttype>> shuddering in orgasm</span> just as the car arrives.
+	<</if>>
+	You hope they didn't see, but the mocking honk suggests they did.<<ggtrauma>><<gstress>><<famebestiality 3>><<trauma 12>><<stress 6>>
+	<br><br>
+<</if>>
+
+<<destination_farm_ride>>
+
+:: Farm Ride Hand Stop
+<<effects>>
+
+You stand up.
+
+<<if $monster is 1>>
+	"Damn you," the <<beasttype>> says as it humps the air.
+<<else>>
+	The <<beasttype>> neighs <<bhis>> frustration.
+<</if>>
+<<if $NPCList[0].penis isnot "none">>
+	A little semen spurts from <<bhis>> <<print $NPCList[0].penisdesc>>, but not much.
+<<else>>
+	<<bHis>> body shakes in what you think is an orgasm, but not a strong one.
+<</if>>
+<br><br>
+
+<<if $submissive gte 1150>>
+	"I-I'm sorry," you say. "But I don't want people to see you so undignified."
+<<elseif $submissive lte 850>>
+	"Don't be so undignified," you say.
+<<else>>
+	"Do you want people to see you like this?"
+<</if>>
+<br><br>
+
+<<bHe>> calms down before the car appears, but shakes <<bhis>> mane. You climb back into the saddle, and spur <<bhim>> to a trot.
+<br><br>
+
+<<destination_farm_ride>>
+
+
+
+:: Farm Ride Force
+<<effects>>
+
+<<if $thighskill gte random(1, 1400)>>
+	You spur and berate the <<beasttype>>.
+	<<if $monster is 1>>
+		<span class="green">"Fine,"</span> <<bhe>> says. "Can't blame me for trying."
+	<<else>>
+		With a neigh, <span class="green"><<bhe>> trots forward once more.</span>
+	<</if>>
+<<else>>
+	You spur and berate the <<beasttype>>.
+	<<if $monster is 1>>
+		<span class="red"><<bHe>> throws an angry glance over your shoulder.</span> "I'm moving," <<bhe>> says. "But you'll pay for this later."
+	<<else>>
+		<span class="red"><<bHe>> rears on <<bhis>> hind legs,</span> almost throwing you off, then breaks into a trot.
+	<</if>>
+	<<llrespect>><<farm_horses -3>>
+<</if>>
+<br><br>
+
+<<destination_farm_ride>>
+
+
+:: Farm Ride Foot
+<<effects>>
+
+You dismount. If the <<beasttype>> is so stubborn, then so be it. <<bHe>> huffs as you walk away.
+<br><br>
+
+
+<<if $bus is "east">>
+	<<link [[다음|Farm Road 4]]>><<endevent>><</link>>
+<<else>>
+	<<link [[다음|Farm Road 3]]>><<endevent>><</link>>
+<</if>>
+
+
+:: Farm Ride Rape
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<set $NPCList[0].stance to "top">>
+	<<if $NPCList[0].penis isnot "none">>
+		<<set $position to "doggy">>
+	<<else>>
+		<<set $position to "missionary">>
+	<</if>>
+	<<farm_trust horses>>
+	<<prop haybale>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br><br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Farm Ride Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Farm Ride Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Farm Ride Rape Finish
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+
+	<<beastejaculation>>
+
+	<<if $monster is 1>>
+		"Good fucktoy," the <<bhe>> says.
+	<</if>>
+
+	<<tearful>> you climb back into the saddle.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destination_farm_ride>>
+
+<<else>>
+
+	You smack the <<beasttype>> on the nose, and <<bhe>> turns and flees.
+	<br><br>
+
+	<<tearful>> you return to the road.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<if $bus is "east">>
+		<<link [[다음|Farm Road 4]]>><</link>>
+		<br>
+	<<else>>
+		<<link [[다음|Farm Road 3]]>><</link>>
+		<br>
+	<</if>>
+
+
+<</if>>
+
+
+:: Farm Ride Faster
+<<effects>>
+
+You spur your <<beasttype>> to a gallop. Hooves thunder behind as Remy's goons try to keep up.
+<<if $thighskill gte random(1, 1000)>>
+	<span class="green">They are unable to.</span> You leave them far behind.<<lstress>><<stress -6>>
+	<br><br>
+
+	<<destination_farm_ride>>
+<<else>>
+	<span class="red">Your steed's strength waves,</span> and the riders catch up with you. One rides ahead, and they box you against the hedge forcing you to stop. They wheel around to face you.<<gstress>><<stress 6>>
+	<br><br>
+
+	"Remy sent us," the <<person2>><<person>> on the left says. "To make sure you were okay. Dangerous for a <<girl>> to be riding alone."<<gstress>><<stress 6>>
+	<br><br>
+
+	"We'll escort you the rest of the way," the <<person3>><<person>> on the right adds. "For a fee. <<printmoney 5000>> should do."
+	<br><br>
+
+	<<if $money gte 5000>>
+		<<link [[Pay (£50)|Farm Ride Pay]]>><<set $money -= 5000>><</link>>
+		<br>
+	<</if>>
+	<<link [[Refuse politely|Farm Ride Polite]]>><<farm_aggro 1>><</link>><<gaggro>>
+	<br>
+	<<link [[Refuse angrily|Farm Ride Angry]]>><<farm_aggro 1>><</link>><<gaggro>>
+	<br>
+<</if>>
+
+
+:: Farm Ride Confront
+<<effects>>
+
+You rein in the <<beasttype>>, and turn to face the approaching riders. They pull up some distance away.
+<br><br>
+
+"Remy sent us," the <<person2>><<person>> on the left says. "To make sure you were okay. Dangerous for a <<girl>> to be riding alone."<<gstress>><<stress 6>>
+<br><br>
+
+"We'll escort you the rest of the way," the <<person3>><<person>> on the right adds. "For a fee. <<printmoney 5000>> should do."
+<br><br>
+
+<<if $money gte 5000>>
+	<<link [[Pay (£50)|Farm Ride Pay]]>><<set $money -= 5000>><</link>>
+	<br>
+<</if>>
+<<link [[Refuse politely|Farm Ride Polite]]>><<farm_aggro 1>><</link>><<gaggro>>
+<br>
+<<link [[Refuse angrily|Farm Ride Angry]]>><<farm_aggro 1>><</link>><<gaggro>>
+<br>
+
+
+
+:: Farm Ride Pay
+<<effects>>
+
+You pay the pair. "Wise," the <<person2>><<person>> says. "Go on then. Lead the way."
+<br><br>
+
+They follow behind for the rest of the journey.
+<<person1>>
+
+<<destination_farm_ride>>
+
+:: Farm Ride Polite
+<<effects>>
+
+<<if $submissive gte 1150>>
+	"S-sorry," you say. "But I'll be okay on my own."
+<<elseif $submissive lte 850>>
+	"Thanks for the offer," you say. "But I can handle myself."
+<<else>>
+	"Thanks," you say. "But I'll be alright alone.
+<</if>>
+<br><br>
+
+"Suit yourself," the <<person2>><<person>> scoffs. "We'll be near." They spur to a trot, and ride past you.
+<br><br>
+
+<<person1>>
+<<destination_farm_ride>>
+
+:: Farm Ride Angry
+<<effects>>
+
+<<if $submissive gte 1150>>
+	"I-I'm not paying you," you say. "Go away."
+<<elseif $submissive lte 850>>
+	"Fuck you," you say. "And fuck Remy."
+<<else>>
+	"Tell Remy I won't be extorted," you say. "Go."
+<</if>>
+<br><br>
+
+The <<person2>><<person>> laughs. "Suit yourself <<girl>>. We'll be near." They spur to a trot, and ride past you.
+<br><br>
+
+<<person1>>
+<<destination_farm_ride>>
+
+
+:: Farm Ride Aggro Faster
+<<effects>>
+
+You spur your <<beasttype>> to a gallop. Hooves thunder behind as Remy's goons try to keep up.
+<<if $thighskill gte random(400, 1400)>>
+	<span class="green">They are unable to.</span> You leave them far behind.<<lstress>><<stress -6>>
+	<br><br>
+
+	<<destination_farm_ride>>
+<<else>>
+	<span class="red">Your steed's strength waves,</span> and the riders catch up with you. One of them, a <<person2>><<person>>, <span class="red">hurls a lasso</span> at your <<beasttype>>'s neck. <<He>> misses, but reels the rope back in.<<gstress>><<stress 6>>
+	<br><br>
+
+	<<His>> colleague, a <<person3>><<person>>, rides alongside you, <span class="red">and tries to shove you from the saddle.</span>
+	<br><br>
+
+	<span class="red">Your steed is on the verge of panic.</span> It veers back and forth across the road. It's hard to stay in the saddle.
+	<br><br>
+
+	<<link [[Punch the closest rider|Farm Ride Punch]]>><</link>><<physiquedifficulty 1 16000>>
+	<br>
+	<<link [[Grab the lasso|Farm Ride Grab]]>><</link>><<skill_difficulty "$handskill" "Hand Skill" 1 1000>>
+	<br>
+	<<link [[Reassure your steed|Farm Ride Reassure]]>><</link>><<tendingdifficulty 1 1000>>
+	<br>
+<</if>>
+
+:: Farm Ride Aggro Confront
+<<effects>>
+
+You rein in the <<beasttype>>, and turn to face the approaching riders. They don't slow. One of them, a <<person2>><<person>>, <span class="red">hurls a lasso</span> at your <<beasttype>>'s neck. <<He>> misses, but reels the rope back in.<<gstress>><<stress 6>>
+<br><br>
+
+<<His>> colleague, a <<person3>><<person>>, rides alongside you, <span class="red">and tries to shove you from the saddle.</span>
+<br><br>
+
+<span class="red">Your steed is on the verge of panic.</span> It wheels around and gallops of its own accord, veering back and forth across the road. It's hard to stay in the saddle.
+<br><br>
+
+<<link [[Punch the closest rider|Farm Ride Punch]]>><</link>><<physiquedifficulty 1 16000>>
+<br>
+<<link [[Grab the lasso|Farm Ride Grab]]>><</link>><<skill_difficulty "$handskill" "Hand Skill" 1 1000>>
+<br>
+<<link [[Reassure your steed|Farm Ride Reassure]]>><</link>><<tendingdifficulty 1 1000>>
+<br>
+
+:: Farm Ride Punch
+<<effects>>
+
+<<if $physiqueSuccess>>
+	You fist connects with the <<person3>><<person>>'s face, <span class="green">knocking <<him>> from the saddle.</span> <<His>> colleague laughs, and readies the lasso for another attempt.
+	<br><br>
+
+	<<link [[Grab the lasso|Farm Ride Grab 2]]>><</link>><<skill_difficulty "$handskill" "Hand Skill" 1 1000>>
+	<br>
+	<<link [[Reassure your steed|Farm Ride Reassure 2]]>><</link>><<tendingdifficulty 1 1000>>
+	<br>
+<<else>>
+	<span class="red">The <<person>> catches your fist,</span> and pulls you from the saddle. You tumble to the ground.<<ggpain>><<pain 8>>
+	<br><br>
+
+	당신의 말은 혼자서 질주한다. 두 사람은 당신을 흙 속에 쓰러진 채 두고, 그 뒤를 쫓는다.<<llrespect>><<farm_horses -3>>
+	<br><br>
+
+	<<tearful>> 당신은 일어선다.
+	<br><br>
+
+
+	<<if $bus is "east">>
+		<<link [[다음|Farm Road 4]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[다음|Farm Road 3]]>><<endevent>><</link>>
+	<</if>>
+<</if>>
+
+
+:: Farm Ride Grab
+<<effects>>
+
+<<if $handskill gte random(1, 1000)>>
+	The <<person2>><<person>> hurls the lasso at your <<beasttype>> once more, <span class="green">but you catch it,</span> and pull the <<person2>><<person>> from <<his>> seat. <<He>> tumbles to the dirt.
+	<br><br>
+
+	<<His>> colleague laughs, and shoves you again.
+	<br><br>
+
+	<<link [[Punch|Farm Ride Punch 2]]>><</link>><<physiquedifficulty 1 16000>>
+	<br>
+	<<link [[Reassure your steed|Farm Ride Reassure 2]]>><</link>><<tendingdifficulty 1 1000>>
+	<br>
+<<else>>
+	The <<person2>><<person>> hurls the lasso at your <<beasttype>> once more. You try to catch it, but it loops around your wrists. <span class="red">The rider pulls you from your saddle.</span><<ggpain>><<gstress>><<pain 8>><<stress 6>>
+	<br><br>
+	당신의 말은 혼자서 질주한다. 두 사람은 당신을 흙 속에 쓰러진 채 두고, 그 뒤를 쫓는다.<<llrespect>><<farm_horses -3>>
+	<br><br>
+
+	<<tearful>> 당신은 일어선다.
+	<br><br>
+
+
+	<<if $bus is "east">>
+		<<link [[다음|Farm Road 4]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[다음|Farm Road 3]]>><<endevent>><</link>>
+	<</if>>
+<</if>>
+
+:: Farm Ride Reassure
+<<effects>>
+
+<<if $tendingSuccess>>
+	<<person1>>
+	You whisper a couple of words into your <<beasttype>>'s ear. <span class="green"><<bHe>> stops veering back and forth across the road,</span> and gallops with more surety.
+	<br><br>
+
+	The <<person2>><<person>> readies the lasso for another throw, while the <<person3>><<person>> tries to shove you from the saddle once more.
+	<br><br>
+
+	<<link [[Punch the closest rider|Farm Ride Punch 2]]>><</link>><<physiquedifficulty 1 16000>>
+	<br>
+	<<link [[Grab the lasso|Farm Ride Grab 2]]>><</link>><<skill_difficulty "$handskill" "Hand Skill" 1 1000>>
+	<br>
+<<else>>
+	<<person1>>
+	You whisper a couple of words into your <<beasttype>>'s ear, <span class="red">but your voice trembles.</span> <<bHe>> rears on <<bhis>> hind legs, throwing you from the saddle.<<ggpain>><<gstress>><<pain 8>><<stress 6>>
+	<br><br>
+	당신의 말은 혼자서 질주한다. 두 사람은 당신을 흙 속에 쓰러진 채 두고, 그 뒤를 쫓는다.<<llrespect>><<farm_horses -3>>
+	<br><br>
+
+	<<tearful>> 당신은 일어선다.
+	<br><br>
+
+	<<if $bus is "east">>
+		<<link [[다음|Farm Road 4]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[다음|Farm Road 3]]>><<endevent>><</link>>
+	<</if>>
+<</if>>
+
+
+
+
+:: Farm Ride Punch 2
+<<effects>>
+
+<<if $physiqueSuccess>>
+	<<earnFeat "Into the Sunset">>
+	You fist connects with the <<person3>><<person>>'s face, <span class="green">knocking <<him>> from the saddle.</span>
+	<br><br>
+
+	<span class="green">You've seized control of the situation.</span> You spur your horse onward, leaving Remy's goons far behind.<<lstress>><<stress -6>>
+	<br><br>
+	<<person1>>
+	<<destination_farm_ride>>
+<<else>>
+	<span class="red">The <<person>> catches your fist,</span> and pulls you from the saddle. You tumble to the ground.<<ggpain>><<pain 8>>
+	<br><br>
+
+	당신의 말은 혼자서 질주한다. 두 사람은 당신을 흙 속에 쓰러진 채 두고, 그 뒤를 쫓는다.<<llrespect>><<farm_horses -3>>
+	<br><br>
+
+	<<tearful>> 당신은 일어선다.
+	<br><br>
+
+
+	<<if $bus is "east">>
+		<<link [[다음|Farm Road 4]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[다음|Farm Road 3]]>><<endevent>><</link>>
+	<</if>>
+<</if>>
+
+:: Farm Ride Grab 2
+<<effects>>
+
+<<if $handskill gte random(1, 1000)>>
+	<<earnFeat "Into the Sunset">>
+	The <<person2>><<person>> hurls the lasso at your <<beasttype>> once more, <span class="green">but you catch it,</span> and pull the <<person2>><<person>> from <<his>> seat. <<He>> tumbles to the dirt.
+	<br><br>
+	<span class="green">You've seized control of the situation.</span> You spur your horse onward, leaving Remy's goons far behind.<<lstress>><<stress -6>>
+	<br><br>
+	<<person1>>
+	<<destination_farm_ride>>
+<<else>>
+	The <<person2>><<person>> hurls the lasso at your <<beasttype>> once more. You try to catch it, but it loops around your wrists. <span class="red">The rider pulls you from your saddle.</span><<ggpain>><<gstress>><<pain 8>><<stress 6>>
+	<br><br>
+	당신의 말은 혼자서 질주한다. 두 사람은 당신을 흙 속에 쓰러진 채 두고, 그 뒤를 쫓는다.<<llrespect>><<farm_horses -3>>
+	<br><br>
+
+	<<tearful>> 당신은 일어선다.
+	<br><br>
+
+
+	<<if $bus is "east">>
+		<<link [[다음|Farm Road 4]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[다음|Farm Road 3]]>><<endevent>><</link>>
+	<</if>>
+<</if>>
+
+
+:: Farm Ride Reassure 2
+<<effects>>
+
+<<if $tendingSuccess>>
+	<<earnFeat "Into the Sunset">>
+
+	You whisper a couple of words into your <<beasttype>>'s ear. <span class="green"><<bHe>> stops veering back and forth across the road,</span> and gallops with more surety.
+	<br><br>
+
+	<span class="green">You've seized control of the situation.</span> You spur your horse onward, leaving Remy's goons far behind.<<lstress>><<stress -6>>
+	<br><br>
+	<<person1>>
+	<<destination_farm_ride>>
+<<else>>
+	<<person1>>
+	You whisper a couple of words into your <<beasttype>>'s ear, <span class="red">but your voice trembles.</span> <<bHe>> rears on <<bhis>> hind legs, throwing you from the saddle.<<ggpain>><<gstress>><<pain 8>><<stress 6>>
+	<br><br>
+	당신의 말은 혼자서 질주한다. 두 사람은 당신을 흙 속에 쓰러진 채 두고, 그 뒤를 쫓는다.<<llrespect>><<farm_horses -3>>
+	<br><br>
+
+	<<tearful>> 당신은 일어선다.
+	<br><br>
+
+
+	<<if $bus is "east">>
+		<<link [[다음|Farm Road 4]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[다음|Farm Road 3]]>><<endevent>><</link>>
+	<</if>>
+<</if>>

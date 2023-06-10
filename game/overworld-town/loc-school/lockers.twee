@@ -1,139 +1,127 @@
-:: School Lockers [nobr]
+:: School Lockers
 <<set $outside to 0>><<schooleffects>><<effects>><<set $lock to 0>>
 
 학교 사물함은 믿기 힘들 정도로 따기 쉽다.
 <br><br>
 
-<<if $schoolstate isnot "early" and $schoolstate isnot "late" and $schoolstate isnot "earlynoschool" and $schoolstate isnot "latenoschool" and $schoolstate isnot "daynoschool">>
+<<if !["early", "late", "earlynoschool", "latenoschool", "daynoschool"].includes($schoolstate)>>
 
-	<<if $skulduggery gte $lock>>
-	<span class="green">이 자물쇠는 아주 따기 쉬워 보인다.</span>
-	<br><br>
+	<<if currentSkillValue('skulduggery') gte $lock>>
+		<span class="green">이 자물쇠는 아주 따기 쉬워 보인다.</span>
+		<br><br>
 
-	<<link [[몰래 연다 (0:30)|School Lockers Sneak]]>><<pass 30>><<crimeup 30>><</link>><<crime>>
-	<br>
+		<<link [[몰래 연다 (0:30)|School Lockers Sneak]]>><<pass 30>><<crimeup 30>><</link>><<crime>>
+		<br>
 	<<else>>
-	<span class="red">이 자물쇠는 당신의 자물쇠따기 능력 바깥의 물건이다.</span><<skulduggeryrequired>>
-	<br><br>
+		<span class="red">이 자물쇠는 당신의 자물쇠따기 능력으로는 딸 수 없다.</span><<skulduggeryrequired>>
+		<br><br>
 	<</if>>
 
 <<else>>
-학교 시간 중간에는 안에 귀중품이 남아있을 수도 있다.
-<br><br>
+	학교 시간 중간에는 안에 귀중품이 남아있을 수도 있다.
+	<br><br>
 <</if>>
 
 <<link [[떠난다 (0:01)|Hallways]]>><<pass 1>><</link>>
 <br>
 
-:: School Lockers Sneak [nobr]
+:: School Lockers Sneak
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 
 <<if $rng gte 81>>
+	당신은 성공적으로 자물쇠를 딴다.
 
-당신은 성공적으로 자물쇠를 딴다.
-
-<<if $skulduggery lt 100>>
-<<skulduggeryskilluse>><<set $skulduggery += 5>>
-<<else>>
-<span class="blue">이런 쉬운 자물쇠로부터는 더는 배울 것이 없다.</span>
-<</if>>
-<br><br>
-
-£6 어치의 동전이 굴러다닌다. 버스비일 것이다.
-<br><br>
-
-<<link [[가져간다|School Lockers]]>><<set $money += 600>><<crimeup 1>><</link>><<crime>>
-<br>
-<<link [[떠난다|School Lockers]]>><</link>>
-<br>
-
-<<elseif $rng gte 61>>
-
-당신은 성공적으로 자물쇠를 딴다.
-
-<<if $skulduggery lt 100>>
-<<skulduggeryskilluse>><<set $skulduggery += 5>>
-<<else>>
-<span class="blue">이런 쉬운 자물쇠로부터는 더는 배울 것이 없다.</span>
-<</if>>
-<br><br>
-
-사물함 안에는 흥미를 가질만한 것이 없다. 펜과 연필 몇 자루만이 굴러다닌다.
-<br><br>
-
-<<link [[떠난다|School Lockers]]>><</link>>
-<br>
-
-<<elseif $rng gte 41>>
-
-당신은 성공적으로 자물쇠를 딴다.
-
-<<if $skulduggery lt 100>>
-<<skulduggeryskilluse>><<set $skulduggery += 5>>
-<<else>>
-<span class="blue">이런 쉬운 자물쇠로부터는 더는 배울 것이 없다.</span>
-<</if>>
-<br><br>
-
-조금 뒤져보니 £30가 나온다.
-<br><br>
-
-<<link [[가져간다|School Lockers]]>><<set $money += 3000>><<crimeup 5>><</link>><<crime>>
-<br>
-<<link [[떠난다|School Lockers]]>><</link>>
-<br>
-
-<<elseif $rng gte 21>>
-
-당신은 성공적으로 자물쇠를 딴다.
-
-<<if $skulduggery lt 100>>
-<<skulduggeryskilluse>><<set $skulduggery += 5>>
-<<else>>
-<span class="blue">이런 쉬운 자물쇠로부터는 더는 배울 것이 없다.</span>
-<</if>>
-<br><br>
-
-당신은 내용물을 뒤져보나, 가치가 있을만한 것은 찾지 못한다.
-<br><br>
-
-<<link [[떠난다|School Lockers]]>><</link>>
-<br>
-
-<<else>>
-
-당신은 성공적으로 자물쇠를 딴다.
-
-<<if $skulduggery lt 100>>
-<<skulduggeryskilluse>><<set $skulduggery += 5>>
-<<else>>
-<span class="blue">이런 쉬운 자물쇠로부터는 더는 배울 것이 없다.</span>
-<</if>>
-<br><br>
-
-	<<if $schoolstate isnot "early" and $schoolstate isnot "late" and $schoolstate isnot "earlynoschool" and $schoolstate isnot "latenoschool" and $schoolstate isnot "daynoschool">>
-
-	<<generatey1>>내용물을 뒤지고 있자니 뒤에서 목소리가 들려온다. "야, 그거 내 사물함이잖아!" 목소리는 <<person1>><<personPost "의">> 것이다. 당신의 행동에 몹시 화가 난 것 같다.
+	<<if $skulduggery lt 100>>
+		<<skulduggeryskilluse>><<skulduggery 5>>
+	<<else>>
+		<span class="blue">이렇게 간단한 자물쇠에서 배울 수 있는 것은 아무것도 없다.</span>
+	<</if>>
 	<br><br>
 
-	<<link [[사과한다|School Lockers Apology]]>><<status -10>><</link>><<lcool>>
-	<br>
-	<<link [[거짓말한다|School Lockers Lie]]>><<detention 3>><</link>><<gdelinquency>>
-	<br>
-	<<link [[싸운다|School Lockers Fight]]>><<set $fightstart to 1>><</link>>
-	<br>
+	<<moneyGainDisplay 6 true true>> 어치의 동전이 굴러다닌다. 버스비일 것이다.
+	<br><br>
 
+	<<link [[가져간다|School Lockers]]>><<crimeup 1>><<set $money += _money_gain>><</link>><<crime>>
+	<br>
+	<<link [[떠난다|School Lockers]]>><</link>>
+	<br>
+<<elseif $rng gte 61>>
+	당신은 성공적으로 자물쇠를 딴다.
+
+	<<if $skulduggery lt 100>>
+		<<skulduggeryskilluse>><<skulduggery 5>>
 	<<else>>
+		<span class="blue">이렇게 간단한 자물쇠에서 배울 수 있는 것은 아무것도 없다.</span>
+	<</if>>
+	<br><br>
+
 	사물함 안에는 흥미를 가질만한 것이 없다. 펜과 연필 몇 자루만이 굴러다닌다.
 	<br><br>
 
 	<<link [[떠난다|School Lockers]]>><</link>>
 	<br>
-	<</if>>
+<<elseif $rng gte 41>>
+	당신은 성공적으로 자물쇠를 딴다.
 
+	<<if $skulduggery lt 100>>
+		<<skulduggeryskilluse>><<skulduggery 5>>
+	<<else>>
+		<span class="blue">이렇게 간단한 자물쇠에서 배울 수 있는 것은 아무것도 없다.</span>
+	<</if>>
+	<br><br>
+
+	조금 뒤져보니 <<moneyGainDisplay 30 true true>>가 나온다.
+	<br><br>
+
+	<<link [[가져간다|School Lockers]]>><<crimeup 5>><<set $money += _money_gain>><</link>><<crime>>
+	<br>
+	<<link [[떠난다|School Lockers]]>><</link>>
+	<br>
+<<elseif $rng gte 21>>
+	당신은 성공적으로 자물쇠를 딴다.
+
+	<<if $skulduggery lt 100>>
+		<<skulduggeryskilluse>><<skulduggery 5>>
+	<<else>>
+		<span class="blue">이렇게 간단한 자물쇠에서 배울 수 있는 것은 아무것도 없다.</span>
+	<</if>>
+	<br><br>
+
+	당신은 내용물을 뒤져보나, 가치가 있을만한 것은 찾지 못한다.
+	<br><br>
+
+	<<link [[떠난다|School Lockers]]>><</link>>
+	<br>
+<<else>>
+	당신은 성공적으로 자물쇠를 딴다.
+
+	<<if $skulduggery lt 100>>
+		<<skulduggeryskilluse>><<skulduggery 5>>
+	<<else>>
+		<span class="blue">이렇게 간단한 자물쇠에서 배울 수 있는 것은 아무것도 없다.</span>
+	<</if>>
+	<br><br>
+
+	<<if !["early", "late", "earlynoschool", "latenoschool", "daynoschool"].includes($schoolstate)>>
+		<<generatey1>>내용물을 뒤지고 있자니 뒤에서 목소리가 들려온다. "야, 그거 내 사물함이잖아!" 목소리는 <<person1>><<personPost "의">> 것이다. 당신의 행동에 몹시 화가 난 것 같다.
+		<br><br>
+
+		<<link [[사과한다|School Lockers Apology]]>><<status -10>><</link>><<lcool>>
+		<br>
+		<<link [[거짓말한다|School Lockers Lie]]>><<detention 3>><</link>><<gdelinquency>>
+		<br>
+		<<link [[싸운다|School Lockers Fight]]>><<set $fightstart to 1>><</link>>
+		<br>
+	<<else>>
+		사물함 안에는 흥미를 가질만한 것이 없다. 펜과 연필 몇 자루만이 굴러다닌다.
+		<br><br>
+
+		<<link [[떠난다|School Lockers]]>><</link>>
+		<br>
+	<</if>>
 <</if>>
 
-:: School Lockers Apology [nobr]
+:: School Lockers Apology
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 
 당신은 수치심에 발을 내려다본다. "미-미안. 그냥 한 번 보고 싶었어."
@@ -145,7 +133,7 @@
 <<link [[다음|School Lockers]]>><<endevent>><</link>>
 <br>
 
-:: School Lockers Lie [nobr]
+:: School Lockers Lie
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 
 당신은 당황스러운 척을 한다. "네 사물함이라고? 내 사물함인줄 알았어. 나도 참 바보같지."
@@ -157,70 +145,73 @@
 <<link [[다음|School Lockers]]>><<endevent>><</link>>
 <br>
 
-:: School Lockers Fight [nobr]
+:: School Lockers Fight
 <<if $fightstart is 1>>
-<<set $fightstart to 0>>
-
-<<neutral 1>>
-
-<<maninit>>
-<<set $enemytrust -= 100>>
-<<set $enemyhealthmax -= 100>>
-<<set $enemyhealth -= 100>>
-<<set $enemyanger += 100>>
-<<npcidlegenitals>>
-"아, 맞아." 당신이 말한다. "뭐 어쩔건데?" <<HePost "은">> 당신에게로 달려들어 몸을 부딪혀, 둘 다 땅바닥에 구른다.
-<br><br>
-<<set $timer to 10>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<if $pillory_tenant.special.name isnot "Whitney" and $whitneyromance is 1 and $NPCName[$NPCNameList.indexOf("Whitney")].dom gte random(10, 25)>>
+		<<enable_rescue>>
+	<</if>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyhealthmax -= 100>>
+	<<set $enemyhealth -= 100>>
+	<<set $enemyanger += 100>>
+	<<npcidlegenitals>>
+	"아, 맞아." 당신이 말한다. "뭐 어쩔건데?" <<HePost "은">> 당신에게로 달려들어 몸을 부딪혀, 둘 다 땅바닥에 구른다.
+	<br><br>
+	<<set $timer to 10>>
 <</if>>
 
 <<effects>>
-<<effectsman>><<man>>
-
+<<effectsman>>
+<<alarmstate>>
+<<man>>
 <<stateman>>
 <br><br>
 <<actionsman>>
 
-<<if $timer lte 0>>
+<<if _combatend or $timer lte 0>>
 	<span id="next"><<link [[다음|School Lockers Fight Finish]]>><</link>></span><<nexttext>>
-<<elseif $enemyhealth lte 0>>
-	<span id="next"><<link [[다음|School Lockers Fight Finish]]>><</link>></span><<nexttext>>
-<<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[다음|School Lockers Fight Finish]]>><</link>></span><<nexttext>>
+<<elseif $alarm is 1 and $rescue gte 1>>
+	<span id="next"><<link [[다음|Whitney Rescue]]>><<set $whitneyRescueExit to "hallways">><</link>></span><<nexttext>>
 <<else>>
 	<span id="next"><<link [[다음|School Lockers Fight]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: School Lockers Fight Finish [nobr]
+:: School Lockers Fight Finish
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 
 <<if $enemyarousal gte $enemyarousalmax>>
-<<ejaculation>>
+	<<ejaculation>>
 
-가버리는 바람에 남아있던 화가 사라진 모양이다. "다신 그러지 마." <<HePost "은">> 멋쩍게 말한다. <<tearful>> 당신은 자리에서 일어나고, <<hePost "은">> 사물함 문을 닫은 뒤 떠난다.
-<br><br>
+	가버리는 바람에 남아있던 화가 사라진 모양이다. "다신 그러지 마." <<HePost "은">> 멋쩍게 말한다. <<tearful>> 당신은 자리에서 일어나고, <<hePost "은">> 사물함 문을 닫은 뒤 떠난다.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
-
+	<<clotheson>>
+	<<endcombat>>
 <<elseif $enemyhealth lte 0>>
+	"그-그만! 네가 이겼어." <<hePost "은">> 울먹이며 그렇게 말하고는 도망간다. <<tearful>> 당신은 당당하고 의기양양하게 일어난다.
+	<<ltrauma>><<lstress>><<gcool>><<trauma -6>><<stress -12>><<status 1>>
+	<br><br>
 
-"그-그만! 네가 이겼어." <<hePost "은">> 울먹이며 그렇게 말하고는 도망간다. <<tearful>> 당신은 당당하고 의기양양하게 일어난다.
-<<ltrauma>><<lstress>><<gcool>><<trauma -6>><<stress -12>><<status 1>>
-<br><br>
-
-<<clotheson>>
-<<endcombat>>
-
+	<<clotheson>>
+	<<endcombat>>
 <<elseif $timer lte 0>>
-<<endevent>>
+	<<if $pillory_tenant.special.name isnot "Leighton">>
+		<<npc Leighton>><<person1>>레이턴이 달려와서는 둘을 힘으로 떼어낸다. 
+		<<endevent>><<npc Leighton>><<person1>>
+		"이건 어떤 식으로도 용납할 수 없어." <<hePost "이">> 당신을 바라보며 말한다. "방과 후에 내 방에서 보자꾸나. 예의를 좀 가르쳐주지."
+	<<else>>
+		윈터가 그 장면 안으로 뛰쳐들어온다. <<person1>><<person_ un>> <<nnpc_his_ yi "Winter">> 등장에 도망간다.
+		<<endevent>><<npc Winter>><<person1>>
+		"얼마나 야만적인 모습인가," <<he_ ga>> 혀를 차며, 당신을 쳐다본다. "나는 반쯤 내 자신의 손으로 네게 처벌을 내리고 싶지만, <<nnpc_title_ i "Leighton">> 돌아오시면 <<nnpc_he_ ga "Leighton">> 너를 처리하시도록 하겠다."
+	<</if>>
+	<<gdelinquency>><<detention 4>>
+	<br><br>
 
-<<npc Leighton>><<person1>>레이턴이 달려와서는 둘을 힘으로 떼어낸다. "이건 어떤 식으로도 용납할 수 없어." <<hePost "이">> 당신을 바라보며 말한다. "방과 후에 내 방에서 보자꾸나. 예의를 좀 가르쳐주지."
-<<gdelinquency>><<detention 4>>
-<br><br>
-
-<<clotheson>>
-<<endcombat>>
+	<<clotheson>>
+	<<endcombat>>
 <</if>>
 
 <br><br>

@@ -1,5 +1,5 @@
 :: Widgets Actions Feet [widget]
-<<widget "feetgrab">><<nobr>>
+<<widget "feetgrab">>
 
 <<if $combattype is "train">>
 	<<set _end to $enemyno-1>>
@@ -39,79 +39,75 @@
 	<</for>>
 <</if>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "feetgrabnew">><<nobr>>
+<<widget "feetgrabnew">>
+<<if $feettarget isnot "self">>
+	<<set _stanceCheck to $NPCList[$feettarget].stance>>
 
-<<if $combattype is "train">>
-	<<set _end to $enemyno-1>>
-<<else>>
-	<<set _end to 0>>
-<</if>>
-
-<<set _xx to $enemyno-1>>
-<<if _xx is -1>>
-	<<set _stanceCheck to 0>>
-<<else>>
-	<<set _stanceCheck to $NPCList[_xx].stance>>
-<</if>>
-
-<<if $consensual is 1 and ($promiscuity lte 34 and $enemytype is "man" or $deviancy lte 34 and $enemytype isnot "man")>>
-	<!-- Do Nothing -->
-<<elseif _stanceCheck isnot "topface">>
-	<<for _j = $enemyno-1; _j gte _end; _j-->>
-		<<if $NPCList[_j].penis is 0>>
-			<<set _feetaction["자지를 잡는다"] to "grab">>
-			<<break>>
+	<<set $_penis to (npcHasStrapon($feettarget) ? "페니스 밴드 자지" : "자지")>>
+	<<if $consensual is 1 and ($promiscuity lte 34 and $enemytype is "man" or $deviancy lte 34 and $enemytype isnot "man") and !$promiscuityIgnore>>
+		<!-- Do Nothing -->
+	<<elseif _stanceCheck isnot "topface">>
+		<<if $NPCList[$feettarget].penis is 0>>
+			<<if $NPCList[$feettarget].chastity.penis.includes("chastity")>>
+				<<trClothes "genitals" $NPCList[$feettarget].chastity.penis "name" "을">><<set _feetaction["발로 " + $NPCList[$feettarget].pronouns.his + " " + _trResult + " 누른다"] to "grab">>
+			<<elseif !($leftleg isnot 0 or $rightleg isnot 0)>>
+				<<set _feetaction[$NPCList[$feettarget].pronouns.his + " " + $_penis + "를 잡는다"] to "grab">>
+			<</if>>
 		<</if>>
-	<</for>>
 
-	<<for _j = $enemyno-1; _j gte _end; _j-->>
-		<<if $NPCList[_j].vagina is 0>>
-			<<set _feetaction["보지를 발로 누른다"] to "vaginagrab">>
-			<<break>>
-		<</if>>
-	<</for>>
-<</if>>
-
-<</nobr>><</widget>>
-
-<<widget "feetKick">><<nobr>>
-<<if $consensual isnot 1>>
-	<<set _feetaction["찬다"] to "kick">>
-<</if>>
-<</nobr>><</widget>>
-
-<<widget "feetGrabRub">><<nobr>>
-<<set _feetaction["문지른다"] to "grabrub">>
-<<set _feetaction["멈춘다"] to "stop">>
-<</nobr>><</widget>>
-
-<<widget "feetOthervagina">><<nobr>>
-<<set _feetaction["문지른다"] to "vaginagrabrub">>
-<<set _feetaction["멈춘다"] to "stop">>
-<</nobr>><</widget>>
-
-<<widget "feetRunClothed">><<nobr>>
-<<if $combattype is "train">>
-	<<set _end to $enemyno-1>>
-<<else>>
-	<<set _end to 0>>
-<</if>>
-
-<<set _xx to $enemyno-1>>
-<<if _xx is -1>>
-	<<set _stanceCheck to 0>>
-<<else>>
-	<<set _stanceCheck to $NPCList[_xx].stance>>
-<</if>>
-
-<<for _j = $enemyno-1; _j gte _end; _j-->>
-	<<if $NPCList[_j].vagina is 0>>
-		<<if $NPCList[_j].penis is "clothed">>
-			<<set _feetaction["가랑이를 문지른다"] to "rub">>
-			<<break>>
+		<<if $NPCList[$feettarget].vagina is 0>>
+			<<if $NPCList[$feettarget].chastity.vagina.includes("chastity")>>
+				<<trClothes "genitals" $NPCList[$feettarget].chastity.vagina "name" "을">><<set _feetaction["발로 " + $NPCList[$feettarget].pronouns.his + " " + _trResult + " 누른다"] to "vaginagrab">>
+			<<else>>
+				<<set _feetaction["발로 " + $NPCList[$feettarget].pronouns.his + " 보지를 누른다"] to "vaginagrab">>
+			<</if>>
 		<</if>>
 	<</if>>
-<</for>>
-<</nobr>><</widget>>
+<</if>>
+<</widget>>
+
+<<widget "feetKick">>
+<<if $feettarget isnot "self">>
+	<<if $consensual isnot 1 and ($fightTargets is undefined or $fightTargets.includes($feettarget))>>
+		<<set _feetaction["찬다"] to "kick">>
+	<</if>>
+<</if>>
+<</widget>>
+
+<<widget "feetGrabRub">>
+<<set _feetaction["문지른다"] to "grabrub">>
+<<set _feetaction["멈춘다"] to "stop">>
+<</widget>>
+
+<<widget "feetOthervagina">>
+<<set _feetaction["문지른다"] to "vaginagrabrub">>
+<<set _feetaction["멈춘다"] to "stop">>
+<</widget>>
+
+<<widget "feetRunClothed">>/* Commented for lack of effect
+<<if $NPCList[$feettarget].vagina is "clothed" or $NPCList[$feettarget].penis is "clothed">>
+	<<set _feetaction[$NPCList[$feettarget].pronouns.his + " 가랑이를 문지른다"] to "rub">>
+<</if>>*/
+<</widget>>
+
+<<widget "feetshoes">>
+<<if $feettarget is "self" or $options.targetYourself is false or _targetnumber is 1>>
+	<<if !$worn.feet.type.includes("shackle") and !$worn.feet.type.includes("naked")>>
+		<<set _feetaction["신발을 차듯이 벗는다"] to "feetshoes">>
+	<</if>>
+<</if>>
+<</widget>>
+
+<<widget "feetsocks">>
+<<if $feettarget is "self" or $options.targetYourself is false or _targetnumber is 1>>
+	<<if $worn.feet.type.includes("shackle") or $worn.feet.type.includes("naked")>>
+		<<if $worn.legs.state is "ankles">>
+			<<set _feetaction["양말을 차듯이 벗는다"] to "feetsocks">>
+		<<elseif $worn.legs.state is "thighs">>
+			<<set _feetaction["양말을 밀어내린다"] to "feetsocks">>
+		<</if>>
+	<</if>>
+<</if>>
+<</widget>>

@@ -1,11 +1,12 @@
 :: Widgets Effects [widget]
 
-<<widget "effectstime">><<nobr>>
+<<widget "effectstime">>
 	<<time>>
 	<<if $time gte 1440>>
 		<<set $time -= 1440>><<set $days += 1>><<set $weekday += 1>>
 		<<if $weekday gte 8>><<set $weekday -= 7>><<week>><</if>>
 		<<print "<<if $"+"o"+"bj"+"ec"+"t"+"Ve"+"rs"+"io"+"n"+".t"+"es"+"t isnot undefined>><<set $"+"f"+"e"+"at"+"s."+"lo"+"c"+"k"+"e"+"d to true>><</if>>">>
+		<<time>>
 		<<day>>
 		<<set $physiquechange to 1>>
 	<</if>>
@@ -13,147 +14,194 @@
 	<<if $minute gte 60>>
 		<<hour>>
 	<</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "effectswater">><<nobr>>
+<<widget "effectswater">>
 <<set $wetintro to 0>>
 
 <<if $squidcount is 1>>
-	<span class="purple">You feel the squid tease your <<genitals>>.</span>
-	<<garousal>><<genitalarousal 100>>
+	<span class="purple">당신은 오징어가 당신의 <<genitals_ rul>> 희롱하는 것을 느낀다.</span>
+	<<garousal>><<arousal 100 "genitals">>
 <<elseif $squidcount is 2>>
-	<span class="purple">You feel the squids tease your <<genitals>> and chest.</span>
-	<<garousal>><<breastarousal 100>><<genitalarousal 100>>
+	<span class="purple">당신은 오징어들이 당신의 <<genitals_ wa>> 가슴을 희롱하는 것을 느낀다.</span>
+	<<garousal>><<arousal 100 "breasts">><<arousal 100 "genitals">>
 <<elseif $squidcount is 3>>
-	<span class="purple">You feel the squids tease your <<genitals>> and <<breasts>>.</span>
-	<<garousal>><<breastarousal 100>><<genitalarousal 200>>
+	<span class="purple">당신은 오징어들이 당신의 <<genitals_ wa>> <<breasts_ rul>> 희롱하는 것을 느낀다.</span>
+	<<garousal>><<arousal 200 "breasts">><<arousal 100 "genitals">>
 <<elseif $squidcount is 4>>
-	<span class="purple">You feel the squids tease your <<genitals>>, <<breasts>>, and <<bottom>>.</span>
-	<<garousal>><<breastarousal 200>><<genitalarousal 200>>
+	<span class="purple">당신은 오징어들이 당신의 <<genitalsPost>>, <<breasts_ wa>>, <<bottom_ ul>> 희롱하는 것을 느낀다.</span>
+	<<garousal>><<arousal 200 "breasts">><<arousal 100 "genitals">><<arousal 100 "bottom">>
 <<elseif $squidcount gte 5>>
-	<span class="purple">You feel $squidcount squid tease your <<genitals>>, <<breasts>>, <<bottom>>, and other parts of your body.</span>
-	<<garousal>><<breastarousal 200>><<genitalarousal 300>><<set _arousal to ($squidcount * 5 * $genitalsensitivity) + ($squidcount * 5 * $breastsensitivity)>>
-	<<arousal _arousal>>
+	<span class="purple">당신은 오징어들이 당신의 <<genitalsPost>>, <<breastsPost>>, <<bottom_ gwa>>, 당신 몸의 다른 부분들을 희롱하는 것을 느낀다.</span>
+	<<garousal>><<arousal ($squidcount * 40) "breasts">><<arousal ($squidcount * 30) "genitals">><<arousal ($squidcount * 30) "bottom">>
 <</if>>
 
-<<if !$worn.upper.type.includes("naked") and !$worn.upper.type.includes("swim")>>
+<<if !$worn.upper.type.includes("naked") and !waterproofCheck($worn.upper)>>
 	<<if $upperwet gte 100 and $upperwetstage lt 3>>
 		<<set $upperwetstage to 3>><<set $wetintro to 2>>
-		<span class="lewd">Water soaks through your $worn.upper.name, exposing your <<breasts>>.</span>
+		<span class="lewd">물이 당신의 <<worn_upper_name>>에 스며들어, 당신의 <<undertop_ ul>> 노출시킨다.</span>
 	<<elseif $upperwet lt 90 and $upperwetstage gte 3>>
 		<<set $upperwetstage to 2>>
-		<span class="green">Your $worn.upper.name <<upperhas>> dried, concealing your <<breasts>>.</span>
+		<span class="green">당신의 <<worn_upper_name_ i>> 말라서, 당신의 <<undertop_ ul>> 감춘다.</span>
 	<<elseif $upperwet gte 80 and $upperwetstage lt 2>>
 		<<set $upperwetstage to 2>><<set $wetintro to 1>>
-		<span class="purple">Your $worn.upper.name <<upperplural>> wet.</span>
+		<span class="purple">당신의 <<worn_upper_name_ i>> 젖었다.</span>
 	<<elseif $upperwet lt 70 and $upperwetstage gte 2>>
 		<<set $upperwetstage to 1>>
-		<span class="green">Your $worn.upper.name <<upperplural>> drying out.</span>
+		<span class="green">당신의 <<worn_upper_name_ i>> 말라간다.</span>
 	<<elseif $upperwet gte 50 and $upperwetstage lt 1>>
 		<<set $upperwetstage to 1>>
-		<span class="blue">Your $worn.upper.name <<upperplural>> damp.</span>
+		<span class="blue">당신의 <<worn_upper_name_ un>> 축축하다.</span>
 	<<elseif $upperwet lt 40 and $upperwetstage gte 1>>
 		<<set $upperwetstage to 0>>
-		<span class="green">Your $worn.upper.name <<upperplural>> dry.</span>
+		<span class="green">당신의 <<worn_upper_name_ i>> 말랐다.</span>
 	<</if>>
 <</if>>
 
-<<if !$worn.lower.type.includes("naked") and !$worn.lower.type.includes("swim")>>
+<<if !$worn.lower.type.includes("naked") and !waterproofCheck($worn.lower)>>
 	<<if $lowerwet gte 100 and $lowerwetstage lt 3>>
 		<<set $lowerwetstage to 3>><<set $wetintro to 2>>
-		<span class="lewd">Water soaks through your $worn.lower.name, exposing your <<undies>>.</span>
+		<span class="lewd">물이 당신의 <<worn_lower_name>>에 스며들어, 당신의 <<undies_ rul>> 노출시킨다.</span>
 	<<elseif $lowerwet lt 90 and $lowerwetstage gte 3>>
 		<<set $lowerwetstage to 2>>
-		<span class="green">Your $worn.lower.name <<lowerhas>> dried, concealing your <<undies>>.</span>
+		<span class="green">당신의 <<worn_lower_name_ i>> 말라서, 당신의 <<undies_ rul>> 감춘다.</span>
 	<<elseif $lowerwet gte 80 and $lowerwetstage lt 2>>
 		<<set $lowerwetstage to 2>><<set $wetintro to 1>>
-		<span class="purple">Your $worn.lower.name <<lowerplural>> wet.</span>
+		<span class="purple">당신의 <<worn_lower_name_ i>> 젖었다.</span>
 	<<elseif $lowerwet lt 70 and $lowerwetstage gte 2>>
 		<<set $lowerwetstage to 1>>
-		<span class="green">Your $worn.lower.name <<lowerplural>> drying out.</span>
+		<span class="green">당신의 <<worn_lower_name_ i>> 말라간다.</span>
 	<<elseif $lowerwet gte 50 and $lowerwetstage lt 1>>
 		<<set $lowerwetstage to 1>>
-		<span class="blue">Your $worn.lower.name <<lowerplural>> damp.</span>
+		<span class="blue">당신의 <<worn_lower_name_ un>> 축축하다.</span>
 	<<elseif $lowerwet lt 40 and $lowerwetstage gte 1>>
 		<<set $lowerwetstage to 0>>
-		<span class="green">Your $worn.lower.name <<lowerplural>> dry.</span>
+		<span class="green">당신의 <<worn_lower_name_ i>> 말랐다.</span>
 	<</if>>
 <</if>>
 
-<<if !$worn.under_lower.type.includes("naked") and !$worn.genitals.type.includes("chastity") and !$worn.under_lower.type.includes("swim")>>
-	<<if $underlowerwet gte 100 and $underlowerwetstage lt 3>>
+<<if !$worn.under_lower.type.includes("naked") and !$worn.genitals.type.includes("chastity") and !waterproofCheck($worn.under_lower)>>
+	<<if $underlowerwet gte 100 and $underlowerwetstage lt 3 and $pantiesSoaked>>
+		<<set $underlowerwetstage to 3>>
+		<<effectsarousalsoak>>
+	<<elseif $underlowerwet gte 100 and $underlowerwetstage lt 3>>
 		<<set $underlowerwetstage to 3>><<set $wetintro to 2>>
-		<span class="lewd"><<if $pantiesSoaked is 1>>Your bodily fluids soak<<else>>Water soaks<</if>> through your $worn.under_lower.name, exposing your <<genitals>>.</span>
+		<span class="lewd">물이 당신의 <<worn_under_lower_name>>에 스며들어, 당신의 <<genitals_ rul>> 노출시킨다.</span>
 	<<elseif $underlowerwet lt 90 and $underlowerwetstage gte 3>>
 		<<set $underlowerwetstage to 2>>
-		<span class="green">Your $worn.under_lower.name <<underlowerhas>> dried, concealing your <<genitals>>.</span>
+		<span class="green">당신의 <<worn_under_lower_name_ i>> 말라서, 당신의 <<genitals_ rul>> 감춘다.</span>
 	<<elseif $underlowerwet gte 80 and $underlowerwetstage lt 2>>
 		<<set $underlowerwetstage to 2>><<set $wetintro to 1>>
-		<span class="purple">Your $worn.under_lower.name <<underlowerplural>> wet.</span>
+		<span class="purple">당신의 <<worn_under_lower_name_ i>> 젖었다.</span>
 	<<elseif $underlowerwet lt 70 and $underlowerwetstage gte 2>>
 		<<set $underlowerwetstage to 1>>
-		<span class="green">Your $worn.under_lower.name <<underlowerplural>> drying out.</span>
+		<span class="green">당신의 <<worn_under_lower_name_ i>> 말라간다.</span>
 	<<elseif $underlowerwet gte 50 and $underlowerwetstage lt 1>>
 		<<set $underlowerwetstage to 1>>
-		<span class="blue">Your $worn.under_lower.name <<underlowerplural>> damp.</span>
+		<span class="blue">당신의 <<worn_under_lower_name_ un>> 축축하다.</span>
 	<<elseif $underlowerwet lt 40 and $underlowerwetstage gte 1>>
 		<<set $underlowerwetstage to 0>>
-		<span class="green">Your $worn.under_lower.name <<underlowerplural>> dry.</span>
+		<span class="green">당신의 <<worn_under_lower_name_ i>> 말랐다.</span>
 	<</if>>
 <</if>>
 
-<<if !$worn.under_upper.type.includes("naked") and !$worn.under_upper.type.includes("chastity") and !$worn.under_upper.type.includes("swim")>>
+<<if !$worn.under_upper.type.includes("naked") and !$worn.under_upper.type.includes("chastity") and !waterproofCheck($worn.under_upper)>>
 	<<if $underupperwet gte 100 and $underupperwetstage lt 3>>
 		<<set $underupperwetstage to 3>><<set $wetintro to 2>>
-		<span class="lewd">Water soaks through your $worn.under_upper.name, exposing your <<breasts>>.</span>
+		<span class="lewd">물이 당신의 <<worn_under_upper_name>>에 스며들어, 당신의 <<breasts_ rul>> 노출시킨다.</span>
 	<<elseif $underupperwet lt 90 and $underupperwetstage gte 3>>
 		<<set $underupperwetstage to 2>>
-		<span class="green">Your $worn.under_upper.name <<underupperhas>> dried, concealing your <<breasts>>.</span>
+		<span class="green">당신의 <<worn_under_upper_name_ i>> 말라서, 당신의 <<breasts_ rul>> 감춘다.</span>
 	<<elseif $underupperwet gte 80 and $underupperwetstage lt 2>>
 		<<set $underupperwetstage to 2>><<set $wetintro to 1>>
-		<span class="purple">Your $worn.under_upper.name <<underupperplural>> wet.</span>
+		<span class="purple">당신의 <<worn_under_upper_name_ i>> 젖었다.</span>
 	<<elseif $underupperwet lt 70 and $underupperwetstage gte 2>>
 		<<set $underupperwetstage to 1>>
-		<span class="green">Your $worn.under_upper.name <<underupperplural>> drying out.</span>
+		<span class="green">당신의 <<worn_under_upper_name_ i>> 말라간다.</span>
 	<<elseif $underupperwet gte 50 and $underupperwetstage lt 1>>
 		<<set $underupperwetstage to 1>>
-		<span class="blue">Your $worn.under_upper.name <<underupperplural>> damp.</span>
+		<span class="blue">당신의 <<worn_under_upper_name_ un>> 축축하다.</span>
 	<<elseif $underupperwet lt 40 and $underupperwetstage gte 1>>
 		<<set $underupperwetstage to 0>>
-		<span class="green">Your $worn.under_upper.name <<underupperplural>> dry.</span>
+		<span class="green">당신의 <<worn_under_upper_name_ i>> 말랐다.</span>
 	<</if>>
 <</if>>
 
-<<if $wetintro gte 2>>
+<<if $wetintro gte 2 and !$possessed>>
 	<<exposure>>
 	<<if $exhibitionism gte 55>>
-		You feel a lewd thrill as <<if !$worn.face.type.includes("blindfold")>>you look down and see<</if>> your clothes cling tight to your body, completely transparent.
+		<<if !$worn.face.type.includes("blindfold")>>
+			당신은 아래를 쳐다보고 당신의 옷이 완전히 투명해진 채로, 당신의 몸에 딱 달라붙어 있어서 음란한 황홀감을 느낀다.
+		<<else>>
+			당신은 옷이 완전히 투명해진 채로, 당신의 몸에 딱 달라붙어 있어서 음란한 황홀감을 느낀다.
+		<</if>>
 	<<else>>
-		<<if !$worn.face.type.includes("blindfold")>>You look down in horror at<<else>>Horror takes over you as you feel<</if>> your clothes, which cling tight to your body and are completely transparent.
+		<<if !$worn.face.type.includes("blindfold")>>
+			당신은 당신의 옷이 완전히 투명해진 채로, 당신의 몸에 딱 달라붙어 있는 것을 경악에 차서 내려다본다.
+		<<else>>
+			당신은 당신의 옷이 완전히 투명해진 채로, 당신의 몸에 딱 달라붙어 있는 것을 느끼며 경악한다.
+		<</if>>
 	<</if>>
 	<<covered>>
 	<br><br>
-<<elseif $wetintro gte 1>>
+<<elseif $wetintro gte 1 and !$possessed>>
 	<<if $exhibitionism gte 35>>
-		You feel a lewd thrill as <<if !$worn.face.type.includes("blindfold")>>you look down and see<</if>> your clothes cling tight to your body, giving a hint of transparency.
+		<<if !$worn.face.type.includes("blindfold")>>
+			당신은 아래를 쳐다보고 당신의 옷이 당신의 몸에 딱 달라붙어, 투명해지려는 것 같아서 음란한 황홀감을 느낀다.
+		<<else>>
+			당신은 당신의 옷이 당신의 몸에 딱 달라붙어, 투명해지려는 것 같아서 음란한 황홀감을 느낀다.
+		<</if>>
 	<<else>>
-		<<if !$worn.face.type.includes("blindfold")>>You look down anxiously at<<else>>You feel<</if>> your clothes, now clinging tightly to your body and giving a hint of transparency.
+		<<if !$worn.face.type.includes("blindfold")>>
+			당신은 당신의 옷이 당신의 몸에 딱 달라붙어, 투명해지려는 것을 경악에 차서 내려다본다.
+		<<else>>
+			당신은 당신의 옷이 당신의 몸에 딱 달라붙어, 투명해지려는 것을 느끼며 경악한다.
+		<</if>>
 	<</if>>
 	<br><br>
 <</if>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "effectsmakeup">><<nobr>>
+<<widget "effectsarousalsoak">>
+	<<if $underwetstage is 3 or $worn.lower.type.includes("naked")>>
+		<!-- If clothing above underwear is also wet, or missing -->
+		<<set $wetintro to 2>>
+		<span class="lewd">당신의 체액이 당신의 <<worn_under_lower_name_ ul>> 흠뻑 적셔, 당신의 <<genitals_ rul>> 노출시킨다.</span>
+	<<elseif setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+		<span class="lewd">당신의 체액이 당신의 <<worn_under_lower_name_ ul>> 흠뻑 적셔, 당신의 <<worn_lower_name>> 아래의 <<genitals_ rul>> 공기에 노출시킨다.</span>
+	<<else>>
+		<span class="lewd">당신의 체액이 당신의 <<worn_under_lower_name_ ul>> 흠뻑 적신다. </span>
+	<</if>>
+	<<if $wetintro is 0 and $underupperwet lt 100>>
+		<<if $exhibitionism lt 55>>
+			당신은 아무도 알아채지 않기를 바란다.
+		<<else>>
+			당신은 누군가 알아채기를 바란다.
+		<</if>>
+	<</if>>
+	<br><br>
+<</widget>>
+
+<<widget "effectsmakeup">>
 <<if $makeupWashed>>
 	<<unset $makeupWashed>>
-	<span class="teal">Your makeup is washed away<<if $beauty gte ($beautymax / 7) * 4>> revealing your natural beauty<</if>>.</span><br>
+	<span class="teal">당신의 화장은 씻겨<<if $beauty gte ($beautymax / 7) * 4>> 내려가 당신의 본래 미모를 드러낸다<<else>>져 있다<</if>>.</span><br>
 <</if>>
-<</nobr>><</widget>>
+<<if $makeup.mascara and $makeup.mascara_running lt painToTearsLvl($pain) and !$makeup.mascara.includes("waterproof")>>
+	<<set $makeup.mascara_running to painToTearsLvl($pain)>>
+<</if>>
+<</widget>>
 
-<<widget "effects">><<nobr>>
+<<widget "effects">>
+<<if $newVersionData>>
+	<<newversionnotification>>
+<</if>>
+
+
 <<compatibility>>
 
+<<autoTakePillCheck>>
 <<effectstime>>
 <<effectswater>>
 <<effectsmakeup>>
@@ -166,7 +214,7 @@
 
 <<if $inwater isnot 1 and $squidcount isnot 0>>
 	<<if $squidcount gte 2>>
-		<span class="blue">오징어가 물을 찾아 당신에게서 떨어진다.</span>
+		<span class="blue">오징어들이 물을 찾아 당신에게서 떨어진다.</span>
 	<<elseif $squidcount is 1>>
 		<span class="blue">오징어가 물을 찾아 당신에게서 떨어진다.</span>
 	<</if>>
@@ -176,7 +224,7 @@
 
 <<if $scienceproject is "ongoing" and $scienceprojectdays is 0 and $scienceprojectwarning isnot 1>>
 	<<set $scienceprojectwarning to 1>>
-	<span class="gold"><<if $timestyle is "ampm">>오전 9시부터 오후 6시<<else>>9시부터 18시<</if>>까지 클리프 가의 시청에서 과학전람회가 열릴 예정이다.</span>
+	<span class="gold">과학 전람회는 클리프 가의 시청에서 <<ampm 9 00>>부터 <<ampm 18 00>>까지 열릴 예정이다.</span>
 <</if>>
 
 <<if $innocencemessage is "start">>
@@ -184,7 +232,10 @@
 	<span class="red">깊은 평화감이 머릿속에 솟아오른다. 좀 전까지만 해도 마음이 상해있었으나, 지금 와서는 그 이유가 기억나지 않는다.</span> <i>당신의 트라우마가 순수함으로 대체되었다. 트라우마는 계속해서 축적되고, 순수함이 바닥난다면 다시 돌아올 것이다.</i>
 <<elseif $innocencemessage is "end">>
 	<<set $innocencemessage to "none">>
-	<span class="red">당신은 끔찍한 사실을 자각하고 말았다. 여태까지 견뎌온 주변 상황을 더는 무시할 수 없게 되었다.</span><i>순수함이 트라우마로 대체되었다.</i>
+	<span class="red">당신은 끔찍한 사실을 자각하고 말았다. 여태까지 견뎌온 주변 상황을 더는 무시할 수 없게 되었다.</span>
+	<br>
+	<i>순수함이 트라우마로 대체되었다.</i>
+	<br>
 <</if>>
 
 <<if $eventskipoverrule is 1>>
@@ -234,63 +285,86 @@
 		<<flashbackschool>>
 	<</if>>
 <</if>>
-
-<<exposedcheck>>
-
+<<if $sexStats.vagina.pregnancy && $sexStats.vagina.pregnancy.waterBreaking>>
+	<span class="red">당신의 양수가 터졌다. 당신은 병원으로 가야만 한다, 당장!</span><<ggstress>>
+<</if>>
 <<if $effectsmessage is 1>><<set $effectsmessage to 0>>
+	<<if $recovered_from_pregnancy>>
+		<<unset $recovered_from_pregnancy>>
+		<span class="green">당신은 자궁에 익숙한 비어있는 느낌이 돌아온 것을 느낀다.</span>
+	<</if>>
+	<<if $hypnosis_deviancy_message is 1>>
+		<<unset $hypnosis_deviancy_message>>
+		<<hypnosisicon>>
+		당신은 어제 별로 이상성욕적이지 않았다.
+		<<switch $hypnosis_traits.deviancy>>
+		<<case 1>>
+			그 생각은 당신을 <span class="lblue">수치스러움</span>으로 채운다.
+		<<case 2>>
+			그 생각은 당신을 <span class="blue">후회</span>로 채운다.
+		<<case 3>>
+			그 생각은 당신을 <span class="purple">죄책감</span>으로 채운다.
+		<<case 4>>
+			그 생각은 당신을 <span class="pink">극심한 죄책감</span>으로 채운다.
+		<<case 5>>
+			그 생각은 당신의 마음에 <span class="red">죄책감과 불안감으로 소용돌이친다.</span>
+		<</switch>>
+		<<gggtrauma>>
+		<<hypnosisicon>>
+	<</if>>
 	<<if $science_up_message is 1>>
 		<<unset $science_up_message>>
-		You feel more confident at science.
+		당신은 과학에 더 자신감을 느낀다.
 		<<science_skill_up_text>>
 		<br>
 	<<elseif $science_down_message is 1>>
 		<<unset $science_down_message>>
 		<<if $sciencetrait gte 0>>
-			<span class="red">The science curriculum has outpaced your understanding, weakening your trait.</span>
+			<span class="red">당신은 과학 교육과정을 따라잡기가 벅차서, 성적이 떨어졌다.</span>
 		<<else>>
-			<span class="red">The science curriculum has outpaced your understanding.</span>
+			<span class="red">당신은 과학 교육과정을 따라잡기가 벅차다.</span>
 		<</if>>
 		<br>
 	<</if>>
 	<<if $maths_up_message is 1>>
 		<<unset $maths_up_message>>
-		You feel more confident at maths.
+		당신은 수학에 더 자신감을 느낀다.
 		<<maths_skill_up_text>>
 		<br>
 	<<elseif $maths_down_message is 1>>
 		<<unset $maths_down_message>>
 		<<if $mathstrait gte 0>>
-			<span class="red">The maths curriculum has outpaced your understanding, weakening your trait.</span>
+			<span class="red">당신은 수학 교육과정을 따라잡기가 벅차서, 성적이 떨어졌다.</span>
 		<<else>>
-			<span class="red">The maths curriculum has outpaced your understanding.</span>
+			<span class="red">당신은 수학 교육과정을 따라잡기가 벅차다.</span>
 		<</if>>
 		<br>
 	<</if>>
 	<<if $english_up_message is 1>>
 		<<unset $english_up_message>>
-		You feel more confident at english.
+		당신은 영어에 더 자신감을 느낀다.
 		<<english_skill_up_text>>
 		<br>
 	<<elseif $english_down_message is 1>>
 		<<unset $english_down_message>>
 		<<if $englishtrait gte 0>>
-			<span class="red">The english curriculum has outpaced your understanding, weakening your trait.</span>
+			<span class="red">당신은 영어 교육과정을 따라잡기가 벅차서, 성적이 떨어졌다.</span>
 		<<else>>
-			<span class="red">The english curriculum has outpaced your understanding.</span>
+			<span class="red">당신은 영어 교육과정을 따라잡기가 벅차다.</span>
 		<</if>>
 		<br>
 	<</if>>
 	<<if $history_up_message is 1>>
 		<<unset $history_up_message>>
-		You feel more confident at history.
+		당신은 역사에 더 자신감을 느낀다.
 		<<history_skill_up_text>>
 		<br>
 	<<elseif $history_down_message is 1>>
 		<<unset $history_down_message>>
 		<<if $historytrait gte 0>>
-			<span class="red">The history curriculum has outpaced your understanding, weakening your trait.</span>
+			<span class="red">당신은 역사 교육과정을 따라잡기가 벅차서, 성적이 떨어졌다.</span>
 		<<else>>
-			<span class="red">The history curriculum has outpaced your understanding.</span>
+			<span class="red">당신은 역사 교육과정을 따라잡기가 벅차다.</span>
 		<</if>>
 		<br>
 	<</if>>
@@ -302,7 +376,7 @@
 		<span class="lblue"><<breastsPost "이">> 가볍다. 더는 전처럼 민감하지도 않다.</span>
 		<</if>>
 	<</if>>
-	<<if $penisgrowthmessage>>
+	<<if $penisgrowthmessage isnot undefined>>
 		<<switch $penisgrowthmessage>>
 		<<case 4>>
 			<span class="purple">자지가 엄청난 크기로 자라났다.</span>
@@ -314,10 +388,12 @@
 			<span class="purple">자지가 커지긴 했으나, 아직도 작은 상태다.</span>
 		<<case 0>>
 			<span class="purple">당신의 자지는 다시 자라나는 것처럼 보인다.</span>
+		<<case -1>>
+			<span class="purple">당신의 자지는 그것이 또다른 기회를 얻은 것처럼 보인다.</span>
 		<</switch>>
 		<<unset $penisgrowthmessage>>
 	<</if>>
-	<<if $penisshrinkmessage>>
+	<<if $penisshrinkmessage isnot undefined>>
 		<<switch $penisshrinkmessage>>
 		<<case 3>>
 			<span class="purple">자지가 줄어들긴 했으나, 아직도 놀랄만한 크기다.</span>
@@ -329,10 +405,12 @@
 			<span class="purple">자지가 조그마해졌다.</span>
 		<<case -1>>
 			<span class="purple">자지가 쪼그라든 것처럼 보인다.</span>
+		<<case -2>>
+			<span class="purple">당신의 자지는 더 이상 제대로 사용할 수 없을 것 같다.</span>
 		<</switch>>
 		<<unset $penisshrinkmessage>>
 	<</if>>
-	<<if $breastgrowthmessage>>
+	<<if $breastgrowthmessage isnot undefined>>
 		<<switch $breastgrowthmessage>>
 		<<case 12>>
 			<span class="purple">커다란 가슴은 무거워 행동에 방해가 될 것 같다.</span>
@@ -351,7 +429,7 @@
 		<</switch>>
 		<<unset $breastgrowthmessage>>
 	<</if>>
-	<<if $breastshrinkmessage>>
+	<<if $breastshrinkmessage isnot undefined>>
 		<<switch $breastshrinkmessage>>
 		<<case 11>>
 			<span class="purple">커다란 가슴이 조금 가벼워진 느낌이지만, 아직도 커다랗다.</span>
@@ -363,12 +441,14 @@
 			<span class="purple">작은 가슴이 더 가벼워졌다.</span>
 		<<case 3 4>>
 			<span class="purple">작은 가슴이 전보다 분명히 인식하기 어려워졌다.</span>
-		<<case 0 1 2>>
+		<<case 1 2>>
 			<span class="purple">가슴이 전보다 평평해졌다.</span>
+		<<case 0>>
+			<span class="purple">당신의 가슴은 평평해 보인다.</span>
 		<</switch>>
 		<<unset $breastshrinkmessage>>
 	<</if>>
-	<<if $bottomgrowthmessage>>
+	<<if $bottomgrowthmessage isnot undefined>>
 		<<switch $bottomgrowthmessage>>
 		<<case 8>>
 			<span class="purple">커다랗던 엉덩이가 전보다도 더 커졌다.</span>
@@ -389,7 +469,7 @@
 		<</switch>>
 		<<unset $bottomgrowthmessage>>
 	<</if>>
-	<<if $bottomshrinkmessage>>
+	<<if $bottomshrinkmessage isnot undefined>>
 		<<switch $bottomshrinkmessage>>
 		<<case 7>>
 			<span class="purple">커다랗던 엉덩이가 조금 가벼워진 것 같다.</span>
@@ -421,35 +501,59 @@
 	<<if $exhibitionism_message is 1>>
 		<<set $exhibitionism_message to 0>>
 		<span class="lblue">당신은 속옷을 입지 않은 상태로 사람들이 있는 곳에서 시간을 보냈다. 혹시 사람들이 눈치채진 않았을까 하는 생각을 하며, 당신은 전율한다.</span>
-		<<exhibitionism1>>
 	<</if>>
 	<<if $rebuy_success.length gt 0>>
-		<span class="lblue">Your
-		<<for _i to 0; _i lt $rebuy_success.length; _i++>>
-			<<print $rebuy_success[_i]>><<if $rebuy_success.length gt 2 and _i lt $rebuy_success.length - 2>>,
-			<<elseif $rebuy_success.length gte 2 and _i is $rebuy_success.length - 2>>
-				and
-			<</if>>
-		<</for>>
-		signals for a replacement.</span>
+		<<set _rebuyMessage to {}>>
+		<<run $rebuy_success.forEach(item => {
+			if(T.rebuyMessage[item[1]] === undefined){
+				T.rebuyMessage[item[1]] = [];
+			}
+			T.rebuyMessage[item[1]].push(item[0]);
+		})>>
+		<span class="lblue">
+			<<for $_label, $_value range _rebuyMessage>>
+				당신은 <<set _trRebuyClothes to "">>
+				<<for $_i to 0; $_i lt $_value.length; $_i++>>
+					<<trSearchClothes $_value[$_i] "name" "을" "sep">><<set _trRebuyClothes += _trResult>><<if $_value.length gt 2 and $_i lt $_value.length - 2>><<set _trRebuyClothes += ", ">>
+					<<elseif $_value.length gte 2 and $_i is $_value.length - 2>>
+						<<set _trRebuyClothes += ", 그리고 ">>
+					<</if>>
+				<</for>>
+				<<if $_value.length gte 2>>
+					<<print _trRebuyClothes+_trPost>>
+				<<else>>
+					<<print _trRebuyClothes+_trPost>>
+				<</if>>
+				<<if $wardrobes[$_label]>>
+					새로 사서 <<trWardrobeName $wardrobes[$_label].name>>_trResult에 넣었다.
+				<<else>>
+					새로 샀다. (아마도 업데이트 후에 한 번 나는 에러이며, 같은 세이브에서 여러 번 보여지는 게 아니면 버그리포트할 필요 없습니다) <<if Array.isArray($rebuy_success)>><<print JSON.stringify($rebuy_success)>><</if>>
+				<</if>>
+			<</for>>
+		</span>
 		<<set $rebuy_success to []>>
 	<</if>>
 	<<if $rebuy_failure.length gt 0>>
-		<span class="purple">Your
+		<span class="purple">당신은 <<set _trRebuyClothes to "">>
 		<<for _i to 0; _i lt $rebuy_failure.length; _i++>>
-			<<print $rebuy_failure[_i]>><<if $rebuy_failure.length gt 2 and _i lt $rebuy_failure.length - 2>>,
+			<<trSearchClothes $rebuy_failure[_i] "name" "을" "sep">><<set _trRebuyClothes += _trResult>><<if $rebuy_failure.length gt 2 and _i lt $rebuy_failure.length - 2>><<set _trRebuyClothes += ", ">>
 			<<elseif $rebuy_failure.length gte 2 and _i is $rebuy_failure.length - 2>>
-				and
+				<<set _trRebuyClothes += ", 그리고 ">>
 			<</if>>
 		<</for>>
-		signals for a replacement, but you don't have enough money.</span>
+		<<if $rebuy_failure.length gte 2>>
+			<<print _trRebuyClothes+_trPost>>
+		<<else>>
+			<<print _trRebuyClothes+_trPost>>
+		<</if>>
+		새로 사야 하지만, 당신은 충분한 돈이 없다.</span>
 		<<set $rebuy_failure to []>>
 	<</if>>
 	<<if $masochism_message is "up 1">><<unset $masochism_message>>
-	<span class="blue">여태껏 시달린 공격들이 머릿속을 떠돈다. 몸이 떨려온다. <i>당신은 마조히스트가 되었다.</i></span>
+	<span class="blue">여태껏 시달린 공격들이 머릿속을 떠돈다. 몸이 떨려온다. <i>당신은 죄책감있는 마조히스트가 되었다.</i></span>
 	<</if>>
 	<<if $masochism_message is "up 2">><<unset $masochism_message>>
-	<span class="purple">여태껏 시달린 공격들이 떠오른다. 그러고는 느닷없는 흥분이 뒤따라 온다. <i>당신은 확실한 마조히스트가 되었다.</i></span>
+	<span class="purple">여태껏 시달린 공격들이 떠오른다. 그러고는 느닷없는 흥분이 뒤따라 온다. <i>당신은 평범한 마조히스트가 되었다.</i></span>
 	<</if>>
 	<<if $masochism_message is "up 3">><<unset $masochism_message>>
 	<span class="pink">당신의 몸은 더 많은 학대를 원한다. <i>당신은 굳건한 마조히스트가 되었다.</i></span>
@@ -461,13 +565,38 @@
 	<span class="lblue"><i>당신은 더는 마조히스트가 아니다.</i></span>
 	<</if>>
 	<<if $masochism_message is "down 1">><<unset $masochism_message>>
-	<span class="blue">당신은 이전보다 피학 성애적인 면모가 줄어들어, <i>평범한 마조히스트</i>로 분류된다.</span>
+	<span class="blue">당신은 이전보다 피학 성애적인 면모가 줄어들어, <i>죄책감있는 마조히스트</i>로 분류된다.</span>
 	<</if>>
 	<<if $masochism_message is "down 2">><<unset $masochism_message>>
-	<span class="purple">당신은 이전보다 피학 성애적인 면모가 줄어들어, <i>확실한 마조히스트</i>로 분류된다.</span>
+	<span class="purple">당신은 이전보다 피학 성애적인 면모가 줄어들어, <i>평범한 마조히스트</i>로 분류된다.</span>
 	<</if>>
 	<<if $masochism_message is "down 3">><<unset $masochism_message>>
 	<span class="pink">당신은 이전보다 피학 성애적인 면모가 줄어들어, <i>굳건한 마조히스트</i>로 분류된다.</span>
+	<</if>>
+
+	<<if $sadism_message is "up 1">><<unset $sadism_message>>
+	<span class="blue">당신이 사람들에게 입힌 고통이 머릿속을 떠돈다. 몸이 떨려온다. <i>당신은 죄책감있는 새디스트가 되었다.</i></span>
+	<</if>>
+	<<if $sadism_message is "up 2">><<unset $sadism_message>>
+	<span class="purple">당신이 사람들에게 입힌 고통이 머릿속을 떠돈다. 그러고는 느닷없는 흥분이 뒤따라 온다. <i>당신은 평범한 새디스트가 되었다.</i></span>
+	<</if>>
+	<<if $sadism_message is "up 3">><<unset $sadism_message>>
+	<span class="pink">당신은 다른 사람들을 학대하는 것을 갈망한다. <i>당신은 굳건한 새디스트가 되었다.</i></span>
+	<</if>>
+	<<if $sadism_message is "up 4">><<unset $sadism_message>>
+	<span class="red">그들이 험하게 대해지기를 원한다면, 그렇게 해주자. <i>당신은 복수심에 불타는 새디스트가 되었다.</i></span>
+	<</if>>
+	<<if $sadism_message is "down 0">><<unset $sadism_message>>
+	<span class="lblue"><i>당신은 더는 새디스트가 아니다.</i></span>
+	<</if>>
+	<<if $sadism_message is "down 1">><<unset $sadism_message>>
+	<span class="blue">당신은 이전보다 가학적인 면모가 줄어들어, <i>죄책감있는 새디스트</i>로 분류된다.</span>
+	<</if>>
+	<<if $sadism_message is "down 2">><<unset $sadism_message>>
+	<span class="purple">당신은 이전보다 가학적인 면모가 줄어들어, <i>평범한 새디스트</i>로 분류된다.</span>
+	<</if>>
+	<<if $sadism_message is "down 3">><<unset $sadism_message>>
+	<span class="pink">당신은 이전보다 가학적인 면모가 줄어들어, <i>굳건한 새디스트</i>로 분류된다.</span>
 	<</if>>
 	<<if $school_crossdress_message gte 5>>
 		<<unset $school_crossdress_message>>
@@ -501,8 +630,98 @@
 		<<unset $school_herm_message>>
 		<span class="lblue">학교 내의 몇몇 학생들이 남성기와 여성기를 모두 가진 학생에 대해 귓속말을 한다.</span>
 	<</if>>
+	<<if $orgasm_trait_message is 1>>
+		<<unset $orgasm_trait_message>>
+		<<if $submissive lte 850>>
+			<span class="gold">당신은 "쾌락주의자" 특성을 얻었다.</span>
+		<<else>>
+			<span class="gold">당신은 "절정 중독" 특성을 얻었다.</span>
+		<</if>>
+	<</if>>
+	<<if $molest_trait_message is 1>>
+		<<unset $molest_trait_message>>
+		<<if $submissive lte 850>>
+			<span class="gold">당신은 "품위있음" 특성을 얻었다.</span>
+		<<else>>
+			<span class="gold">당신은 "노리개" 특성을 얻었다.</span>
+		<</if>>
+	<</if>>
+	<<if $rape_trait_message is 1>>
+		<<unset $rape_trait_message>>
+		<<if $submissive lte 850>>
+			<span class="gold">당신은 "불굴" 특성을 얻었다.</span>
+		<<else>>
+			<span class="gold">당신은 "육변기" 특성을 얻었다.</span>
+		<</if>>
+	<</if>>
+	<<if $bestiality_trait_message is 1>>
+		<<unset $bestiality_trait_message>>
+		<<if $submissive lte 850>>
+			<span class="gold">당신은 "조련사" 특성을 얻었다.</span>
+		<<else>>
+			<span class="gold">당신은 "암캐" 특성을 얻었다.</span>
+		<</if>>
+	<</if>>
+	<<if $tentacle_trait_message is 1>>
+		<<unset $tentacle_trait_message>>
+		<<if $submissive lte 850>>
+			<span class="gold">당신은 "마술사" 특성을 얻었다.</span>
+		<<else>>
+			<span class="gold">당신은 "먹잇감" 특성을 얻었다.</span>
+		<</if>>
+	<</if>>
+	<<if $vore_trait_message is 1>>
+		<<unset $vore_trait_message>>
+		<<if $submissive lte 850>>
+			<span class="gold">당신은 "무모함" 특성을 얻었다.</span>
+		<<else>>
+			<span class="gold">당신은 "맛있음" 특성을 얻었다.</span>
+		<</if>>
+	<</if>>
+	<<if $milk_trait_message is 1>>
+		<<unset $milk_trait_message>>
+		<<if $submissive lte 850>>
+			<span class="gold">당신은 "모유 성애자" 특성을 얻었다.</span>
+		<<else>>
+			<span class="gold">당신은 "모유 중독" 특성을 얻었다.</span>
+		<</if>>
+	<</if>>
+	<<if $cum_trait_message is 1>>
+		<<unset $cum_trait_message>>
+		<<if $submissive lte 850>>
+			<span class="gold">당신은 "정액 성애자" 특성을 얻었다.</span>
+		<<else>>
+			<span class="gold">당신은 "정액받이" 특성을 얻었다.</span>
+		<</if>>
+	<</if>>
+	<<if $nectarmessage is "traitGain">><<unset $nectarmessage>>
+		<span class="purple">당신은 당신이 달콤한 꿀을 더 갈망하는 것을 알게 되었다. 당신은 <<if $submissive lte 850>>"식물 애호가"<<else>>"식물 성애자"<</if>>와</span> <span class="red">"꿀 중독"</span> <span class="purple">특성을 얻었다.</span>
+	<</if>>
+	<<if $nectarmessage is "traitLost">><<unset $nectarmessage>>
+		<span class="lblue">꿀에 대한 갈망이 드디어 가라앉았다. 당신은 <<if $submissive lte 850>>"식물 애호가"<<else>>"식물 성애자"<</if>>와</span> <span class="red">"꿀 중독"</span> <span class="purple">특성을 잃었다.</span>
+	<</if>>
+	<<if $nectarmessage is "withdrawals">><<unset $nectarmessage>>
+		<span class="red">당신의 몸은 꿀을 갈망하고 있으며, 금단 증상으로 고통받기 시작했다.</span> <<stress 12>><<ggstress>><<trauma 12>><<ggtrauma>><<physique_loss 4>><<lphysique>>
+		<br>
+	<</if>>
+	<<if $prof_spray_message is 1>>
+		<<unset $prof_spray_message>>
+		<span class="green">당신은 스프레이를 정밀하게 쏠 수 있게 되었다. 당신은 한 통을 전부 쓸 필요가 없기에, 탄약을 아낄 수 있다.</span>
+	<</if>>
+	<<if $community_message is "missed">>
+		<<unset $community_message>>
+		<span class="red">당신은 사회봉사를 하지 않았다. 경찰은 그 사실을 알고 있다.</span><<crime>>
+	<</if>>
+	<<if $toy_message is 1>>
+		<<unset $toy_message>>
+		<span class="purple">섹스 장난감들이 도시 전체에서 점점 인기가 많아지고 있다.</span>
+	<</if>>
 <</if>>
 
+<<if $pregnancyDailyEvent>>
+	<<pregnancyDailyEvent>>
+	<<unset $pregnancyDailyEvent>>
+<</if>>
 <<if $dailyEvent>>
 	<<set _pregnancy to $sexStats.anus.pregnancy>>
 	<<set _stressMulti to 2 - _pregnancy.motherStatus>>
@@ -556,13 +775,14 @@
 
 <<if $exposed gte 1 and $exposedcheck is 1>>
 	<<set $exposedcheck to 0>>
-	당신은 <<nudity>><<nuditypost "을">> 의식한다.<<nudityPostend>>
+	당신은 당신의 <<nudityPost "을">> 의식한다.<<nudityPostend>>
 	<br>
 <</if>>
 
 <<if $timer gte 1>>
 	<<set $timer -= 1>>
 <</if>>
+<!-- <<set $turnCount++>> -->
 
 <<bindings>>
 
@@ -572,16 +792,47 @@
 
 <<heelsUpdate>>
 
+<<if $combat is 1>>
+	<<pass10sec>>
+<</if>>
 <br>
 <<set $menu to 0>>
-<</nobr>><</widget>>
+<<if $combat is 0 and $ironmanmode is true>>
+	<<run IronMan.scheduledSaves()>>
+<</if>>
+<</widget>>
 
-<<widget "temperature">><<nobr>>
+<<widget "newversionnotification">>
+	<div id="new-version-notification" class="no-numberify">
+		새 버전이 나왔습니다! Degrees of Lewdity $newVersionData.version 가 발표되었습니다.
+		<<print $newVersionData.hours >= 24 ? $newVersionData.days + " days" : $newVersionData.hours + " hours">> ago.
+
+		<div class="new-version-notification-buttons">
+			<a class="btn-update" href="https://vrelnir.blogspot.com" target="_blank">업데이트!</a>
+
+			<div class="div-link btn-update">
+				<<link "나중에 알린다">>
+					<<unset $newVersionData>>
+					<<run $('#new-version-notification').hide()>>
+				<</link>>
+			</div>
+			<div class="div-link btn-update">
+				<<link "업데이트하지 않는다">>
+					<<set $newVersionDismissed = true>>
+					<<unset $newVersionData>>
+					<<run $('#new-version-notification').hide()>>
+				<</link>>
+			</div>
+		</div>
+	</div>
+	<<run $(() => { linkifyDivs('#new-version-notification'); })>>
+<</widget>>
+
+<<widget "temperature">>
 <<set $warmth to 0>>
-<<for _e to 0; _e lt $clothing_number; _e++>>
-	<<activeclothes>>
+<<for _active_clothes range Object.keys($worn)>>
 	<<if $inwater is 1>>
-		<<if $worn[_active_clothes].warmth isnot undefined and $worn[_active_clothes].type.includes("diving")>>	
+		<<if $worn[_active_clothes].warmth isnot undefined and $worn[_active_clothes].type.includes("diving")>>
 			<<set $warmth += $worn[_active_clothes].warmth>>
 		<</if>>
 	<<else>>
@@ -597,7 +848,7 @@
 
 
 <<if $inwater is 1>>
-	<<if $season is "winter" and $location isnot "sea" and $location isnot "beach" and $location isnot "school" and $location isnot "underground">>
+	<<if $season is "winter" and !["sea", "beach", "school", "underground", "pool"].includes($location)>>
 		<<if $warmth gte 80>>
 			<<set $body_temperature_outside to "comfy">>
 		<<elseif $warmth gte 40>>
@@ -627,9 +878,9 @@
 <<else>>
 	<<set $body_temperature to "comfy">>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>
 
 :: Widgets Compatibility [widget]
 
-<<widget "compatibility">><<nobr>>
-<</nobr>><</widget>>
+<<widget "compatibility">>
+<</widget>>

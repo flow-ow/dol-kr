@@ -1,0 +1,637 @@
+:: Farm Upgrades
+<<effects>>
+<<farm_work_update>>
+<<if $farm_work.alex is "admin" or ($farm_work.alex is "clearing" and $farm_stage is 12)>>
+	당신은 알렉스 옆에 앉아서, 농장을 개선할 수 있는 방법을 살펴본다.
+	<br><br>
+<<else>>
+	당신은 책상에 앉아서, 농장을 개선할 수 있는 방법을 살펴본다.
+	<br><br>
+<</if>>
+
+<<farm_upgrades_current>>
+<<farm_upgrades_status>>
+
+<<if $sexStats.anus.pregnancy.motherStatus gte 1 and !$farm.parasitebarn and $farm.build isnot "parasites 1">>
+	당신의 생각은 당신이 낳은 다양한 동물들에게로 향한다. 농장에는 당신이 그들을 돌보는 데 필요한 모든 것이 있다. <span class="blue">아이디어가 하나 떠오른다.</span>
+	<br>
+	<<link [[당신의 기생충을 위한 보관소를 만든다|Farm Upgrades Parasite Barn]]>><</link>>
+	<br><br>
+<</if>>
+<<if !$alex_greenhouse>>
+	근처 쓰레기통에 빨간 잉크로 뒤덮인, 구겨진 종이 조각이 있다.
+	<br>
+	<<link [[조사한다|Farm Upgrades Greenhouse]]>><</link>>
+	<br><br>
+<</if>>
+
+<<if _upgrade_count gte 8>>
+	<<earnFeat "The Rival Estate">>
+<</if>>
+<<if _upgrade_count gte 1>>
+	<<earnFeat "The Rival Farm">>
+<</if>>
+
+<<link [[떠난다|Farm Alex Bedroom]]>><</link>>
+<br>
+
+
+:: Farm Upgrades Greenhouse
+<<effects>>
+
+당신은 종이를 펼친다. 자세한 내용은 지워졌지만, 온실을 만들기 위한 계획처럼 보인다.
+
+<<if $farm_work.alex is "admin" or ($farm_work.alex is "clearing" and $farm_stage is 12)>>
+	<<npc Alex>><<person1>>
+	<<if $NPCName[$NPCNameList.indexOf("Alex")].love gte 80>>
+		알렉스는 그것을 받아 들고, 한숨을 쉰다. "나는 온실이 내가 더 다루기 쉬울지도 모른다고 생각했어," <<he_ ga>> 말한다. "허브랑 꽃을 키우는 게 취미거든. 계획은 다 세웠지만, 시간이 없을 것 같아."
+		<br><br>
+
+		그것은 고아원 정원에 어울릴 것 같아보인다. 당신은 이것과 농장을 확장시키는 것을 동시에 할 수 있다.
+		<br><br>
+
+		<<if $money gte 1000000>>
+			<<link [[작업을 시작한다 (£10000)|Farm Upgrades Greenhouse 2]]>><<set $alex_greenhouse to 1>><<set $alex_greenhouse_timer to 7>><<set $money -= 1000000>><</link>>
+			<br>
+		<<else>>
+			당신은 온실을 건설할 만큼의 충분한 돈을 가지고 있지 않다.
+			<br>
+		<</if>>
+
+		<<link [[뒤로|Farm Upgrades]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		알렉스는 그것을 낚아채고, 비웃는다. <span class="red">"이건 중요한 게 아니야"</span> <<he_ nun>> 그렇게 말하며, 그것을 다시 구겨 넣는다. "그냥 시간낭비 겸 만든 거야."
+		<br><br>
+		<<He_ ga>> 당신 곁을 더 편안하게 느끼게 된다면 마음을 터놓을지도 모른다.
+		<br><br>
+
+		<<link [[다음|Farm Upgrades]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<npc Alex>><<person1>>
+	<span class="lblue">다음에 알렉스가 관리자 작업을 하고 있을 때, 그것에 대해 물어볼 수 있을 것이다.</span>
+	<br><br>
+
+	<<link [[다음|Farm Upgrades]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+
+
+:: Farm Upgrades Greenhouse 2
+<<effects>>
+
+<<if $submissive gte 1150>>
+	"제, 제안 하나 해도 될까??" 당신은 질문한다. "고아원에 있는 내 친구들이 이걸 좋아할 것 같아. 우리는 정원을-"
+<<elseif $submissive lte 850>>
+	"내게 좋은 생각이 하나 있는데," 당신은 말한다. "고아원을 위해 네 계획을 쓸 수 있을 거 같아. 고아원은-"
+<<else>>
+	"내게 좋은 생각이 하나 있는데," 당신은 말한다. "고아원에서 정원을 쓸 수 있을거야. 네 계획을 내가 쓰도록 허락해준다면-"
+<</if>>
+<br><br>
+
+"그건 좋은 생각이네," 알렉스가 말을 끊으며 미소를 짓는다. "어쩌면 내가 시간을 낭비하기만 한 건 아닐지도 몰라" <<He_ nun>> 종이를 더 눌러서 펼치고, 맨 위에 있는 숫자를 가리킨다.
+<br><br>
+
+당신이 전화하면 즉시 작업을 시작할 것이다.
+<br><br>
+
+
+
+<<link [[다음|Farm Upgrades]]>><<endevent>><</link>>
+<br>
+
+:: Farm Upgrades Wall 1
+<<effects>>
+
+농장을 둘러싼 돌담은 오래되었고, 군데군데 빈 곳이 보인다. 그런 부분을 올바르게 수리하면 침입자를 막을 수 있을 것이다.
+<br><br>
+
+<span class="green">레미의 침공이 약간 느려진다.</span>
+<br>
+<span class="green">전투 중에 공격자를 약간 느리게 만든다.</span>
+<br>
+<span class="gold">비용은 £3500.</span>
+<br>
+<span class="blue">작업에는 7일이 걸린다.</span>
+<br>
+<span class="blue">작업이 끝날 때까지 농장에 일꾼들이 있을 것이다.</span>
+<br>
+<br>
+
+<<if $farm.build>>
+	<span class="blue">한 번에 하나의 업그레이드 작업만 진행할 수 있다.</span>
+	<br>
+<<elseif $money gte 350000>>
+	<<link [[작업을 시작한다 (0:20)|Farm Upgrades Build]]>><<pass 20>><<set $money -= 350000>><<set $farm.build to "wall 1">><<set $farm.build_timer to 7>><</link>>
+	<br>
+<</if>>
+<br>
+<<link [[뒤로|Farm Upgrades]]>><</link>>
+<br>
+
+
+:: Farm Upgrades Build
+<<effects>>
+
+당신은 전화를 걸었다. 그들이 즉시 작업을 시작할 것이다.
+<br><br>
+
+<<link [[다음|Farm Upgrades]]>><</link>>
+<br>
+
+
+:: Farm Upgrades Wall 2
+<<effects>>
+
+벽은 튼튼하지만, 더 견고해질 수도 있다. 시멘트로 보강하면 방해하기가 더 어려워질 것이다.
+<br><br>
+
+<span class="green">파괴 공작의 영향을 줄여, 벽을 더 쉽게 보수할 수 있도록 한다.</span>
+<br>
+<span class="green">전투 중에 공격자를 더욱 느리게 만든다.</span>
+<br>
+<span class="gold">비용은 £10000.</span>
+<br>
+<span class="blue">작업에는 7일이 걸린다.</span>
+<br>
+<span class="blue">작업이 끝날 때까지 농장에 일꾼들이 있을 것이다.</span>
+<br>
+<br>
+
+<<if $farm.build>>
+	<span class="blue">한 번에 하나의 업그레이드 작업만 진행할 수 있다.</span>
+	<br>
+<<elseif $money gte 1000000>>
+	<<link [[작업을 시작한다 (0:20)|Farm Upgrades Build]]>><<pass 20>><<set $money -= 1000000>><<set $farm.build to "wall 2">><<set $farm.build_timer to 7>><</link>>
+	<br>
+<</if>>
+<br>
+<<link [[뒤로|Farm Upgrades]]>><</link>>
+<br>
+
+
+:: Farm Upgrades Wall 3
+<<effects>>
+
+돌담 위에 금속으로 된 울타리를 더할 수도 있다. 오르려면 더 많은 노력이 필요할 것이다.
+<br><br>
+<span class="green">일부 침입 시도를 저지한다.</span>
+<br>
+<span class="green">전투 중에 공격자를 더욱 느리게 만든다.</span>
+<br>
+<span class="gold">비용은 £25000.</span>
+<br>
+<span class="blue">작업에는 14일이 걸린다.</span>
+<br>
+<span class="blue">작업이 끝날 때까지 농장에 일꾼들이 있을 것이다.</span>
+<br>
+<br>
+
+<<if $farm.build>>
+	<span class="blue">한 번에 하나의 업그레이드 작업만 진행할 수 있다.</span>
+	<br>
+<<elseif $money gte 2500000>>
+	<<link [[작업을 시작한다 (0:20)|Farm Upgrades Build]]>><<pass 20>><<set $money -= 2500000>><<set $farm.build to "wall 3">><<set $farm.build_timer to 14>><</link>>
+	<br>
+<</if>>
+<br>
+<<link [[뒤로|Farm Upgrades]]>><</link>>
+<br>
+
+:: Farm Upgrades Wall 4
+<<effects>>
+
+울타리에 철조망을 둘러서, 특별한 장비 없이는 오를 수 없게 만든다.
+<br><br>
+<span class="green">많은 침입 시도를 저지한다.</span>
+<br>
+<span class="green">전투 중에 공격자를 더욱 느리게 만든다.</span>
+<br>
+<span class="gold">비용은 £5000.</span>
+<br>
+<span class="blue">작업에는 7일이 걸린다.</span>
+<br>
+<span class="blue">작업이 끝날 때까지 농장에 일꾼들이 있을 것이다.</span>
+<br>
+<br>
+
+<<if $farm.build>>
+	<span class="blue">한 번에 하나의 업그레이드 작업만 진행할 수 있다.</span>
+	<br>
+<<elseif $money gte 500000>>
+	<<link [[작업을 시작한다 (0:20)|Farm Upgrades Build]]>><<pass 20>><<set $money -= 500000>><<set $farm.build to "wall 4">><<set $farm.build_timer to 7>><</link>>
+	<br>
+<</if>>
+<br>
+<<link [[뒤로|Farm Upgrades]]>><</link>>
+<br>
+
+
+:: Farm Upgrades Tower
+<<effects>>
+
+
+밤에 들판을 감시하기 위해 탑을 세울 수 있다. 그 일을 담당할 사람을 고용해야 할 것이다.
+<br><br>
+
+<span class="green">레미의 침공이 느려진다.</span>
+<br>
+<span class="green">전투 중에 정보를 얻을 수 있다.</span>
+<br>
+<span class="purple">완벽하게 기능하기 위해서는 직원이 필요하다.</span>
+<br>
+<span class="gold">비용은 £20000.</span>
+<br>
+<span class="blue">작업에는 14일이 걸린다.</span>
+<br>
+<span class="blue">작업이 끝날 때까지 농장에 일꾼들이 있을 것이다.</span>
+<br>
+<br>
+
+<<if $farm.build>>
+	<span class="blue">한 번에 하나의 업그레이드 작업만 진행할 수 있다.</span>
+	<br>
+<<elseif $money gte 2000000>>
+	<<link [[작업을 시작한다 (0:20)|Farm Upgrades Build]]>><<pass 20>><<set $money -= 2000000>><<set $farm.build to "tower 1">><<set $farm.build_timer to 14>><</link>>
+	<br>
+<</if>>
+<br>
+<<link [[뒤로|Farm Upgrades]]>><</link>>
+<br>
+
+:: Farm Upgrades Tower 2
+<<effects>>
+
+망루에 탐조등을 부착해서, 더욱 효과적인 보안시설을 만들 수 있다.
+<br><br>
+
+<span class="green">레미의 침공이 더 느려진다.</span>
+<br>
+<span class="green">공격받는 동안 적을 발견하기가 더 쉬워진다.</span>
+<br>
+<span class="purple">직원이 있는 동안에만 기능한다.</span>
+<br>
+<span class="gold">비용은 £5000.</span>
+<br>
+<span class="blue">작업에는 7일이 걸린다.</span>
+<br>
+<span class="blue">작업이 끝날 때까지 농장에 일꾼들이 있을 것이다.</span>
+<br>
+<br>
+
+<<if $farm.build>>
+	<span class="blue">한 번에 하나의 업그레이드 작업만 진행할 수 있다.</span>
+	<br>
+<<elseif $money gte 500000>>
+	<<link [[작업을 시작한다 (0:20)|Farm Upgrades Build]]>><<pass 20>><<set $money -= 500000>><<set $farm.build to "tower 2">><<set $farm.build_timer to 7>><</link>>
+	<br>
+<</if>>
+<br>
+<<link [[뒤로|Farm Upgrades]]>><</link>>
+<br>
+
+
+:: Farm Upgrades Woodland 1
+<<effects>>
+
+삼림 지대가 농장의 대부분을 둘러싸고 있으며, 이를 농장 영토에 합병하면 돼지를 키울 더 넓은 공간을 얻을 수 있다.
+<br><br>
+
+<span class="green">생성되는 송로 버섯의 양을 증가시킨다.</span>
+<br>
+<span class="purple">관리해줄 필요가 있다.</span>
+<br>
+<span class="red">돼지가 더 많은 자유를 얻게 되므로 지금보다 통제하기 어려워 질 것이다.</span>
+<br>
+<span class="gold">비용은 £10000.</span>
+<br>
+<span class="blue">울타리를 확장하는 데 3일이 걸린다.</span>
+<br>
+<span class="blue">작업이 끝날 때까지 농장에 일꾼들이 있을 것이다.</span>
+<br>
+<br>
+
+<<if $farm.build>>
+	<span class="blue">한 번에 하나의 업그레이드 작업만 진행할 수 있다.</span>
+	<br>
+<<elseif $money gte 1000000>>
+	<<link [[작업을 시작한다 (0:20)|Farm Upgrades Build]]>><<pass 20>><<set $money -= 1000000>><<set $farm.build to "woodland 1">><<set $farm.build_timer to 3>><</link>>
+	<br>
+<</if>>
+<br>
+<<link [[뒤로|Farm Upgrades]]>><</link>>
+<br>
+
+:: Farm Upgrades Woodland 2
+<<effects>>
+
+근처의 삼림 지대 중 일부는 과일, 견과류, 식용 버섯이 풍부하다. 이 구역이 더해지면 사료를 구할 공간이 늘어나게 된다.
+<br><br>
+
+<span class="green">농장에서 사료를 찾을 수 있게 된다.</span>
+<br>
+<span class="purple">관리해줄 필요가 있다.</span>
+<br>
+<span class="gold">Costs £20000.</span>
+<br>
+<span class="blue">울타리를 확장하는 데 5일이 걸린다.</span>
+<br>
+<span class="blue">작업이 끝날 때까지 농장에 일꾼들이 있을 것이다.</span>
+<br>
+<br>
+
+<<if $farm.build>>
+	<span class="blue">한 번에 하나의 업그레이드 작업만 진행할 수 있다.</span>
+	<br>
+<<elseif $money gte 2000000>>
+	<<link [[작업을 시작한다 (0:20)|Farm Upgrades Build]]>><<pass 20>><<set $money -= 2000000>><<set $farm.build to "woodland 2">><<set $farm.build_timer to 5>><</link>>
+	<br>
+<</if>>
+<br>
+<<link [[뒤로|Farm Upgrades]]>><</link>>
+<br>
+
+:: Farm Upgrades Woodland 3
+<<effects>>
+
+더 많은 삼림지대가 합병되어, 당신과 돼지가 사료를 찾을 수 있는 더 많은 공간을 얻을 수 있다.
+<br><br>
+
+<span class="green">생성되는 송로 버섯의 양을 증가시킨다.</span>
+<br>
+<span class="green">생산되는 사료의 양을 증가시킨다.</span>
+<br>
+<span class="purple">관리해줄 필요가 있다.</span>
+<br>
+<span class="red">돼지가 더 많은 자유를 얻게 되므로 지금보다 통제하기 어려워 질 것이다.</span>
+<br>
+<span class="gold">비용은 £50000.</span>
+<br>
+<span class="blue">울타리를 확장하는 데 7일이 걸린다.</span>
+<br>
+<span class="blue">작업이 끝날 때까지 농장에 일꾼들이 있을 것이다.</span>
+<br>
+<br>
+
+<<if $farm.build>>
+	<span class="blue">한 번에 하나의 업그레이드 작업만 진행할 수 있다.</span>
+	<br>
+<<elseif $money gte 5000000>>
+	<<link [[작업을 시작한다 (0:20)|Farm Upgrades Build]]>><<pass 20>><<set $money -= 5000000>><<set $farm.build to "woodland 3">><<set $farm.build_timer to 7>><</link>>
+	<br>
+<</if>>
+<br>
+<<link [[뒤로|Farm Upgrades]]>><</link>>
+<br>
+
+:: Farm Upgrades Kennel 1
+<<effects>>
+
+사육장은 경비견을 훈련시킬 때 필요한 시설을 갖추고 있으며, 이들은 농장의 보안에 도움이 된다.
+<br><br>
+
+<span class="green">레미의 침공이 느려진다.</span>
+<br>
+<span class="green">사냥개들은 공격을 받는 동안 더 질서 있게 행동할 것이다.</span>
+<br>
+<span class="green">사육장에 새 옵션을 추가한다.</span>
+<br>
+<span class="red">인간들을 쓰러뜨리기 위해 사냥개를 훈련시키게 되면, 그들이 규율을 유지하기 더 어려워질 것이다.</span>
+<br>
+<span class="red">그 공격성은 소에게도 영향을 줄 것이다.</span>
+<br>
+<span class="gold">비용은 £15000.</span>
+<br>
+<span class="blue">작업에는 7일이 걸린다.</span>
+<br>
+<span class="blue">작업이 끝날 때까지 농장에 일꾼들이 있을 것이다.</span>
+<br>
+<br>
+
+<<if $farm.build>>
+	<span class="blue">한 번에 하나의 업그레이드 작업만 진행할 수 있다.</span>
+	<br>
+<<elseif $money gte 1500000>>
+	<<link [[작업을 시작한다 (0:20)|Farm Upgrades Build]]>><<pass 20>><<set $money -= 1500000>><<set $farm.build to "kennel 1">><<set $farm.build_timer to 7>><</link>>
+	<br>
+<</if>>
+<br>
+<<link [[뒤로|Farm Upgrades]]>><</link>>
+<br>
+
+
+:: Farm Upgrades Stable 1
+<<effects>>
+
+마구간을 확장하여 말에게 더 많은 공간을 제공하여 휴식을 개선할 수 있다.
+<br><br>
+
+<span class="green">말이 당신을 더 빨리 마을로 데려다 줄 것이다.</span>
+<br>
+<span class="gold">비용은 £20000.</span>
+<br>
+<span class="blue">작업에는 14일이 걸린다.</span>
+<br>
+<span class="blue">작업이 끝날 때까지 농장에 일꾼들이 있을 것이다.</span>
+<br>
+<br>
+
+<<if $farm.build>>
+	<span class="blue">한 번에 하나의 업그레이드 작업만 진행할 수 있다.</span>
+	<br>
+<<elseif $money gte 2000000>>
+	<<link [[작업을 시작한다 (0:20)|Farm Upgrades Build]]>><<pass 20>><<set $money -= 2000000>><<set $farm.build to "stable 1">><<set $farm.build_timer to 14>><</link>>
+	<br>
+<</if>>
+<br>
+<<link [[뒤로|Farm Upgrades]]>><</link>>
+<br>
+
+:: Farm Upgrades Barn 1
+<<effects>>
+
+최첨단 착유 장비를 헛간에 설치하여, 수확량을 늘릴 수 있다.
+<br><br>
+
+<span class="green">젖소에게서 더 많은 우유가 얻을 수 있게 된다.</span>
+<br>
+<span class="green">당신 스스로의 젖을 짜는 속도가 빨라진다.</span>
+<br>
+<span class="gold">비용은 £5000.</span>
+<br>
+<span class="blue">작업에는 2일이 걸린다.</span>
+<br>
+<span class="blue">작업이 끝날 때까지 농장에 일꾼들이 있을 것이다.</span>
+<br>
+<br>
+
+<<if $farm.build>>
+	<span class="blue">한 번에 하나의 업그레이드 작업만 진행할 수 있다.</span>
+	<br>
+<<elseif $money gte 500000>>
+	<<link [[작업을 시작한다 (0:20)|Farm Upgrades Build]]>><<pass 20>><<set $money -= 500000>><<set $farm.build to "barn 1">><<set $farm.build_timer to 2>><</link>>
+	<br>
+<</if>>
+<br>
+<<link [[뒤로|Farm Upgrades]]>><</link>>
+<br>
+
+:: Farm Upgrades Barn 2
+<<effects>>
+
+헛간을 확장시킨다는 것은 더 많은 소를 기를 수 있다는 것을 의미한다.
+<br><br>
+
+<span class="green">더 많은 소를 가지게 되고, 더 많은 우유를 얻을 수 있게 된다.</span>
+<br>
+<span class="red">소의 젖을 짤 때 더 많은 시간을 소요하게 된다.</span>
+<br>
+<span class="gold">비용은 £20000.</span>
+<br>
+<span class="blue">작업에는 10일이 걸린다.</span>
+<br>
+<span class="blue">작업이 끝날 때까지 농장에 일꾼들이 있을 것이다.</span>
+<br>
+<br>
+
+<<if $farm.build>>
+	<span class="blue">한 번에 하나의 업그레이드 작업만 진행할 수 있다.</span>
+	<br>
+<<elseif $money gte 2000000>>
+	<<link [[작업을 시작한다 (0:20)|Farm Upgrades Build]]>><<pass 20>><<set $money -= 2000000>><<set $farm.build to "barn 2">><<set $farm.build_timer to 10>><</link>>
+	<br>
+<</if>>
+<br>
+<<link [[뒤로|Farm Upgrades]]>><</link>>
+<br>
+
+
+:: Farm Upgrades Coop 1
+<<effects>>
+
+닭장을 확장시킨다는 것은 더 많은 닭을 기를 수 있다는 것을 의미한다.
+<br><br>
+
+<span class="green">더 많은 달걀이 생산된다.</span>
+<br>
+<span class="gold">비용은 £2000.</span>
+<br>
+<span class="blue">작업에는 5일이 걸린다.</span>
+<br>
+<span class="blue">작업이 끝날 때까지 농장에 일꾼들이 있을 것이다.</span>
+<br>
+<br>
+
+<<if $farm.build>>
+	<span class="blue">한 번에 하나의 업그레이드 작업만 진행할 수 있다.</span>
+	<br>
+<<elseif $money gte 200000>>
+	<<link [[작업을 시작한다 (0:20)|Farm Upgrades Build]]>><<pass 20>><<set $money -= 200000>><<set $farm.build to "coop 1">><<set $farm.build_timer to 5>><</link>>
+	<br>
+<</if>>
+<br>
+<<link [[뒤로|Farm Upgrades]]>><</link>>
+<br>
+
+
+:: Farm Upgrades Coop 2
+<<effects>>
+
+닭장을 더 확장시킨다는 것은 지금보다 더 많은 닭을 기를 수 있다는 것을 의미한다.
+<br><br>
+
+<span class="green">더더욱 많은 달걀이 생산된다.</span>
+<br>
+<span class="gold">비용은 £5000.</span>
+<br>
+<span class="blue">작업에는 7일이 걸린다.</span>
+<br>
+<span class="blue">작업이 끝날 때까지 농장에 일꾼들이 있을 것이다.</span>
+<br>
+<br>
+
+<<if $farm.build>>
+	<span class="blue">한 번에 하나의 업그레이드 작업만 진행할 수 있다.</span>
+	<br>
+<<elseif $money gte 500000>>
+	<<link [[작업을 시작한다 (0:20)|Farm Upgrades Build]]>><<pass 20>><<set $money -= 500000>><<set $farm.build to "coop 2">><<set $farm.build_timer to 7>><</link>>
+	<br>
+<</if>>
+<br>
+<<link [[뒤로|Farm Upgrades]]>><</link>>
+<br>
+
+:: Farm Upgrades Parasite Barn
+
+당신의 기생충을 저장할 새로운 보관소다.
+<br><br>
+
+<span class="green">기생충 보관소.</span>
+<br>
+<span class="gold">비용은 £5000.</span>
+<br>
+<span class="blue">작업에는 14일이 걸린다.</span>
+<br>
+<span class="blue">작업이 끝날 때까지 농장에 일꾼들이 있을 것이다.</span>
+<br><br>
+<<if $farm.build>>
+	<span class="blue">한 번에 하나의 업그레이드 작업만 진행할 수 있다.</span>
+	<br>
+<<elseif $money gte 500000>>
+	<<link [[작업을 시작한다 (0:20)|Farm Upgrades Build]]>><<pass 20>><<set $money -= 500000>><<set $farm.build to "parasites 1">><<set $farm.build_timer to 14>><</link>>
+	<br>
+<</if>>
+<br>
+<<link [[뒤로|Farm Upgrades]]>><</link>>
+<br>
+
+:: Farm Upgrades Parasite Barn 2
+
+당신의 기생충을 저장할 새로운 보관소다.
+<br><br>
+
+<span class="green">기생충 보관소를 업그레이드하여, 약간의 추가 공간을 제공하고 그들이 더 오래 생존할 수 있게 한다.</span>
+<br>
+<span class="gold">비용은 £20000.</span>
+<br>
+<span class="blue">작업에는 7일이 걸린다.</span>
+<br>
+<span class="blue">작업이 끝날 때까지 농장에 일꾼들이 있을 것이다.</span>
+<br><br>
+<<if $farm.build>>
+	<span class="blue">한 번에 하나의 업그레이드 작업만 진행할 수 있다.</span>
+	<br>
+<<elseif $money gte 2000000>>
+	<<link [[작업을 시작한다 (0:20)|Farm Upgrades Build]]>><<pass 20>><<set $money -= 2000000>><<set $farm.build to "parasites 2">><<set $farm.build_timer to 7>><</link>>
+	<br>
+<</if>>
+<br>
+<<link [[뒤로|Farm Upgrades]]>><</link>>
+<br>
+
+:: Farm Upgrades Irrigation
+
+마을의 강과 연결된 관개 수로.
+<br><br>
+
+<span class="green">밭에 관개 수로를 추가하여 더 이상 농작물에 물을 줄 필요가 없도록 한다.</span>
+<br>
+<span class="gold">비용은 £5000.</span>
+<br>
+<span class="blue">작업에는 3일이 걸린다.</span>
+<br>
+<span class="blue">작업이 끝날 때까지 농장에 일꾼들이 있을 것이다.</span>
+<br><br>
+<<if $farm.build>>
+	<span class="blue">한 번에 하나의 업그레이드 작업만 진행할 수 있다.</span>
+	<br>
+<<elseif $money gte 500000>>
+	<<link [[작업을 시작한다 (0:20)|Farm Upgrades Build]]>><<pass 20>><<set $money -= 500000>><<set $farm.build to "irrigation">><<set $farm.build_timer to 3>><</link>>
+	<br>
+<</if>>
+<br>
+<<link [[뒤로|Farm Upgrades]]>><</link>>
+<br>

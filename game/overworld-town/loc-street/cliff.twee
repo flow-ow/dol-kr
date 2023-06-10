@@ -1,15 +1,17 @@
-:: Cliff Street [nobr]
+:: Cliff Street
 
-<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "cliff">>
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "cliff">><<getTarget true>>
 당신은 클리프 가에 있다. 이곳엔 시청을 포함한 여러 공공기관이 위치해있다. 오션 브리즈 카페가 바닷가 옆에 있다.
-<<if $chef_state is 9>>
+<<if $chef_state is 9 and $daystate isnot "night">>
 	카페의 화려한 문 밖에 줄이 늘어서있다.
 <<elseif $chef_state is 7 and $chef_rework lte 0>>
 	<span class="teal">새 건물이 완공되었다.</span>
 <<elseif $chef_state is 7 and $chef_rework lte 30>>
 	<span class="blue">카페는 비계로 둘러싸여있고, 건축 자재가 부지 곳곳에 놓여있다.</span>
-<<elseif $chef_state gte 2>>
+<<elseif $chef_state gte 2 and $daystate isnot "night">>
 	카페 밖에 줄이 늘어서있다.
+<<elseif $oceanbreezejob isnot 1>>
+	창문의 푯말에는 다음과 같이 써 있다: "직원 구함."
 <</if>>
 해변으로 향하는 길이 있다.
 <<if $daystate is "day">>
@@ -21,11 +23,29 @@
 		바다로부터 산들바람이 가볍게 불어온다.
 	<</if>>
 <<elseif $daystate is "dawn">>
-	도로에 차가 아주 많다. 사람들이 직장으로 가고 있다.
+	<<if $weather is "rain">>
+		비가 바다에서부터 휘몰아친다.
+	<<elseif $weather is "snow">>
+		차가운 바람이 바다에서부터 윙윙거린다.
+	<<else>>
+		도로에 차가 아주 많다. 사람들이 직장으로 가고 있다.
+	<</if>>
 <<elseif $daystate is "dusk">>
-	도로에 차가 아주 많다. 사람들이 직장에서 집으로 돌아가고 있다.
+	<<if $weather is "rain">>
+		비가 바다에서부터 휘몰아치며, 근무를 마치고 집으로 향하는 사람들을 흠뻑 적신다.
+	<<elseif $weather is "snow">>
+		차가운 바람이 바다에서부터 윙윙거리며, 근무를 마치고 집으로 향하는 사람들을 오싹하게 한다.
+	<<else>>
+		도로에 차가 아주 많다. 사람들이 직장에서 집으로 돌아가고 있다.
+	<</if>>
 <<elseif $daystate is "night">>
-	거리는 어둡고 조용하다. 오직 바닷소리만이 들려온다.
+	<<if $weather is "rain">>
+		바다가 아래에서 으르렁거린다.
+	<<elseif $weather is "snow">>
+		바다가 아래에서 설렁거린다.
+	<<else>>
+		거리는 어둡고 조용하다. 오직 바닷소리만이 들려온다.
+	<</if>>
 <</if>>
 <<streeteffects>>
 <br><br>
@@ -37,55 +57,68 @@
 	<</if>>
 <</if>>
 
-<<if ndef $pillory_tenant>><<setup_pillory>><</if>>
-<<if $pillory_tenant.exists is 1>> /* If someone is in pillory... */
-	<<if $days gt $pillory_tenant.endday>>/* If sentence finished before today. */
-		<<setup_pillory>>
-	<<elseif ($days is $pillory_tenant.endday)>>
-		<<if $hour gt $pillory_tenant.endhour>> /* If ended earlier today */
+<<if $robinmissing is "pillory">> <!-- Robin is in pillory, or is scheduled to be -->
+	<<if $hour lt 15>>
+		<<if $robinPillory.known is 1>>
+			Robin will be locked in the pillory today at <<ampm 15 00>>.
+			<br><br>
+		<<else>>
+			The pillory is empty, but a crowd is starting to gather regardless.
+		<</if>>
+	<<else>>
+		You see Robin in the pillory. You are unsure when <<nnpc_he "Robin">> is scheduled for release.
+		<<set $robinPillory.known to 1>> <!-- known means you know that robin is in the pillory -->
+		<br><br>
+	<</if>>
+<<else>>
+	<<if ndef $pillory_tenant>><<setup_pillory>><</if>>
+	<<if $pillory_tenant.exists is 1>> /* If someone is in pillory... */
+		<<if $days gt $pillory_tenant.endday>>/* If sentence finished before today. */
 			<<setup_pillory>>
-		<<elseif $hour is $pillory_tenant.endhour>> /* If ending now? */
-			<<end_npc_pillory>>
-		<<else>> /* Sentence ongoing. */
+		<<elseif ($days is $pillory_tenant.endday)>>
+			<<if $hour gt $pillory_tenant.endhour>> /* If ended earlier today */
+				<<setup_pillory>>
+			<<elseif $hour is $pillory_tenant.endhour>> /* If ending now? */
+				<<end_npc_pillory>>
+			<<else>> /* Sentence ongoing. */
+				<<npc_pillory>>
+			<</if>>
+		<<else>> /* Sentence ongoing to tomorrow. */
 			<<npc_pillory>>
 		<</if>>
-	<<else>> /* Sentence ongoing to tomorrow. */
-		<<npc_pillory>>
+	<<elseif $rng %10 is 0>> /* Pillory empty gives 10% chance of new person */
+		<<new_npc_pillory>>
 	<</if>>
-<<elseif $rng %10 is 0>> /* Pillory empty gives 10% chance of new person */
-	<<new_npc_pillory>>
 <</if>>
 
-<<if $arousal gte 10000>>
+<<if $arousal gte $arousalmax>>
 	<<orgasmstreet>>
 <</if>>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax and !$possessed>>
 	<<passoutstreet>>
-<<elseif $chef_event gte random(1, 100) and $exposed lte 0>>
-	<<set $rng to random(1, 100)>>
+<<elseif $chef_event gte random(1, 100) and $exposed lte 0 and !$possessed>>
+	<<rng>>
 	<<if $chef_sus gte 100>>
 		<<set $chef_sus to 30>>
-		<<generate1>><<person1>>경찰차 한 대가 당신 옆에서 멈추더니, <<personPost "이">> 걸어나온다.
-		<br><br>
-		"곤란하게 됐어, 꼬맹아." <<hePost "이">> 말한다. "네가 만드는 그 크림에 대해 충격적인 이야기가 좀 들려오더라고. 보건 규정을 조롱하는 듯한 방식이라고 말이야. 그런 류의 이야기는 아주 심각하게 받아들여지기 때문에, 테스트 몇 개를 거쳤지." <<HePost "이">> 조수석 문을 연다.
+		<<generatePolice 1>><<person1>>경찰차 한 대가 당신 옆에서 멈추더니, <<personPost "이">> 걸어나온다. "곤란하게 됐어, <<girl_ a>>." <<hePost "이">> 말한다. "네가 만드는 그 크림에 대해 충격적인 이야기가 좀 들려오더라고. 보건 규정을 조롱하는 듯한 방식이라고 말이야. 그런 류의 이야기는 아주 심각하게 받아들여지기 때문에, 테스트 몇 개를 거쳤지." <<HePost "이">> 조수석 문을 연다.
 		<br><br>
 		"안에 타." <<hePost "이">> 말한다. "내 말을 따르는 게 좋을 거야."
 		<br><br>
 
-		<<link [[탄다|Chef Blackmail Car]]>><<set $submissive += 1>><</link>>
+		<<link [[차에 탄다|Chef Blackmail Car]]>><<sub 1>><</link>>
 		<br>
-		<<link [[거부한다|Chef Blackmail Car Refuse]]>><<crimeup 3000>><<set $submissive -= 1>><</link>><<crime>>
+		<<link [[거부한다|Chef Blackmail Car Refuse]]>><<crimeup 3000>><<def 1>><</link>><<crime>>
 	<<elseif $chef_sus gte 10 and $rng gte 51>>
-		<<generate1>><<person1>>"거기 너." 옆에서 목소리가 들려온다. "네가 셰프지." 고개를 돌리자 <<personPost "이">> 골목길 벽에 기대어 서있는 게 보인다. "크림 참 좋더라. 정말 맛있어. 근데 왠지 거기 들어가는 재료를 내가 맞출 수 있을 거 같은데." <<HePost "은">> 씩 웃는다. "너도 참 짖궂은 녀석이야. 분명 저기 높으신 분들이 알면 참 곤란해지는 재료라고 할 수 있겠지."
+		<<generate1>><<person1>>"거기 너." 옆에서 목소리가 들려온다. "네가 셰프지." 고개를 돌리자 <<personPost "이">> 골목길 벽에 기대어 서있는 게 보인다. "크림 참 좋더라. 정말 맛있어. 근데 왠지 거기 들어가는 재료를 내가 맞출 수 있을 거 같은데." <<HePost "은">> 씩 웃는다. "너도 참 짓궂은 녀석이야. 분명 저기 높으신 분들이 알면 참 곤란해지는 재료라고 할 수 있겠지."
 		<br><br>
 
 		<<link [[뭘 원하는지 묻는다|Chef Blackmail Ask]]>><</link>>
 		<br>
-		<<link [[협박당하지 않을 거라 말한다|Chef Blackmail Refuse]]>><<set $chef_sus += 10>><</link>><<ggsuspicion>>
+		<<link [[협박당하지 않을 거라 말한다|Chef Blackmail Refuse]]>><<def 1>><<set $chef_sus += 10>><</link>><<ggsuspicion>>
 		<br>
 
 	<<else>>
-		<<generate1>><<person1>><<personPost "이">> 당신에게 다가온다. "거기 빵 먹어봤어." <<hePost "이">> 말한다. "그 크림은 정말 최고야!" <<His>> 얼굴이 환해지더니, <<hePost "은">> 당신의 팔에 묻은 뭔가를 닦아낸다. "여기 조금 흘렸네." <<hePost "이">> 말한다. 저지하기도 전에 <<hePost "은">> 손가락을 입가로 가져간다.
+		<<generate1>><<person1>><<personPost "이">> 당신에게 다가온다. "거기 빵 먹어봤어," <<hePost "이">> 말한다. "그 크림은 정말 최고야!" <<His_ yi>> 얼굴이 환해지더니, <<hePost "은">> 당신의 팔에 묻은 뭔가를 닦아낸다. "여기 조금 흘렸네," <<hePost "이">> 말한다. 당신이 <<him_ ul>> 저지하기도 전에 <<hePost "은">> 그것을 핥는다.
 		<br><br>
 
 		"정말 맛있어." <<hePost "이">> 말한다. "근데 뭔가 익숙한 맛이란 말이지." <<hePost "이">> 잠시 뭔가 알아낸듯한 표정을 하더니, 곧 고개를 내젓는다. "미안. 빵 열심히 만들어."
@@ -96,43 +129,50 @@
 		<br>
 	<</if>>
 <<else>>
-<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
 		<<eventsstreet>>
 	<<else>>
-		<<if $map.top is true>>
+		<<if $options.mapTop is true>>
 			<<map "cliff">>
 			<br>
 		<</if>>
 		주요 장소
 		<br>
 		<<if $scienceproject is "ongoing" and $scienceprojectdays is 0 and $daystate is "day" and $exposed lte 0>>
-			<<link [[과학전람회에 참가한다|Science Fair]]>><</link>>
+			<<scienceicon>><<link [[과학전람회에 참가한다|Science Fair]]>><</link>>
 			<br>
 		<</if>>
 		<<if $mathsproject is "ongoing" and $mathsprojectdays is 0 and $daystate is "day" and $exposed lte 0>>
-			<<link [[수학 경시대회에 참가한다|Maths Competition]]>><</link>>
+			<<mathicon>><<link [[수학 경시대회에 참가한다|Maths Competition]]>><</link>>
 			<br>
 		<</if>>
-		<<if $pillory_tenant.exists is 1 and $exposed lte 0>>
-			<<link [[공개굴욕형을 구경한다 (0:10)|Cliff Street Pillory]]>><<pass 10>><</link>>
+		<<if $robinmissing is "pillory" and $exposed lte 0>>
+			<<if $hour gte 15 and $hour lte 22>>
+				<<pilloryicon>><<link [[Watch pillory (0:10)|Robin Pillory Watch]]>><<pass 10>><</link>>
+			<<elseif $hour gte 23>>
+				<<pilloryicon>><<link [[Watch pillory (0:10)|Robin Pillory Failure]]>><<pass 10>><</link>>
+			<</if>>
+			<br>
+		<<elseif $pillory_tenant.exists is 1 and $exposed lte 0>>
+			<<pilloryicon>><<link [[공개굴욕형을 구경한다 (0:10)|Cliff Street Pillory]]>><<pass 10>><</link>>
 			<br>
 		<</if>>
-		<<customHome "cliff">><br><<link [[해변 (0:05)|Beach]]>><<pass 5>><</link>>
+		<<customHome "cliff">><br><<beachicon>><<link [[해변 (0:05)|Beach]]>><<pass 5>><</link>>
 		<br>
 		<<if $chef_state is 8 and $daystate is "dusk">>
-		<<link [[개장 행사에 참석한다 (5:00)|Chef Opening]]>><</link>>
-		<br>
+			<<cafeicon>><<link [[개장 행사에 참석한다 (5:00)|Chef Opening]]>><</link>>
+			<br>
 		<<elseif $chef_state is 7 and $chef_rework gte 1 and $chef_rework lte 30>>
 
 		<<elseif $chef_state is 7 and $chef_rework lte 0>>
 			<<if $exposed lte 0>>
-				<<link [[카페 (0:01)|Ocean Breeze Rework]]>><<pass 1>><</link>>
+				<<cafeicon>><<link [[카페 (0:01)|Ocean Breeze Rework]]>><<pass 1>><</link>>
 				<br>
 			<</if>>
 		<<elseif $openinghours is 1>>
 			<<if $exposed lte 0>>
-				<<link [[카페 (0:01)|Ocean Breeze]]>><<pass 1>><</link>>
+				<<cafeicon>><<link [[카페 (0:01)|Ocean Breeze]]>><<pass 1>><</link>>
 				<br>
 			<<else>>
 			<</if>>
@@ -140,7 +180,7 @@
 			<span class="blue">사람들이 카페에서 나오고 있다.</span> 문을 닫을 시간인가 보다.
 			<br>
 		<<else>>
-			<<link [[카페|Ocean Breeze Lock]]>><</link>>
+			<<cafeicon>><<link [[카페 (0:01)|Ocean Breeze Lock]]>><<pass 1>><</link>>
 			<br>
 		<</if>>
 		<br>
@@ -160,7 +200,7 @@
 		<<commercial>>
 		<<stormdrain>>
 		<<displayLinks>>
-		<<if $map.top isnot true>>
+		<<if $options.mapTop isnot true>>
 			<br>
 			<<map "cliff">>
 		<</if>>
@@ -169,13 +209,13 @@
 <<set $eventskip to 0>>
 <<set $chef_event to 0>>
 
-:: Cliff Street Pillory [nobr]
+:: Cliff Street Pillory
 <<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "cliff">>
 당신은 클리프 가에서 행해지는 공개굴욕형을 구경하는 관중과 함께한다.
 <<npc_pillory_detail>>
-<<if $stress gte 3000>>
+<<if $stress gte ($stressmax / 10) * 3>>
 <span class="gold">당신은 스트레스를 받는다.</span> 상황을 감당하기가 힘들다.
-몇몇 사람들이 <<the_pillory_person>><<if $pillory_tenant.special.name is "Leighton">>을<<else>>를<</if>> 향해 과일을 던진다. 지켜보고 있자니 재밌을 것 같다. <span class="teal">당신은 거기에 끼고 싶은 충동을 느낀다.</span> 저 사람도 저런 취급을 당할만해서 저기 있는 것이리라.
+몇몇 사람들이 <<the_pillory_person "을">> 향해 과일을 던진다. 지켜보고 있자니 재밌을 것 같다. <span class="teal">당신은 거기에 끼고 싶은 충동을 느낀다.</span>
 <<if $daystate isnot "night">>
 <br>
 품위 있는 이들이 잠에 들어있을 때, 당신은 과감하게 더 야한 짓을 할 수 있을 것이다.
@@ -183,9 +223,9 @@
 <br><br>
 <</if>>
 <<if $daystate is "night">>
-	<<if $stress gte 3000>>
+	<<if $stress gte ($stressmax / 10) * 3>>
 		<<if $pillory_tenant.fruitstock gte 1>>
-			<<link [[과일을 던진다|Cliff Street Prisoner]]>><<pass 2>><<set $phase to 0>><<stress -6>><<set $pillory_tenant.fruitstock -= 1>><</link>><<lstress>>
+			<<link [[과일을 던진다 (0:02)|Cliff Street Prisoner]]>><<pass 2>><<set $phase to 0>><<stress -6>><<set $pillory_tenant.fruitstock -= 1>><</link>><<lstress>>
 			<br>
 		<<else>>
 			<span class="red">당장은 던질 과일이 남아있지 않다.</span>
@@ -193,21 +233,21 @@
 		<</if>>
 	<</if>>
 	<<if $cat gte 6 and ($pillory_tenant.ass + $pillory_tenant.genital) gte 2>>
-		<<link [[죄수를 그루밍 해준다|Cliff Street Prisoner]]>><<pass 5>><<set $phase to 1>><</link>>
+		<<link [[죄수를 그루밍 해준다 (0:05)|Cliff Street Prisoner]]>><<pass 5>><<set $phase to 1>><</link>>
 		<br>
 	<</if>>
 	<<if $pillory_tenant.lowerexposed gte 2 and $stress gte 4000 and $trauma gte (($traumamax / 5) * 1)>>
-		<<link [[죄수의 엉덩이를 때린다|Cliff Street Prisoner]]>><<pass 5>><<set $phase to 2>><</link>><<llstress>><<ltrauma>>
+		<<link [[죄수의 엉덩이를 때린다 (0:05)|Cliff Street Prisoner]]>><<pass 5>><<set $phase to 2>><</link>><<llstress>><<ltrauma>>
 		<br>
 	<</if>>
 	<<if $pillory_tenant.lowerexposed lte 1 or (($pronoun is "m" and $pillory_tenant.upperexposed lte 1) or ($pronoun is "f" and $pillory_tenant.upperexposed lte 2)) and $stress gte 7000 and $trauma gte (($traumamax / 5) * 2)>>
-		<<link [[죄수의 옷을 벗긴다|Cliff Street Prisoner]]>><<pass 2>><<set $phase to 3>><</link>><<llstress>>
+		<<link [[죄수의 옷을 벗긴다 (0:02)|Cliff Street Prisoner]]>><<pass 2>><<set $phase to 3>><</link>><<llstress>>
 		<br>
 	<</if>>
 <<else>>
-	<<if $stress gte 4000>>
+	<<if $stress gte ($stressmax / 5) * 2>>
 		<<if $pillory_tenant.fruitstock gte 1>>
-			<<link [[과일을 던진다|Cliff Street Prisoner]]>><<pass 2>><<set $phase to 0>><<stress -6>><<set $pillory_tenant.fruitstock -= 1>><</link>><<lstress>>
+			<<link [[과일을 던진다 (0:02)|Cliff Street Prisoner]]>><<pass 2>><<set $phase to 0>><<stress -6>><<set $pillory_tenant.fruitstock -= 1>><</link>><<lstress>>
 			<br>
 		<<else>>
 			<span class="red">당장은 던질 과일이 남아있지 않다.</span>
@@ -215,7 +255,7 @@
 		<</if>>
 	<</if>>
 		<<if $pillory_tenant.lowerexposed lte 1 and ($stress gte 6000 or $trauma gte (($traumamax / 5) * 2))>>
-		<<link [[팬티를 잡아올린다|Cliff Street Prisoner]]>><<pass 5>><<set $phase to 4>><<stress -12>><</link>><<llstress>><<ltrauma>>
+		<<link [[팬티를 잡아올린다 (0:05)|Cliff Street Prisoner]]>><<set $pillory_tenant.wedgied to 1>><<pass 5>><<set $phase to 4>><<stress -12>><</link>><<llstress>><<ltrauma>>
 		<br>
 	<</if>>
 <</if>>
@@ -223,7 +263,7 @@
 <<link [[떠난다|Cliff Street]]>><</link>>
 <br>
 
-:: Cliff Street Prisoner [nobr]
+:: Cliff Street Prisoner
 <<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "cliff">>
 <<get_pillory_npc>><<person1>>
 <<if $phase is 0>>
@@ -233,19 +273,19 @@
 	<<if $rng gte 75>>
 	<<set $pillory_tenant.fruit += 1>>
 		던지고, <span class="teal"><<him>>의 얼굴에 정확히 맞는다.</span> 그때의 반응은 정말로 우습다.
-		<<if $physique gte ($physiquesize / 7) * 4>>상당한 힘을 실어 던졌으니, 꽤나 아플 것이다.<</if>>
+		<<if currentSkillValue('physique') gte ($physiquesize / 7) * 4>>You put a lot of strength behind it, it must have hurt.<</if>>
 		<<llstress>><<stress -12>>
 		<br>
 		군중이 환호하며 웃는다.
 	<<else>>
-		던지나 완전히 빗나간다.<<if $physique lte ($physiquesize / 7) * 3>> 근처의 몇몇 사람들이 제대로 던지라며 당신을 조롱한다.<</if>>
+		but miss entirely.<<if currentSkillValue('physique') lte ($physiquesize / 7) * 3>> Some people nearby mock your feeble throw.<</if>>
 	<</if>>
 <<elseif $phase is 1>>
-	당신은 <<the_pillory_person>>의 엉덩이와 사타구니에 묻은 크림을 할짝인다. 군중은 그 모습을 뚫어져라 쳐다본다.
-	<<set $famesex +=20>>
+	당신은 <<the_pillory_persons>> 엉덩이와 사타구니에 묻은 크림을 할짝인다. 군중은 그 모습을 뚫어져라 쳐다본다.
+	<<famesex 20>>
 <<elseif $phase is 2>>
 <<set $pillory_tenant.spank += 1>><<control 10>><<stress -24>><<trauma -12>>
-	당신은 <<print either("맹렬히","분한듯이","잔인하게","독선적으로","광적으로")>> <<the_pillory_person>>의 엉덩이를 때린다. 어째선가,
+	당신은 <<print either("맹렬히","분한듯이","잔인하게","독선적으로","광적으로")>> <<the_pillory_persons>> 엉덩이를 때린다. 어째선가,
 	<<print either("그 행동으로부터 당신은 통제감과 행복을 느낀다.","그러고나니 마음이 차분해진다.","그러고나니 마음 속의 그림자가 걷힌 느낌이다.")>>
 	<br>
 	군중의 일부가 환호한다.
@@ -253,38 +293,49 @@
 	뒤에서부터 <<the_pillory_person>>에게 다가가, 당신은 <<print either("부드럽게","서투르게","재빨리")>>
 	<<if $pronoun is "m">>
 		<<if $pillory_tenant.upperexposed lte 1>>
-			<<set $pillory_tenant.upperexposed to 2>><<his>> 상의를 벗겨, 가슴을 완전히 노출
+			<<set $pillory_tenant.upperexposed to 2>><<his_ yi>> 상의를 벗겨, 가슴을 완전히 노출
 			<<if $pillory_tenant.lowerexposed lte 1>>시키고<</if>>
 		<</if>>
-		<<if $pillory_tenant.lowerexposed lte 1>><<his>>
+		<<if $pillory_tenant.lowerexposed lte 1>><<his_ yi>>
 			<<if $pillory_tenant.lowerexposed is 0>>바지와<</if>>
-			속옷을 내려 바닥에 내던진 뒤, 엉덩이와 <<trPenisdesc $pillory_tenant.person.penisdesc "을">>_trResult 노출
+			속옷을 내려 바닥에 내던진 뒤, <<his_ yi>> 엉덩이와
+			<<if $pillory_tenant.person.gender is "m">>
+				<<trPenisdesc $pillory_tenant.person.penisdesc "을">>_trResult 노출
+			<<else>>
+				보지를 노출
+			<</if>>
 			<<set $pillory_tenant.lowerexposed to 2>>
 		<</if>>
 	<<elseif $pronoun is "f">>
 		<<if $pillory_tenant.upperexposed lte 2>>
-			<<if $pillory_tenant.upperexposed lte 0>><<his>> 상의를 벗겨<</if>>
-			<<his>> 브라를 벗긴 뒤, <<his>> <<trBreastsdesc $pillory_tenant.person.breastsdesc "을">>_trResult 완전히 노출
+			<<if $pillory_tenant.upperexposed lte 0>><<his_ yi>> 상의를 벗겨<</if>>
+			<<his_ yi>> 브라를 벗긴 뒤, <<his_ yi>> <<trBreastsdesc $pillory_tenant.person.breastsdesc "을">>_trResult 완전히 노출
 			<<if $pillory_tenant.lowerexposed lte 1>>시켜 모두에게 보인다. 일말의 지체도 없이, 당신은 곧<</if>>
 			<<set $pillory_tenant.upperexposed to 3>>
 		<</if>>
 		<<if $pillory_tenant.lowerexposed lte 1>>
-			<<if $pillory_tenant.lowerexposed lte 0>><<his>> 치마를 휙 들추고는 팬티를 바닥으로 끌어내린 뒤,
-			<<else>><<the_pillory_person>>의 팬티를 벗겨 바닥에 내던진 뒤,<</if>>
-			<<his>> 보지와 엉덩이를 노출
+			<<if $pillory_tenant.lowerexposed lte 0>><<his_ yi>> 치마를 휙 들추고는 팬티를 바닥으로 끌어내린 뒤,
+			<<else>><<the_pillory_persons>> 팬티를 벗겨 바닥에 내던진 뒤,<</if>>
+			<<his_ yi>>
+			<<if $pillory_tenant.person.gender is "m">>
+				<<trPenisdesc $pillory_tenant.person.penisdesc "과">>_trResult 
+			<<else>>
+				보지와 
+			<</if>>
+			엉덩이를 노출
 			<<set $pillory_tenant.lowerexposed to 2>>
 		<</if>>
 	<<else>> /* in case the game goes fully non binary */
-		<<his>> 옷을 전부 찢어발긴 뒤, 몸을 완전히 노출
+		<<his_ yi>> 옷을 전부 찢어발긴 뒤, 몸을 완전히 노출
 	<</if>>시켜 군중에게 내보인다. <<HePost "은">> 충격에 비명을 지른다.
-	<br>
+	<br><br>
 
 	어떤 이들은 <<print either("헉 하고 숨을 들이쉬나,","웃음을 터트리나,","불평을 내뱉으나,","침묵을 지키나,","휘파람을 불고,","조롱을 날리고,","음란한 위협을 가하고,")>> 적잖은 이들이 환호한다.
 <<elseif $phase is 4>><<control 5>><<stress -20>><<trauma -4>><<set $pillory_tenant.broken += 1>>
 	뒤에서 다가가, 당신은 <<print either("뻔뻔스럽게","공격적으로","재빨리","보복하듯","은밀히")>>
-	<<the_pillory_person>>의 <<if $pronoun is "m">>속옷을<<else>>팬티를<</if>> 붙잡고는 강하게 들어올린다.
+	<<the_pillory_persons>> <<if $pronoun is "m">>속옷을<<else>>팬티를<</if>> 붙잡고는 강하게 들어올린다.
 	<br>
-	<<His>> 충격받은듯한 비명 소리에 당신은 웃으며 달아난다. 군중에 재합류한 뒤에, <<his>> 뚱한 표정에 당신은 다시 한 번 웃음을 터트린다.
+	<<His_ yi>> 충격받은듯한 비명 소리에 당신은 웃으며 달아난다. 군중에 재합류한 뒤에, <<his_ yi>> 뚱한 표정에 당신은 다시 한 번 웃음을 터트린다.
 	구속대에 갇힌 채로는 고쳐입을 수도 없다. <<HePost "은">> 물론이고 지켜보고 있는 모두가 그걸 알고 있다.
 	<br>
 	군중의 대다수가 당신과 즐거움을 나누는 것처럼 보인다.

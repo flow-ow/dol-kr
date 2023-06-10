@@ -1,6 +1,6 @@
 :: Widgets Feet [widget]
 <!-- For any item that has a colour_combat tag, set it to 0 if that item ever gets its own combat sprites. -->
-<<widget "init_feet">><<nobr>>
+<<widget "init_feet">>
 <<set setup.clothes.feet to [
 
 	{index: 0,
@@ -49,13 +49,13 @@
 	warmth: 10,
 	cost: 2500,
 	description: "Smart and suitable for school.",
-	shop: ["clothing"],
+	shop: ["clothing", "school"],
 	accessory: 0,
 	accessory_colour: 0,
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "School shoes.png",
+	iconFile: "school_shoes.png",
 	accIcon: 0
 },
 
@@ -84,7 +84,7 @@
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Tuxedo shoes.png",
+	iconFile: "tuxedo_shoes.png",
 	accIcon: 0
 },
 
@@ -101,7 +101,7 @@
 	colour: 0,
 	colour_options: [],
 	colour_combat:"black",
-	type: ["fetish"],
+	type: ["fetish", "shackle"],
 	gender: "n",
 	warmth: 0,
 	cost: 10000,
@@ -141,7 +141,7 @@
 	accessory_colour_combat:"brown",
 	cursed: 0,
 	location: 0,
-	iconFile: "Sandals.png",
+	iconFile: "sandals.png",
 	accIcon: 0
 },
 
@@ -170,7 +170,7 @@
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Dress sandals.png",
+	iconFile: "dress_sandals.png",
 	accIcon: 0
 },
 
@@ -199,8 +199,8 @@
 	accessory_colour_sidebar: 1,
 	cursed: 0,
 	location: 0,
-	iconFile: "Trainers.png",
-	accIcon: "Trainers_acc.png"
+	iconFile: "trainers.png",
+	accIcon: "trainers_acc.png"
 },
 
 	{index: 7,
@@ -228,7 +228,7 @@
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Witch shoes.png",
+	iconFile: "witch_shoes.png",
 	accIcon: 0
 },
 
@@ -256,7 +256,7 @@
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Wellies.png",
+	iconFile: "wellies.png",
 	accIcon: 0
 },
 
@@ -279,13 +279,13 @@
 	warmth: 10,
 	cost: 5000,
 	description: "Makes you feel rather girly.",
-	shop: [],
+	shop: ["adult"],
 	accessory: 0,
 	accessory_colour: 0,
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Platform heels.png",
+	iconFile: "platform_heels.png",
 	accIcon: 0
 },
 
@@ -314,7 +314,7 @@
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Kitten heels.png",
+	iconFile: "kitten_heels.png",
 	accIcon: 0
 },
 
@@ -344,7 +344,7 @@
 	accessory_colour_combat: 0,
 	cursed: 0,
 	location: 0,
-	iconFile: "Wedge sandals.png",
+	iconFile: "wedge_sandals.png",
 	accIcon: 0,
 },
 
@@ -367,13 +367,13 @@
 	warmth: 10,
 	cost: 12500,
 	description: "Quite tall and very grown-up.",
-	shop: ["clothing"],
+	shop: ["clothing", "adult"],
 	accessory: 0,
 	accessory_colour: 0,
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Court heels.png",
+	iconFile: "court_heels.png",
 	accIcon: 0
 },
 
@@ -396,13 +396,13 @@
 	warmth: 20,
 	cost: 16000,
 	description: "A powerful choice.",
-	shop: ["clothing"],
+	shop: ["clothing", "adult"],
 	accessory: 0,
 	accessory_colour: 0,
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Heeled boots.png",
+	iconFile: "heeled_boots.png",
 	accIcon: 0
 },
 
@@ -425,14 +425,14 @@
 	warmth: 10,
 	cost: 25000,
 	description: "Crazy tall and very slutty.",
-	shop: ["clothing"],
+	shop: ["adult"],
 	accessory: 1,
 	accessory_colour: 0,
 	accessory_colour_options: ["black", "blue", "brown", "green", "pink", "purple", "red", "tangerine", "teal", "white", "yellow", "custom"],
 	accessory_colour_sidebar: 1,
 	cursed: 0,
 	location: 0,
-	iconFile: "Stripper heels.png",
+	iconFile: "stripper_heels.png",
 	accIcon: 0
 },
 
@@ -461,7 +461,7 @@
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Horsebit loafers.png",
+	iconFile: "horsebit_loafers.png",
 	accIcon: 0
 },
 
@@ -490,7 +490,7 @@
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Cordovan loafers.png",
+	iconFile: "cordovan_loafers.png",
 	accIcon: 0
 },
 
@@ -513,13 +513,13 @@
 	warmth: 40,
 	cost: 2000,
 	description: "Keeps your toes warm.",
-	shop: ["clothing"],
+	shop: ["clothing", "adult"],
 	accessory: 0,
 	accessory_colour: 0,
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Bunny slippers.png",
+	iconFile: "bunny_slippers.png",
 	accIcon: 0
 },
 
@@ -548,7 +548,7 @@
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Combat boots.png",
+	iconFile: "combat_boots.png",
 	accIcon: 0
 },
 
@@ -577,7 +577,7 @@
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Field boots.png",
+	iconFile: "field_boots.png",
 	accIcon: 0
 },
 
@@ -606,7 +606,7 @@
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Paddock boots.png",
+	iconFile: "paddock_boots.png",
 	accIcon: 0
 },
 
@@ -635,7 +635,7 @@
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Work boots.png",
+	iconFile: "work_boots.png",
 	accIcon: 0
 },
 
@@ -664,7 +664,7 @@
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Flippers.png",
+	iconFile: "flippers.png",
 	accIcon: 0
 },
 
@@ -693,7 +693,7 @@
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Ice skates.png",
+	iconFile: "ice_skates.png",
 	accIcon: 0
 },
 
@@ -716,16 +716,138 @@
 	warmth: 40,
 	cost: 4500,
 	description: "Covers your knees.",
+	shop: ["clothing", "adult"],
+	accessory: 0,
+	accessory_colour: 0,
+	accessory_colour_options: [],
+	cursed: 0,
+	location: 0,
+	iconFile: "long_boots.png",
+	accIcon: 0
+},
+
+	{index: 25,
+	name: "light-up trainers",
+	name_cap: "Light-up trainers",
+	variable: "lightuptrainers",
+	integrity: 250,
+	integrity_max: 250,
+	fabric_strength: 20,
+	reveal: 200,
+	word: "n",
+	plural: 1,
+	colour: 0,
+	colour_options: ["black", "blue", "brown", "green", "pink", "purple", "red", "tangerine", "teal", "white", "yellow", "custom"],
+	colour_sidebar: 1,
+	type: ["normal"],
+	gender: "n",
+	warmth: 10,
+	cost: 4500,
+	description: "For better visibility.",
+	shop: ["clothing"],
+	accessory: 1,
+	accessory_colour: 0,
+	accessory_colour_options: [],
+	cursed: 0,
+	location: 0,
+	iconFile: "light-up_trainers.png",
+	accIcon: "light-up_trainers_acc.png"
+},
+
+	{index: 26,
+	name: "ball and chain",
+	name_cap: "Ball and chain",
+	variable: "ballchain",
+	integrity: 400,
+	integrity_max: 400,
+	fabric_strength: 20,
+	reveal: 200,
+	word: "n",
+	plural: 0,
+	colour: 0,
+	colour_options: [],
+	colour_combat:"black",
+	type: ["fetish", "shackle"],
+	gender: "n",
+	warmth: 0,
+	cost: 10000,
+	description: "Requires a special tool to unlock.",
+	shop: [],
+	accessory: 0,
+	accessory_colour: 0,
+	accessory_colour_options: [],
+	cursed: 1,
+	location: 0,
+	iconFile: 0,
+	accIcon: 0
+},
+
+	{index: 27,
+	name: "cowboy boots",
+	name_cap: "Cowboy boots",
+	variable: "cowboy",
+	integrity: 350,
+	integrity_max: 350,
+	fabric_strength: 40,
+	reveal: 1,
+	word: "n",
+	plural: 1,
+	colour: 0,
+	colour_options: [],
+	colour_combat:"brown",
+	type: ["normal", "riding"],
+	gender: "m",
+	femininity: -200,
+	warmth: 30,
+	cost: 8500,
+	description: "Spurs included.",
 	shop: ["clothing"],
 	accessory: 0,
 	accessory_colour: 0,
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Long boots.png",
+	iconFile: "cowboy_boots.png",
 	accIcon: 0
+},
+
+	{index: 28,
+	name: "high top trainers",
+	name_cap: "High top trainers",
+	variable: "hightops",
+	integrity: 300,
+	integrity_max: 300,
+	fabric_strength: 20,
+	reveal: 1,
+	word: "n",
+	plural: 1,
+	colour: 0,
+	colour_options: ["black", "blue", "brown", "green", "pink", "purple", "red", "tangerine", "teal", "white", "yellow", "custom"],
+	colour_sidebar: 1,
+	type: ["normal"],
+	gender: "n",
+	warmth: 10,
+	cost: 6000,
+	description: "Fashionable and practical.",
+	shop: ["clothing"],
+	accessory: 0,
+	accessory_colour: 0,
+	accessory_colour_options: [],
+	cursed: 0,
+	location: 0,
+	iconFile: "trainers.png",
+	accIcon: "trainers_acc.png"
 }
 
 
 ]>>
-<</nobr>><</widget>>
+
+<!--
+	Clothes that modders add go into this array, this should be empty in the base game at all times.
+	These items should have a `modder` variable with a the modders name in a short string
+-->
+<<set setup.moddedClothes.feet to []>>
+
+<<run setup.moddedClothes.feet.forEach( (x,i) => x.index = setup.clothes.feet.length + i )>>
+<<run setup.clothes.feet.push(...setup.moddedClothes.feet)>>
+<</widget>>

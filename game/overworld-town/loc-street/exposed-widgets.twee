@@ -1,5 +1,5 @@
 :: Widgets Street Exposed [widget]
-<<widget "destinationexposed">><<nobr>>
+<<widget "destinationexposed">>
 	<<switch $bus>>
 	<<case "nightingale">>
 		<<link [[다음|Nightingale Exposed]]>><<set $eventskip to 1>><</link>>
@@ -63,94 +63,94 @@
 		<br>
 	<</switch>>
 	<br><br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "domusexposed">><<nobr>>
+<<widget "domusexposed">>
 <<link [[도무스 가 (0:05)|Domus Exposed]]>><<pass 5>><</link>>
 <br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "barbexposed">><<nobr>>
+<<widget "barbexposed">>
 <<link [[바브 가 (0:05)|Barb Exposed]]>><<pass 5>><</link>>
 <br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "danubeexposed">><<nobr>>
-<<link [[다누베 가 (0:05)|Danube Exposed]]>><<pass 5>><</link>>
+<<widget "danubeexposed">>
+<<link [[다뉴브 가 (0:05)|Danube Exposed]]>><<pass 5>><</link>>
 <br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "connudatusexposed">><<nobr>>
+<<widget "connudatusexposed">>
 <<link [[코누다투스 가 (0:05)|Connudatus Exposed]]>><<pass 5>><</link>>
 <br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "cliffexposed">><<nobr>>
+<<widget "cliffexposed">>
 <<link [[클리프 가 (0:05)|Cliff Exposed]]>><<pass 5>><</link>>
 <br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "wolfexposed">><<nobr>>
+<<widget "wolfexposed">>
 <<link [[울프 가 (0:05)|Wolf Exposed]]>><<pass 5>><</link>>
 <br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "highexposed">><<nobr>>
-<<link [[중심가 (0:05)|high Exposed]]>><<pass 5>><</link>>
+<<widget "highexposed">>
+<<link [[하이 가 (0:05)|high Exposed]]>><<pass 5>><</link>>
 <br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "starfishexposed">><<nobr>>
+<<widget "starfishexposed">>
 <<link [[스타피쉬 가 (0:05)|Starfish Exposed]]>><<pass 5>><</link>>
 <br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "nightingaleexposed">><<nobr>>
+<<widget "nightingaleexposed">>
 <<link [[나이팅게일 가 (0:05)|Nightingale Exposed]]>><<pass 5>><</link>>
 <br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "oxfordexposed">><<nobr>>
+<<widget "oxfordexposed">>
 <<link [[옥스포드 가 (0:05)|Oxford Exposed]]>><<pass 5>><</link>>
 <br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "elkexposed">><<nobr>>
+<<widget "elkexposed">>
 <<link [[엘크 가 (0:05)|Elk Exposed]]>><<pass 5>><</link>>
 <br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "merexposed">><<nobr>>
+<<widget "merexposed">>
 <<link [[메르 가 (0:05)|Mer Exposed]]>><<pass 5>><</link>>
 <br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "harvestexposed">><<nobr>>
+<<widget "harvestexposed">>
 <<link [[하베스트 가 (0:05)|Harvest Exposed]]>><<pass 5>><</link>>
 <br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "residentialexposed">><<nobr>>
+<<widget "residentialexposed">>
 <<link [[거주구 골목길 (0:05)|Residential Exposed]]>><<pass 5>><</link>>
 <br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "commercialexposed">><<nobr>>
+<<widget "commercialexposed">>
 <<link [[상업구 골목길 (0:05)|Commercial Exposed]]>><<pass 5>><</link>>
 <br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "parkexposed">><<nobr>>
+<<widget "parkexposed">>
 <<link [[공원 길 (0:05)|Park Exposed]]>><<pass 5>><</link>>
 <br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "industrialexposed">><<nobr>>
+<<widget "industrialexposed">>
 <<link [[공업구 골목길 (0:05)|Industrial Exposed]]>><<pass 5>><</link>>
 <br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "ex_init">><<nobr>>
+<<widget "ex_init">>
 <<set $ex to 1>>
 <<set $shame to 0>>
 <<if $ex_intro isnot 1>>
@@ -158,13 +158,13 @@
 	<i>당신은 바깥에서 옷을 벗고 있다! 신나는 동시에 무섭다. 너무 부끄러우면 어쩔 수 없이 안전을 위해 도망쳐서 숨게 될 것이다.</i>
 	<br><br>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "ex_end">><<nobr>>
+<<widget "ex_end">>
 <<set $ex to 0>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "ex_effects">><<nobr>>
+<<widget "ex_effects">>
 <<if $ex is 1>>
 	수치심:
 	<div class="meter">
@@ -172,4 +172,4 @@
 		<<print '<div class="redbar" style="width:' + $percent + '%"></div>'>>
 	</div>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>

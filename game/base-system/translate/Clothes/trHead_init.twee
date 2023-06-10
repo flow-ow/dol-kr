@@ -1,10 +1,10 @@
 :: Widgets trHead [widget nobr]
 <<widget "init_trHead">>
-    <<set _trClothes.head to [
+    <<set setup.trClothes.head to [
         {
             index: 0,
             name: "naked",
-            name_ko: "알몸",
+            name_ko: "벗음",
             variable: "naked",
             post: 0,
             description: "naked"
@@ -42,7 +42,7 @@
             name: "nun's veil",
             name_ko: "수녀 베일",
             variable: "nun",
-            post: 0,
+            post: 2,
             description: "원치 않는 관심으로부터 머리카락을 보호해준다."
         },
 
@@ -278,6 +278,141 @@
             variable: "racing",
             post: 0,
             description: "진지하게 말을 탈 때 쓰는 헬멧."
-        }
+        },
+		
+        {
+            index: 31,
+            name: "feathered hair clip",
+            name_ko: "깃털 머리 장식",
+            variable: "featheredhairclip",
+            post: 0,
+            description: "진짜 깃털로 만들어졌다."
+        },
+		
+        {
+            index: 32,
+            name: "hoodie hood",
+            name_ko: "후드",
+            variable: "hoodie",
+            post: 1,
+            description: "휴대용 사회적 격리기."
+        },
+		
+        {
+            index: 33,
+            name: "tam o' shanter",
+            name_ko: "스코틀랜드식 모자",
+            variable: "tam",
+            post: 1,
+            description: "정직한 남자와 예쁜 여자를 위한 것."
+        },
+		
+        {
+            index: 34,
+            name: "cat hat",
+            name_ko: "캣 모자",
+            variable: "cat",
+            post: 1,
+            description: "고양이 수염은 포함되어 있지 않다."
+        },
+		
+        {
+            index: 35,
+            name: "monster hood",
+            name_ko: "몬스터 후드",
+            variable: "monster",
+            post: 1,
+            description: "크앙."
+        },
+		
+        {
+            index: 36,
+            name: "kitty ears",
+            name_ko: "고양이 귀",
+            variable: "kitty",
+            post: 1,
+            description: "귀엽다."
+        },
+		
+        {
+            index: 37,
+            name: "mini snowman",
+            name_ko: "작은 눈사람",
+            variable: "minisnowman",
+            post: 0,
+            description: "놀랍도록 따뜻하다."
+        },
+		
+        {
+            index: 38,
+            name: "cow onesie hood",
+            name_ko: "젖소 한벌옷 후드",
+            variable: "cowonesie",
+            post: 1,
+            description: "포근하다."
+        },
+		
+        {
+            index: 39,
+            name: "baseball cap",
+            name_ko: "야구모자",
+            variable: "baseball",
+            post: 1,
+            description: "태양으로부터 가려준다."
+        },
+		
+        {
+            index: 40,
+            name: "rose",
+            name_ko: "장미꽃",
+            variable: "rose",
+            post: 0,
+            description: "금방 딴 꽃냄새가 난다."
+        },
+		
+        {
+            index: 41,
+            name: "scarecrow hat",
+            name_ko: "허수아비 모자",
+            variable: "scarecrow",
+            post: 1,
+            description: "머리속이 텅 빈 누군가가 썼던 적이 있다."
+        },
+		
+        {
+            index: 42,
+            name: "fish hairpin",
+            name_ko: "물고기 머리핀",
+            variable: "fishhairpin",
+            post: 0,
+            description: "진짜 뼈 같은 느낌이다."
+        },
+		
+        {
+            index: 43,
+            name: "pink nurse hat",
+            name_ko: "분홍 간호사 모자",
+            variable: "pinknurse",
+            post: 1,
+            description: "병원의 간호사들이 사용한다."
+        },
+		
+        {
+            index: 44,
+            name: "plastic nurse hat",
+            name_ko: "플라스틱 간호사 모자",
+            variable: "plasticnurse",
+            post: 1,
+            description: "세척하기 쉽다."
+        },
+		
+        {
+            index: 45,
+            name: "transparent nurse hat",
+            name_ko: "투명 간호사 모자",
+            variable: "transparentnurse",
+            post: 1,
+            description: "세척하기 쉽다."
+        },
     ]>>
 <</widget>>

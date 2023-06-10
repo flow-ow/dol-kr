@@ -1,9 +1,6 @@
 :: Widgets Livestock [widget]
-<<widget "livestock_sleep">><<nobr>>
-<<run Save.autosave.save(null, {"saveId":$saveId, "saveName":$saveName})>>
-<<if _preventUpdate is undefined>>
-	<<run setSaveDetail("autosave",{"saveId":$saveId,"saveName":$saveName})>>
-<</if>>
+<<widget "livestock_sleep">>
+<<set _autosavehere to true>>
 <<if $hour is 21>>
 	<<set _livestock_sleep to 9>>
 <<elseif $hour is 22>>
@@ -23,181 +20,236 @@
 		<<set $tiredness -= 250>>
 	<</if>>
 <</for>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "livestock_init">><<nobr>>
+<<widget "livestock_init">>
 <<set $livestock_river to 1>>
 <<set $livestock_fence to 1>>
 <<set $livestock_grass to 1>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "livestock_end">><<nobr>>
+<<widget "livestock_end">>
 <<unset $livestock_muzzle>>
 <<unset $livestock_dig>>
-<</nobr>><</widget>>
+<</widget>>
 
 <!-- Modified for Monster People -->
-<<widget "livestock_cows">><<nobr>>
-<<if ($monsterchance gte 1 and $hallucinations gte 1) or ($monsterchance gte 1 and $monsterhallucinations is "f") or ($bestialitydisable is "t")>>
+<<widget "livestock_cows">>
+<<if ($monsterchance gte 1 and $hallucinations gte 1) or ($monsterchance gte 1 and $monsterhallucinations is "f")>>
 	<<if $malechance is 0>>
-		<<set _text_output to "cowgirls">>
+		<<set _trResult to "암소소녀들">><<trPost 2 _args[0] _args[1]>><<set _text_output to _trResult>>
 	<<elseif $malechance is 100>>
-		<<set _text_output to "bullboys">>
+		<<set _trResult to "황소소년들">><<trPost 2 _args[0] _args[1]>><<set _text_output to _trResult>>
 	<<else>>
-		<<set _text_output to "cowgirls and bullboys">>
+		<<set _trResult to "황소소년들과 암소소녀들">><<trPost 2 _args[0] _args[1]>><<set _text_output to _trResult>>
 	<</if>>
 <<else>>
-	<<set _text_output to "cows">>
+	<<set _trResult to "암소들">><<trPost 2 _args[0] _args[1]>><<set _text_output to _trResult>>
 <</if>>
-<<print _text_output>>
-<</nobr>><</widget>>
 
-<<widget "livestock_horse">><<nobr>>
+<<if _args[0] is "cap">>
+	<<set _text_output to _text_output.toUpperFirst()>>
+<</if>>
+
+<<print _text_output>>
+<</widget>>
+
+<<widget "livestock_horse">>
 <<if ($monsterchance gte 1 and $hallucinations gte 1) or ($monsterchance gte 1 and $monsterhallucinations is "f") or ($bestialitydisable is "t")>>
-	<<set _text_output to "centaur">>
+	<<set _text_output to "centaur">><<trBeasttypeFun _text_output _args[0] _args[1]>>
 <<else>>
-	<<set _text_output to "stallion">>
+	<<if $beastmalechance gte random(1, 100)>>
+		<<set _text_output to "stallion">><<trBeasttypeFun _text_output _args[0] _args[1]>>
+	<<else>>
+		<<set _text_output to "mare">><<trBeasttypeFun _text_output _args[0] _args[1]>>
+	<</if>>
 <</if>>
-<<print _text_output>>
-<</nobr>><</widget>>
+<<print _trResult>>
+<</widget>>
 
-<<widget "livestock_obey_description">><<nobr>>
+<<widget "livestock_obey_description">>
 <<if $livestock_obey gte 100>>
-	<span class="green">The farmhands don't give you a second look. As far as they're concerned, you're a domesticated member of the herd.</span>
+	<span class="green">농장 일꾼들은 당신에게 눈길을 주지 않는다. 적어도 그들이 생각하기엔, 당신은 이미 무리의 가축화된 일원이다.</span>
 <<elseif $livestock_obey gte 80>>
-	<span class="teal">The farmhands don't pay you much attention. They expect no trouble.</span>
+	<span class="teal">농장 일꾼들은 당신에게 그리 주의를 기울이지 않는다. 그들은 문제가 일어나지 않을 것으로 보고 있다.</span>
 <<elseif $livestock_obey gte 60>>
-	<span class="lblue">The farmhands glance at you now and then, but don't seem concerned about your behaviour.</span>
+	<span class="lblue">농장 일꾼들은 당신을 종종 확인하지만, 당신의 행동에 큰 관심을 두진 않는 것 같다.</span>
 <<elseif $livestock_obey gte 40>>
-	<span class="blue">The farmhands keep a cautious eye on you.</span>
+	<span class="blue">농장 일꾼들은 당신을 유의하고 있다.</span>
 <<elseif $livestock_obey gte 20>>
-	<span class="purple">The farmhands watch you warily from behind the fence.</span>
+	<span class="purple">농장 일꾼들이 울타리 바깥에서 당신을 우려하듯이 감시하고 있다.</span>
 <<elseif $livestock_obey gte 1>>
-	<span class="pink">The farmhands watch you, expecting trouble.</span>
+	<span class="pink">농장 일꾼들은 당신이 사고를 치리라 생각하면서 당신을 감시하고 있다.</span>
 <<else>>
-	<span class="red">The farmhands watch you, expecting an escape attempt.</span>
+	<span class="red">농장 일꾼들은 당신이 탈출 시도를 하리라 생각하면서 당신을 감시하고 있다.</span>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "livestock_overhear">><<nobr>>
+<<widget "livestock_overhear">>
 <<generate1>><<generate2>><<person1>>
-You overhear two farmhands talking behind the fence.
-<<set $rng to random(1, 9)>>
-<<if $rng is 1>>
-	"How does Remy keep that herd of beasts under control?" a <<person>> asks.
+당신은 울타리 너머에서 농장 일꾼 두 명이 떠드는 걸 엿듣는다.
+<<cleareventpool>>
+<<addinlineevent "livestock_overhear 1">>
+	"레미는 대체 어떻게 저 많은 동물들을 통제 하에 두는 거지?" <<person_ i>> 묻는다.
 	<br>
-	"No clue," a <<person2>><<person>> responds. "They won't respond to anyone else."
+	"나도 몰라." <<person2>><<person_ i>> 대답한다. "다른 사람들에게는 반응하지 않던데 말야."
 	<br>
-	"Have you seen them at full gallop?"
+	"저것들이 전속력으로 달리는 거 본 적 있어?"
 	<br>
-	"Aye. Cow got free once, and Remy chased it down on one. Was terrifying to see."
+	"응. 소가 한 번 풀려났었는데, 레미가 쫓아가서 잡았지. 보는 게 무서울 정도였다니까."
 	<br><br>
-	They walk out of earshot.
+	그들은 소리가 들리지 않는 곳으로 멀어져간다.
 	<br><br>
-<<elseif $rng is 2>>
-	"Remy's a stingy bastard," a <<person>> says, looking over <<his>> shoulder.
+<</addinlineevent>>
+
+<<addinlineevent "livestock_overhear 2">>
+	"레미는 지독한 구두쇠 놈이야." <<person_ i>> 어깨 너머를 흘끗이며 말한다.
 	<br>
-	"Aye," a <<person2>><<person>> responds. "Especially with the animals. Treats apples like they're fucking gold."
+	"그렇지." <<person2>><<person_ i>> 대답한다. "특히 동물 관련된 일에 그래. 사과를 무슨 금처럼 다룬다니까."
 	<br>
-	"I ate an apple in front of those horses once. The way they looked at it, I almost felt bad."
+	"난 말들 앞에서 사과를 먹은 적이 있었는데, 말들이 바라보는 눈길이... 거의 죄책감을 느낄 뻔 했다니까."
 	<br><br>
-	They walk out of earshot.
+	그들은 소리가 들리지 않는 곳으로 멀어져간다.
 	<br><br>
-<<elseif $rng is 3>>
-	"Where'd you think the milk ends up?" a <<person>> asks.
+<</addinlineevent>>
+
+<<addinlineevent "livestock_overhear 3">>
+	"우유가 다 어디로 간다고 생각해?" <<person_ i>> 묻는다.
 	<br>
-	"Where'd you think?" a <<person2>><<person>> responds. "In a supermarket. Where else?"
+	"어디라고 생각하는데?" <<person2>><<person_ i>> 대답한다. "슈퍼마켓이지, 어디겠어?"
 	<br>
-	"No, I mean the," <<person1>><<he>> looks over <<his>> shoulder. "The milk from the special cattle. I'm not drinking it with my tea am I?"
+	"아니, 내 말은," <<person1>><<he_ ga>> 어깨 너머를 흘끗이며 말한다. "특별한 가축한테서 짜낸 우유 말야. 내 차에 들어가는 건 아니겠지?"
 	<br>
-	"I know some gets processed elsewhere. Don't know more than that."
+	"다른 어딘가에서 가공된다고는 들었지만, 그 이상으론 나도 몰라."
 	<br><br>
-	They walk out of earshot.
+	그들은 소리가 들리지 않는 곳으로 멀어져간다.
 	<br><br>
-<<elseif $rng is 4>>
-	"Heard more strange noises last night," a <<person>> says. "From the south."
+<</addinlineevent>>
+
+<<addinlineevent "livestock_overhear 4">>
+	"어젯밤에 정말 기묘한 소리를 들었어." <<person_ i>> 말한다. "남쪽에서 말야."
 	<br>
-	"Just some animal," a <<person2>><<person>> responds. "A wolf, at worst. What, you scared?"
+	"그냥 동물 소리겠지." <<person2>><<person_ i>> 대답한다. "잘해봐야 늑대겠지. 뭐야, 너 겁먹었냐?"
 	<br>
-	"You haven't heard it. I'm telling you. Like a screech. I'm asking Remy to change my hours."
+	"너는 그 소리 못 들었잖아. 거의 비명 소리 같았다고. 레미한테 작업 시간 바꿔달라고 해야겠어."
 	<br><br>
-	They walk out of earshot.
+	그들은 소리가 들리지 않는 곳으로 멀어져간다.
 	<br><br>
-<<elseif $rng is 5>>
-	"There's no way," a <<person>> says. "One of the teachers would step in."
+<</addinlineevent>>
+
+<<addinlineevent "livestock_overhear 5">>
+	"말도 안 돼." <<person_ i>> 말한다. "선생 한 명이 들어왔어."
 	<br>
-	"They don't though," a <<person2>><<person>> responds. "Maybe they don't know. Check it out yourself if you don't believe me."
+	"아니, 안 그랬어." <<person2>><<person_ i>> 대답한다. "어쩌면 그냥 모르는 걸지도 모르지. 날 믿지 못하겠다면 직접 확인해보지 그래."
 	<br>
-	"You know I don't like that part of town. Smells like shit."
+	"너 내가 마을에서 그 부분만은 싫어하는 거 알지. 배설물 같은 냄새가 난다고."
 	<br>
-	"Doesn't smell like any shit I've known."
+	"내가 아는 어떤 배설물 냄새도 안 나던데."
 	<br><br>
-	They walk out of earshot.
+	그들은 소리가 들리지 않는 곳으로 멀어져간다.
 	<br><br>
-<<elseif $rng is 6>>
-	<<set _harper_gender to $NPCName[$NPCNameList.indexOf("Harper")].pronoun>>
-	"That doctor makes me uncomfortable," a <<person>> says.
+<</addinlineevent>>
+
+<<addinlineevent "livestock_overhear 6">>
+	"그 의사를 보고 있자면 뭔가 불안해." <<person_ i>> 말한다.
 	<br>
-	"The kid?" a <<person2>><<person>> laughs. "Don't be daft."
+	"그 꼬마?" <<person2>><<person_ i>> 웃는다. "바보 같은 소리 하지 마."
 	<br>
-	"<<if _harper_gender is "m">>He's<<else>>She's<</if>> too nice for a place like this. Something's not right."
+	"<<nnpc_He_ nun "Harper">> 이런 장소에 있기엔 너무 좋은 사람이야. 이건 뭔가 잘못됐어."
 	<br>
-	"I think you're just afraid of doctors."
+	"내 생각엔 그냥 네가 의사를 무서워하는 것 같다."
 	<br><br>
-	They walk out of earshot.
+	그들은 소리가 들리지 않는 곳으로 멀어져간다.
 	<br><br>
-<<elseif $rng is 7>>
-	"Where'd they get new <<girls>> anyway?" a <<person>> asks. "Just grab em off the street?"
+<</addinlineevent>>
+
+<<addinlineevent "livestock_overhear 7">>
+	"그나저나 농장에선 새 <<girls_ rul>> 어디서 데려오는 거야?" <<person_ i>> 묻는다. "그냥 길에서?"
 	<br>
-	"Remy knows a few sellers," a <<person2>><<person>> responds. "Dunno how they get them. Police sometimes throw trash our way."
+	"레미가 판매자 몇 명을 알지." <<person2>><<person_ i>> 대답한다. "근데 그 판매자들은 어떻게 데려오는진 모르겠어. 가끔씩 경찰이 우리 쪽에 버리고 가긴 하던데."
 	<br>
-	"Explains the squad car. Thought they were just shaking us down."
+	"그 경찰차 말이지, 이해가 되는구만. 난 걔네가 우리 겁주러 온 줄 알았는데."
 	<br>
-	"They probably were."
+	"아마 그랬을 거야."
 	<br><br>
-	They walk out of earshot.
+	그들은 소리가 들리지 않는 곳으로 멀어져간다.
 	<br><br>
-<<elseif $rng is 8>>
-	"That new <<girl>> is cute," a <<person>> says.
+<</addinlineevent>>
+
+<<addinlineevent "livestock_overhear 8">>
+	"저기 새로 온 <<girl_ un>> 귀여운데." <<person_ i>> 말한다.
 	<br>
-	"That new <<if $player.gender_appearance is "m">>bull<<else>>cow<</if>> you mean," a <<person2>><<person>> responds.
+	"저기 새로 온 <<if $player.gender_appearance is "m">>황소<<else>>젖소<</if>> 말하는 거겠지." <<person2>><<person_ i>> 대답한다.
 	<br>
-	"Right. Tasty looking thing."
+	"맞아, 맛있어 보이네."
 	<br>
-	"Just don't get any ideas. Remy don't like us interfering."
+	"꿈도 꾸지 마. 레미는 우리가 손대는 거 싫어하잖아."
 	<br><br>
-	They walk out of earshot.
+	그들은 소리가 들리지 않는 곳으로 멀어져간다.
 	<br><br>
-<<elseif $rng is 9>>
-	"Wish they let us see the photos," a <<person>> says.
+<</addinlineevent>>
+
+<<addinlineevent "livestock_overhear 9">>
+	"사진 좀 볼 수 있도록 해줬으면 좋겠어." <<person_ i>> 말한다.
 	<br>
-	"Aye," a <<person2>><<person>> responds. "Asked that photographer for a peek. <<if $NPCName[$NPCNameList.indexOf("Niki")].pronoun is "m">>He<<else>>She<</if>> ignored me."
+	"맞아." <<person2>><<person_ i>> 대답한다. "잠깐 봐도 되냐고 사진사한테 말했는데, <<nnpc_He_ nun "Niki">> 날 무시하더라고."
 	<br>
-	"They must be selling em to someone."
+	"분명 누군가에게 팔고 있을 거야."
 	<br>
-	"Perverts richer than us, I guess."
+	"추측컨데 우리보다 돈 많은 변태들한테겠지."
 	<br><br>
-	They walk out of earshot.
+	그들은 소리가 들리지 않는 곳으로 멀어져간다.
 	<br><br>
+<</addinlineevent>>
+
+<<if pregnancyBellyVisible() and $pregnancyspeechdisable is "f">>
+	<<addinlineevent "livestock_overhear 10">>
+		"저 임신한 <<girl_ un>> 귀여운데." <<person_ i>> 말한다.
+		<br>
+		"맞아." <<person2>><<person_ i>> 대답한다. "또 실험인가?"
+		<br>
+		"누가 알겠어? 그나저나 말하는 것 좀 조심해. 가축들이 겁먹겠어."
+		<br>
+		<<if $player.breastsize gte 12>>
+			"글쎄, 레미가 뭘 하던 간에, 저 정도 가슴이면 아주 잘 되고 있는 것 같은데."
+		<<elseif $player.breastsize gte 8>>
+			"글쎄, 레미가 뭘 하던 간에, 잘 되고 있는 것 같은데. <<pshe_ nun>> 멋진 가슴을 가지고 있군."
+		<<elseif $player.breastsize gte 6>>
+			"글쎄, 레미가 뭘 하던 간에, 뭔가 되고 있는 것 같은데. <<pher_ yi>> 가슴이 자라고 있는 것 같아."
+		<<elseif $player.breastsize gte 1>>
+			"글쎄, 레미가 뭘 하던 간에, 이번엔 잘 안 되고 있는 것 같은데. <<pshe_ nun>> 거의 평평하구만."
+		<<else>>
+			"글쎄, 레미가 뭘 하던 간에, 이번엔 잘 안 되고 있는 것 같은데. <<pshe_ nun>> 무슨 빨래판마냥 평평하구만."
+		<</if>>
+		<br><br>
+		그들은 소리가 들리지 않는 곳으로 멀어져간다.
+		<br><br>
+	<</addinlineevent>>
 <</if>>
+
+<<runeventpool>>
 <<endevent>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "passoutremy">><<nobr>>
-
-<<passout>>
-You've pushed yourself too much. You pass out.
-<br><br>
-<<link [[Next|Livestock Passout]]>><<pass 60>><<set $stress -= 4000>><</link>>
+<<widget "passoutremy">>
+/*ToDo: Pregnancy, remove $pregnancyTesting to properly enable*/
+<<if $sexStats.vagina.pregnancy.waterBreaking is true and $pregnancyTesting>>
+	<<pregnancyWatersBrokenPassout "remy">>
+<<else>>
+	<<passout>>
+	당신은 몸을 너무 혹사시켰다. 당신은 기절한다.
+	<br><br>
+	<<link [[다음|Livestock Passout]]>><<pass 60>><<set $stress -= 4000>><</link>>
+<</if>>
 <br>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "livestock_bodywriting">><<nobr>>
+<<widget "livestock_bodywriting">>
 <<if $skin[_bodypart].writing>>
 	<<bodywriting_clear _bodypart>>
 <</if>>
-<<set $rng to random(1, 6)>>
+<<rng 6>>
 <<switch $rng>>
 <<case 1>>
 	<<add_bodywriting _bodypart remys_cattle tattoo>>
@@ -220,31 +272,39 @@ You've pushed yourself too much. You pass out.
 <<case 6>>
 	<<add_bodywriting _bodypart breedable tattoo>>
 <</switch>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "milking_img">><<nobr>>
-<<if $images is 1>>
+<<widget "milking_img">>
+<<if $options.images is 1 and $options.combatImages is 1>>
 	<<machine_init>>
-	<<if $penisexist is 1 and $breastfeedingdisable is "f">>
-		<<if $args[0]>>
-			<<prop haybale milk penis_pump breast_pump $args[0]>>
+	<<if $player.penisExist and $breastfeedingdisable is "f">>
+		<<if _args[0]>>
+			<<prop haybale milk penis_pump breast_pump _args[0]>>
 		<<else>>
 			<<prop haybale milk penis_pump breast_pump>>
 		<</if>>
 		<<timed 100ms>>
-		<<combatimg>>
-		<br><br>
+			<<combatimg>>
+			<br><br>
 		<</timed>>
 	<<elseif $breastfeedingdisable is "f">>
-		<<if $args[0]>>
-			<<prop haybale milk breast_pump $args[0]>>
+		<<if _args[0]>>
+			<<prop haybale milk breast_pump _args[0]>>
 		<<else>>
 			<<prop haybale milk breast_pump>>
 		<</if>>
 		<<timed 100ms>>
-		<<combatimg>>
-		<br><br>
+			<<combatimg>>
+			<br><br>
 		<</timed>>
 	<</if>>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>
+
+<<widget "livestockescape">>
+<<if $whitneyromance is 1>>
+	<<set $whitneyReunionScene to "farm">>
+<</if>>
+
+<<unset $baileySold>>
+<</widget>>

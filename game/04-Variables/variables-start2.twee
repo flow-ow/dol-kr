@@ -1,6 +1,14 @@
 :: Widgets variablesStart2 [widget]
-<<widget "variablesStart2">><<nobr>>
+<<widget "variablesStart2">>
 /*Variables required at the start of passage 'Start2', please remove if not required"*/
+/*This widget should be used to initialise most or all variables that are required when you begin a new game. also check <<gameStartOnly>> for other initialisations. */
+
+<<if $hairselect is "random">>
+	<<set $hairselect to ["red","jetblack","black","brown","softbrown","lightbrown","burntorange","blond","softblond","platinumblond","ashyblond","strawberryblond","ginger"].random()>>
+<</if>>
+<<if $eyeselect is "random">>
+	<<set $eyeselect to ["purple","dark blue","light blue","amber","hazel","green","red","pink","grey", "light grey", "lime green"].random()>>
+<</if>>
 
 <<switch $bodysize>>
 	<<case 0>><<set $devlevel to 6>>
@@ -9,12 +17,8 @@
 	<<case 3>><<set $devlevel to 16>>
 <</switch>>
 
-<<if $skinColor.tanImgEnabled is null>>
-	<<set $skinColor.tanImgEnabled to "f">>
-<</if>>
-
 <<clamp>>
-<<effects>>
+<!-- <<effects>> -->
 <<initnpcgender>>
 <<set $physiquesize to (1000 * $devlevel)>>
 
@@ -24,45 +28,52 @@
 <</if>>
 
 <<set $per_npc to {}>>
+<<set $perNPCFix to 4>>
 
 <<set $physique to ($physiquesize / 7) * 3>>
 <<set $beauty to ($beautymax / 7)>>
 
-<<set $playergender to 1>>/*Needed to stop VersionUpdate triggering on first couple of pages.*/
-
 <<set $devstate to 1>>
 
-<<if $breastsize is 0>>
-	<<set $breastsizeold to 0>><<set $breastgrowthtimer to 350>>
-<<elseif $breastsize is 1>>
-	<<set $breastsizeold to 1>><<set $breastgrowthtimer to 350>>
-<<elseif $breastsize is 2>>
-	<<set $breastsizeold to 2>><<set $breastgrowthtimer to 350>>
-<<elseif $breastsize is 3>>
-	<<set $breastsizeold to 3>><<set $breastgrowthtimer to 350>>
-<<else>>
-	<<set $breastsizeold to 4>><<set $breastgrowthtimer to 350>>
-<</if>>
+<<set $breastgrowthtimer to 350>>
 
-<<physicalAdjustmentsInit>>
 <<tryOnInit>>
 
 <<givestartclothing>>
 
 <<set $intro to 0>>
-<<set $haircolour to $hairselect>>
-<<set $naturalhaircolour to $haircolour>>
+<<set $naturalhaircolour to $hairselect>>
+<<set $haircolour to $naturalhaircolour>>
+<<set $hairfringecolour to $naturalhaircolour>>
 
-<<if $cheatdisable is "f" and !$debug>>
+<<if $cheatdisable is "f" and !$debug or $rentmod lt 1 and !$debug>>
 	<<set $feats.locked to true>>
 <</if>>
 
-<<set $eyecolour to $eyeselect>>
+<<set $leftEyeColour to $eyeselect>>
+<<set $rightEyeColour to $eyeselect>>
 
 <<if $awareselect is "innocent">>
 <<elseif $awareselect is "knowledgeable">>
 	<<set $awareness += 200>>
 	<<set $awarelevel to 1>>
+<</if>>
+
+/*pharmacy contact lenses related */
+<<if ndef $lenses_ordered>>
+	<<set $lenses_ordered to []>>
+<</if>>
+<<if ndef $custom_lenses_already_ordered>>
+	<<set $custom_lenses_already_ordered to 0>>
+<</if>>
+<<if ndef $custom_eyecolours>>
+	<<set $custom_eyecolours to []>>
+<</if>>
+<<if ndef $makeup.owned>>
+	<<set $makeup.owned to []>>
+	<<if ndef $makeup.owned.custom_eyelenses>>
+		<<set $makeup.owned.custom_eyelenses to []>>
+	<</if>>
 <</if>>
 
 <<set $player.gender_appearance to $player.gender>>
@@ -74,33 +85,56 @@
 <<if $player.gender is "f">>
 	<<set $vaginause to 0>>
 	<<set $vaginastate to 0>>
-	<<set $vaginaexist to 1>>
 	<<set $penisuse to "none">>
 	<<set $penisstate to "none">>
-	<<set $penisexist to 0>>
 	<<set $player.sex to "f">>
+	<<set $player.vaginaExist to true>>
+	<<set $player.penisExist to false>>
 	<<set $player.ballsExist to false>>
 <<elseif $player.gender is "m">>
 	<<set $vaginause to "none">>
 	<<set $vaginastate to "none">>
-	<<set $vaginaexist to 0>>
 	<<set $penisuse to 0>>
 	<<set $penisstate to 0>>
-	<<set $penisexist to 1>>
 	<<set $player.sex to "m">>
+	<<set $player.vaginaExist to false>>
+	<<set $player.penisExist to true>>
 	<<set $player.ballsExist to true>>
 <<elseif $player.gender is "h">>
 	<<set $vaginause to 0>>
 	<<set $vaginastate to 0>>
-	<<set $vaginaexist to 1>>
 	<<set $penisuse to 0>>
 	<<set $penisstate to 0>>
-	<<set $penisexist to 1>>
-	<<set $player.gender to "h">>
 	<<set $player.sex to "h">>
 	<<set $player.penisExist to true>>
 	<<set $player.vaginaExist to true>>
 <</if>>
+<<physicalAdjustmentsInit>>
+<<set $player.perceived_breastsize = $player.breastsize>>
+<<set $player.perceived_bottomsize = $player.bottomsize>>
+
+<<if $startingseason is "random">>
+	<<set $startingseason to ["autumn","winter","spring","summer"].random()>>
+<</if>>
+
+<<switch $startingseason>> /* The yeardays countdown begins on September 1st, autumn start is on Sep 4th */
+	<<case "winter">>
+		<<set $yeardays to 91>>
+		<<set $month to "december">>
+		<<set $season to "winter">>
+	<<case "spring">>
+		<<set $yeardays to 182>>
+		<<set $month to "march">>
+		<<set $season to "spring">>
+	<<case "summer">>
+		<<set $yeardays to 273>>
+		<<set $month to "june">>
+		<<set $season to "summer">>
+	<<default>>
+		<<set $yeardays to 3>>
+		<<set $month to "september">>
+		<<set $season to "autumn">>
+<</switch>>
 
 <<if $background is "nerd">>
 	<<set $science += 100>><<set $maths += 100>><<set $english += 100>><<set $history += 100>><<set $school += 400>><<set $cool to 0>>
@@ -108,7 +142,7 @@
 <<elseif $background is "athlete">>
 	<<set $physique += ($physiquesize / 4)>><<set $swimmingskill += 200>><<set $athletics += 200>>
 	<<set $science to 0>><<set $maths to 0>><<set $english to 0>><<set $history to 0>><<set $school to 0>>
-	<<set $sciencetrait to 0>><<set $mathstrait to 0>><<set $englishtrait to 0>><<set $historytrait to 0>>
+	<<set $sciencetrait to -1>><<set $mathstrait to -1>><<set $englishtrait to -1>><<set $historytrait to -1>>
 <<elseif $background is "delinquent">>
 	<<set $delinquency += 401>><<set $cool += 200>>
 <<elseif $background is "promiscuous">>
@@ -126,9 +160,14 @@
 		<<set $player.gender_posture to "f">>
 	<<else>>
 		<<set $player.gender_posture to "n">>
+		<<set $background to "waif">>
 	<</if>>
 <<elseif $background is "greenthumb">>
+	/* Leaving this here in case we ever turn Green Thumb back into a background. Can't be set to the background variable in current state. */
 	<<set $tending += 200>>
+<<elseif $background is "plantlover">>
+	<<set $nectar_addiction to 200>>
+	<<set $nectar_timer to 21>>
 <</if>>
 <<set $backgroundTraits to [$background]>>
 
@@ -168,15 +207,13 @@
 	<<applyFeatsBoost>>
 <</if>>
 
-<<if $penisexist is 1>>
+<<if $player.penisExist>>
 	<<set $semen_amount to 90>>
 	<<set $semen_volume to 90>>
 <<else>>
 	<<set $semen_amount to 0>>
 	<<set $semen_volume to 0>>
 <</if>>
-
-<<set $bodywritingImages to true>>
 
 <<if $dateCount is undefined>>
 	<<set $dateCount to {
@@ -186,18 +223,133 @@
 		Kylar: 0,
 		Eden: 0,
 		Avery: 0,
-		BlackWolfHunts: 0
+		BlackWolfHunts: 0,
+		GreatHawkHunts: 0,
+		Alex: 0,
+		Sydney: 0
 	}>>
 <</if>>
 
+<<if $virginTaken is undefined>>
+	<<set $virginTaken to {
+		kiss: [],
+		handholding: [],
+		oral: [],
+		anal: [],
+		vaginal: [],
+		penile: []
+	}>>
+<</if>>
+
+<<set $loveInterest to {
+	primary: "None",
+	secondary: "None",
+	tertiary: "None"
+}>>
+
+<<set $attitudesControl to {
+	showGoldLink:false,
+	unlockExhibitionismUnderwear:false,
+	unlockExhibitionismNude:false,
+	unlockTransformation:false,
+	unlockDemonFlaunt:false,
+	unlockProstitution:false,
+	unlockLoveInterest1:false,
+	unlockLoveInterest2:false,
+	unlockLoveInterest3:false,
+	unlockDefaultActions:false,
+	unlockHypnosis:false,
+	unlockLewd:false,
+}>>
+
+<<set $clothingShop to {
+	ban: 0,
+	banExtension: false,
+	spotted: false,
+	stolenClothes: 0,
+	totalStolenClothes: 0,
+	banCount: 0,
+	rng: random(0,1000)
+}>>
+
+<<set $adultShop to {
+	ban: 0,
+	banExtension: false,
+	spotted: false,
+	stolenClothes: 0,
+	totalStolenClothes: 0,
+	banCount: 0,
+	rng: random(0,1000)
+}>>
+
+<<set $retrieveShopCustomColor to {}>>
+
+<<set $customColors to {
+	presets:{},
+	action: "set",
+	currentType: "primary",
+	color:{primary:0, secondary:0},
+	saturation:{primary:1, secondary:1},
+	brightness:{primary:1, secondary:1},
+	contrast:{primary:1, secondary:1},
+	sepia:{primary:1, secondary:1},
+	value:{primary:100, secondary:100}
+}>>
+
+<<set $combatTrain to {
+	length: 0,
+	generateInit: 1,
+	beastTypes: [],
+	numberPerTrain: [],
+}>>
+
+<<set $enemyArousalLossReduction to 1>>
+
+<<set $robinTattoo to []>>
+<<set $robinmissing to 0>>
+<<set $kylar to {
+	raped: 0,
+	riddle: 0,
+	timer: {halls:0,street:0,home:0,love:0},
+	fameStage: 0,
+}>>
+<<set $kylarSeen to []>>
+<<set $museumAntiqueJournalHints to []>>
+
+<<specialClothesSetup>>
+<<pregnancyVar>>
+<<specialClothesEffectsSetup>>
 <<weather_select>>
 <<set $warmth to 0>>
 <<temperature_hour>>
+<<childrenSetup>>
 
 <<setupTransformationPiecesObject>>
 
 <<if $fertiliser is undefined>>
 	<<set $fertiliser to {current:0,used:0}>>
+	<<if $backgroundTraits.includes("greenthumb")>>
+		<<set $fertiliser.current++>>
+	<</if>>
 <</if>>
 
-<</nobr>><</widget>>
+<<set $actionDefaults = DefaultActions.setDefaults()>>
+
+<<set versionUpdateCheck to false>>
+
+<<set $rebuy_failure to []>>
+<<set $rebuy_success to []>>
+
+<<pbhairinit>>
+<<resetLastOptions>>
+
+<<set $adultshopprogress to 0>>
+<<set $adultshopcontribution to 0>>
+
+<<run createInventoryObject()>>
+
+<<set $robinPunishments to []>>
+<<set $robinTraumaMultiplier to 1>>
+
+<<set $daily to { school: {}, whitney: {}, robin: {}, kylar: {}, morgan: {}, eden: {}, alex: {}, sydney: {}, ex: {}, pharm: {} }>>
+<</widget>>

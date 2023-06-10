@@ -9,7 +9,7 @@ if (fs.existsSync(path.resolve(ROOT, 'img'))) {
 }
 
 function copyFilesFromRoot() {
-    const MAIN = 'Degrees of Lewdity kr.html'
+    const MAIN = 'Degrees of Lewdity.html'
     const ANDROID_PATH = path.resolve('./platforms/android/app/src/main/assets/www')
     const paths = {
         src: {

@@ -1,0 +1,93 @@
+stages:
+  - build
+
+default:
+  image: alpine:latest
+  before_script:
+    # Install requirements
+    - | 
+      apk update
+      apk add git bash
+
+    # Get devTools/tweego and images from original repository (with specific commit)
+    - |
+      git clone -c core.symlinks=false https://gitgud.io/Vrelnir/degrees-of-lewdity.git _originalRepository
+      cd _originalRepository
+      git checkout $(cat ../version.git | xargs)
+      cd ..
+      cp -rf ./_originalRepository/devTools/tweego ./devTools/tweego
+      cp -rf ./_originalRepository/img ./img
+  
+    # Fix Permission on compile script.
+    - |
+      chmod +x ./compile.sh
+      chmod +x ./devTools/tweego/tweego_linux64
+
+build:html:
+  stage: build
+  script:
+    # Build
+    - FORCE_VERSION=kr-$(git describe --tags --always) ./compile.sh
+
+  artifacts:
+    name: dol-kr
+    paths:
+      - Degrees of Lewdity kr-*.html
+
+build:debug_apk:
+  image: docker:latest
+  services:
+    - docker:dind
+  stage: build
+  script:
+    # Apply patch for APK build
+    - |
+      sed -i 's/\"enableLinkNumberify\"\: true/\"enableLinkNumberify\"\: false/g' game/01-config/sugarcubeConfig.js
+      chmod +x ./keys/initKeys.sh && ./keys/initKeys.sh
+
+    # Build HTML
+    - FORCE_VERSION='' ./compile.sh
+
+    # Build Cordova docker image
+    - |
+      cd devTools/androidsdk/image
+      docker build -t cordova-android:latest .
+
+    # Build debug apk
+    - docker run -v $CI_PROJECT_DIR:/src -t cordova-android npm run sign-build-debug
+
+  artifacts:
+    name: dol-kr-debug-apk
+    paths:
+        - dist/*-debug.apk
+
+build:release_apk:
+  image: docker:latest
+  services:
+    - docker:dind
+  rules:
+    - if: '$CI_COMMIT_TAG'
+  stage: build
+  script:
+    # Apply patch for APK build
+    - |
+      sed -i 's/\"enableLinkNumberify\"\: true/\"enableLinkNumberify\"\: false/g' game/01-config/sugarcubeConfig.js
+      chmod +x ./keys/initKeys.sh && ./keys/initKeys.sh
+
+    # Build HTML
+    - FORCE_VERSION='' ./compile.sh
+
+    # Build Cordova docker image
+    - |
+      cd devTools/androidsdk/image
+      docker build -t cordova-android:latest .
+  
+    # Build release apk
+    - docker run -v $CI_PROJECT_DIR:/src -t cordova-android npm run sign-build-release
+
+  artifacts:
+    name: dol-kr-release-apk
+    paths:
+      - dist/*.apk
+    exclude:
+      - dist/*-debug.apk

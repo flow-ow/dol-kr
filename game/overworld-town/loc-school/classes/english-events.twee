@@ -1,4 +1,4 @@
-:: English Event1 [nobr]
+:: English Event1
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 
@@ -15,7 +15,7 @@
 <</if>>
 <<endnpc>>
 
-:: English Outbuilding [nobr]
+:: English Outbuilding
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 <<if $phase is 0>>
@@ -31,18 +31,20 @@
 		<<beastNEWinit 1 dog>>
 		당신은 씩씩하게 별채로 가서 쪽지를 배달하나, 뒤를 돌자 <<beasttypePost>> 한 마리가 달려든다.
 		<br><br>
+		<<if $monster is 1 or $bestialitydisable is "f">>
+			<<link [[다음|English Outbuilding Molestation]]>><<set $molestationstart to 1>><</link>>
+			<br>
+		<<else>>
+			당신은 가까스로 교실로 도망칠 수 있었지만, 상처를 좀 입었다.<<beastescape>>
+			<br><br>
+			<<integritycheck>><<towelup>>
+			<<link [[다음|English Lesson]]>><<endevent>><</link>>
+		<</if>>
 		<!-- Modified for Beast People -->
-		<!-- You manage to flee back to the classroom, though not unscathed.<<beastescape>>
-		<br><br>
-		<<integritycheck>><<towelup>>
-		<<link [[Next|English Lesson]]>><</link>>
-		-->
-		<<link [[다음|English Outbuilding Molestation]]>><<set $molestationstart to 1>><</link>>
-		<br>
 	<</if>>
 <</if>>
 
-:: English Outbuilding Molestation [nobr]
+:: English Outbuilding Molestation
 
 <<if $molestationstart is 1>>
 	<<set $molestationstart to 0>>
@@ -52,59 +54,57 @@
 	<<molested>>
 	<<beastCombatInit>>
 
-	<<set $rescue to 1>>
+	<<enable_rescue>>
 <</if>>
 <<effects>>
 <<effectsman>>
-<br>
+<<alarmstate>>
 <<beast $enemyno>>
 <br><br>
 <<stateman>>
 <br><br>
 <<actionsman>>
-<<if $alarm is 1 and $rescue is 1>>
-	<span id="next"><<link [[다음|English Outbuilding Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[다음|English Outbuilding Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $enemyhealth lte 0>>
+
+<<if _combatend>>
 	<span id="next"><<link [[다음|English Outbuilding Molestation Finish]]>><</link>></span><<nexttext>>
 <<else>>
 	<span id="next"><<link [[다음|English Outbuilding Molestation]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: English Outbuilding Molestation Finish [nobr]
+:: English Outbuilding Molestation Finish
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
-<<if $rescue is 1 and $alarm is 1>>
+<<if $alarm is 1 and $rescue is 1>>
 	<<if $NPCList[0].stance is "top">>
 		<<set $rescued += 1>>
 		<<clothesontowel>>
 		<<saveNPC 0 english_dog>>
 		<<endcombat>>
 		<<loadNPC 0 english_dog>>
-		A caretaker emerges from the outbuilding to see what the fuss is about, stopping at the sight of the <<beasttype>> humping you, mouth agape.
+		관리인이 무슨 소란인지 확인하기 위해 별채에서 나오다가, <<beasttype_ i>> 당신과 성교하고 있는 것을 보고 입을 떡 벌린 채로 멈춘다.
 		<<generate2>><<person2>>
-		<<He>> breaks free from <<his>> stupor and drags the <<beasttype 0>> off the top of you. <<He>> seems almost as embarrassed as you are, and says nothing as <<he>> locks the the creature in the kennel and returns to the outbuilding. <<tearful>> you to return to the classroom.
-		
+		<<He_ nun>> <<his_ yi>> 망연자실한 상태에서 벗어나 <<beasttype_ ul 0>> 당신의 위에서 끌어내린다. <<He_ nun>> 당신만큼이나 당황한 것 처럼 보인다. <<he_ nun>> 아무 말도 하지 않고 그 동물을 사육장에 가두고 별채로 돌아간다. <<tearful>> 당신은 교실로 돌아간다.
+
 		<<famebestiality 10>>
 		<br><br>
-		<<link [[Next|English Lesson]]>><<clearNPC 0 english_dog>><<endevent>><</link>>
+		<<link [[다음|English Lesson]]>><<clearNPC english_dog>><<endevent>><</link>>
 		<br>
 	<<else>>
 		<<set $rescued += 1>>
 		<<clothesontowel>>
-		A caretaker emerges from the outbuilding to see what the fuss is about. "Bad <<beasttype>>! Bad!" The <<beasttype>> backs off, ears and tail drooping. "I'm so sorry, <<bhe>>'s just a bit too friendly," the caretaker says, returning the <<beasttype>> to <<bhis>> kennel. "No harm done though, right?" 
+		관리인이 무슨 소란인지 확인하기 위해 별채에서 나온다. "나쁜 <<beasttypePost>> 같으니! 훠이!" <<beasttype_ un>> 귀와 꼬리가 축 쳐진 채 뒤로 물러난다. "미안하다, <<bhe_ nun>> 그냥 너무 친하게 지내고 싶어서 그런거야," 관리인이 <<beasttype_ ul>> <<bhis_ yi>> 사육장으로 돌려보내며 말한다. "다치진 않았지, 그치?"
 		<<endcombat>>
+		<br><br>
 		<<generate1>><<person1>>
-		<<He>> heads back to the outbuilding. <<tearful>> you to return to the classroom.
-		
+		<<He_ nun>> 별채로 돌아간다. <<tearful>> 당신은 교실로 돌아간다.
+
 		<br><br>
 		<<link [[다음|English Lesson]]>><<endevent>><</link>>
 		<br>
 	<</if>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
 	<<beastejaculation>>
-	<<beasttypePost "은">> 만족스러운듯 으르렁거리고는, 풀밭 위에 누워있는 당신을 두고 떠난다. <<tearful>> 당신은 먼지를 털고는 교실로 돌아간다.
+	<<beasttypePost "은">> 만족스러운 듯 으르렁거리고는, 풀밭 위에 누워있는 당신을 두고 떠난다. <<tearful>> 당신은 먼지를 털고는 교실로 돌아간다.
 	<br><br>
 	<<clothesontowel>>
 	<<endcombat>>
@@ -119,19 +119,19 @@
 	<br>
 <</if>>
 
-:: English Event2 [nobr]
+:: English Event2
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
-당신은 도렌에게 도와달라고 외치며, 희롱당하고 있다 설명하려 한다. <<personPost "은">> 충격을 받은듯, 눈을 크게 뜨고 입술을 떨며, 금방이라도 울음을 터트릴 것 같다. <<endevent>><<npc Doren>><<person1>>도렌은 양손을 허리춤에 올리고는 당신에게 침착한 시선을 보낸다. "그렇게 쉽게 속이지는 못할 거야, <<if $player.gender_appearance is "m">>친구.<<else>>아가씨.<</if>> 저쪽에 앉도록 해. 순진한 애들한테서 떨어져서 말이야."
+당신은 도렌에게 도와달라고 외치며, 희롱당하고 있다 설명하려 한다. <<personPost "은">> 충격을 받은듯, 눈을 크게 뜨고 입술을 떨며, 금방이라도 울음을 터트릴 것 같다. <<endevent>><<npc Doren>><<person1>>도렌은 양손을 허리춤에 올리고는 당신에게 침착한 시선을 보낸다. "그렇게 쉽게 속이지는 못할 거야, <<lassPost>>. 저쪽에 앉도록 해. 순진한 애들한테서 떨어져서 말이야."
 <br><br>
-도렌은 당신을 교실 건너편에 혼자 않게 만든다. 적어도 도망치기는 했다.
+도렌은 당신을 교실 건너편에 혼자 앉게 만든다. 적어도 도망치기는 했다.
 <br><br>
 <<link [[다음|English Lesson]]>><<endevent>><</link>>
 
-:: English Event2 Molest [nobr]
+:: English Event2 Molest
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
-<<HePost "은">> 당신의 기분은 아랑곳하지 않고, 당신의 허벅지 위로 손을 뻗는다.
+<<HePost "은">> 당신의 기분은 아랑곳하지 않고, 당신의 넓적다리 위로 손을 뻗는다.
 <<if $worn.genitals.type.includes("chastity") and $worn.under_lower.type.includes("naked")>>
 	<<HePost "은">> <<trClothes "genitals" $worn.genitals.name "name" "이">>_trResult 만져지자 멈춘다. "뭐야 이건? 노예들이 이런 걸 강제로 착용했다 들었는데, 너도 누군가의 소유물인거야?" <<HePost "은">> 히죽인다. "조심해야겠는걸. 누군가를 화나게 만들 수도 있으니 말이야." <<HePost "은">> 남은 수업시간 동안 당신을 건드리지 않는다.
 <<elseif $worn.under_lower.type.includes("naked")>>
@@ -144,32 +144,30 @@
 <br><br>
 <<link [[다음|English Lesson]]>><<endevent>><</link>>
 
-:: English Events Pinch [nobr]
+:: English Events Pinch
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 <<person1>><<personPost "은">> 충격에 비명을 지른다. 도렌은 고개를 들고는 <<hePost "을">> 쳐다본다. 하지만 <<personPost "은">> 뭐라고 하기엔 너무 당황했는지, 아무런 말도 못하고 발만 쳐다보며 웅얼웅얼 사과를 한 뒤 자리에 앉는다.
 <<promiscuity2>>
-<br><br>
 <<endevent>>
 <<link [[다음|English Lesson]]>><</link>>
 <br>
 
-:: English Events Own [nobr]
+:: English Events Own
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 "왜 그러세요, 선생님." 당신이 말한다. "탐나세요?" 키득거림이 큰 웃음소리로 변한다.
 <<promiscuity3>>
-<br><br>
-"요즘 애들은 참 유머감각이 이상하구나." 도렌이 고개를 저으며 말한다.
+"요즘 애들은 참 유머감각이 이상하구나." 도렌이 <<his_ yi>> 고개를 저으며 말한다.
 <br><br>
 <<endevent>>
 <<link [[다음|English Lesson]]>><</link>>
 <br>
 
-:: English Events Stare [nobr]
+:: English Events Stare
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
-당신은 손을 내려다보며 웃음소리를 무시하려고 애쓴다. 도렌은 <<person2>><<personPost "을">> 본다. "내가 징계를 주는 걸 좋아하지 않는 건 알고 있겠지." <<person1>><<hePost "이">> 말한다. "하지만 넌 어쩔 수가 없구나." <<person2>><<personPost "은">> 히죽거리며 고개를 돌린다.
+당신은 당신의 손을 내려다본 채 웃음소리를 무시하려고 노력한다. 도렌이 <<person2>><<person_ ul>> 쳐다본다. "너도 내가 징계를 주는 걸 좋아하지 않는 걸 알고 있지 않니," <<person1>><<he_ ga>> 말한다. "하지만 너는 내가 무시하기 어렵게 만드는구나." <<person2>><<person_ un>> 히죽히죽 웃으며 고개를 돌린다.
 <br><br>
 <<if $dorenhonest isnot 1>>
 	<<person1>>도렌은 다시 당신에게로 시선을 돌린다. "너랑 밖에서 얘기를 좀 할 게 있구나. 나오렴." 당신은 고개를 푹 숙인 채로 <<hePost "을">> 따라 교실을 나간다. 모두가 지켜보고 있을 것이다.
@@ -186,20 +184,20 @@
 	<br>
 <</if>>
 
-:: English Events Honest [nobr]
+:: English Events Honest
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 <<set $dorenhonest to 1>>
 당신은 도렌에게 이미 수도 없이 공격당했으며, 더는 버틸 수 없을 것 같다고 말한다. 그런 얘기를 큰 소리로 말하자 머리가 어지럽다. 당신은 자세하게는 이야기하지 못하지만, 얼마나 갇혀있는 느낌을 받고 있는지를 분명하게 한다.
 <br><br>
-정신을 차려보니 도렌의 팔을 붙잡은 상태에서 바닥에 주저앉아있다. 기억도 못하는 사이에 주저앉아있었다. "괜찮아, <<lassPost>>. 내가 있잖니." <<HePost "은">> 주머니에서 전화기를 꺼내더니 누군가에게 전화를 건다. "여보세요? 네. 제 수업을 대신 해줄 분이 필요해서요. 네, 응급 상황입니다. 아뇨. 그럼 이만." <<HePost "은">> 전화기를 집어넣는다.
+정신을 차려보니 도렌의 팔을 붙잡은 상태에서 바닥에 주저앉아 있다. 기억도 못하는 사이에 주저앉아 있었다. "괜찮아, <<lassPost>>. 내가 있잖니." <<HePost "은">> 주머니에서 전화기를 꺼내더니 누군가에게 전화를 건다. "여보세요? 네. 제 수업을 대신 해줄 분이 필요해서요. 네, 응급 상황입니다. 아뇨. 그럼 이만." <<HePost "은">> 전화기를 집어넣는다.
 <br><br>
 도렌은 당신을 일으켜 세워준다. "널 도와줄 수 있는 곳으로 데려다주려 그러는데, 괜찮겠지?" <<HePost "은">> 당신의 손을 잡고는 함께 교실에서 멀어진다. <<HePost "은">> 밖에 주차된 자동차로 당신을 데려간다. "타렴. 오래 걸리진 않을 거야."
 <br><br>
 <<link [[차에 탄다 (0:05)|English Events Police]]>><<pass 5>><</link>>
 <br>
 
-:: English Events Fine [nobr]
+:: English Events Fine
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 당신은 태연한 척을 하며 괜찮다고 말한다. "알았어. 네가 그렇게 말한다면야." <<HePost "이">> 말한다. "이제 애들이 창문이라도 부수기 전에 교실로 돌아가자꾸나."
@@ -208,12 +206,12 @@
 <<link [[다음|English Lesson]]>><</link>>
 <br>
 
-:: English Events Police [nobr]
+:: English Events Police
 
 <<set $outside to 0>><<set $location to "town">><<effects>>
 도렌은 바브 가로 차를 운전해 경찰서 앞에서 멈춘다. "네게도 힘든 일이라는 건 알고 있지만, 경찰들에게도 내게 말한 걸 말해줘야 한단다." 당신은 차에서 나와 경찰서에 들어간다.
 <br><br>
-<<generate3>><<person3>><<personPost "이">> 경찰 제복을 입은 채로 책상 앞에 앉아있다. <<HePost "은">> 당신이 들어오는 걸 거들떠 보지도 않는다. 도렌이 연필이 바닥에 굴러떨어질 정도로 책상 위를 손으로 두드린다. <<person1>>"범죄 제보하러 왔습니다." <<HePost "이">> 말한다. "여러 건일 수도 있고요."
+<<generatePolice 3>><<person3>><<personPost "이">> 경찰 제복을 입은 채로 책상 앞에 앉아있다. <<HePost "은">> 당신이 들어오는 걸 거들떠 보지도 않는다. 도렌이 연필이 바닥에 굴러떨어질 정도로 책상 위를 손으로 두드린다. <<person1>>"범죄 제보하러 왔습니다." <<HePost "이">> 말한다. "여러 건일 수도 있고요."
 <br><br>
 경찰관이 고개를 든다. "대기 중인 사건들이 있어서요." <<person3>><<hePost "이">> 말한다.
 <br><br>
@@ -228,7 +226,7 @@
 <<link [[다음|Doren Intro]]>><</link>>
 <br>
 
-:: English Kylar Moved [nobr]
+:: English Kylar Moved
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 당신은 고개를 내젓는다. 도렌은 카일라를 바라본다. "거기, 낙서쟁이." <<HePost "이">> 말한다. "앞으로 와서 날 좀 도와주렴."
@@ -241,7 +239,7 @@
 <<link [[다음|English Lesson]]>><</link>>
 <br>
 
-:: English Kylar Nod [nobr]
+:: English Kylar Nod
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 당신은 고개를 끄덕인다. "좋아." 도렌이 말한다. 딱히 납득한 목소리는 아니다.

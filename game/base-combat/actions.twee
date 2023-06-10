@@ -1,8 +1,13 @@
 :: Widgets Actions Man [widget]
-<<widget "actionsman">><<nobr>>
+<<widget "actionsman">>
 <div @class="($debugLines ? 'debugLines-actionsman' : '')">
 <<exposure>>
 <<set $face to 0>>
+
+/*ToDo: Pregnancy, remove to properly enable*/
+<<if $pregnancyTesting is undefined>>
+	<<set $condomUse to false>>
+<</if>>
 
 <<if $enemyno gte 2>>
 	<<set $pronoun to "n">>
@@ -24,24 +29,27 @@
 	<</if>>
 <</if>>
 
-<<if $images is 1>>
-	<<timed 100ms>>
-	<<combatimg>>
-	<br>
-	<</timed>>
+<<if $options.images is 1 and $options.combatImages is 1>>
+	<<if $position isnot "stalk">>
+		<<timed 100ms>>
+			<<combatimg>>
+			<br>
+		<</timed>>
+	<</if>>
 <</if>>
 
 <<if $traumafocus gte 1 and $traumafocusintro isnot 1>>
 	<<set $traumafocusintro to 1>>
-	<i>As you gain focus, you become more and more likely to escape your helpless state of dissociation.</i>
+	<i>당신이 집중을 하면서, 무력한 인격 분열의 상태에서 점점 빠져나오기 쉬워졌다.</i>
 	<br><br>
 <</if>>
 
 <<if $traumafocus gt random(1, 1000) and $dissociation gte 2 and $combat is 1>>
 	<<set $traumafocus to 0>><<set $trauma -= 1000>><<set $dissociation to 1>>
-	<span class="green">Your lucidity returns.</span>
+	<span class="green">당신은 정신이 돌아왔다.</span>
 	<<ltrauma>>
-	<span class="red">The weight of reality crashes down on you.</span>
+	<br>
+	<span class="red">현실의 무게가 당신을 짓눌러 왔다.</span>
 	<br><br>
 <</if>>
 
@@ -52,27 +60,30 @@
 <<actioncarry>>
 <<actioncarrydrop>>
 
-<<if $trance lte 0 and $dissociation lte 1 and $panicparalysis is 0 and $panicviolence is 0
-and $orgasmdown lte 0 and ($pain lt 100 or $willpowerpain is undefined)>>
+<<combatstate>>
+<<carryblock>>
 
-	<<if $images is 1 and $consensual is 1 and $position_lock isnot 1>>
-		<<if $position is "doggy">>
-			| <label>Roll over <<radiobutton "$bodyaction" "missionary">></label>
-		<<elseif $position is "missionary">>
-			| <label>Roll over <<radiobutton "$bodyaction" "doggy">></label>
+<<if $trance lte 0 and $panicparalysis is 0 and ($panicviolence is 0 or $position is "stalk")>>
+	<<if $dissociation lte 1 and $orgasmdown lte 0 and ($pain lt 100 or $willpowerpain is undefined) and !$possessed>>
+		<<if $options.images is 1 and $options.combatImages is 1 and $consensual is 1 and $position_lock isnot 1>>
+			<<if $position is "doggy">>
+				| <label>몸을 돌린다 <<radiobutton "$bodyaction" "missionary">></label>
+			<<elseif $position is "missionary">>
+				| <label>몸을 돌린다 <<radiobutton "$bodyaction" "doggy">></label>
+			<</if>>
+			<<if $position isnot "stalk">>
+				| <label>가만히 있는다 <<radiobutton "$bodyaction" "rest" checked>></label>
+				<br>
+			<</if>>
 		<</if>>
-		| <label>Rest <<radiobutton "$bodyaction" "rest" checked>></label>
-		<br>
 	<</if>>
 
-	<<if $combatControls isnot "disabled">>
+	<<if $options.combatControls isnot "disabled">>
 		<<generateActionsMan>>
 	<</if>>
 	<br>
 <</if>>
 
-<<combatstate>>
-<<carryblock>>
 <br><br>
 
 <<set $face to 0>>
@@ -81,14 +92,33 @@ and $orgasmdown lte 0 and ($pain lt 100 or $willpowerpain is undefined)>>
 
 /*Due to how combat is setup, this is the best location for it*/
 <<setupMidOrgasm>>
+
+<<set _combatend to
+	($alarm is 1 and $rescue is 1) or
+	($enemyhealth lte 0) or
+	($enemyarousal gte $enemyarousalmax) or
+	($finish is 1)
+>>
+
 <<if $debug is 1>>
 	__Debug__
 	<br>
-	<<for _i to 0; _i lt $enemyno; _i++>>
-		<<print _i>> $NPCList[_i].fullDescription: Head Location: $NPCList[_i].location.head --- Genitals Location: $NPCList[_i].location.genitals
+	적 체력: $enemyhealth -- 적 최대 체력: $enemyhealthmax
+	<br>
+	적의 수: $enemyno -- 적의 총 수: $enemynomax
+	<br><br>
+	<<for _i to 0; _i lt $enemynomax; _i++>>
+		#<<print _i>>: <<trNPCdesc $NPCList[_i].fullDescription>>_trResult
 		<br>
-		Penis: $NPCList[_i].penis --- Vagina: $NPCList[_i].vagina --- Mouth: $NPCList[_i].mouth --- Anus: $NPCList[_i].anus
+		머리 위치: $NPCList[_i].location.head -- 생식기 위치: $NPCList[_i].location.genitals
+		<br>
+		활성 상태: $NPCList[_i].active -- 자세: $NPCList[_i].stance -- 체력: $NPCList[_i].health
+		<br>
+		자지: $NPCList[_i].penis -- 보지: $NPCList[_i].vagina -- 입: $NPCList[_i].mouth -- 항문: $NPCList[_i].anus
+		/* Note: Anus is literally not a real var for npcs yet. Don't think anything is wrong when you see it isn't printing a logical value. A rework is required first. */
+		<br>
+		왼손: $NPCList[_i].lefthand -- 오른손: $NPCList[_i].righthand
 		<br><br>
 	<</for>>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>

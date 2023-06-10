@@ -1,11 +1,13 @@
 :: Machine Effects [widget]
-<<widget "machine_effects">><<nobr>>
-<<set $pain -= 1>>
+<<widget "machine_effects">>
+<<pain -0.25>>
 
-<<if $trance gte 1>>
-	당신은 멍하니 앞을 보고 있으며, 당신의 몸은 수동적이고 순응적이다.
-<<elseif $dissociation gte 2>>
-	당신은 멍하니 앞을 보고 있으며, 당신의 몸은 수동적이고 순응적이다.
+<<if $trance gte 1 or $dissociation gte 2>>
+	<<if $position is "stalk">>
+		당신은 멍하니, 주변을 인식하지 못하고 떠돌아다닌다.
+	<<else>>
+		당신은 멍하니 앞을 보고 있으며, 당신의 몸은 수동적이고 순응적이다.
+	<</if>>
 <</if>>
 
 <<if $underwater is 1>>
@@ -23,7 +25,7 @@
 		<<gtrauma>><<gstress>><<stress 4>><<trauma 2>>
 	<<else>>
 		<span class="red">당신은 질식할 것 같아졌다.</span>
-		<<set $pain += 20>><<gtrauma>><<gstress>><<stress 6>><<trauma 4>>
+		<<pain 20 1>><<gtrauma>><<gstress>><<gpain>><<stress 6>><<trauma 4>>
 		<br><br>
 	<</if>>
 <</if>>
@@ -69,7 +71,7 @@
 		당신은 타투건을 양손으로 친다.
 	<</if>>
 	<<set $attackstat += 2>>
-	<<if $physique gte random(1, $physiquemax)>>
+	<<if currentSkillValue('physique') gte random(1, $physiquemax)>>
 		<span class="teal">당신은 금속 뒤에서 뭔가 딱딱 거리는 것을 느낄 수 있다. </span><<set $machine.tattoo.health -= 2>>
 	<</if>>
 	<br>
@@ -85,7 +87,7 @@
 		당신은 타투건을 친다.
 	<</if>>
 	<<set $attackstat += 1>>
-	<<if $physique gte random(1, $physiquemax)>>
+	<<if currentSkillValue('physique') gte random(1, $physiquemax)>>
 		<span class="teal">당신은 금속 뒤에서 뭔가 딱딱 거리는 것을 느낄 수 있다.</span><<set $machine.tattoo.health -= 1>>
 	<</if>>
 	<br>
@@ -101,7 +103,7 @@
 		당신은 타투건을 친다.
 	<</if>>
 	<<set $attackstat += 1>>
-	<<if $physique gte random(1, $physiquemax)>>
+	<<if currentSkillValue('physique') gte random(1, $physiquemax)>>
 		<span class="teal">당신은 금속 뒤에서 뭔가 딱딱 거리는 것을 느낄 수 있다.</span><<set $machine.tattoo.health -= 1>>
 	<</if>>
 	<br>
@@ -110,7 +112,7 @@
 <<if $leftaction is "vaginal_whack" and $rightaction is "vaginal_whack">>
 	<<set $leftactiondefault to "vaginal_whack">><<set $leftaction to 0>><<set $rightactiondefault to "vaginal_whack">><<set $rightaction to 0>>
 	<<defiance 10>><<set $machine.vaginal.health -= 2>><<machine_violent_arms>>
-	<<if $machine.vaginal.use isnot "ready" and $physique gte random(1, 40000)>>
+	<<if $machine.vaginal.use isnot "ready" and currentSkillValue('physique') gte random(1, 40000)>>
 		당신이 남근 기계를 양손으로 치자, <span class="lblue">당신에게서 멀어진다.</span>
 		<<set $machine.vaginal.use to "ready">>
 		<<set $machine.vaginal.state to "ready">>
@@ -118,15 +120,15 @@
 		당신은 남근 기계를 양손으로 친다.
 	<</if>>
 	<<set $attackstat += 2>>
-	<<if $physique gte random(1, $physiquemax)>>
-		<span class="teal">당신은 실리콘 뒤에서 뭔가 딱딱거리는 것을 느낄 수 있다.</span><<set $machine.vaginal.health -= 2>>
+	<<if currentSkillValue('physique') gte random(1, $physiquemax)>>
+		<span class="teal">당신은 실리콘 뒤에서 뭔가 부서지는 것을 느낀다.</span><<set $machine.vaginal.health -= 2>>
 	<</if>>
 	<br>
 
 <<elseif $leftaction is "vaginal_whack">>
 	<<set $leftactiondefault to "vaginal_whack">><<set $leftaction to 0>>
 	<<defiance 5>><<set $machine.vaginal.health -= 1>><<machine_violent_arms>>
-	<<if $machine.vaginal.use isnot "ready" and $physique gte random(1, 50000)>>
+	<<if $machine.vaginal.use isnot "ready" and currentSkillValue('physique') gte random(1, 50000)>>
 		당신이 남근 기계를 치자, <span class="lblue">당신에게서 멀어진다.</span>
 		<<set $machine.vaginal.use to "ready">>
 		<<set $machine.vaginal.state to "ready">>
@@ -134,15 +136,15 @@
 		당신은 남근 기계를 친다.
 	<</if>>
 	<<set $attackstat += 1>>
-	<<if $physique gte random(1, $physiquemax)>>
-		<span class="teal">당신은 실리콘 뒤에서 뭔가 딱딱거리는 것을 느낄 수 있다.</span><<set $machine.vaginal.health -= 1>>
+	<<if currentSkillValue('physique') gte random(1, $physiquemax)>>
+		<span class="teal">당신은 실리콘 뒤에서 뭔가 부서지는 것을 느낀다.</span><<set $machine.vaginal.health -= 1>>
 	<</if>>
 	<br>
 
 <<elseif $rightaction is "vaginal_whack">>
 	<<set $rightactiondefault to "vaginal_whack">><<set $rightaction to 0>>
 	<<defiance 5>><<set $machine.vaginal.health -= 1>><<machine_violent_arms>>
-	<<if $machine.vaginal.use isnot "ready" and $physique gte random(1, 50000)>>
+	<<if $machine.vaginal.use isnot "ready" and currentSkillValue('physique') gte random(1, 50000)>>
 		당신이 남근 기계를 치자, <span class="lblue">당신에게서 멀어진다.</span>
 		<<set $machine.vaginal.use to "ready">>
 		<<set $machine.vaginal.state to "ready">>
@@ -150,7 +152,7 @@
 		당신은 남근 기계를 친다.
 	<</if>>
 	<<set $attackstat += 1>>
-	<<if $physique gte random(1, $physiquemax)>>
+	<<if currentSkillValue('physique') gte random(1, $physiquemax)>>
 		<span class="teal">당신은 금속 뒤에서 뭔가 딱딱 거리는 것을 느낄 수 있다.</span><<set $machine.vaginal.health -= 1>>
 	<</if>>
 	<br>
@@ -163,7 +165,7 @@
 		<<set $machine.vaginal.health -= 1>>
 	<</if>>
 	<<if $machine.vaginal.state is "penetrated">>
-		당신은 양손으로 남근기계를 밀어내려고 노력하지만, <span class="pink">너무 격렬하다.</span>
+		당신은 양손으로 남근기계를 밀어내려고 노력하지만, <span class="pink">기계의 움직임이 너무 격렬하다.</span>
 	<<elseif $machine.vaginal.state is "imminent">>
 		<<set $machine.vaginal.state to "ready">>
 		<<set $machine.vaginal.use to "ready">>
@@ -184,7 +186,7 @@
 		<<set $machine.vaginal.health -= 1>>
 	<</if>>
 	<<if $machine.vaginal.state is "penetrated">>
-		당신은 왼손으로 남근 기계를 밀어내려고 노력하지만, <span class="pink">너무 격렬하다.</span>
+		당신은 왼손으로 남근 기계를 밀어내려고 노력하지만, <span class="pink">기계의 움직임이 너무 격렬하다.</span>
 	<<elseif $machine.vaginal.state is "imminent">>
 		<<set $machine.vaginal.state to "entrance">>
 		<<set $vaginastate to "entrance">>
@@ -204,7 +206,7 @@
 		<<set $machine.vaginal.health -= 1>>
 	<</if>>
 	<<if $machine.vaginal.state is "penetrated">>
-		당신은 왼손으로 남근 기계를 밀어내려고 노력하지만, <span class="pink">너무 격렬하다.</span>
+		당신은 왼손으로 남근 기계를 밀어내려고 노력하지만, <span class="pink">기계의 움직임이 너무 격렬하다.</span>
 	<<elseif $machine.vaginal.state is "imminent">>
 		<<set $machine.vaginal.state to "entrance">>
 		<<set $vaginastate to "entrance">>
@@ -223,7 +225,7 @@
 <<if $leftaction is "anal_whack" and $rightaction is "anal_whack">>
 	<<set $leftactiondefault to "anal_whack">><<set $leftaction to 0>><<set $rightactiondefault to "anal_whack">><<set $rightaction to 0>>
 	<<defiance 10>><<set $machine.anal.health -= 2>><<machine_violent_arms>>
-	<<if $machine.anal.use isnot "ready" and $physique gte random(1, 40000)>>
+	<<if $machine.anal.use isnot "ready" and currentSkillValue('physique') gte random(1, 40000)>>
 		당신이 양손으로 작은 남근 기계를 치자, <span class="lblue">당신에게서 멀어진다.</span>
 		<<set $machine.anal.use to "ready">>
 		<<set $machine.anal.state to "ready">>
@@ -231,15 +233,15 @@
 		당신은 양손으로 작은 남근 기계를 친다.
 	<</if>>
 	<<set $attackstat += 2>>
-	<<if $physique gte random(1, $physiquemax)>>
-		<span class="teal">당신은 실리콘 뒤에서 뭔가 딱딱거리는 것을 느낄 수 있다.</span><<set $machine.anal.health -= 2>>
+	<<if currentSkillValue('physique') gte random(1, $physiquemax)>>
+		<span class="teal">당신은 실리콘 뒤에서 뭔가 부서지는 것을 느낀다.</span><<set $machine.anal.health -= 2>>
 	<</if>>
 	<br>
 
 <<elseif $leftaction is "anal_whack">>
 	<<set $leftactiondefault to "anal_whack">><<set $leftaction to 0>>
 	<<defiance 5>><<set $machine.anal.health -= 1>><<machine_violent_arms>>
-	<<if $machine.anal.use isnot "ready" and $physique gte random(1, 50000)>>
+	<<if $machine.anal.use isnot "ready" and currentSkillValue('physique') gte random(1, 50000)>>
 		당신이 작은 남근 기계를 치자, <span class="lblue">당신에게서 멀어진다.</span>
 		<<set $machine.anal.use to "ready">>
 		<<set $machine.anal.state to "ready">>
@@ -247,15 +249,15 @@
 		당신은 작은 남근 기계를 친다.
 	<</if>>
 	<<set $attackstat += 1>>
-	<<if $physique gte random(1, $physiquemax)>>
-		<span class="teal">당신은 실리콘 뒤에서 뭔가 딱딱거리는 것을 느낄 수 있다.</span><<set $machine.anal.health -= 1>>
+	<<if currentSkillValue('physique') gte random(1, $physiquemax)>>
+		<span class="teal">당신은 실리콘 뒤에서 뭔가 부서지는 것을 느낀다.</span><<set $machine.anal.health -= 1>>
 	<</if>>
 	<br>
 
 <<elseif $rightaction is "anal_whack">>
 	<<set $rightactiondefault to "anal_whack">><<set $rightaction to 0>>
 	<<defiance 5>><<set $machine.anal.health -= 1>><<machine_violent_arms>>
-	<<if $machine.anal.use isnot "ready" and $physique gte random(1, 50000)>>
+	<<if $machine.anal.use isnot "ready" and currentSkillValue('physique') gte random(1, 50000)>>
 		당신이 작은 남근 기계를 치자, <span class="lblue">당신에게서 멀어진다.</span>
 		<<set $machine.anal.use to "ready">>
 		<<set $machine.anal.state to "ready">>
@@ -263,7 +265,7 @@
 		당신은 작은 남근 기계를 친다.
 	<</if>>
 	<<set $attackstat += 1>>
-	<<if $physique gte random(1, $physiquemax)>>
+	<<if currentSkillValue('physique') gte random(1, $physiquemax)>>
 		<span class="teal">당신은 금속 뒤에서 뭔가 딱딱 거리는 것을 느낄 수 있다.</span><<set $machine.anal.health -= 1>>
 	<</if>>
 	<br>
@@ -276,7 +278,7 @@
 		<<set $machine.anal.health -= 1>>
 	<</if>>
 	<<if $machine.anal.state is "penetrated">>
-		당신은 양손으로 작은 남근 기계를 밀어내려고 노력하지만, <span class="pink">너무 격렬하다.</span>
+		당신은 양손으로 작은 남근 기계를 밀어내려고 노력하지만, <span class="pink">기계의 움직임이 너무 격렬하다.</span>
 	<<elseif $machine.anal.state is "imminent">>
 		<<set $machine.anal.state to "ready">>
 		<<set $machine.anal.use to "ready">>
@@ -297,7 +299,7 @@
 		<<set $machine.anal.health -= 1>>
 	<</if>>
 	<<if $machine.anal.state is "penetrated">>
-		당신은 왼손으로 작은 남근 기계를 밀어내려고 노력하지만, <span class="pink">너무 격렬하다.</span>
+		당신은 왼손으로 작은 남근 기계를 밀어내려고 노력하지만, <span class="pink">기계의 움직임이 너무 격렬하다.</span>
 	<<elseif $machine.anal.state is "imminent">>
 		<<set $machine.anal.state to "entrance">>
 		<<set $anusstate to "entrance">>
@@ -317,7 +319,7 @@
 		<<set $machine.anal.health -= 1>>
 	<</if>>
 	<<if $machine.anal.state is "penetrated">>
-		당신은 오른손으로 작은 남근 기계를 밀어려고 노력하지만, <span class="pink">너무 격렬하다.</span>
+		당신은 오른손으로 작은 남근 기계를 밀어려고 노력하지만, <span class="pink">기계의 움직임이 너무 격렬하다.</span>
 	<<elseif $machine.anal.state is "imminent">>
 		<<set $machine.anal.state to "entrance">>
 		<<set $anusstate to "entrance">>
@@ -354,7 +356,7 @@
 		당신은 타투건을 찼다.
 	<</if>>
 	<<set $attackstat += 1>>
-	<<if $physique gte random(1, $physiquemax)>>
+	<<if currentSkillValue('physique') gte random(1, $physiquemax)>>
 		<span class="teal">당신은 금속 뒤에서 뭔가 딱딱 거리는 것을 느낄 수 있다.</span><<set $machine.tattoo.health -= 1>>
 	<</if>>
 	<br>
@@ -366,7 +368,7 @@
 	<<if random(1, 6) is 6>>
 		<<set $machine.vaginal.health -= 1>>
 	<</if>>
-	<<if $machine.vaginal.use isnot "ready" and $physique gte random(1, 50000)>>
+	<<if $machine.vaginal.use isnot "ready" and currentSkillValue('physique') gte random(1, 50000)>>
 		당신이 남근 기계를 차자, <span class="lblue">당신에게서 멀어진다.</span>
 		<<set $machine.vaginal.use to "ready">>
 		<<set $machine.vaginal.state to "ready">>
@@ -374,8 +376,8 @@
 		당신은 남근 기계를 찼다.
 	<</if>>
 	<<set $attackstat += 1>>
-	<<if $physique gte random(1, $physiquemax)>>
-		<span class="teal">당신은 실리콘 뒤에서 뭔가 딱딱거리는 것을 느낄 수 있다.</span><<set $machine.vaginal.health -= 1>>
+	<<if currentSkillValue('physique') gte random(1, $physiquemax)>>
+		<span class="teal">당신은 실리콘 뒤에서 뭔가 부서지는 것을 느낀다.</span><<set $machine.vaginal.health -= 1>>
 	<</if>>
 	<br>
 <</if>>
@@ -406,7 +408,7 @@
 	<<if random(1, 6) is 6>>
 		<<set $machine.anal.health -= 1>>
 	<</if>>
-	<<if $machine.anal.use isnot "ready" and $physique gte random(1, 50000)>>
+	<<if $machine.anal.use isnot "ready" and currentSkillValue('physique') gte random(1, 50000)>>
 		당신이 작은 남근 기계를 차자, <span class="lblue">당신에게서 멀어진다.</span>
 		<<set $machine.anal.use to "ready">>
 		<<set $machine.anal.state to "ready">>
@@ -414,8 +416,8 @@
 		당신은 작은 남근 기계를 찼다.
 	<</if>>
 	<<set $attackstat += 1>>
-	<<if $physique gte random(1, $physiquemax)>>
-		<span class="teal">당신은 실리콘 뒤에서 뭔가 딱딱거리는 것을 느낄 수 있다.</span><<set $machine.anal.health -= 1>>
+	<<if currentSkillValue('physique') gte random(1, $physiquemax)>>
+		<span class="teal">당신은 실리콘 뒤에서 뭔가 부서지는 것을 느낀다.</span><<set $machine.anal.health -= 1>>
 	<</if>>
 	<br>
 <</if>>
@@ -497,12 +499,12 @@
 	<</if>>
 <</if>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "machine_violent_arms">><<nobr>>
+<<widget "machine_violent_arms">>
 <<set _machine_arms to 1>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "machine_violent_legs">><<nobr>>
+<<widget "machine_violent_legs">>
 <<set _machine_legs to 1>>
-<</nobr>><</widget>>
+<</widget>>

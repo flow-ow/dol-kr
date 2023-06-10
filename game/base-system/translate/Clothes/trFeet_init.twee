@@ -1,10 +1,10 @@
 :: Widgets trFeet [widget nobr]
 <<widget "init_trFeet">>
-    <<set _trClothes.feet to [
+    <<set setup.trClothes.feet to [
         {
             index: 0,
             name: "naked",
-            name_ko: "알몸",
+            name_ko: "벗음",
             variable: "naked",
             description: "naked",
             post: 0
@@ -16,7 +16,7 @@
             name_ko: "학교 신발",
             variable: "schoolshoes",
             description: "지적이고 학교에서 신기 적합하다.",
-            post: 0
+            post: 2
         },
 
         {
@@ -25,7 +25,7 @@
             name_ko: "턱시도 신발",
             variable: "tuxedoshoes",
             description: "지적이고 세련됐다.",
-            post: 0
+            post: 2
         },
 
         {
@@ -43,7 +43,7 @@
             name_ko: "샌들",
             variable: "sandals",
             description: "여름에 시원하다.",
-            post: 0
+            post: 2
         },
 
         {
@@ -52,7 +52,7 @@
             name_ko: "드레스 샌들",
             variable: "dresssandals",
             description: "유행하는 스타일이고 세련됐다.",
-            post: 0
+            post: 2
         },
 
         {
@@ -70,7 +70,7 @@
             name_ko: "마녀 신발",
             variable: "witch",
             description: "방수다.",
-            post: 0
+            post: 2
         },
 
         {
@@ -88,7 +88,7 @@
             name_ko: "플랫폼 힐",
             variable: "platformheels",
             description: "뭔가 여성스러운 기분이 들게 한다.",
-            post: 0
+            post: 2
         },
 
         {
@@ -96,8 +96,8 @@
             name: "kitten heels",
             name_ko: "키튼 힐",
             variable: "kittenheels",
-            description: "굽이 3센치 밖에 되지 않아 키튼힐이라 불린다.",
-            post: 0
+            description: "굽이 3센티 밖에 되지 않아 키튼힐이라 불린다.",
+            post: 2
         },
 
         {
@@ -106,7 +106,7 @@
             name_ko: "웨지 샌들",
             variable: "wedgesandals",
             description: "해변에서 신기 좋다.",
-            post: 0
+            post: 2
         },
 
         {
@@ -115,7 +115,7 @@
             name_ko: "코트 힐",
             variable: "courtheels",
             description: "꽤 높고 아주 어른스럽다.",
-            post: 0
+            post: 2
         },
 
         {
@@ -124,7 +124,7 @@
             name_ko: "부츠 힐",
             variable: "bootheels",
             description: "아주 강렬한 선택이다.",
-            post: 0
+            post: 2
         },
 
         {
@@ -133,7 +133,7 @@
             name_ko: "스트리퍼 힐",
             variable: "stripperheels",
             description: "미친 듯이 굽이 높고 매우 천박하다.",
-            post: 0
+            post: 2
         },
 
         {
@@ -187,7 +187,7 @@
             name_ko: "방목장 신발",
             variable: "paddock",
             description: "가벼운 승마를 위한 신발.",
-            post: 1
+            post: 2
         },
 
         {
@@ -224,6 +224,42 @@
             variable: "long",
             description: "무릎까지 감싸준다",
             post: 1
-        }
+        },
+
+        {
+            index: 25,
+            name: "light-up trainers",
+            name_ko: "발광 운동화",
+            variable: "lightuptrainers",
+            description: "더 눈에 띄기 위해서.",
+            post: 1
+        },
+
+        {
+            index: 26,
+            name: "ball and chain",
+            name_ko: "철구와 사슬",
+            variable: "ballchain",
+            description: "풀려면 특별한 도구가 필요하다.",
+            post: 2
+        },
+
+        {
+            index: 27,
+            name: "cowboy boots",
+            name_ko: "카우보이 부츠",
+            variable: "cowboy",
+            description: "박차가 포함되어 있음.",
+            post: 1
+        },
+
+        {
+            index: 28,
+            name: "high top trainers",
+            name_ko: "하이탑 운동화",
+            variable: "hightops",
+            description: "패셔너블하고 실용적이다.",
+            post: 1
+        },
     ]>>
 <</widget>>

@@ -1,5 +1,5 @@
 :: Widget EZ Thesaurus [widget]
-<<widget "EZdisgusting">><<nobr>>
+<<widget "EZdisgusting">>
 <<set _possibilities to [
 	"구역질나는",
 	"더러운",
@@ -12,9 +12,9 @@
 	"끔찍한"
 ]>>
 <<print _possibilities.pluck()>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "EZsmall">><<nobr>>
+<<widget "EZsmall">>
 <<set _possibilities to [
 	"자그마한",
 	"조그마한",
@@ -23,9 +23,9 @@
 	"아주 작은"
 ]>>
 <<print _possibilities.pluck()>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "EZbig">><<nobr>>
+<<widget "EZbig">>
 <<set _possibilities to [
 	"큰",
 	"커다란",
@@ -33,9 +33,9 @@
 	"거대한"
 ]>>
 <<print _possibilities.pluck()>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "EZpenis">><<nobr>>
+<<widget "EZpenis">>
 <<set _possibilities to [
 	"자지",
 	"육봉",
@@ -43,5 +43,5 @@
 	"고추"
 ]>>
 <<print _possibilities.pluck()>>
-<</nobr>><</widget>>
+<</widget>>
 

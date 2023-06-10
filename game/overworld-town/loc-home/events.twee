@@ -1,4 +1,4 @@
-:: Home Max [nobr]
+:: Home Max
 
 <<effects>>
 
@@ -11,7 +11,7 @@
 더 많은 고아들이 보러 와서는 한 번씩 쓰다듬어보길 원한다. <<person2>><<personPost "이">> 물 한 접시를 가져온다. 맥스는 열심히 물을 들이킨다. "목말라 할줄 알았어." <<hePost "이">> 말한다.
 <br><br>
 
-한동안 그렇게 시간이 흐르다가, <<person1>><<personPost "이">> 창문 밖을 본다. "주인이 왔어." <<hePost "이">> 말한다. 바깥에서 목소리가 들려온다. 맥스는 목소리를 알아들었는지 꼬리를 흔들며 일어난다.
+한동안 그렇게 시간이 흐르다가, <<person1>><<personPost "이">> 창문 밖을 본다. "주인이 왔어." <<hePost "이">> 말한다. 바깥에서 여러 목소리들이 들려온다. 맥스는 그중 최소 한 사람의 목소리를 알아들었는지, 꼬리를 흔들며 일어난다.
 <br><br>
 
 <<personPost "이">> 맥스를 주인에게 데려다주는 동안 다들 창문 앞에 몰려들어 밖을 본다.<<endevent>><<generateyv1>><<person1>> 어린 고아 한 명이 당신의 소매를 당긴다. "베일리가 개를 키우게 해줄까?" <<hePost "이">> 묻는다. 다른 고아들도 귀를 기울인다.
@@ -22,46 +22,46 @@
 <<link [[희망을 표한다|Home Max Hope]]>><<hope 1>><<reb -1>><</link>><<lreb>><<ghope>>
 <br>
 
-:: Home Max Doubt [nobr]
+:: Home Max Doubt
 
 <<effects>>
 
 당신은 고개를 내젓는다.
 
 <<if $submissive gte 1150>>
-"그러기엔 베일리는 너무 불평이 많아." 당신이 말한다.
-<br><br>
+	"그러기엔 베일리는 너무 불평이 많아." 당신이 말한다.
+	<br><br>
 
-<<personPost "은">> 제 발을 내려다보며 고개를 끄덕인다.
-<br><br>
+	<<personPost "은">> 제 발을 내려다보며 고개를 끄덕인다.
+	<br><br>
 <<elseif $submissive lte 850>>
-"아니." 당신이 말한다. "베일리는 개자식이거든."
-<br><br>
+	"아니." 당신이 말한다. "베일리는 개자식이거든."
+	<br><br>
 
-<<personPost "이">> 깜짝 놀라 손으로 제 입을 가리고, <<generatey2>><<person2>>당신 또래로 보이는 <<personPost "은">> 어린 고아의 귀를 제 손으로 막는다. "고운 말 좀 써!" <<hePost "이">> 당신을 노려보며 말한다.
-<br><br>
+	<<personPost "이">> 깜짝 놀라 손으로 제 입을 가리고, <<generatey2>><<person2>>당신 또래로 보이는 <<personPost "은">> 어린 고아의 귀를 제 손으로 막는다. "고운 말 좀 써!" <<hePost "이">> 당신을 노려보며 말한다.
+	<br><br>
 <<else>>
-"고아원을 떠나면 개를 기를 수 있을 거야." 당신이 말한다.
-<br><br>
+	"고아원을 떠나면 개를 기를 수 있을 거야." 당신이 말한다.
+	<br><br>
 
-<<personPost "은">> 제 발을 내려다보며 고개를 끄덕인다.
-<br><br>
+	<<personPost "은">> 제 발을 내려다보며 고개를 끄덕인다.
+	<br><br>
 <</if>>
 
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home Max Hope [nobr]
+:: Home Max Hope
 <<effects>>
 
 당신은 끄덕인다.
 
 <<if $submissive gte 1150>>
-"착하게 굴면 그럴지도 모르지." 당신이 말한다.
+	"착하게 굴면 그럴지도 모르지." 당신이 말한다.
 <<elseif $submissive lte 850>>
-"우리가 원하면 베일리도 어쩔 수 없어." 당신이 말한다.
+	"우리가 원하면 베일리도 어쩔 수 없어." 당신이 말한다.
 <<else>>
-"베일리도 그렇게 나쁜 사람은 아냐." 당신이 말한다.
+	"베일리도 그렇게 나쁜 사람은 아냐." 당신이 말한다.
 <</if>>
 <br><br>
 <<personPost "은">> 다시 창문 밖을 바라보며 활짝 웃는다.
@@ -70,17 +70,17 @@
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home Intervene [nobr]
+:: Home Intervene
 <<effects>>
 
 당신은 앞으로 나선다.
 
 <<if $submissive gte 1150>>
-"자-잠깐!" 당신은 말을 더듬는다. "걜 그냥 냅둬요!"
+	"자-잠깐!" 당신은 말을 더듬는다. "걜 그냥 냅둬요!"
 <<elseif $submissive lte 850>>
-"이 나쁜 놈." 당신이 말한다. "너 같은 건 혼이 좀 나봐야 해."
+	"이 나쁜 놈." 당신이 말한다. "너 같은 건 혼이 좀 나봐야 해."
 <<else>>
-"멈춰요." 당신이 말한다. "이런 건 잘못 되었어요."
+	"멈춰요." 당신이 말한다. "이런 건 잘못 되었어요."
 <</if>>
 <br><br>
 
@@ -88,14 +88,14 @@
 <br><br>
 
 <<if $money gte 20000>>
-<<link [[낸다|Home Intervene Pay]]>><<hope 1>><<set $money -= 20000>><</link>><<ghope>><<ltrauma>><<trauma -6>>
-<br>
+	<<link [[낸다|Home Intervene Pay]]>><<hope 1>><<set $money -= 20000>><</link>><<ghope>><<ltrauma>><<trauma -6>>
+	<br>
 <</if>>
 <<link [[싸운다|Home Intervene Fight]]>><<set $fightstart to 1>><</link>>
 <br>
 <<link [[물러선다|Home Intervene Step]]>><</link>>
 
-:: Home Watch [nobr]
+:: Home Watch
 <<effects>>
 
 당신은 <<person2>><<personPost>>의 머리에 복면이 씌워지고 팔이 구속구로 묶이는 장면을 지켜본다. 베일리는 <<hePost "을">> 밀며 복도를 따라 걷는다. 당신은 그 뒤를 따른다.
@@ -107,7 +107,7 @@
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home Intervene Pay [nobr]
+:: Home Intervene Pay
 <<effects>>
 
 베일리가 당신의 손에 든 돈을 낚아채서 갯수를 센다. "좋아." <<hePost "은">> 만족스럽다는 듯이 말한다. 베일리는 <<person2>><<personPost "을">> 향해 고개를 돌린다. "다음 주에는 £300를 가져와." <<person2>><<personPost "이">> 고개를 끄덕인다.
@@ -122,7 +122,7 @@
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home Intervene Step [nobr]
+:: Home Intervene Step
 <<effects>>
 
 당신은 뒤로 물러선다. 베일리는 <<person2>><<personPost>>의 머리에 검은 복면을 씌우고, 팔을 묶은 뒤, <<hePost "을">> 복도를 따라 이끈다.
@@ -131,105 +131,96 @@
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home Intervene Fight [nobr]
+:: Home Intervene Fight
 <<if $fightstart is 1>>
-<<set $fightstart to 0>>
-
-<<neutral 1>>
-
-<<set $enemyno to 1>><<maninit>>
-<<set $enemyhealthmax += 200>>
-<<set $enemyanger += 200>>
-<<npcidlegenitals>>
-당신은 베일리의 정강이를 걷어차나, <<hePost "은">> 옆으로 물러서며 당신을 넘어뜨린다. 하지만 베일리가 당신의 취약한 상태를 어떻게 이용해보기 전에, <<person2>><<personPost "이">> 베일리의 등에 올라타서는 <<person1>><<hisPost "의">> 머리카락을 잡아당긴다. 베일리는 <<person2>><<personPost "을">> 벽에 내팽겨치고, <<hePost "은">> 웅크린채로 떨어진다.<<person1>>
-<br><br><br><br>
-<<set $phase to 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<set $enemyno to 1>><<set $enemynomax to 1>><<maninit>>
+	<<set $enemyhealthmax += 200>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+	당신은 베일리의 정강이를 걷어차나, <<hePost "은">> 옆으로 물러서며 당신을 넘어뜨린다. 하지만 베일리가 당신의 취약한 상태를 어떻게 이용해보기 전에, <<person2>><<personPost "이">> 베일리의 등에 올라타서는 <<person1>><<hisPost "의">> 머리카락을 잡아당긴다. 베일리는 <<person2>><<personPost "을">> 벽에 내팽겨치고, <<hePost "은">> 웅크린채로 떨어진다.<<person1>>
+	<br><br><br><br>
+	<<set $phase to 1>>
 <</if>>
 
 <<effects>>
-<<effectsman>><<man>>
+<<effectsman>>
+<<man>>
 
 <<if $phase is 1>><<set $phase to 2>>
-고아들이 소리에 이끌려, 싸움을 보러 모인다.
-<br><br>
+	고아들이 소리에 이끌려, 싸움을 보러 모인다.
+	<br><br>
 <</if>>
 
 <<stateman>>
 <br><br>
 <<actionsman>>
 
-<<if $enemyhealth lte 0>>
-	<span id="next"><<link [[다음|Home Intervene Fight Finish]]>><</link>></span><<nexttext>>
-<<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[다음|Home Intervene Fight Finish]]>><</link>></span><<nexttext>>
-<<elseif $pain gte 100 and $willpowerpain is 0>>
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
 	<span id="next"><<link [[다음|Home Intervene Fight Finish]]>><</link>></span><<nexttext>>
 <<else>>
 	<span id="next"><<link [[다음|Home Intervene Fight]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Home Intervene Fight Finish [nobr]
+:: Home Intervene Fight Finish
 <<effects>>
 
 <<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+	<<set $orphan_rent to "paid">><<earnFeat "Bailey's Trouble Maker">>
+	<<person1>>구경하던 고아 중 한 명이 낄낄댄다. 베일리는 범인을 찾으려 몸을 돌리지만, 뒤에서 또 다른 웃음소리가 들려온다. 곧 방 전체가 웃음소리로 가득 찬다. <<HePost "은">> 당신을 돌아본다. "언젠간 대가를 치르게 될 거다." 베일리는 그렇게 말하고는 방에서 뛰쳐나간다.
+	<br><br>
 
-<<ejaculation>>
-<<set $orphan_rent to "paid">>
-<<person1>>구경하던 고아 중 한 명이 낄낄댄다. 베일리는 범인을 찾으려 몸을 돌리지만, 뒤에서 또 다른 웃음소리가 들려온다. 곧 방 전체가 웃음소리로 가득 찬다. <<HePost "은">> 당신을 돌아본다. "언젠간 대가를 치르게 될 거다." 베일리는 그렇게 말하고는 방에서 뛰쳐나간다.
-<br><br>
+	고아들은 당신이 폭군을 물리친 것에 환호를 보낸다.
+	<<greb>><<ghope>><<reb 1>><<hope 1>><<ltrauma>><<lstress>><<trauma -6>><<stress -12>>
+	<br><br>
 
-고아들은 당신이 폭군을 물리친 것에 환호를 보낸다.
-<<greb>><<ghope>><<reb 1>><<hope 1>><<ltrauma>><<lstress>><<trauma -6>><<stress -12>>
-<br><br>
+	<<person2>><<personPost "이">> 자리에서 일어선다. "네가 날 구했어."<<hePost "이">> 웃음을 터트린다. "고마워. 일자리를 찾기가 쉽지 않았거든. 어딜 가나 소름끼치는 인간들 밖에 없어서 말이야." <<HePost "이">> 눈길을 돌린다. "베일리가 날 가지고 어떻게 하려고 했는지 알고 싶지 않아. 그냥 그렇게까지 나쁜 일은 아니길 바랄 뿐이었지.
+	<br><br>
 
-<<person2>><<personPost "이">> 자리에서 일어선다. "네가 날 구했어."<<hePost "이">> 웃음을 터트린다. "고마워. 일자리를 찾기가 쉽지 않았거든. 어딜 가나 소름끼치는 인간들 밖에 없어서 말이야." <<HePost "이">> 눈길을 돌린다. "베일리가 날 가지고 어떻게 하려고 했는지 알고 싶지 않아. 그냥 그렇게까지 나쁜 일은 아니길 바랄 뿐이었지.
-<br><br>
+	"언젠가 이 은혜는 갚을게." <<hePost "이">> 말을 이어나간다. "약속이야."
+	<br><br>
 
-"언젠가 이 은혜는 갚을게." <<hePost "이">> 말을 이어나간다. "약속이야."
-<br><br>
+	<<clotheson>>
+	<<endcombat>>
 
-<<clotheson>>
-<<endcombat>>
-
-<<link [[다음|Orphanage]]>><</link>>
-
+	<<link [[다음|Orphanage]]>><</link>>
 <<elseif $enemyhealth lte 0>>
-<<set $orphan_rent to "paid">>
-<<person1>><<HePost "은">> 당신의 공격에 놀라 멍이 든 부분을 쓸어내리며 잠시 뒤로 물러선다. 곧 현관 주변에 고아들이 모인 것을 눈치챈다. "언젠간 대가를 치르게 될 거다. 명심해둬." 베일리는 뛰쳐나간다.
-<br><br>
+	<<set $orphan_rent to "paid">>
+	<<person1>><<HePost "은">> 당신의 공격에 놀라 멍이 든 부분을 쓸어내리며 잠시 뒤로 물러선다. 곧 현관 주변에 고아들이 모인 것을 눈치챈다. "언젠간 대가를 치르게 될 거다. 명심해둬." 베일리는 뛰쳐나간다.
+	<br><br>
 
-고아들은 당신이 폭군을 물리친 것에 환호를 보낸다.
-<<greb>><<ghope>><<reb 1>><<hope 1>><<ltrauma>><<lstress>><<trauma -6>><<stress -12>>
-<br><br>
+	고아들은 당신이 폭군을 물리친 것에 환호를 보낸다.
+	<<greb>><<ghope>><<reb 1>><<hope 1>><<ltrauma>><<lstress>><<trauma -6>><<stress -12>>
+	<br><br>
 
-<<person2>><<personPost "이">> 자리에서 일어선다. "네가 날 구했어."<<hePost "이">> 웃음을 터트린다. "고마워. 일자리를 찾기가 쉽지 않았거든. 어딜 가나 소름끼치는 인간들 밖에 없어서 말이야." <<HePost "이">> 눈길을 돌린다. "베일리가 날 가지고 어떻게 하려고 했는지 알고 싶지 않아. 그냥 그렇게까지 나쁜 일은 아니길 바랄 뿐이었지.
-<br><br>
+	<<person2>><<personPost "이">> 자리에서 일어선다. "네가 날 구했어."<<hePost "이">> 웃음을 터트린다. "고마워. 일자리를 찾기가 쉽지 않았거든. 어딜 가나 소름끼치는 인간들 밖에 없어서 말이야." <<HePost "이">> 눈길을 돌린다. "베일리가 날 가지고 어떻게 하려고 했는지 알고 싶지 않아. 그냥 그렇게까지 나쁜 일은 아니길 바랄 뿐이었지.
+	<br><br>
 
-"언젠가 이 은혜는 갚을게." <<hePost "이">> 말을 이어나간다. "약속이야.
-<br><br>
+	"언젠가 이 은혜는 갚을게." <<hePost "이">> 말을 이어나간다. "약속이야."
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
+	<<clotheson>>
+	<<endcombat>>
 
-<<link [[다음|Orphanage]]>><</link>>
-
+	<<link [[다음|Orphanage]]>><</link>>
 <<else>>
-<<set $baileydefeatedchain to 0>>
+	<<set $baileydefeatedchain to 0>>
 
-당신은 몸을 움직이기엔 너무 크게 다친 채로 바닥에 쓰러진다.
-<<lreb>><<reb -1>>
-<br><br>
-베일리가 <<person2>><<personPost "을">> 끌고 가는 동안 모였던 인파가 흩어진다.
-<br><br>
-<<set $orphan_rent to "taken">>
-<<clotheson>>
-<<endcombat>>
+	당신은 몸을 움직이기엔 너무 크게 다친 채로 바닥에 쓰러진다.
+	<<lreb>><<reb -1>>
+	<br><br>
+	베일리가 <<person2>><<personPost "을">> 끌고 가는 동안 모였던 인파가 흩어진다.
+	<br><br>
+	<<set $orphan_rent to "taken">>
+	<<clotheson>>
+	<<endcombat>>
 
-<<link [[다음|Orphanage]]>><</link>>
-
+	<<link [[다음|Orphanage]]>><</link>>
 <</if>>
 
-:: Home Money Take [nobr]
+:: Home Money Take
 <<effects>>
 
 당신은 돈을 받는다. <<personPost "이">> 미소 짓는다. "괜찮은 일자리를 찾았어." <<hePost "이">> 말한다. "내가 이런 일을 할 거라고 생각해본 적은 없던 일이지만, 그렇게 나쁘진 않아. 그저 베일리가 계속 요구량을 올리지 않길 빌 뿐이지."
@@ -238,17 +229,17 @@
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home Money Refuse [nobr]
+:: Home Money Refuse
 <<effects>>
 
 당신은 돈을 거절한다.
 
 <<if $submissive gte 1150>>
-"나보다는 다른 애들이 더 필요할 거야." 당신이 말한다. "걔들을 대신 도와줘."
+	"나보다는 다른 애들이 더 필요할 거야." 당신이 말한다. "걔들을 대신 도와줘."
 <<elseif $submissive lte 850>>
-"내 앞가림은 내가 할 수 있어." 당신이 말한다. "힘들어 하는 다른 애들한테 줘."
+	"내 앞가림은 내가 할 수 있어." 당신이 말한다. "힘들어 하는 다른 애들한테 줘."
 <<else>>
-"다른 애들을 돕는데 써줘." 당신이 말한다.
+	"다른 애들을 돕는데 써줘." 당신이 말한다.
 <</if>>
 <br><br>
 
@@ -258,52 +249,48 @@
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home Beg Give [nobr]
+:: Home Beg Give
 <<effects>>
 
 <<if $phase is 0>>
-당신은 <<personPost>>에게 £5를 준다. "고마워." <<hePost "이">> 말한다. 하지만 여전히 불안한 눈치다.
-<br><br>
-
+	당신은 <<personPost>>에게 £5를 준다. "고마워." <<hePost "이">> 말한다. 하지만 여전히 불안한 눈치다.
+	<br><br>
 <<elseif $phase is 1>>
-당신은 <<personPost>>에게 £25를 준다. "고마워." <<hePost "이">> 웃으며 말한다.
-<br><br>
-
+	당신은 <<personPost>>에게 £25를 준다. "고마워." <<hePost "이">> 웃으며 말한다.
+	<br><br>
 <<else>>
-당신은 <<personPost>>에게 £100를 준다. <<HePost "이">> 헉 하는 소리를 낸다. "정말 고마워!" <<hePost "은">> 당신을 껴안으며 그렇게 말한다.
-<br><br>
-
+	당신은 <<personPost>>에게 £100를 준다. <<HePost "이">> 헉 하는 소리를 낸다. "정말 고마워!" <<hePost "은">> 당신을 껴안으며 그렇게 말한다.
+	<br><br>
 <</if>>
 
 <<endevent>>
 <<link [[다음|Orphanage]]>><</link>>
 <br>
 
-:: Home Beg Prostitution [nobr]
+:: Home Beg Prostitution
 <<effects>>
 
 <<if $submissive gte 1150>>
-"네 돈은 네가 직접 벌어야 해." 당신이 말한다. "사람들은 네 몸에 많은 돈을 낼 거야."
-<br><br>
-<<HePost "은">> 당신의 직설적인 말에 깜짝 놀란듯 하다. "그런 일은 못해!" <<hePost "이">> 말한다.
-<br><br>
-"그렇지만 그 편이 더 안전할 거야." 당신이 말한다.
-<br><br>
+	"네 돈은 네가 직접 벌어야 해." 당신이 말한다. "사람들은 네 몸에 많은 돈을 낼 거야."
+	<br><br>
+	<<HePost "은">> 당신의 직설적인 말에 깜짝 놀란듯 하다. "그런 일은 못해!" <<hePost "이">> 말한다.
+	<br><br>
+	"그렇지만 그 편이 더 안전할 거야." 당신이 말한다.
+	<br><br>
 <<elseif $submissive lte 850>>
-"알아서 자립하는 법을 배워야 해." 당신이 말한다. "매춘해볼 생각 해봤어?"
-<br><br>
-<<HePost "은">> 당신의 직설적인 말에 깜짝 놀란듯 하다. "그런 일은 못해!" <<hePost "이">> 말한다.
-<br><br>
-"그래서 그냥 도움만 요청할 거라고?" 당신이 묻는다. "여기서 너만 곤란한 상황인게 아냐."
-<br><br>
-
+	"알아서 자립하는 법을 배워야 해." 당신이 말한다. "매춘해볼 생각 해봤어?"
+	<br><br>
+	<<HePost "은">> 당신의 직설적인 말에 깜짝 놀란듯 하다. "그런 일은 못해!" <<hePost "이">> 말한다.
+	<br><br>
+	"그래서 그냥 도움만 요청할 거라고?" 당신이 묻는다. "여기서 너만 곤란한 상황인게 아냐."
+	<br><br>
 <<else>>
-"네 돈은 네가 직접 벌어야 해." 사람들이 말한다. "사람들은 매춘부한테 많은 돈을 주지."
-<br><br>
-<<HePost "은">> 당신의 직설적인 말에 깜짝 놀란듯 하다. "그런 일은 못해!" <<hePost "이">> 말한다.
-<br><br>
-"믿을만한 자금원이 필요하잖아." 당신이 말한다.
-<br><br>
+	"네 돈은 네가 직접 벌어야 해." 사람들이 말한다. "사람들은 매춘부한테 많은 돈을 주지."
+	<br><br>
+	<<HePost "은">> 당신의 직설적인 말에 깜짝 놀란듯 하다. "그런 일은 못해!" <<hePost "이">> 말한다.
+	<br><br>
+	"믿을만한 자금원이 필요하잖아." 당신이 말한다.
+	<br><br>
 <</if>>
 
 <<HePost "은">> 그닥 기분이 좋아보이지는 않지만, 당신의 말을 이해한다.
@@ -312,7 +299,7 @@
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home Beg Skulduggery [nobr]
+:: Home Beg Skulduggery
 
 <<effects>>
 <<if $submissive gte 1150>>
@@ -341,7 +328,7 @@
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home Beg Refuse [nobr]
+:: Home Beg Refuse
 
 <<effects>>
 <<if $submissive gte 1150>>
@@ -357,7 +344,7 @@
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Orphanage Loft Intro [nobr]
+:: Orphanage Loft Intro
 
 <<effects>>
 <<if $phase is 0>>
@@ -374,7 +361,7 @@
 <<link [[다음|Orphanage Loft Intro 2]]>><</link>>
 <br>
 
-:: Orphanage Loft Intro 2 [nobr]
+:: Orphanage Loft Intro 2
 <<effects>>
 
 <<person1>>"내려와." 뒤에서 목소리가 들려온다. 베일리다. <<person2>><<personPost "과">> <<person3>><<personPost "은">> 이미 사라지고 없다.
@@ -392,44 +379,44 @@
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home School Bag [nobr]
+:: Home School Bag
 <<effects>>
 
 당신이 곳곳을 샅샅이 뒤지는 동안 <<personPost>>의 짜증은 커져만 간다. 마침내, 당신은
 
 <<if $rng gte 71>>
-<<famegood 1>>
-가방이 복도 조명에 걸려있는 것을 발견한다.
-<br><br>
+	<<famegood 1>>
+	가방이 복도 조명에 걸려있는 것을 발견한다.
+	<br><br>
 
-당신은 가방을 <<personPost>>에게 돌려준다. 어디서 찾았는지 말해주자 깜짝 놀란 것 같다. "어떻게 거기까지 올라갔지?" 잠시 당혹스러워하며 <<hePost "이">> 그렇게 묻는다. "아. 아까 얼마나 높게 뛸 수 있는지 보고 있었는데. 그때 벗겨졌나보네." <<HePost "은">> 웃음을 터트린다. "나도 참 바보같네. 고마워." <<HePost "은">> 떠나기 전에 몸을 앞으로 기울여서 당신의 뺨에 키스한다.
-<<lstress>><<stress -6>>
-<br><br>
+	당신은 가방을 <<personPost>>에게 돌려준다. 어디서 찾았는지 말해주자 깜짝 놀란 것 같다. "어떻게 거기까지 올라갔지?" 잠시 당혹스러워하며 <<hePost "이">> 그렇게 묻는다. "아. 아까 얼마나 높게 뛸 수 있는지 보고 있었는데. 그때 벗겨졌나보네." <<HePost "은">> 웃음을 터트린다. "나도 참 바보같네. 고마워." <<HePost "은">> 떠나기 전에 몸을 앞으로 기울여서 당신의 뺨에 키스한다.
+	<<lstress>><<stress -6>>
+	<br><br>
 <<elseif $rng gte 41>>
-<<famegood 1>>
-부엌 찬장에서 가방을 발견한다.
-<br><br>
+	<<famegood 1>>
+	부엌 찬장에서 가방을 발견한다.
+	<br><br>
 
-"고마워." 당신이 돌아오자 <<personPost "이">> 말한다. 당신은 어디서 가방을 찾았는지 말해준다. "이제 기억이 나네." <<hePost "이">> 말한다. "너무 배가 고파서 뭐 남은 음식이 없나 찾아보고 있었거든. 고마워." <<HePost "은">> 떠나기 전에 몸을 앞으로 기울여서 당신의 뺨에 키스한다.
-<<lstress>><<stress -6>>
-<br><br>
+	"고마워." 당신이 돌아오자 <<personPost "이">> 말한다. 당신은 어디서 가방을 찾았는지 말해준다. "이제 기억이 나네." <<hePost "이">> 말한다. "너무 배가 고파서 뭐 남은 음식이 없나 찾아보고 있었거든. 고마워." <<HePost "은">> 떠나기 전에 몸을 앞으로 기울여서 당신의 뺨에 키스한다.
+	<<lstress>><<stress -6>>
+	<br><br>
 <<else>>
-<<famegood 2>>
-<<generatey2>><<person2>><<personPost "이">> 가방을 들고 다니는 걸 발견한다.
-<br><br>
+	<<famegood 2>>
+	<<generatey2>><<person2>><<personPost "이">> 가방을 들고 다니는 걸 발견한다.
+	<br><br>
 
-"이 가방?" 당신이 가방에 대해 묻자 <<personPost "이">> 대답한다. "내 친구가 방에 두고 갔더라고. 그래서 걜 찾고 있었지."
-<br><br>
+	"이 가방?" 당신이 가방에 대해 묻자 <<personPost "이">> 대답한다. "내 친구가 방에 두고 갔더라고. 그래서 걜 찾고 있었지."
+	<br><br>
 
-당신은 <<person1>><<personPost>>에게 가방을 돌려주며 어디서 찾았는지 말해준다. <<HePost "은">> 화가 나서 얼굴을 양손으로 덮는다. "나 진짜 바보 같네." <<hePost "이">> 말한다. "고마워." <<HePost "은">> 떠나기 전에 몸을 앞으로 기울여서 당신의 뺨에 키스한다.
-<<lstress>><<stress -6>>
-<br><br>
+	당신은 <<person1>><<personPost>>에게 가방을 돌려주며 <<himPost>>에게 어디서 찾았는지 말해준다. <<HePost "은">> 화가 나서 한 손을 얼굴에 가져다 댄다. "나 진짜 바보 같네," <<hePost "이">> 말한다. "고마워." <<HePost "은">> 떠나기 전에 몸을 앞으로 기울여서 당신의 뺨에 키스한다.
+	<<lstress>><<stress -6>>
+	<br><br>
 <</if>>
 
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home School Bag Refuse [nobr]
+:: Home School Bag Refuse
 <<effects>>
 
 "괜찮아." <<hePost "이">> 말한다. "내 문제니까. 내가 찾을게."
@@ -438,7 +425,7 @@
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home Scream [nobr]
+:: Home Scream
 <<effects>>
 
 목소리가 들려오는 쪽으로 달려가니, 한쪽 문 안에서 다투는 소리가 들려온다. 당신은 그 안으로 뛰어 들어간다.
@@ -452,7 +439,7 @@
 <<link [[베일리를 찾아온다|Home Scream Bailey]]>><<reb -1>><</link>><<lreb>>
 <br>
 
-:: Home Scream Ignore [nobr]
+:: Home Scream Ignore
 <<effects>>
 
 당신은 비명소리를 무시한다. 걱정할 문제는 그 말고도 많다.
@@ -463,50 +450,45 @@
 <<link [[다음|Orphanage]]>><</link>>
 <br>
 
-:: Home Scream Intervene [nobr]
+:: Home Scream Intervene
 <<effects>>
 
 당신은 <<person2>><<personPost>>의 목덜미를 잡아 끌고, <<person3>><<personPost "은">> <<person2>><<hisPost "의">> 가슴팍을 걷어찬다. 둘은 힘을 합쳐 <<hePost "을">> 침대에서 끌어내 복도 밖으로 내던진다.
 <br><br>
 
 <<if $rng gte 71>>
-"개같은 걸레년들이." <<personPost "이">> 으르렁거린다. "내가 누군지 알아? 감히 내게 이렇게 무례하게 굴다니." <<person3>><<personPost "은">>>> 당신의 뒤에 몸을 숨긴다.
-<br><br>
+	"개같은 걸레년들이." <<personPost "이">> 으르렁거린다. "내가 누군지 알아? 감히 내게 이렇게 무례하게 굴다니." <<person3>><<personPost "은">> 당신의 뒤에 몸을 숨긴다.
+	<br><br>
 
-<<link [[공격한다|Home Scream Press]]>><<reb 1>><<crimeup 100>><</link>><<crime>><<greb>>
-<br>
-<<link [[보호한다|Home Scream Protect]]>><<hope 1>><</link>>
-<br>
-
+	<<link [[공격한다|Home Scream Press]]>><<reb 1>><<crimeup 100>><</link>><<crime>><<greb>>
+	<br>
+	<<link [[보호한다|Home Scream Protect]]>><<hope 1>><</link>>
+	<br>
 <<elseif $rng gte 41>>
+	"나한텐 힘센 친구들이 많아." <<person2>><<personPost "이">> 침을 뱉는다. "후회하게 될 거다." <<HePost "은">> 비틀거리며 복도를 걸어내려간다.
+	<br><br>
 
-"나한텐 힘센 친구들이 많아." <<person2>><<personPost "이">> 침을 뱉는다. "후회하게 될 거다." <<HePost "은">> 비틀거리며 복도를 걸어내려간다.
-<br><br>
+	"고마워." <<person3>><<personPost "이">> 옷을 매만지며 말한다. "눈을 떴더니 저 사람이 내 위에 있지 뭐야. 너무 무서웠어." <<HePost "이">> 당신을 껴안는다.
+	<br><br>
 
-"고마워." <<person3>><<personPost "이">> 옷을 매만지며 말한다. "눈을 떴더니 저 사람이 내 위에 있지 뭐야. 너무 무서웠어." <<HePost "이">> 당신을 껴안는다.
-<br><br>
+	<<endevent>>
 
-<<endevent>>
-
-<<link [[다음|Orphanage]]>><</link>>
-<br>
-
+	<<link [[다음|Orphanage]]>><</link>>
+	<br>
 <<else>>
+	<<person2>><<personPost "이">> 자리에서 일어서서는 당신을 노려본다. 그러고는 주변을 둘러본다. 다른 고아들이 무슨 일이 일어났는지 보러 와서는, 문가와 복도 끝에 모여서 쳐다보고 있다. 그 광경에 불안함을 느꼈는지, <<hePost "은">> 아무 말도 없이 떠난다.
+	<br><br>
 
-<<person2>><<personPost "이">> 자리에서 일어서서는 당신을 노려본다. 그러고는 주변을 둘러본다. 다른 고아들이 무슨 일이 일어났는지 보러 와서는, 문가와 복도 끝에 모여서 쳐다보고 있다. 그 광경에 불안함을 느꼈는지, <<hePost "은">> 아무 말도 없이 떠난다.
-<br><br>
+	"고마워." <<person3>><<personPost "이">> 옷을 매만지며 말한다. "눈을 떴더니 저 사람이 내 위에 있지 뭐야. 너무 무서웠어." <<HePost "이">> 당신을 껴안는다.
+	<br><br>
 
-"고마워." <<person3>><<personPost "이">> 옷을 매만지며 말한다. "눈을 떴더니 저 사람이 내 위에 있지 뭐야. 너무 무서웠어." <<HePost "이">> 당신을 껴안는다.
-<br><br>
+	<<endevent>>
 
-<<endevent>>
-
-<<link [[다음|Orphanage]]>><</link>>
-<br>
-
+	<<link [[다음|Orphanage]]>><</link>>
+	<br>
 <</if>>
 
-:: Home Scream Press [nobr]
+:: Home Scream Press
 <<effects>>
 
 당신은 앞으로 뛰쳐나가 <<person2>><<personPost "을">> 밀친다. <<HePost "은">> 더욱 뒤로 밀려난다. "개같은 걸레년들이." <<hePost "은">> 뒤로 돌아 도망가며 중얼거린다.
@@ -520,7 +502,7 @@
 <<link [[다음|Orphanage]]>><</link>>
 <br>
 
-:: Home Scream Protect [nobr]
+:: Home Scream Protect
 <<effects>>
 
 <<person2>><<personPost "은">> 다시 <<person3>><<personPost "을">> 잡아채려고 하지만, 당신이 그 사이에 끼어든다. <<person2>><<HePost "은">> 마침내 포기하고는 욕설을 더 내뱉으며 떠난다.
@@ -534,28 +516,28 @@
 <<link [[다음|Orphanage]]>><</link>>
 <br>
 
-:: Home Scream Bailey [nobr]
+:: Home Scream Bailey
 <<effects>>
 
 <<person1>>당신은 베일리의 이름을 외치며 <<hisPost "의">> 사무실로 달려간다.
 
 <<if $rng gte 51>>
-중앙 현관에 도착하자 마침 <<hePost "이">> 정문으로 들어오고 있다.
-<br><br>
+	중앙 복도에 도착하자 마침 <<hePost "이">> 정문으로 들어오고 있다.
+	<br><br>
 <<else>>
-당신이 중앙 현관에 도착하자 마침 <<hePost "이">> 사무실에서 나오고 있다.
-<br><br>
+	당신이 중앙 복도에 도착하자 마침 <<hePost "이">> 사무실에서 나오고 있다.
+	<br><br>
 <</if>>
 
 "지금은 바빠." 당신이 뭐라 말을 하기도 전에 <<hePost "이">> 말한다.
 <br><br>
 
 <<if $submissive gte 1150>>
-"죄송해요." 당신이 말한다. "하지만 당신을 필요로 하는 사람이 있어요."
+	"죄송해요." 당신이 말한다. "하지만 당신을 필요로 하는 사람이 있어요."
 <<elseif $submissive lte 850>>
-"당신은 침입자를 그냥 내버려 두는 거예요." 당신이 말한다. "이미 들어와서는 여기 사는 애를 공격하고 있어요."
+	"당신은 침입자를 그냥 내버려 두는 거예요." 당신이 말한다. "이미 들어와서는 여기 사는 애를 공격하고 있어요."
 <<else>>
-"그렇지만 누군가 몰래 들어왔는 걸요." 당신이 말한다. "그리고 지금 누군가를 공격하고 있어요."
+	"그렇지만 누군가 몰래 들어왔는 걸요." 당신이 말한다. "그리고 지금 누군가를 공격하고 있어요."
 <</if>>
 다시 한 번 비명소리가 들려온다.
 <br><br>
@@ -576,41 +558,39 @@
 <<link [[다음|Orphanage]]>><</link>>
 <br>
 
-:: Home Peek [nobr]
+:: Home Peek
 <<effects>>
 
 당신은 문틈을 들여다본다.
 
 <<if $rng gte 51>>
-<<personPost "이">> 수건으로 몸을 닦고 있다.
+	<<personPost "이">> 수건으로 몸을 닦고 있다.
 
 	<<if $NPCList[0].penis isnot "none">>
-		<<if $NPCList[0].gender is "f">>
+		<<if $pronoun is "f">>
 			<<HePost "은">> 당신이 있는줄 모르는 채로, <span class="lewd">노출된 <<trBreastsdesc $NPCList[0].breastsdesc "과">>_trResult <<trPenisdesc $NPCList[0].penisdesc "을" "sep">>_trResult</span>_trPost 수건으로 문지르고 있다.
-		<<else>>
+			<<else>>
 			<<HePost "은">> 당신이 있는줄 모르는 채로, <span class="lewd">노출된 <<trPenisdesc $NPCList[0].penisdesc "을" "sep">>_trResult</span>_trPost 수건으로 문지르고 있다.
 		<</if>>
 	<<else>>
-		<<if $NPCList[0].gender is "f">>
+		<<if $pronoun is "f">>
 			<<HePost "은">> 당신이 있는줄 모르는 채로, <span class="lewd">노출된 <<trBreastsdesc $NPCList[0].breastsdesc "을" "sep">>_trResult</span>_trPost 수건으로 문지르고 있다.
-		<<else>>
+			<<else>>
 			<<HePost "은">> 당신이 있는줄 모르는 채로, <span class="lewd">노출된 보지</span>를 수건으로 문지르고 있다.
 		<</if>>
 	<</if>>
 
-당신은 들키기 전에 떠난다.
-<br><br>
-
+	당신은 들키기 전에 떠난다.
+	<br><br>
 <<else>>
 	<<personPost "이">> 알몸으로 욕조 안에 앉아서, 머리 위에 물을 붓고 있다. <<if $pronoun is "f">>당신은 <<hisPost "의">> <span class="lewd"><<trBreastsdesc $NPCList[0].breastsdesc "으로">>_trResult</span> 시선을 돌리지만, 들키기 전에 떠난다.<<else>>당신은 들키기 전에 떠난다.<</if>>
-<br><br>
-
+	<br><br>
 <</if>>
 
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home Close [nobr]
+:: Home Close
 <<effects>>
 
 당신은 안쪽에 있을 누군가의 사생활을 보장해주기 위해 문을 닫는다.
@@ -619,49 +599,48 @@
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br><br>
 
-:: Home Pair [nobr]
+:: Home Pair
 <<effects>>
 
 <<if $submissive gte 1150>>
-"지-지금 날 보고 웃는 거야?" 당신이 묻는다.
+	"지-지금 날 보고 웃는 거야?" 당신이 묻는다.
 <<elseif $submissive lte 850>>
-"날 보고 웃은 게 아니어야 할 거야." 당신이 말한다.
+	"날 보고 웃은 게 아니어야 할 거야." 당신이 말한다.
 <<else>>
-"뭣 때문에 웃는 거야?" 당신이 묻는다.
+	"뭣 때문에 웃는 거야?" 당신이 묻는다.
 <</if>>
 <br><br>
 <<person2>><<personPost "은">> <<hisPost "의">> 친구에게서 시선을 돌려, 당신을 본다.
 
 <<if $rng gte 51>>
-"얘가 너한테 반했대." <<hePost "이">> 말한다. <<person1>><<personPost "은">> 배신감과 수치심을 담은 눈빛으로 자신의 친구를 쳐다본다.
-<br><br>
+	"얘가 너한테 반했대." <<hePost "이">> 말한다. <<person1>><<personPost "은">> 배신감과 수치심을 담은 눈빛으로 자신의 친구를 쳐다본다.
+	<br><br>
 
-<<link [[다독인다|Home Pair Comfort]]>><</link>>
-<br>
-<<link [[추파를 던진다|Home Pair Flirt]]>><</link>><<promiscuous1>>
-<br>
-<<link [[퇴짜 놓는다|Home Pair Spurn]]>><</link>>
-<br>
-<<link [[무시한다|Orphanage]]>><<endevent>><</link>>
-<br>
-
+	<<link [[다독인다|Home Pair Comfort]]>><</link>>
+	<br>
+	<<link [[추파를 던진다|Home Pair Flirt]]>><</link>><<promiscuous1>>
+	<br>
+	<<link [[퇴짜 놓는다|Home Pair Spurn]]>><</link>>
+	<br>
+	<<link [[무시한다|Orphanage]]>><<endevent>><</link>>
+	<br>
 <<else>>
-아무 예고도 없이, <<hePost "은">> 친구의 팔을 붙잡고는 함께 복도를 뛰어내려간다.
-<br><br>
+	아무 예고도 없이, <<hePost "은">> 친구의 팔을 붙잡고는 함께 복도를 뛰어내려간다.
+	<br><br>
 
-<<link [[다음|Orphanage]]>><<endevent>><</link>>
-<br>
+	<<link [[다음|Orphanage]]>><<endevent>><</link>>
+	<br>
 <</if>>
 
-:: Home Pair Comfort [nobr]
+:: Home Pair Comfort
 <<effects>>
 
 <<if $submissive gte 1150>>
-"고-고마워." 당신이 말한다. "누가 날 좋아해주다니 기분이 좋네."
+	"고-고마워." 당신이 말한다. "누가 날 좋아해주다니 기분이 좋네."
 <<elseif $submissive lte 850>>
-"걱정하지 마." 당신이 말한다. "다들 그래."
+	"걱정하지 마." 당신이 말한다. "다들 그래."
 <<else>>
-"다정하기도 하지." 당신이 말한다. "칭찬으로 받아들일게."
+	"다정하기도 하지." 당신이 말한다. "칭찬으로 받아들일게."
 <</if>>
 <br><br>
 <<person2>><<personPost "은">> 다시 웃음을 터트린다. <<person1>><<personPost "은">> 얼굴이 달아올랐지만, 미소를 짓고 있다.
@@ -670,15 +649,15 @@
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home Pair Flirt [nobr]
+:: Home Pair Flirt
 <<effects>>
 <<person1>>
 <<if $submissive gte 1150>>
-"내-내가 매력적이라고?" 당신이 묻는다. "너도 <<if $pronoun is "m">>잘생겼어<<else>>예뻐<</if>>."
+	"내-내가 매력적이라고?" 당신이 묻는다. "너도 <<if $pronoun is "m">>잘생겼어<<else>>예뻐<</if>>."
 <<elseif $submissive lte 850>>
-"걱정하지 마." 당신이 말한다. "나도 너한테 반했으니까."
+	"걱정하지 마." 당신이 말한다. "나도 너한테 반했으니까."
 <<else>>
-"나도 널 좋아해." 당신은 <<personPost>>에게 윙크를 날리며 말한다.
+	"나도 널 좋아해." 당신은 <<personPost>>에게 윙크를 날리며 말한다.
 <</if>>
 <<promiscuity1>>
 
@@ -688,15 +667,15 @@
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home Pair Spurn [nobr]
+:: Home Pair Spurn
 <<effects>>
 
 <<if $submissive gte 1150>>
-"미-미안." 당신이 말한다. "나한테 넌 매력적이지 않아."
+	"미-미안." 당신이 말한다. "나한테 넌 매력적이지 않아."
 <<elseif $submissive lte 850>>
-"으웩." 당신이 말한다.
+	"으웩." 당신이 말한다.
 <<else>>
-"미안." 당신이 말한다. "넌 내 타입이 아니야."
+	"미안." 당신이 말한다. "넌 내 타입이 아니야."
 <</if>>
 <br><br>
 <<person1>><<personPost "은">> 제 얼굴을 감싸쥐고는 달아난다. <<hisPost "의">> 친구도 그 뒤를 따른다.
@@ -705,7 +684,7 @@
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home Comfort [nobr]
+:: Home Comfort
 <<effects>>
 
 "왜 그래?" 당신이 묻는다. <<personPost "이">> 당신을 쳐다본다.
@@ -723,37 +702,37 @@
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home Darts [nobr]
+:: Home Darts
 <<effects>>
 
 당신은 규칙을 간략하게 들은 뒤 동참한다. 눈을 맞추면 가장 많은 점수를 받는다.
 <br><br>
 <<if $handskill gte 1000>>
-당신의 결과는 거의 흠이 없을 정도로, 베일리의 눈을 족족 맞춘다. 당신은 모든 판에서 승리한다.
+	당신의 결과는 거의 흠이 없을 정도로, 베일리의 눈을 족족 맞춘다. 당신은 모든 판에서 승리한다.
 <<elseif $handskill gte 400>>
-당신은 괜찮게 했고, 몇 판을 이긴다.
+	당신은 괜찮게 했고, 몇 판을 이긴다.
 <<elseif $handskill gte 100>>
-당신은 계속해서 사진을 다트로 맞추나, 가장 점수가 높은 부분을 맞추지는 못한다.
+	당신은 계속해서 사진을 다트로 맞추나, 가장 점수가 높은 부분을 맞추지는 못한다.
 <<else>>
-당신은 썩 잘하지는 못한다. 사진은 딱 한 번 맞출 뻔했다.
+	당신은 썩 잘하지는 못한다. 사진은 딱 한 번 맞출 뻔했다.
 <</if>>
 <br><br>
 
 <<link [[다음|Orphanage]]>><</link>>
 <br>
 
-:: Home Spill Help [nobr]
+:: Home Spill Help
 
 <<effects>>
 
 당신은 <<personPost "을">> 일으켜 세워준다.
 
 <<if $submissive gte 1150>>
-"내가 도와줄게." 당신이 말한다. "네가 다른 대걸레를 가져오는 동안 내가 걸레질을 하고 있을게."
+	"내가 도와줄게." 당신이 말한다. "네가 다른 대걸레를 가져오는 동안 내가 걸레질을 하고 있을게."
 <<elseif $submissive lte 850>>
-"가서 다른 대걸레 가져와." 당신이 말한다. "우리 둘이서 하는 거야."
+	"가서 다른 대걸레 가져와." 당신이 말한다. "우리 둘이서 하는 거야."
 <<else>>
-"내가 이 대걸레를 말릴게." 당신이 말한다. "넌 가서 새 대걸레를 가져와."
+	"내가 이 대걸레를 말릴게." 당신이 말한다. "넌 가서 새 대걸레를 가져와."
 <</if>>
 <br><br>
 
@@ -766,51 +745,51 @@
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home Encourage [nobr]
+:: Home Encourage
 <<effects>>
 
 당신은 <<person1>><<personPost>> 옆에 앉는다.
 
 <<if $submissive gte 1150>>
-"내 생각엔 쟤가 널 좋아하는 것 같아." 당신이 말한다. "가서 인사해봐."
+	"내 생각엔 쟤가 널 좋아하는 것 같아." 당신이 말한다. "가서 인사해봐."
 <<elseif $submissive lte 850>>
-"겁쟁이처럼 굴지 마." 당신이 말한다. "쟤한테 가서 말해봐."
+	"겁쟁이처럼 굴지 마." 당신이 말한다. "쟤한테 가서 말해봐."
 <<else>>
-"가서 뭔가 말을 해봐." 당신이 말한다.
+	"가서 뭔가 말을 해봐." 당신이 말한다.
 <</if>>
 <br><br>
 <<person1>><<personPost "은">> 입을 떡 벌리고 당신을 쳐다본다. "그런 짓은 못해." <<hePost "이">> 말한다.
 <br><br>
 
 <<if $submissive gte 1150>>
-"하지만 쟤는 너가 자길 좋아하지 않는다고 생각할지도 몰라." 당신이 첨언한다.
-<br><br>
+	"하지만 <<person2>><<he_ nun>> 네가 <<him_ ul>> 좋아하지 않는다고 생각할지도 몰라." 당신이 첨언한다.
+	<br><br>
 
-<<person1>><<personPost "은">> 잠시 머뭇거린다. 곧 주먹을 꽉 쥐고는, 자리에서 일어나 걸어나간다. <<person2>><<personPost "과">> <<hisPost "의">> 친구는 말을 멈추고는 <<person1>><<hePost "을">> 바라본다. 뭐라 말을 하는지는 들리지 않지만, <<person2>><<personPost>>의 얼굴이 붉어지더니, <<person1>><<personPost>>의 팔을 붙잡고는 함께 방에서 달려나간다.
+	<<person1>><<personPost "은">> 잠시 머뭇거린다. 곧 주먹을 꽉 쥐고는, 자리에서 일어나 걸어나간다. <<person2>><<personPost "과">> <<hisPost "의">> 친구는 말을 멈추고는 <<person1>><<hePost "을">> 바라본다. 뭐라 말을 하는지는 들리지 않지만, <<person2>><<personPost>>의 얼굴이 붉어지더니, <<person1>><<personPost>>의 팔을 붙잡고는 함께 방에서 달려나간다.
 <<elseif $submissive lte 850>>
-"그러던가." 당신이 대답한다. 당신은 일어나서 <<person2>><<personPost>>에게로 걸어간다.
-<br><br>
-"잠깐!" <<person1>><<personPost "이">> 당신의 뒤에서 속삭인다. 당신은 <<hisPost "의">> 말을 무시한다.
-<br><br>
-<<person2>><<personPost "과">> <<hisPost "의">> 친구는 하던 대화를 멈추고 당신을 쳐다본다. "저기 내 친구가 널 좋아한대." 당신이 말한다. <<person1>><<personPost>>의 얼굴은 책으로 거의 가려져있지만, <<hisPost "의">> 얼굴이 붉어져있다는 건 알 수 있다.
-<br><br>
+	"그러던가." 당신이 대답한다. 당신은 일어나서 <<person2>><<personPost>>에게로 걸어간다.
+	<br><br>
+	"잠깐!" <<person1>><<personPost "이">> 당신의 뒤에서 속삭인다. 당신은 <<hisPost "의">> 말을 무시한다.
+	<br><br>
+	<<person2>><<personPost "과">> <<hisPost "의">> 친구는 하던 대화를 멈추고 당신을 쳐다본다. "저기 내 친구가 널 좋아한대." 당신이 말한다. <<person1>><<personPost>>의 얼굴은 책으로 거의 가려져있지만, <<hisPost "의">> 얼굴이 붉어져있다는 건 알 수 있다.
+	<br><br>
 
-<<person2>><<personPost>>도 얼굴을 붉히나, <<hePost "은">> 일어나서 <<person1>><<personPost>>에게로 걸어가 그 옆에 앉는다.
-<br><br>
+	<<person2>><<personPost>>도 얼굴을 붉히나, <<hePost "은">> 일어나서 <<person1>><<personPost>>에게로 걸어가 그 옆에 앉는다.
+	<br><br>
 
-둘이 무슨 대화를 나누고 있는지는 알 수 없으나, <<person2>><<personPost "이">> <<person1>><<personPost>>의 팔을 붙잡고는 함께 방에서 달려나간다.
+	둘이 무슨 대화를 나누고 있는지는 알 수 없으나, <<person2>><<personPost "이">> <<person1>><<personPost>>의 팔을 붙잡고는 함께 방에서 달려나간다.
 <<else>>
-"왜 못해?" 당신이 묻는다. "쟤도 널 좋아하는 걸."
-<br><br>
+	"왜 못해?" 당신이 묻는다. "쟤도 널 좋아하는 걸."
+	<br><br>
 
-<<person1>><<personPost "은">> 잠시 머뭇거린다. 곧 주먹을 꽉 쥐고는, 자리에서 일어나 걸어나간다. <<person2>><<personPost "과">> <<hisPost "의">> 친구는 말을 멈추고는 <<person1>><<hePost "을">> 바라본다. 뭐라 말을 하는지는 들리지 않지만, <<person2>><<personPost>>의 얼굴이 붉어지더니, <<person1>><<personPost>>의 팔을 붙잡고는 함께 방에서 달려나간다.
+	<<person1>><<personPost "은">> 잠시 머뭇거린다. 곧 주먹을 꽉 쥐고는, 자리에서 일어나 걸어나간다. <<person2>><<personPost "과">> <<hisPost "의">> 친구는 말을 멈추고는 <<person1>><<hePost "을">> 바라본다. 뭐라 말을 하는지는 들리지 않지만, <<person2>><<personPost>>의 얼굴이 붉어지더니, <<person1>><<personPost>>의 팔을 붙잡고는 함께 방에서 달려나간다.
 <</if>>
 <br><br>
 
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home Flirt [nobr]
+:: Home Flirt
 <<effects>>
 
 당신은 <<person1>><<personPost>> 옆에 앉는다. "걘 잊어버려." 당신은 <<hisPost "의">> 다리 위에 손을 얹으며 속삭인다. "내가 여기 있잖아."
@@ -827,7 +806,7 @@
 <<link [[떠난다|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home Tease [nobr]
+:: Home Tease
 <<effects>>
 
 "뭐 읽고 있어?" 당신이 몸을 가까이 기울이며 묻는다. 아주 가까이. 당신은 <<person1>><<hisPost "의">> 허리를 팔로 감싸 안는다. <<HePost "이">> 살짝 몸을 떤다.
@@ -836,12 +815,12 @@
 <<person2>>"야!" <<personPost "이">> 자리를 박차고 다가오며 말한다. "걘 내가 먼저 봤어."
 <br><br>
 
-<<link [[싸운다|Home Tease Fight]]>><<set $submissive -=1 >><</link>>
+<<link [[싸운다|Home Tease Fight]]>><<def 1>><</link>>
 <br>
 <<link [[임무 완수|Home Tease Mission]]>><<famegood 1>><</link>>
 <br>
 
-:: Home Tease Fight [nobr]
+:: Home Tease Fight
 <<effects>>
 
 당신은 자리에서 일어나 <<person2>><<personPost "을">> 밀친다. <<HePost>>도 당신을 되민다. 되돌려주려 할 때, <<person1>><<personPost "이">> 사이에 끼어든다. "그-그만해." <<hePost "이">> 말한다. "싸우지 마. 날 두고 말이야. 아." <<HePost "은">> 얼굴을 양손으로 감싸고 방에서 뛰쳐나간다.
@@ -853,7 +832,7 @@
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home Tease Mission [nobr]
+:: Home Tease Mission
 
 <<effects>>
 
@@ -863,15 +842,15 @@
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home Solicitation [nobr]
+:: Home Solicitation
 <<effects>>
 
 <<if $submissive gte 1150>>
-당신은 서둘러 정문으로 나간다. "걜 내버려둬." 당신이 말한다. "그런 식으로 이용해먹는 건 공평치 않아."
+	당신은 서둘러 정문으로 나간다. "걜 내버려둬." 당신이 말한다. "그런 식으로 이용해먹는 건 공평치 않아."
 <<elseif $submissive lte 850>>
-당신은 정문으로 뛰쳐나간다. "썩 꺼져." 당신은 <<person1>><<personPost>>에게 말한다. "좆까고 꺼져."
+	당신은 정문으로 뛰쳐나간다. "썩 꺼져." 당신은 <<person1>><<personPost>>에게 말한다. "좆까고 꺼져."
 <<else>>
-당신은 정문으로 달려간다. "저리 가." 당신이 말한다. "약한 애들을 괴롭히지 말라고."
+	당신은 정문으로 달려간다. "저리 가." 당신이 말한다. "약한 애들을 괴롭히지 말라고."
 <</if>>
 <br><br>
 
@@ -882,25 +861,25 @@
 <br><br>
 
 <<if $money gte 5000>>
-<<link [[£50를 준다|Home Solicitation Money]]>><<set $phase to 0>><<set $money -= 5000>><<hope 2>><</link>><<gghope>>
-<br>
+	<<link [[£50를 준다|Home Solicitation Money]]>><<set $phase to 0>><<set $money -= 5000>><<hope 2>><</link>><<gghope>>
+	<br>
 <</if>>
 <<if $money gte 2000>>
-<<link [[£20를 준다|Home Solicitation Money]]>><<set $phase to 1>><<set $money -= 2000>><<hope 1>><</link>><<ghope>>
-<br>
+	<<link [[£20를 준다|Home Solicitation Money]]>><<set $phase to 1>><<set $money -= 2000>><<hope 1>><</link>><<ghope>>
+	<br>
 <</if>>
 <<link [[사과한다|Home Solicitation Apologise]]>><</link>>
 <br>
 
-:: Home Solicitation Apologise [nobr]
+:: Home Solicitation Apologise
 <<effects>>
 
 <<if $submissive gte 1150>>
-"미안해." 당신이 말한다. "하지만 네가 스스로를 위험에 빠트리는 꼴을 보고만 있을 순 없었어."
+	"미안해." 당신이 말한다. "하지만 네가 스스로를 위험에 빠트리는 꼴을 보고만 있을 순 없었어."
 <<elseif $submissive lte 850>>
-"자존심이 있지." 당신이 말한다. "그보다 더 나은 일을 할 수도 있잖아."
+	"자존심이 있지." 당신이 말한다. "그보다 더 나은 일을 할 수도 있잖아."
 <<else>>
-"미안해." 당신이 말한다. "하지만 내가 옳다 생각하는 일을 해야 했어."
+	"미안해." 당신이 말한다. "하지만 내가 옳다 생각하는 일을 해야 했어."
 <</if>>
 <br><br>
 
@@ -910,87 +889,98 @@
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home Solicitation Money [nobr]
+:: Home Solicitation Money
 <<effects>>
 
 <<if $phase is 0>>
+	당신은 £50를 꺼내든다. <<personPost "은">> 그걸 쳐다만 본다. "놀리지 마." <<hePost "이">> 말한다.
+	<br><br>
 
-당신은 £50를 꺼내든다. <<personPost "은">> 그걸 쳐다만 본다. "놀리지 마." <<hePost "이">> 말한다.
-<br><br>
+	"그런게 아니야." 당신이 대답한다. "맹세할 수 있어."
+	<br><br>
 
-"그런게 아니야." 당신이 대답한다. "맹세할 수 있어."
-<br><br>
-
-<<HePost "은">> 돈을 받는다. "고마워." <<hePost "은">> 코를 훌쩍인다. 그러곤 뭔가를 말하려 입을 열었다가, 곧바로 안으로 뛰어들어간다.
-<br><br>
-
+	<<HePost "은">> 돈을 받는다. "고마워." <<hePost "은">> 코를 훌쩍인다. 그러곤 뭔가를 말하려 입을 열었다가, 곧바로 안으로 뛰어들어간다.
+	<br><br>
 <<elseif $phase is 1>>
+	당신은 £20를 꺼내든다. "어째서?" <<personPost "이">> 묻는다.
+	<br><br>
 
-당신은 £20를 꺼내든다. "어째서?" <<personPost "이">> 묻는다.
-<br><br>
+	"돕고 싶으니까." 당신이 대답한다. "받아."
+	<br><br>
 
-"돕고 싶으니까." 당신이 대답한다. "받아."
-<br><br>
-
-<<HePost "은">> 돈을 받는다. "고마워." <<hePost "은">> 코를 훌쩍인다. 그러곤 뭔가를 말하려 입을 열었다가, 곧바로 안으로 뛰어들어간다.
-<br><br>
-
+	<<HePost "은">> 돈을 받는다. "고마워." <<hePost "은">> 코를 훌쩍인다. 그러곤 뭔가를 말하려 입을 열었다가, 곧바로 안으로 뛰어들어간다.
+	<br><br>
 <</if>>
 
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
-:: Home Rumor Eavesdrop Robin [nobr]
-<<effects>><<set $rng to random(1, 100)>>
-You listen in on the conversation.
-<<if $robinmissing is 1>>
-	They're thinking of making a group to search for Robin. You notice the <<person2>><<person>> holding what looks like a missing poster. <<hope -3>><<llhope>>
+:: Home Rumor Eavesdrop Robin
+<<effects>><<rng>>
+당신은 오가는 대화에 귀를 기울인다.
+<<if $robinmissing isnot 0>>
+	아이들은 조를 짜서 로빈을 찾으려고 생각하고 있다. 당신은 <<person2>><<person_ i>> 실종자 전단지로 보이는 것을 들고 있음을 알아차린다. <<hope -3>><<llhope>>
 <<elseif $robin_injured gte 1>>
-	The <<person1>><<person>> wants to bring Robin to the hospital. The <<person2>><<person>> thinks Bailey won't allow it. <<hope -1>><<lhope>>
+	<<person1>><<person_ i>> 로빈을 병원에 데려가고 싶어 한다. <<person2>><<person_ un>> 베일리가 허락하지 않을 거라고 생각한다. <<hope -1>><<lhope>>
 <<elseif $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 40>>
-	The <<person1>><<person>> speaks. "Even Robin isn't safe. What do you think happened to <<nnpc_him "Robin">>?" <<hope -1>><<lhope>>
+	<<person1>><<person_ i>> 말한다. "로빈조차도 안전하지 못해. 넌 <<nnpc_himPost "Robin" "에게">> 무슨 일이 일어났다고 생각해?" <<hope -1>><<lhope>>
 <<elseif $rng gte 70>>
-	They're talking about the lemonade stand Robin runs on the weekends.
+	아이들은 로빈이 주말에 여는 레모네이드 가판에 대해 이야기하고 있다.
 	<<if $orphan_hope lte 0 and $watersportsdisable is "f">>
-		They're joking about what liquids <<nnpc_he "Robin">> may actually be selling instead. The <<person1>><<person>> laughs.
+		아이들은 <<nnpc_hePost "Robin" "이">> 레모네이드 대신 다른 무언가를 팔고 있을지도 모른다는 농담을 한다. <<person1>><<person_ i>> 웃는다.
 	<<else>>
-		They think the lemonade is tasty, and they're inspired by <<nnpc_his "Robin">> efforts. <<hope 1>><<reb 1>><<ghope>><<greb>>
+		아이들은 레모네이드가 맛있다고 생각하고, <<nnpc_hisPost "Robin" "의">> 노력에 감명을 받은 것 같다. <<hope 1>><<ghope>>
 	<</if>>
 
 <<elseif $rng gte 35>>
 	<<if $NPCName[$NPCNameList.indexOf("Robin")].dom lte 50>>
-		They're talking about how Robin never seems to resort to violence. <<hope 1>><<reb -1>><<ghope>><<lreb>>
+		아이들은 로빈이 절대로 폭력에 의지하지 않는 것 같다고 말하고 있다. <<hope 1>><<reb -1>><<ghope>><<lreb>>
 	<<else>>
-		They're impressed by Robin's ability to remain amicable in the face of danger. <<reb 1>><<greb>>
+		아이들은 위험이 코앞에 들이닥친 상황이어도 원만하게 지내는 로빈의 능력에 감명을 받은 것 같다. <<reb 1>><<greb>>
 	<</if>>
 
 <<else>>
 	<<if $orphan_hope gte 10>>
-		The <<person1>><<person>> mentions how good Robin is at lifting the other orphans' spirits. <<hope 1>><<ghope>>
+		<<person1>><<person_ i>> 로빈이 다른 고아들의 의지를 잘 끌어올린다고 언급한다. <<hope 1>><<ghope>>
 	<<else>>
-		They're talking about how Robin's always hiding in <<nnpc_his "Robin">> room, and that they want to do the same. <<hope -1>><<lhope>>
+		아이들은 로빈이 항상 <<nnpc_hisPost "Robin" "의">> 방으로 숨으며, 자기들도 그렇게 하고 싶다고 말한다. <<hope -1>><<lhope>>
 	<</if>>
 <</if>>
 <br><br>
 
-<<link [[Leave|Orphanage]]>><<endevent>><<set $eventskip to 1>><</link>>
+<<link [[떠난다|Orphanage]]>><<endevent>><<set $eventskip to 1>><</link>>
 <br>
 
 
-:: Home Rumor Eavesdrop [nobr]
-<<effects>><<set $rng to random(1, 100)>>
+:: Home Rumor Eavesdrop
+<<effects>><<rng>>
 <<if $rng gte 80>>
-	You listen in on the conversation. They're talking about their experiences with Bailey. <<hope -1>><<lhope>>
+	당신은 오가는 대화에 귀를 기울인다. 아이들은 베일리와의 일에 대해 말하고 있다. <<hope -1>><<lhope>>
 <<elseif $rng gte 60>>
-	You listen in on the conversation. They're making fun of another orphan.
+	당신은 오가는 대화에 귀를 기울인다. 아이들은 다른 고아를 놀리고 있다.
 <<elseif $rng gte 40 and $loft_kylar>>
-	You listen in on the conversation. They're trading for some pepper spray. <<reb 1>><<greb>>
+	당신은 오가는 대화에 귀를 기울인다. 아이들은 후추 스프레이를 거래하고 있다. <<reb 1>><<greb>>
 <<elseif $rng gte 20>>
-	You listen in on the conversation. They're gushing about the cute animals they saw in the pet store today. <<hope 1>><<ghope>>
+	당신은 오가는 대화에 귀를 기울인다. 아이들은 오늘 애완동물 가게에서 본 귀여운 동물들에 대해 떠들고 있다. <<hope 1>><<ghope>>
 <<else>>
-	You listen in on the conversation. One of them has a crush on another orphan.
+	당신은 오가는 대화에 귀를 기울인다. 그중 한 명이 다른 고아를 짝사랑하고 있는 것 같다.
 <</if>>
 <br><br>
 
-<<link [[Leave|Orphanage]]>><<endevent>><<set $eventskip to 1>><</link>>
+<<link [[떠난다|Orphanage]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Home Bandage
+<<effects>>
+
+베일리는 의료 도구들을 메인 홀에 있는 찬장에 둔다. <<nnpc_He_ nun Bailey>> 고아들이 그것들을 낭비한다면 화내겠지만, 이것은 적절하게 사용하는 것이다.
+<br><br>
+
+당신은 <<personPost>>에게 당신이 <<his_ yi>> 붕대를 갈아줄 때 까지 앉아 있으라고 한다. 당신이 대화를 시작하자 <<his_ yi>> 얼굴에는 방어적인 표정이 떠올랐지만, <<he_ nun>> 앉았고, 당신이 새 붕대를 가져올 때 까지 기다린다. <<He_ nun>> 당신이 상처에 붕대를 다시 감는 동안, 부끄러운 듯이 시선을 피한다.
+<br><br>
+
+<<He_ nun>> 당신이 일을 마치자 감사의 말을 중얼거리고는, <<his_ yi>> 방으로 들어간다.
+<br><br>
+
+<<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>

@@ -1,6 +1,6 @@
 :: Widgets Over Lower Clothing [widget]
 <!-- For any item that has a colour_combat tag, set it to 0 if that item ever gets its own combat sprites. -->
-<<widget "init_over_lower">><<nobr>>
+<<widget "init_over_lower">>
 <<set setup.clothes.over_lower to [
 	{index: 0,
 	name: "naked",
@@ -10,6 +10,7 @@
 	integrity_max: 0,
 	fabric_strength: 0,
 	reveal: 1000,
+	rearresize: 0,
 	word: "n",
 	skirt: 0,
 	skirt_down: 0,
@@ -50,6 +51,7 @@
 	integrity_max: 300,
 	fabric_strength: 30,
 	reveal: 100,
+	rearresize: -4,
 	word: "a",
 	one_piece: 1,
 	skirt: 1,
@@ -95,6 +97,7 @@
 	integrity_max: 100,
 	fabric_strength: 30,
 	reveal: 1000,
+	rearresize: 0,
 	word: "n",
 	one_piece: 0,
 	skirt: 0,
@@ -131,4 +134,13 @@
 }
 
 ]>>
-<</nobr>><</widget>>
+
+<!--
+	Clothes that modders add go into this array, this should be empty in the base game at all times.
+	These items should have a `modder` variable with a the modders name in a short string
+-->
+<<set setup.moddedClothes.over_lower to []>>
+
+<<run setup.moddedClothes.over_lower.forEach( (x,i) => x.index = setup.clothes.over_lower.length + i )>>
+<<run setup.clothes.over_lower.push(...setup.moddedClothes.over_lower)>>
+<</widget>>

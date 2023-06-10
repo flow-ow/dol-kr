@@ -1,44 +1,44 @@
 :: Widgets Coast [widget]
-<<widget "cliff_top_desc">><<nobr>>
+<<widget "cliff_top_desc">>
 <<if $daystate is "night">>
 	<<if $weather is "rain">>
-		You hear waves crash below as rain lashes you.
+		빗방울이 당신을 후려치고, 아래에서는 파도가 부서지는 소리가 들린다.
 	<<elseif $weather is "overcast">>
-		You hear waves crash below.
+		아래에서 파도가 부서지는 소리가 들린다.
 	<<elseif $weather is "snow">>
-		You hear waves crash below.
+		아래에서 파도가 부서지는 소리가 들린다.
 	<<else>>
-		Stars glimmer over the endless deep.
+		별들이 끝없이 깊은 바다 위로 반짝인다.
 	<</if>>
 <<elseif $daystate is "dawn">>
 	<<if $weather is "rain">>
-		Waves crash below as rain lashes you.
+		빗방울이 당신을 후려치고, 아래에서는 파도가 부서지는 소리가 들린다.
 	<<elseif $weather is "overcast">>
-		Waves crash below.
+		아래에서 파도가 부서진다.
 	<<elseif $weather is "snow">>
-		Waves crash below.
+		아래에서 파도가 부서진다.
 	<<else>>
-		The sun creeps above the water.
+		태양이 바다 위로 천천히 움직인다.
 	<</if>>
 <<elseif $daystate is "dusk">>
 	<<if $weather is "rain">>
-		Waves crash below as rain lashes you.
+		빗방울이 당신을 후려치고, 아래에서는 파도가 부서지는 소리가 들린다.
 	<<elseif $weather is "overcast">>
-		The darkling water stretches to the horizon.
+		점점 어두워지는 바다가 지평선까지 뻗어 있다.
 	<<elseif $weather is "snow">>
-		The darkling water stretches to the horizon.
+		점점 어두워지는 바다가 지평선까지 뻗어 있다.
 	<<else>>
-		The fading sun still illuminates the water with an orange glow.
+		희미해져가는 태양은 여전히 바다를 주홍색 빛으로 비추고 있다. 
 	<</if>>
 <<else>>
 	<<if $weather is "rain">>
-		Waves crash below as rain lashes you.
+		빗방울이 당신을 후려치고, 아래에서는 파도가 부서지는 소리가 들린다.
 	<<elseif $weather is "overcast">>
-		Grey water stretches to the horizon.
+		회색 바다가 지평선까지 뻗어 있다.
 	<<elseif $weather is "snow">>
-		Grey water stretches to the horizon.
+		회색 바다가 지평선까지 뻗어 있다.
 	<<else>>
-		Grey-blue water stretches to the horizon.
+		회청색 바다가 지평선까지 뻗어 있다.
 	<</if>>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>

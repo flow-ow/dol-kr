@@ -1,41 +1,42 @@
 :: mobileStats [widget]
-<<widget "mobileStats">><<nobr>>
-<<if $sidebarStats is "All" or $pain gt 50>>
+<<widget "mobileStats">>
+<<if $options.sidebarStats is "all" or $pain gt 50>>
 	<<mobileStatsColor "pain">>
 	<div @class="'stat ' + _mobileColor">
 		P
 	</div>
 <</if>>
-<<if $sidebarStats is "All" or $arousal gt $arousalmax / 2>>
+<<if $options.sidebarStats is "all" or $arousal gt $arousalmax / 2>>
 	<<mobileStatsColor "arousal">>
 	<div @class="'stat ' + _mobileColor">
 		Ar
 	</div>
 <</if>>
-<<if $sidebarStats is "All" or $tiredness gt $tirednessmax / 2>>
+
+<<if $options.sidebarStats is "all" or $tiredness gt C.tiredness.max / 2>>
 	<<mobileStatsColor "fatigue">>
 	<div @class="'stat ' + _mobileColor">
 		F
 	</div>
 <</if>>
-<<if $sidebarStats is "All" or $stress gt $stressmax / 2>>
+<<if $options.sidebarStats is "all" or $stress gt $stressmax / 2>>
 	<<mobileStatsColor "stress">>
 	<div @class="'stat ' + _mobileColor">
 		S
 	</div>
 <</if>>
-<<if $innocencestate is 1 and ($sidebarStats is "All" or $awareness gt -100)>>
+<<if $innocencestate is 1 and ($options.sidebarStats is "all" or $awareness gt -100)>>
 	<<mobileStatsColor "innocence">>
 	<div @class="'stat ' + _mobileColor">
 		I
 	</div>
-<<elseif $sidebarStats is "All" or $trauma gt $traumamax / 2>>
+<<elseif $options.sidebarStats is "all" or $trauma gt $traumamax / 2>>
 	<<mobileStatsColor "trauma">>
 	<div @class="'stat ' + _mobileColor">
 		T
 	</div>
 <</if>>
-<<if $sidebarStats is "All" or $control gt $controlmax / 2>>
+<<if $options.sidebarStats is "all" or $control gt $controlmax / 2>>
 	<<mobileStatsColor "control">>
 	<div @class="'stat ' + _mobileColor">
 		C
@@ -63,9 +64,9 @@
 		H
 	</div>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "mobileStatsTime">><<nobr>>
+<<widget "mobileStatsTime">>
 <div class="stat time">
 	<<if $timestyle is "ampm">>
 		<<if $hour gte 13>>
@@ -77,16 +78,16 @@
 		<<if $hour lt 10>>0<</if>>$hour:<<print ($time - $hour * 60).toString().padStart(2, "0")>>
 	<</if>>
 </div>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "mobileStatsColor">><<nobr>>
-	<<switch $args[0]>>
+<<widget "mobileStatsColor">>
+	<<switch _args[0]>>
 	<<case "pain">>
 		<<mobileStatsColorSet `($pain gte 100 and $willpowerpain is 0 ? $pain : Math.clamp($pain, 0, 99))` 100>>
 	<<case "arousal">>
 		<<mobileStatsColorSet `Math.clamp($arousal, 0, $arousalmax)` $arousalmax>>
 	<<case "fatigue">>
-		<<mobileStatsColorSet `Math.clamp($tiredness, 0, $tirednessmax)` $tirednessmax>>
+		<<mobileStatsColorSet `Math.clamp($tiredness, 0, C.tiredness.max)` `C.tiredness.max`>>
 	<<case "stress">>
 		<<mobileStatsColorSet `Math.clamp($stress, 0, $stressmax)` $stressmax>>
 	<<case "innocence">>
@@ -104,13 +105,13 @@
 	<<case "hallucinogen">>
 		<<mobileStatsColorSet `Math.clamp($hallucinogen, 50, 500)` 500>>
 	<</switch>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "mobileStatsColorSet">><<nobr>>
-	<<if $args[0] is 0>>
+<<widget "mobileStatsColorSet">>
+	<<if _args[0] is 0>>
 		<<set _mobileColor to "green">>
 	<<else>>
-		<<set _percent=Math.floor(($args[0]/$args[1])*10)>>
+		<<set _percent=Math.floor((_args[0]/_args[1])*10)>>
 		<<switch _percent>>
 		<<case 8 9>>
 			<<set _mobileColor to "pink">>
@@ -126,13 +127,13 @@
 			<<set _mobileColor to "red">>
 		<</switch>>
 	<</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "mobileStatsColorSetIverted">><<nobr>>
-	<<if $args[0] is 0>>
+<<widget "mobileStatsColorSetIverted">>
+	<<if _args[0] is 0>>
 		<<set _mobileColor to "red">>
 	<<else>>
-		<<set _percent=Math.floor(($args[0]/$args[1])*10)>>
+		<<set _percent=Math.floor((_args[0]/_args[1])*10)>>
 		<<switch _percent>>
 		<<case 8 9>>
 			<<set _mobileColor to "teal">>
@@ -148,9 +149,9 @@
 			<<set _mobileColor to "green">>
 		<</switch>>
 	<</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "mobileStatsColorAllure">><<nobr>>
+<<widget "mobileStatsColorAllure">>
 	<<if $allure gte (6000 * $alluremod)>>
 		<<set _mobileColor to "red">>
 	<<else>>
@@ -171,4 +172,4 @@
 			<<set _mobileColor to "pink">>
 		<</switch>>
 	<</if>>
-<</nobr>><</widget>>
+<</widget>>

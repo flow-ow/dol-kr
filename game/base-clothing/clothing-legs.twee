@@ -1,6 +1,6 @@
 :: Widgets Legs [widget]
 <!-- For any item that has a colour_combat tag, set it to 0 if that item ever gets its own combat sprites. -->
-<<widget "init_legs">><<nobr>>
+<<widget "init_legs">>
 <<set setup.clothes.legs to [
 
 	{index: 0,
@@ -54,13 +54,13 @@
 	warmth: 5,
 	cost: 1000,
 	description: "They don't conceal much.",
-	shop: ["clothing"],
+	shop: ["clothing", "adult"],
 	accessory: 0,
 	accessory_colour: 0,
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Tights.png",
+	iconFile: "tights.png",
 	accIcon: 0
 },
 
@@ -85,13 +85,13 @@
 	warmth: 15,
 	cost: 500,
 	description: "Cushioned and breathable.",
-	shop: ["clothing"],
+	shop: ["clothing", "school", "adult"],
 	accessory: 0,
 	accessory_colour: 0,
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Boy's gym socks.png",
+	iconFile: "boys_gym_socks.png",
 	accIcon: 0
 },
 
@@ -116,13 +116,13 @@
 	warmth: 15,
 	cost: 500,
 	description: "Cushioned and breathable.",
-	shop: ["clothing"],
+	shop: ["clothing", "school", "adult"],
 	accessory: 0,
 	accessory_colour: 0,
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Girl's gym socks.png",
+	iconFile: "girls_gym_socks.png",
 	accIcon: 0
 },
 
@@ -147,13 +147,13 @@
 	warmth: 15,
 	cost: 1500,
 	description: "Attractive and alluring.",
-	shop: ["clothing"],
+	shop: ["clothing", "adult"],
 	accessory: 0,
 	accessory_colour: 0,
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Stockings.png",
+	iconFile: "stockings.png",
 	accIcon: 0
 },
 
@@ -175,16 +175,16 @@
 	type: ["normal"],
 	gender: "f",
 	femininity: 300,
-	warmth: 10,
+	warmth: 3,
 	cost: 1500,
 	description: "Attractive and alluring.",
-	shop: ["clothing"],
+	shop: ["clothing", "adult"],
 	accessory: 0,
 	accessory_colour: 0,
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Fishnet stockings.png",
+	iconFile: "fishnet_stockings.png",
 	accIcon: 0
 },
 
@@ -209,13 +209,13 @@
 	warmth: 3,
 	cost: 1700,
 	description: "Attractive and alluring.",
-	shop: ["clothing"],
+	shop: ["clothing", "adult"],
 	accessory: 0,
 	accessory_colour: 0,
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Fishnet tights.png",
+	iconFile: "fishnet_tights.png",
 	accIcon: 0
 },
 
@@ -240,13 +240,13 @@
 	warmth: 20,
 	cost: 4000,
 	description: "Sexy.",
-	shop: ["clothing"],
+	shop: ["clothing", "adult"],
 	accessory: 0,
 	accessory_colour: 0,
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Garter stockings.png",
+	iconFile: "garter_stockings.png",
 	accIcon: 0
 },
 
@@ -276,7 +276,7 @@
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Legwarmers.png",
+	iconFile: "legwarmers.png",
 	accIcon: 0
 },
 
@@ -307,7 +307,7 @@
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Christmas leg warmers.png"
+	iconFile: "christmas_leg_warmers.png"
 },
 
 	{index: 10,
@@ -330,13 +330,13 @@
 	warmth: 0,
 	cost: 25000,
 	description: "Exotic and eye-catching.",
-	shop: ["clothing"],
+	shop: ["adult"],
 	accessory: 0,
 	accessory_colour: 0,
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Gold anklets.png",
+	iconFile: "gold_anklets.png",
 	accIcon: 0
 },
 
@@ -390,15 +390,15 @@
 	warmth: 20,
 	cost: 3000,
 	description: "Brimming with personality.",
-	shop: ["clothing"],
+	shop: ["clothing", "adult"],
 	accessory: 1,
 	accessory_colour: 0,
 	accessory_colour_options: ["black", "blue", "brown", "green", "pink", "purple", "red", "tangerine", "teal", "white", "yellow", "custom"],
 	accessory_colour_sidebar: 1,
 	cursed: 0,
 	location: 0,
-	iconFile: "Striped thighhighs.png",
-	accIcon: "Striped thighhighs_acc.png"
+	iconFile: "striped_thighhighs.png",
+	accIcon: "striped_thighhighs_acc.png"
 },
 
 	{index: 13,
@@ -428,9 +428,111 @@
 	accessory_colour_options: [],
 	cursed: 0,
 	location: 0,
-	iconFile: "Ankle socks.png",
-	accIcon: "Ankle socks_acc.png"
+	iconFile: "ankle_socks.png",
+	accIcon: "ankle_socks_acc.png"
+},
+
+	{index: 14,
+	name: "plain thighhighs",
+	name_cap: "Plain thighhighs",
+	variable: "plainthighhighs",
+	integrity: 100,
+	integrity_max: 100,
+	fabric_strength: 15,
+	reveal: 300,
+	word: "n",
+	state: "thighs",
+	state_base: "thighs",
+	plural: 1,
+	colour: 0,
+	colour_options: ["black", "blue", "brown", "green", "pink", "purple", "red", "tangerine", "teal", "white", "yellow", "custom"],
+	colour_sidebar: 1,
+	type: ["normal"],
+	gender: "f",
+	femininity: 200,
+	warmth: 20,
+	cost: 2500,
+	description: "Simple and cute.",
+	shop: ["clothing", "adult"],
+	accessory: 0,
+	accessory_colour: 0,
+	accessory_colour_options: [],
+	cursed: 0,
+	location: 0,
+	iconFile: "striped_thighhighs.png",
+	accIcon: 0
+},
+
+	{index: 15,
+	name: "cow socks",
+	name_cap: "Cow socks",
+	variable: "cow",
+	integrity: 100,
+	integrity_max: 100,
+	fabric_strength: 20,
+	reveal: 1,
+	word: "n",
+	state: "knees",
+	state_base: "knees",
+	plural: 1,
+	colour: 0,
+	colour_options: [],
+	colour_combat: 0,
+	type: ["costume"],
+	gender: "n",
+	femininity: -0,
+	warmth: 15,
+	cost: 1000,
+	description: "Cute cow print.",
+	shop: ["forest"],
+	accessory: 0,
+	accessory_colour: 0,
+	accessory_colour_options: [],
+	cursed: 0,
+	location: 0,
+	iconFile: "cow_socks.png",
+	accIcon: 0
+},
+
+	{index: 16,
+	name: "nurse socks",
+	name_cap: "Nurse socks",
+	variable: "nursesocks",
+	integrity: 100,
+	integrity_max: 100,
+	fabric_strength: 20,
+	reveal: 1,
+	word: "n",
+	state: "thighs",
+	state_base: "thighs",
+	plural: 1,
+	colour: 0,
+	colour_options: [],
+	colour_combat: 0,
+	type: ["costume"],
+	gender: "f",
+	femininity: 100,
+	warmth: 15,
+	cost: 900,
+	description: "Worn by nurses at the local hospital.",
+	shop: ["clothing"],
+	accessory: 0,
+	accessory_colour: 0,
+	accessory_colour_options: [],
+	cursed: 0,
+	location: 0,
+	iconFile: "nurse_socks.png",
+	accIcon: 0
 }
 
 ]>>
-<</nobr>><</widget>>
+
+<!--
+	Clothes that modders add go into this array, this should be empty in the base game at all times.
+	These items should have a `modder` variable with a the modders name in a short string
+-->
+<<set setup.moddedClothes.legs to []>>
+
+<<run setup.moddedClothes.legs.forEach( (x,i) => x.index = setup.clothes.legs.length + i )>>
+<<run setup.clothes.legs.push(...setup.moddedClothes.legs)>>
+<</widget>>

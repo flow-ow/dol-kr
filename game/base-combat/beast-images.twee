@@ -1,5 +1,5 @@
 :: Widgets Beast Img [widget]
-<<widget "beastimgdoggy">><<nobr>>
+<<widget "beastimgdoggy">>
 
 <<set _na to $active_enemy>>
 
@@ -11,7 +11,7 @@
 	<</if>>
 <<elseif $monster isnot 1>>
 	<<if $enemytype is "beast" and $NPCList[_na].stance is "top" or $enemytype is "beast" and $vaginause is "penis" or $enemytype is "beast" and $anususe is "penis" or $enemytype is "beast" and $penisuse is "othervagina" or $enemytype is "beast" and $penisuse is "otheranus">>
-		<<if $NPCList[_na].penis is "none" and $penisexist is 1 or $penisuse is "othervagina" or $penisuse is "otheranus">>
+		<<if $NPCList[_na].penis is "none" and $player.penisExist or $penisuse is "othervagina" or $penisuse is "otheranus">>
 			<<if $NPCList[_na].type is "lizard">>
 				<img @class="'layer-beastback anim-doggy-4f-'+_animspeed" src="img/sex/doggy/femalebeast/activelizard.png">
 				<img @class="'layer-beastforeground anim-doggy-4f-'+_animspeed" src="img/sex/doggy/femalebeast/activelizardfrontleg.png">
@@ -30,6 +30,9 @@
 			<<elseif $NPCList[_na].type is "creature">>
 				<img @class="'layer-beastback anim-doggy-4f-'+_animspeed" src="img/sex/doggy/femalebeast/creature/activecreature.png">
 				<img @class="'layer-beastforeground anim-doggy-4f-'+_animspeed" src="img/sex/doggy/femalebeast/creature/activecreaturefrontleg.png">
+			<<elseif $NPCList[_na].type is "hawk">>
+			<<elseif $NPCList[_na].type is "cow" or $NPCList[_na].type is "bull">>
+				<!-- Cow sprites go here -->
 			<<else>>
 				<img @class="'layer-beastback anim-doggy-4f-'+_animspeed" src="img/sex/doggy/femalebeast/activebeast.png">
 				<img @class="'layer-beastforeground anim-doggy-4f-'+_animspeed" src="img/sex/doggy/femalebeast/activebeastfrontleg.png">
@@ -65,6 +68,8 @@
 			<<elseif $NPCList[_na].type is "hawk">>
 				<img @class="'layer-beastforeground anim-doggy-4f-'+_animspeed" src="img/sex/doggy/beast/bird/birdfront.png">
 				<img @class="'layer-beastback anim-doggy-4f-'+_animspeed" src="img/sex/doggy/beast/bird/birdback.png">
+			<<elseif $NPCList[_na].type is "cow" or $NPCList[_na].type is "bull">>
+				<!-- Cow sprites go here -->
 			<<else>>
 				<img @class="'layer-beastback anim-doggy-4f-'+_animspeed" src="img/sex/doggy/beast/activebeast.png">
 				<img @class="'layer-beastforeground anim-doggy-4f-'+_animspeed" src="img/sex/doggy/beast/activebeastfrontleg.png">
@@ -86,11 +91,13 @@
 		<<elseif $NPCList[_na].type is "bear">>
 			<img @class="'layer-beastback anim-doggy-4f-'+_animspeed" src="img/sex/doggy/frontbeast/bear/activebear.png">
 			<img @class="'layer-beastforeground anim-doggy-4f-'+_animspeed" src="img/sex/doggy/frontbeast/bear/activebearfrontleg.png">
+		<<elseif $NPCList[_na].type is "cow" or $NPCList[_na].type is "bull">>
+			<!-- Cow sprites go here -->
 		<<elseif $NPCList[_na].type is "creature">>
 			<img @class="'layer-beastback anim-doggy-4f-'+_animspeed" src="img/sex/doggy/frontbeast/creature/activecreature.png">
 			<img @class="'layer-beastforeground anim-doggy-4f-'+_animspeed" src="img/sex/doggy/frontbeast/creature/activecreaturefrontleg.png">
 		<<else>>
-			
+
 		<</if>>
 	<</if>>
 <<else>>
@@ -240,7 +247,21 @@
 			<<elseif $mouthuse is "penis">>
 				<img @class="'layer-beastforeground anim-doggy-4f-'+_animspeed" src="img/sex/doggy/shadow/bird/oral.png">
 			<<else>>
-				<img @class="'layer-beastforeground anim-doggy-4f-'+_animspeed" src="img/sex/doggy/shadow/bird/vaginal.png">			
+				<img @class="'layer-beastforeground anim-doggy-4f-'+_animspeed" src="img/sex/doggy/shadow/bird/vaginal.png">
+			<</if>>
+		<<elseif $NPCList[_na].type is "cowgirl" or $NPCList[_na].type is "bullboy">>
+			<<if $vaginause is "penis" and $anususe is "penis" and ($leftarm is "bound" or $leftarm is "grappled")>>
+				<!-- Cow monster sprites go here -->
+			<<elseif $vaginause is "penis" and $anususe is "penis">>
+				<!-- Cow monster sprites go here -->
+			<<elseif $anususe is "penis">>
+				<!-- Cow monster sprites go here -->
+			<<elseif $vaginause is "penis">>
+				<!-- Cow monster sprites go here -->
+			<<elseif $mouthuse is "penis">>
+				<!-- Cow monster sprites go here -->
+			<<else>>
+				<!-- Cow monster sprites go here -->
 			<</if>>
 		<</if>>
 	<<else>>
@@ -249,9 +270,9 @@
 
 <<beastimggenitals>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "beastimgmissionary">><<nobr>>
+<<widget "beastimgmissionary">>
 
 <<set _na to $active_enemy>>
 
@@ -288,6 +309,9 @@
 			<<elseif $NPCList[_na].type is "wolf">>
 				<img @class="'layer-beastback anim-doggy-4f-'+_animspeed" src="img/sex/missionary/beast/wolf/wolfbase.png">
 				<img @class="'layer-beastforeground anim-doggy-4f-'+_animspeed" src="img/sex/missionary/beast/wolf/wolffrontleg.png">
+			<<elseif $NPCList[_na].type is "hawk">>
+			<<elseif $NPCList[_na].type is "cow" or $NPCList[_na].type is "bull">>
+				<!-- Cow sprites go here -->
 			<<else>>
 				<img @class="'layer-beastback anim-doggy-4f-'+_animspeed" src="img/sex/missionary/beast/creature/beastbase.png">
 				<img @class="'layer-beastforeground anim-doggy-4f-'+_animspeed" src="img/sex/missionary/beast/creature/beastfrontleg.png">
@@ -421,19 +445,31 @@
 		<<else>>
 			<img @class="'layer-beastforeground anim-doggy-4f-'+_animspeed" src="img/sex/missionary/shadow/bird/vaginal.png">
 		<</if>>
+	<<elseif $NPCList[_na].type is "cowgirl" or $NPCList[_na].type is "bullboy">>
+		<<if $penisuse is "othervagina" or $penisuse is "otheranus">>
+			<!-- Cow monster sprites go here -->
+		<<elseif $anususe is "penis">>
+			<!-- Cow monster sprites go here -->
+		<<elseif $vaginause is "penis">>
+			<!-- Cow monster sprites go here -->
+		<<elseif $mouthuse is "penis">>
+			<!-- Cow monster sprites go here -->
+		<<else>>
+			<!-- Cow monster sprites go here -->
+		<</if>>
 	<</if>>
 <</if>>
 
 <<beastimggenitalsmissionary>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "beastimggenitals">><<nobr>>
+<<widget "beastimggenitals">>
 
 <<set _na to $active_enemy>>
 
 <<set _filters to $skinColor.current>>
-<<set _img to setup.tanImg.doggy[$skinColor.tanImgEnabled]>>
+<<set _img to setup.tanImg.doggy[($options.tanImgEnabled ? "t" : "f")]>>
 <<if $NPCList[_na].type is "dolphin" and $enemytype is "beast">>
 	<<if $NPCList[_na].penis is "anusentrance" and $position isnot "missionary">>
 		<img @class="'layer-beastback anim-doggy-4f-'+_animspeed" src="img/sex/doggy/beast/dolphin/activedolphinanusentrance.png">
@@ -476,14 +512,14 @@
 	<</if>>
 
 	<<if $NPCList[_na].penis is "leftarm">>
-		<<if $skinColor.tanImgEnabled is "t">>
+		<<if $options.tanImgEnabled>>
 			<img @class="'layer-sexbasefront anim-doggy-4f-'+_animspeed" @src="_img.activedolphinlefthandpenis">
 		<</if>>
 		<img @class="'layer-sexbasefront anim-doggy-4f-'+_animspeed" @src="_img.activedolphinlefthand" @style="'filter: '+_filters.body">
 	<</if>>
 
 	<<if $NPCList[_na].penis is "rightarm">>
-		<<if $skinColor.tanImgEnabled is "t">>
+		<<if $options.tanImgEnabled>>
 			<img @class="'layer-sexbaseback anim-doggy-4f-'+_animspeed" @src="_img.activedolphinrighthandpenis">
 		<</if>>
 		<img @class="'layer-sexbaseback anim-doggy-4f-'+_animspeed" @src="_img.activedolphinrighthand" @style="'filter: '+_filters.body">
@@ -531,14 +567,14 @@
 	<</if>>
 
 	<<if $NPCList[_na].penis is "leftarm">>
-		<<if $skinColor.tanImgEnabled is "t">>
+		<<if $options.tanImgEnabled>>
 			<img @class="'layer-sexbasefront anim-doggy-4f-'+_animspeed" @src="_img.activebearlefthandpenis">
 		<</if>>
 		<img @class="'layer-sexbasefront anim-doggy-4f-'+_animspeed" @src="_img.activebearlefthand" @style="'filter: '+_filters.body">
 	<</if>>
 
 	<<if $NPCList[_na].penis is "rightarm">>
-		<<if $skinColor.tanImgEnabled is "t">>
+		<<if $options.tanImgEnabled>>
 			<img @class="'layer-sexbaseback anim-doggy-4f-'+_animspeed" @src="_img.activebearrighthandpenis">
 		<</if>>
 		<img @class="'layer-sexbaseback anim-doggy-4f-'+_animspeed" @src="_img.activebearrighthand" @style="'filter: '+_filters.body">
@@ -586,14 +622,14 @@
 	<</if>>
 
 	<<if $NPCList[_na].penis is "leftarm">>
-		<<if $skinColor.tanImgEnabled is "t">>
+		<<if $options.tanImgEnabled>>
 			<img @class="'layer-sexbasefront anim-doggy-4f-'+_animspeed" @src="_img.activebearrighthandpenis">
 		<</if>>
 		<img @class="'layer-sexbasefront anim-doggy-4f-'+_animspeed" @src="_img.activecatlefthand" @style="'filter: '+_filters.body">
 	<</if>>
 
 	<<if $NPCList[_na].penis is "rightarm">>
-		<<if $skinColor.tanImgEnabled is "t">>
+		<<if $options.tanImgEnabled>>
 			<img @class="'layer-sexbaseback anim-doggy-4f-'+_animspeed" @src="_img.activebearrighthandpenis">
 		<</if>>
 		<img @class="'layer-sexbaseback anim-doggy-4f-'+_animspeed" @src="_img.activecatrighthand" @style="'filter: '+_filters.body">
@@ -769,14 +805,14 @@
 	<</if>>
 
 	<<if $NPCList[_na].penis is "leftarm">>
-		<<if $skinColor.tanImgEnabled is "t">>
+		<<if $options.tanImgEnabled>>
 			<img @class="'layer-sexbasefront anim-doggy-4f-'+_animspeed" @src="_img.activebeastlefthandpenis">
 		<</if>>
 		<img @class="'layer-sexbasefront anim-doggy-4f-'+_animspeed" @src="_img.activebeastlefthand" @style="'filter: '+_filters.body">
 	<</if>>
 
 	<<if $NPCList[_na].penis is "rightarm">>
-		<<if $skinColor.tanImgEnabled is "t">>
+		<<if $options.tanImgEnabled>>
 			<img @class="'layer-sexbaseback anim-doggy-4f-'+_animspeed" @src="_img.activebeastrighthandpenis">
 		<</if>>
 		<img @class="'layer-sexbaseback anim-doggy-4f-'+_animspeed" @src="_img.activebeastrighthand" @style="'filter: '+_filters.body">
@@ -790,9 +826,9 @@
 	<</if>>
 <</if>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "beastimggenitalsmissionary">><<nobr>>
+<<widget "beastimggenitalsmissionary">>
 
 	<<if $NPCList[_na].penis is "anusentrance" and $NPCList[_na].type isnot "horse" and $NPCList[_na].type isnot "centaur">>
 		<<if $NPCList[_na].type is "dogboy" or $NPCList[_na].type is "doggirl" or $NPCList[_na].type is "wolfboy" or $NPCList[_na].type is "wolfgirl">>
@@ -933,9 +969,9 @@
 			<img @class="'layer-beastback anim-doggy-4f-'+_animspeed" src="img/sex/missionary/monster/normal/oral.png">
 		<</if>>
 	<</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "beastimgidle">><<nobr>>
+<<widget "beastimgidle">>
 
 <<set _na to $active_enemy>>
 
@@ -948,4 +984,4 @@
 		<img @class="'layer-beastback anim-doggy-4f-'+_animspeed" src="img/sex/doggy/beast/horse.png">
 	<</if>>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>

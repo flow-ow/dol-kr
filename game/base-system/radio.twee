@@ -3,18 +3,18 @@ Radio mod for Degrees of Lewdity v.1.
 Feb 2019
 (c) khan@buntownik.pl
 */
-:: RadioDummy [nobr]
+:: RadioDummy
 
 <<radio_listen>><<pass 1>>
 <<radio_listen>><<pass 1>>
 <<radio_listen>><<pass 1>>
 <<radio_listen>><<pass 1>>
 <<radio_listen>><<pass 1>>
-<<link [[Next|previous()]]>><</link>>
+<<link [[다음|previous()]]>><</link>>
 
 :: RadioWidgets [widget]
 
-<<widget "radio_midnight">><<nobr>> /*call every midnight to reduce importance of news, and shift the Tanktracks*/
+<<widget "radio_midnight">> /*call every midnight to reduce importance of news, and shift the Tanktracks*/
 	<<set $news1_importance to $news1_importance-1>>
 	<<if $news1_importance lte 0>>
 		<<set $news1 to "gossip">>
@@ -45,25 +45,25 @@ Feb 2019
 	<<else>>
 		<<set $tanktracks to 1>>
 	<</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "radio_placehere">><<nobr>>
+<<widget "radio_placehere">>
 	<<set $rem to 60 - ($time % 60)>>
 	<<set $rem_str to $rem.toString().padStart(2, "0")>>
 	<<set $loc to passage()>>
 	<<radio_listen>>
 	<<link [[Listen to the radio (0:01)|passage()]]>><<pass 1>><</link>> /*script thing is magically required to link to the same page*/
 	<br>
-	<<link [[Listen for a while (0:05)|RadioDummy]]>><</link>>
+	<<link [[Listen for a while (0:05)|passage()]]>><</link>>
 	<br>
 	<<if $rem lte 47>>
 		<<link "Wait for the news (0:$rem_str)" $loc>><<pass $rem>><</link>>
 		<br>
 	<</if>>
 	<br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "radio_hardreset">><<nobr>> /* call this to reset news. Should be called when fresh new game is initialised */
+<<widget "radio_hardreset">> /* call this to reset news. Should be called when fresh new game is initialised */
 	<<set $news1 to "gossip">>
 	<<set $news1_importance to 0>>
 	<<set $news1_gen to "person">>
@@ -74,9 +74,9 @@ Feb 2019
 	<<set $news2_gen to "person">>
 	<<set $news2_hairc to "black">>
 	<<set $news2_hairl to "regular">>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "radio_addnews">><<nobr>>
+<<widget "radio_addnews">>
 /*sort news*/
 <<if $news2_importance gt $news1_importance>>
 	<<set $newstemp1 to $news1>>
@@ -96,12 +96,12 @@ Feb 2019
 	<<set $news2_hairl to $newstemp5>>
 <</if>>
 /*if the incoming news are actually something new*/
-<<if ($args[0] isnot $news1) and ($args[0] isnot $news1)>>
+<<if (_args[0] isnot $news1) and (_args[0] isnot $news1)>>
 	/*if incoming news is more or as important as than news2, but less important than the news1*/
-	<<if ($args[1] gte $news2_importance) and ($args[1] lt $news1_importance)>>
+	<<if (_args[1] gte $news2_importance) and (_args[1] lt $news1_importance)>>
 		/* new news shall replace news2 */
-		<<set $news2 to $args[0]>>
-		<<set $news2_importance to $args[1]>>
+		<<set $news2 to _args[0]>>
+		<<set $news2_importance to _args[1]>>
 		/* store PC appearance */
 		<<if $player.gender is "m">>
 			<<set $news2_gen to "male">>
@@ -115,7 +115,7 @@ Feb 2019
 			<<set $news2_hairl to "short">>
 		<</if>>
 		/* if incoming news is more or as important as both current news */
-	<<elseif ($args[1] gte $news2_importance) and ($args[1] gte $news2_importance)>>
+	<<elseif (_args[1] gte $news2_importance) and (_args[1] gte $news2_importance)>>
 		/*new1 should replace news2
 		new news should replace news1*/
 		<<set $news2 to $news1>>
@@ -124,8 +124,8 @@ Feb 2019
 		<<set $news2_gen to $news1_gen>>
 		<<set $news2_hairc to $news1_hairc>>
 		<<set $news2_hairl to $news1_hairl>>
-		<<set $news1 to $args[0]>>
-		<<set $news1_importance to $args[1]>>
+		<<set $news1 to _args[0]>>
+		<<set $news1_importance to _args[1]>>
 		/* store PC appearance */
 		<<if $player.gender is "m">>
 			<<set $news1_gen to "male">>
@@ -142,19 +142,19 @@ Feb 2019
 	/*if the incoming news already exist*/
 <<else>>
 	/*if incoming news are the same as news1 but are more important */
-	<<if ($args[0] is $news1) and ($args[1] gt $news1_importance)>>
+	<<if (_args[0] is $news1) and (_args[1] gt $news1_importance)>>
 		/*refresh importance*/
-		<<set $news1_importance to $args[1]>>
+		<<set $news1_importance to _args[1]>>
 	<</if>>
 	/*if incoming news are the same as news2 but are more important */
-	<<if ($args[0] is $news2) and ($args[1] gt $news2_importance)>>
+	<<if (_args[0] is $news2) and (_args[1] gt $news2_importance)>>
 		/*refresh importance*/
-		<<set $news2_importance to $args[1]>>
+		<<set $news2_importance to _args[1]>>
 	<</if>>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "radio_listen">><<nobr>> /* call this to listen to the radio */
+<<widget "radio_listen">> /* call this to listen to the radio */
 	<<set $radioname to "Sunshine Radio">>
 	<<set $radioslogan to "Your window to the world">>
 	<<if $weekday eq 1>>
@@ -179,7 +179,8 @@ Feb 2019
 	<<set $news1_line2 to "The investigative commission is in the process of determining what happened to the money earmarked for the renovation of the city's orphanage and asylum.">>
 	<<set $news1_line3 to "As reported by anonymous sources - someone from the city council may be involved in the loss of money.">>
 	<<set $news1_line4 to "In the coming days the mayor is to make a special statement.">>
-	<<set $news1_line5 to "Until then, he abstains from comments and states that the whole thing is part of the pre-election provocation.">>
+	<<silently>><<nnpc_he "Quinn">><</silently>>
+	<<set $news1_line5 to "Until then, "+_text_output+" abstains from comments and states that the whole thing is part of the pre-election provocation.">>
 	<<set $news2_line1 to "The number of wolves in forest areas near the city keep growing.">>
 	<<set $news2_line2 to "Ah gone up in smoke a sheep this week, an two goats previous one! Lord, far ta cut a path thuh house! - claims one of local farmers.">>
 	<<set $news2_line3 to "According to some commentators, this is the result of recent changes in the law on poaching and hunting.">>
@@ -4002,4 +4003,4 @@ Feb 2019
 	<br><br>
 	</span>
 	*/
-<</nobr>><</widget>>
+<</widget>>

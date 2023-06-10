@@ -1,6 +1,6 @@
 :: Widgets trHands [widget nobr]
 <<widget "init_trHands">>
-    <<set _trClothes.hands to [
+    <<set setup.trClothes.hands to [
         {
             index: 0,
             name: "naked",
@@ -44,6 +44,42 @@
             variable: "lacewarmers",
             post: 1,
             description: "패셔너블."
-        }
-    ]>>
+        },
+		
+        {
+            index: 5,
+            name: "long leather gloves",
+            name_ko: "긴 가죽 장갑",
+            variable: "longleathergloves",
+            post: 0,
+            description: "패셔너블하고 손을 주머니에 집어넣기 쉽다."
+        },
+
+        {
+            index: 6,
+            name: "pom poms",
+            name_ko: "폼폼",
+            variable: "pompoms",
+            post: 0,
+            description: "당신 팀의 승리를 응원하기 위한 것."
+        },
+ 
+        {
+            index: 7,
+            name: "gold bracelets",
+            name_ko: "황금 팔찌",
+            variable: "gold",
+            post: 1,
+            description: "이국적이고 시선을 끈다."
+        },
+ 
+        {
+            index: 8,
+            name: "cow sleeves",
+            name_ko: "소 토시",
+            variable: "cow",
+            post: 1,
+            description: "귀여운 소 발자국."
+        },
+     ]>>
 <</widget>>

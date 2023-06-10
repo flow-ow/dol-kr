@@ -1,4 +1,4 @@
-:: Events Swimming Molestation [nobr]
+:: Events Swimming Molestation
 
 <<if $molestationstart is 1>>
 	<<set $molestationstart to 0>>
@@ -6,82 +6,78 @@
 	<<violence 1>>
 	<<neutral 1>>
 	<<molested>>
-	<<maninit>><<npcexpose>>
+	<<maninit>>
 	<<set $timer to 18>>
-	<<if $delinquency lt 400>><<set $rescue to 1>><</if>>
+	<<if $delinquency lt 400>><<enable_rescue>><</if>>
+	<<if $swimall is 1>>
+		<<npcexpose>>
+	<</if>>
 	<<person2>><<personPost "이">> 계속해서 당신의 엉덩이를 애무하는 동안 <<person1>><<personPost "은">> 몸을 굽혀 당신의 가슴에 손을 뻗는다.
-	<<if $worn.upper.exposed gte 1>>
-		시선을 피하지 않으며, <<HePost "은">> 혀 끝으로 부드럽게 당신의 유두를 핥는다.
+	<<if $worn.upper.exposed gte 2 and $worn.under_upper.exposed gte 1>>
+		시선을 피하지 않으며, <<HePost "은">> 혀 끝으로 부드럽게 당신의 <<nipple_ ul>> 핥는다.
+	<<elseif $worn.upper.exposed gte 2>>
+		시선을 피하지 않으며, <<HePost "은">> <<worn_under_upper_name>> 너머에서 혀 끝으로 부드럽게 당신의 <<nipple_ ul>> 핥는다.
 	<<else>>
-		시선을 피하지 않으며, <<HePost "은">> $worn.upper.name 너머에서 혀 끝으로 부드럽게 당신의 유두를 핥는다.
-		<br><br>
+		시선을 피하지 않으며, <<HePost "은">> <<worn_upper_name>> 너머에서 혀 끝으로 부드럽게 당신의 <<nipple_ ul>> 핥는다.
 	<</if>>
 <</if>>
+
 <<effects>>
-<<if $alarm is 1 and $rescue is 0>>
-	<<set $alarm to 0>>
-	불량학생으로서의 명성 때문에 메이슨은 당신을 무시한다.
-	<br><br>
-<</if>>
-<<effectsman>><<man>>
+<<effectsman>>
+<<alarmstate "<span class='red'>불량학생으로서의 명성 때문에, 메이슨은 당신을 무시한다.</span>">>
+<<man>>
 <<stateman>>
 <br><br>
 <<actionsman>>
-<<if $enemyhealth lte 0>>
-	<span id="next"><<link [[다음|Events Swimming Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[다음|Events Swimming Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $timer lte 0>>
-	<span id="next"><<link [[다음|Events Swimming Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $rescue is 1 and $alarm is 1>>
+
+<<if _combatend or $timer lte 0>>
 	<span id="next"><<link [[다음|Events Swimming Molestation Finish]]>><</link>></span><<nexttext>>
 <<else>>
 	<span id="next"><<link [[다음|Events Swimming Molestation]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Events Swimming Endure [nobr]
+:: Events Swimming Endure
 
 <<set $outside to 0>><<set $location to "pool">><<schooleffects>><<effects>>
 <<person2>><<personPost "이">> 계속해서 당신의 엉덩이를 애무하는 동안 <<person1>><<personPost "은">> 몸을 굽혀 당신의 가슴에 손을 뻗는다.
-<<if $worn.upper.exposed gte 1>>
-	시선을 피하지 않으며, <<HePost "은">> 혀 끝으로 부드럽게 당신의 유두를 핥는다.
+<<if $worn.upper.exposed gte 2 and $worn.under_upper.exposed gte 1>>
+	시선을 피하지 않으며, <<HePost "은">> 혀 끝으로 부드럽게 당신의 <<nipple_ ul>> 핥는다.
+<<elseif $worn.upper.exposed gte 2>>
+	시선을 피하지 않으며, <<HePost "은">> <<worn_under_upper_name>> 너머에서 혀 끝으로 부드럽게 당신의 <<nipple_ ul>> 핥는다.
 <<else>>
-	시선을 피하지 않으며, <<HePost "은">> <<trClothes "upper" $worn.upper.name>>_trResult 너머에서 혀 끝으로 부드럽게 당신의 유두를 핥는다.
+	시선을 피하지 않으며, <<HePost "은">> <<worn_upper_name>> 너머에서 혀 끝으로 부드럽게 당신의 <<nipple_ ul>> 핥는다.
 <</if>>
 하지만 <<hePost "은">> 곧 방해를 받는다. 메이슨이 소동을 종식시키자, 둘은 당신에게서 떨어지며 <<person2>><<personPost "이">> 작별의 의미를 당신을 한 번 꼬집는다.
 <br><br>
 <<link [[다음|Swimming Lesson]]>><<endevent>><</link>>
 <br>
 
-:: Events Swimming Molestation Finish [nobr]
+:: Events Swimming Molestation Finish
 
 <<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
-<<ejaculation>>
+	<<ejaculation>>
 
-둘은 잠시 뒤 정신을 차리고는, 약간 죄책감을 느끼는 모습으로 당신에게서 멀어진다.
-<br><br>
+	둘은 잠시 뒤 정신을 차리고는, 약간 죄책감을 느끼는 모습으로 당신에게서 멀어진다.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
+	<<clotheson>>
+	<<endcombat>>
 
-<<link [[다음|Swimming Lesson]]>><</link>>
-
+	<<link [[다음|Swimming Lesson]]>><</link>>
 <<elseif $enemyhealth lte 0>>
+	<<person1>><<personPost "은">> 고통에 몸을 움찔거리며 당신을 노려본다. <<HePost "은">> <<person2>><<personPost "을">><<person1>> 데리고 멀어진다.
+	<br><br>
 
-<<person1>><<personPost "은">> 고통에 몸을 움찔거리며 당신을 노려본다. <<HePost "은">> <<person2>><<personPost "을">><<person1>> 데리고 멀어진다.
-<br><br>
+	<<tearful>> 당신은 몸을 추스른다.
+	<br><br>
 
-<<tearful>> 당신은 몸을 추스른다.
-<br><br>
+	<<clotheson>>
+	<<endcombat>>
 
-<<clotheson>>
-<<endcombat>>
-
-<<link [[다음|Swimming Lesson]]>><</link>>
-
+	<<link [[다음|Swimming Lesson]]>><</link>>
 <<elseif $alarm is 1 and $rescue is 1>>
-<<set $rescued += 1>>
+	<<set $rescued += 1>>
 
 	<<if $delinquency gte 200>>
 	당신의 비명 소리를 메이슨이 듣는다. "어떻게든 너랑 연관된 일일줄 알았다. 다른 학생들을 그만 괴롭혀." 선생님은 당신의 항의는 들은 척도 하지 않는다.
@@ -91,29 +87,27 @@
 	<</if>>
 	<br><br>
 
-<<tearful>> 당신은 몸을 추스른다.
-<br><br>
+	<<tearful>> 당신은 몸을 추스른다.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
+	<<clotheson>>
+	<<endcombat>>
 
-<<link [[다음|Swimming Lesson]]>><</link>>
-
+	<<link [[다음|Swimming Lesson]]>><</link>>
 <<else>>
+	메이슨이 싸움을 다 말리자, 둘은 당신을 내버려둔다.
+	<br><br>
 
-메이슨이 싸움을 다 말리자, 둘은 당신을 내버려둔다.
-<br><br>
+	<<tearful>> 당신은 몸을 추스른다.
+	<br><br>
 
-<<tearful>> 당신은 몸을 추스른다.
-<br><br>
+	<<clotheson>>
+	<<endcombat>>
 
-<<clotheson>>
-<<endcombat>>
-
-<<link [[다음|Swimming Lesson]]>><</link>>
+	<<link [[다음|Swimming Lesson]]>><</link>>
 <</if>>
 
-:: Events Swimming Refuse [nobr]
+:: Events Swimming Refuse
 <<set $outside to 0>><<set $location to "pool">><<schooleffects>><<effects>>
 
 <<personPost "은">> 어깨를 으쓱거리고는 수영복을 스키머 안에 넣는다. 곧 뭔가 찢어지는 소리와 함께 수영복이 사라진다.
@@ -122,131 +116,118 @@
 <<link [[다음|Swimming Lesson]]>><<endevent>><</link>>
 <br>
 
-:: Events Swimming Molestation Single [nobr]
+:: Events Swimming Molestation Single
 <<if $molestationstart is 1>>
-<<set $molestationstart to 0>>
-<<controlloss>>
-<<violence 1>>
-<<neutral 1>>
-<<molested>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
 
-<<maninit>><<npcexpose>>
-	<<if $delinquency lt 400>><<set $rescue to 1>><</if>>
-
-<<personPost "은">> 당신에게로 헤엄쳐 온다.
-<br><br>
+	<<maninit>>
+	<<if $swimall is 1>>
+		<<npcexpose>>
+	<</if>>
+	<<if $delinquency lt 400>><<enable_rescue>><</if>>
+		<<personPost "은">> 당신에게로 헤엄쳐 온다.
+		<br><br>
 <</if>>
 
 <<effects>>
-
-<<if $alarm is 1 and $rescue is 0>>
-	<<set $alarm to 0>>
-	불량학생으로서의 명성 때문에 메이슨은 당신을 무시한다.
-	<br><br>
-<</if>>
-
-<<effectsman>><<man>>
-
+<<effectsman>>
+<<alarmstate "<span class='red'>불량학생으로서의 명성 때문에, 메이슨은 당신을 무시한다.</span>">>
+<<man>>
 <<stateman>>
 <br><br>
 <<actionsman>>
 
-<<if $enemyhealth lte 0>>
-	<span id="next"><<link [[다음|Events Swimming Molestation Single Finish]]>><</link>></span><<nexttext>>
-<<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[다음|Events Swimming Molestation Single Finish]]>><</link>></span><<nexttext>>
-<<elseif $rescue is 1 and $alarm is 1>>
+<<if _combatend>>
 	<span id="next"><<link [[다음|Events Swimming Molestation Single Finish]]>><</link>></span><<nexttext>>
 <<else>>
 	<span id="next"><<link [[다음|Events Swimming Molestation Single]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Events Swimming Molestation Single Finish [nobr]
+:: Events Swimming Molestation Single Finish
 <<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
-<<ejaculation>>
+	<<ejaculation>>
 
-"자, 받아." <<HePost "은">> 한쪽으로 당신의 수영복을 던진다. 당신은 거기까지 헤엄쳐가 수영복을 챙긴다. 돌아보자, <<personPost "은">> 사라지고 없다.
-<br><br>
+	"자, 받아." <<HePost "은">> 한쪽으로 당신의 수영복을 던진다. 당신은 거기까지 헤엄쳐가 수영복을 챙긴다. 돌아보자, <<personPost "은">> 사라지고 없다.
+	<br><br>
 
-<<tearful>> 당신은 몸을 추스른다.
-<br><br>
+	<<tearful>> 당신은 몸을 추스른다.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
+	<<clotheson>>
+	<<endcombat>>
 
-<<link [[다음|Swimming Lesson]]>><</link>>
-
+	<<link [[다음|Swimming Lesson]]>><</link>>
 <<elseif $enemyhealth lte 0>>
+	<<personPost "은">> 고통에 몸을 움찔거리며 당신을 노려본다. <<HePost "은">> 헤엄쳐 멀어지려 하나, 당신은 <<hisPost "의">> 손에 여전히 들려있는 수영복을 붙잡는다. 뒤이은 실랑이마저 이긴 뒤, 당신은 재빠르게 수영복을 입는다. 돌아보자, <<personPost "은">> 사라지고 없다.
+	<br><br>
 
-<<personPost "은">> 고통에 몸을 움찔거리며 당신을 노려본다. <<HePost "은">> 헤엄쳐 멀어지려 하나, 당신은 <<hisPost "의">> 손에 여전히 들려있는 수영복을 붙잡는다. 뒤이은 실랑이마저 이긴 뒤, 당신은 재빠르게 수영복을 입는다. 돌아보자, <<personPost "은">> 사라지고 없다.
-<br><br>
+	<<tearful>> 당신은 몸을 추스른다.
+	<br><br>
 
-<<tearful>> 당신은 몸을 추스른다.
-<br><br>
+	<<clotheson>>
+	<<endcombat>>
 
-<<clotheson>>
-<<endcombat>>
-
-<<link [[다음|Swimming Lesson]]>><</link>>
-
+	<<link [[다음|Swimming Lesson]]>><</link>>
 <<elseif $alarm is 1 and $rescue is 1>>
-<<set $rescued += 1>>
+	<<set $rescued += 1>>
 
 	<<if $delinquency gte 200>>
-	당신의 비명 소리를 메이슨이 듣는다. "어떻게든 너랑 연관된 일일줄 알았다. 다른 학생들을 그만 괴롭혀. 그리고 제발 수영복 좀 입으렴." <<personPost "은">> 어디에도 보이지 않고, 오직 당신의 수영복만이 물 위에 떠있다.
-	<<gdelinquency>><<detention 1>>
+		당신의 비명 소리를 메이슨이 듣는다. "어떻게든 너랑 연관된 일일줄 알았다. 다른 학생들을 그만 괴롭혀. 그리고 제발 수영복 좀 입으렴." <<personPost "은">> 어디에도 보이지 않고, 오직 당신의 수영복만이 물 위에 떠있다.
+		<<gdelinquency>><<detention 1>>
 	<<else>>
-	당신의 비명 소리를 메이슨이 듣는다. 선생님은 <<personPost "을">> 노려본다. "당장 그 수영복 돌려줘. 넌 크게 혼 좀 나봐야겠다. 옷 갈아입고 교장실로 가렴." 관심이 더 쏠리기 전에 당신은 수영복을 입는다.
+		당신의 비명 소리를 메이슨이 듣는다. 선생님은 <<personPost "을">> 노려본다. "당장 그 수영복 돌려줘. 넌 크게 혼 좀 나봐야겠다. 옷 갈아입고 교장실로 가렴." 관심이 더 쏠리기 전에 당신은 수영복을 입는다.
 	<</if>>
 	<br><br>
 
-<<tearful>> 당신은 몸을 추스른다.
-<br><br>
-<<clotheson>>
-<<endcombat>>
+	<<tearful>> 당신은 몸을 추스른다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
 
-<<link [[다음|Swimming Lesson]]>><</link>>
-
+	<<link [[다음|Swimming Lesson]]>><</link>>
 <</if>>
 
-:: Events Swimming Flaunt [nobr]
+:: Events Swimming Flaunt
 <<set $outside to 0>><<set $location to "pool">><<schooleffects>><<effects>>
 
 <<flaunting>> 당신은 플랫폼으로 가면서, 아무 것도 숨기지 않으며 나른하게 몸을 쭉 편다. 휘파람과 환호성을 배경 삼아, 당신은 <<swimmingtext>> 물에 뛰어든다.
 <<gswimming>><<exhibitionism5>><<swimmingskilluse>>
-<br><br>
 
 <<link [[다음|Swimming Lesson]]>><<endevent>><</link>>
 <br>
 
-:: Events Swimming Lewd Dive [nobr]
+:: Events Swimming Lewd Dive
 <<set $outside to 0>><<set $location to "pool">><<schooleffects>><<effects>>
 
 당신은 그냥 참고 하기로 한다.
 
 <<if $leftarm is "bound" and $rightarm is "bound">>
-양팔이 묶여 몸을 가릴 수 없기에, 대신 당신은 관중으로부터 등을 돌린다. 그러고는 그렇게 뒤로 돈 상태에서 물 속으로 뛰어든다. 그런 식으로 수영을 하라 한 건 아니지만, 상황이 상황이니만큼 메이슨은 당신을 탓하지 않을 것이다.
+	양팔이 묶여 몸을 가릴 수 없기에, 대신 당신은 관중으로부터 등을 돌린다. 그러고는 그렇게 뒤로 돈 상태에서 물 속으로 뛰어든다. 그런 식으로 수영을 하라 한 건 아니지만, 상황이 상황이니만큼 메이슨은 당신을 탓하지 않을 것이다.
 <<else>>
-당신은 몸을 훑어보는 시선을 강하게 의식하며, <<lewdnessPost "을">> 가린 채로 플랫폼에 다가간다. 그러고는 물 속에 뛰어든다. 멋진 실력은 아니지만, 상황이 상황이니만큼 메이슨은 당신을 탓하지 않을 것이다.
+	당신은 몸을 훑어보는 시선을 강하게 의식하며, <<lewdnessPost "을">> 가린 채로 플랫폼에 다가간다. 그러고는 물 속에 뛰어든다. 멋진 실력은 아니지만, 상황이 상황이니만큼 메이슨은 당신을 탓하지 않을 것이다.
 <</if>>
 일단 물에 몸이 가려지자, 메이슨은 어떻게든 학생들을 조금씩 제어하기 시작하며, 당신으로부터 대부분의 관심을 돌린다.
 <br><br>
 <<link [[다음|Swimming Lesson]]>><<endevent>><</link>>
 <br>
 
-:: Event Swimming Run [nobr]
+:: Event Swimming Run
 <<set $outside to 0>><<set $location to "pool">><<schooleffects>><<effects>>
 
 압도되어, 당신은 몸을 돌려 수영장으로부터 도망친다. 등 뒤에서 야유와 웃음소리가 들려온다.
 <br><br>
 <<if $player.gender_appearance is "m">>
-<<link [[다음|School Boy Changing Room]]>><<endevent>><</link>>
+	<<link [[다음|School Boy Changing Room]]>><<endevent>><</link>>
 <<else>>
-<<link [[다음|School Girl Changing Room]]>><<endevent>><</link>>
+	<<link [[다음|School Girl Changing Room]]>><<endevent>><</link>>
 <</if>>
 
-:: Events Swimming Stalk Confront [nobr]
+:: Events Swimming Stalk Confront
 <<set $outside to 0>><<set $location to "pool">><<schooleffects>><<effects>>
 
 당신은 <<personPost>>에게로 헤엄쳐 가서 자신을 그냥 내버려 두라고 말한다. "미-미안." <<HePost "이">> 발을 내려다보며 말한다.<<endevent>><<npc Mason>><<person1>> 몸을 돌리자, 메이슨이 비난하듯 당신을 쳐다보고 있다. "다신 다른 학생을 괴롭히지 마렴." <<HePost "이">> 말한다. <<HePost "은">> 당신의 말을 들으려 하지 않는다.
@@ -254,106 +235,94 @@
 <<link [[다음|Swimming Lesson]]>><<endevent>><</link>>
 <br>
 
-:: Events Swimming Stalk Ignore [nobr]
+:: Events Swimming Stalk Ignore
 <<set $outside to 0>><<set $location to "pool">><<schooleffects>><<effects>>
 
 <<if $rng gte 81>>
-당신은 <<personPost "을">> 무시하려 하나, <<hePost "은">> 포기하지 않으며, 점점 자신감을 얻으며 당신에게로 다가온다. <<hePost "은">> 곧 자신감을 얻었는지 손을 뻗어 당신을 만지기 시작한다.
-<br><br>
-<<link [[다음|Events Swimming Stalk Molestation]]>><<set $molestationstart to 1>><</link>>
-<br>
-
+	당신은 <<personPost "을">> 무시하려 하나, <<hePost "은">> 포기하지 않으며, 점점 자신감을 얻으며 당신에게로 다가온다. <<hePost "은">> 곧 자신감을 얻었는지 손을 뻗어 당신을 만지기 시작한다.
+	<br><br>
+	<<link [[다음|Events Swimming Stalk Molestation]]>><<set $molestationstart to 1>><</link>>
+	<br>
 <<else>>
-<<personPost "은">> 잠시동안 당신을 계속 따라다니다가, 곧 다른 사람에게 시선을 돌린다.
-<br><br>
-<<link [[다음|Swimming Lesson]]>><<endevent>><</link>>
-<br>
+	<<personPost "은">> 잠시동안 당신을 계속 따라다니다가, 곧 다른 사람에게 시선을 돌린다.
+	<br><br>
+	<<link [[다음|Swimming Lesson]]>><<endevent>><</link>>
+	<br>
 <</if>>
 
-:: Events Swimming Stalk Molestation [nobr]
+:: Events Swimming Stalk Molestation
 <<if $molestationstart is 1>>
-<<set $molestationstart to 0>>
-<<controlloss>>
-<<violence 1>>
-<<neutral 1>>
-<<molested>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
 
-<<maninit>>
-	<<if $delinquency lt 400>><<set $rescue to 1>><</if>>
+	<<maninit>>
+	<<if $swimall is 1>>
+		<<npcexpose>>
+	<</if>>
+	<<if $delinquency lt 400>><<enable_rescue>><</if>>
 <</if>>
 
 <<effects>>
-
-<<if $alarm is 1 and $rescue is 0>>
-	<<set $alarm to 0>>
-	불량학생으로서의 명성 때문에 메이슨은 당신을 무시한다.
-	<br><br>
-<</if>>
-
-<<effectsman>><<man>>
-
+<<effectsman>>
+<<alarmstate "<span class='red'>불량학생으로서의 명성 때문에, 메이슨은 당신을 무시한다.</span>">>
+<<man>>
 <<stateman>>
 <br><br>
 <<actionsman>>
 
-<<if $enemyhealth lte 0>>
-	<span id="next"><<link [[다음|Events Swimming Stalk Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[다음|Events Swimming Stalk Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $rescue is 1 and $alarm is 1>>
+<<if _combatend>>
 	<span id="next"><<link [[다음|Events Swimming Stalk Molestation Finish]]>><</link>></span><<nexttext>>
 <<else>>
 	<span id="next"><<link [[다음|Events Swimming Stalk Molestation]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Events Swimming Stalk Molestation Finish [nobr]
+:: Events Swimming Stalk Molestation Finish
 <<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
-<<ejaculation>>
+	<<ejaculation>>
 
-<<HePost "은">> 아무 말도 없이 헤엄쳐 간다.
-<br><br>
+	<<HePost "은">> 아무 말도 없이 헤엄쳐 간다.
+	<br><br>
 
-<<tearful>> 당신은 몸을 추스른다.
-<br><br>
+	<<tearful>> 당신은 몸을 추스른다.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
+	<<clotheson>>
+	<<endcombat>>
 
-<<link [[다음|Swimming Lesson]]>><</link>>
-
+	<<link [[다음|Swimming Lesson]]>><</link>>
 <<elseif $enemyhealth lte 0>>
+	<<personPost "은">> 고통에 몸을 움찔거리며 당신에게서 떨어진다. <<tearful>> 당신은 그 기회를 틈타 도망친다.
+	<br><br>
 
-<<personPost "은">> 고통에 몸을 움찔거리며 당신에게서 떨어진다. <<tearful>> 당신은 그 기회를 틈타 도망친다.
-<br><br>
+	<<clotheson>>
+	<<endcombat>>
 
-<<clotheson>>
-<<endcombat>>
-
-<<link [[다음|Swimming Lesson]]>><</link>>
-
+	<<link [[다음|Swimming Lesson]]>><</link>>
 <<elseif $alarm is 1 and $rescue is 1>>
-<<set $rescued += 1>>
+	<<set $rescued += 1>>
 
 	<<if $delinquency gte 200>>
-	당신의 비명 소리를 메이슨이 듣는다. "어떻게든 너랑 연관된 일일줄 알았다. 다른 학생들을 그만 괴롭혀." <<personPost "은">> 곤경에 처하고 싶지 않아 그 말에 동조한다.
-	<<gdelinquency>><<detention 1>>
+		당신의 비명 소리를 메이슨이 듣는다. "어떻게든 너랑 연관된 일일줄 알았다. 다른 학생들을 그만 괴롭혀." <<personPost "은">> 곤경에 처하고 싶지 않아 그 말에 동조한다.
+		<<gdelinquency>><<detention 1>>
 	<<else>>
-	당신의 비명 소리를 메이슨이 듣는다. 선생님은 <<personPost "을">> 노려본다. "넌 크게 혼 좀 나봐야겠다. 옷 갈아입고 교장실로 가렴." <<personPost "은">> 금방이라도 울 것 같다.
+		당신의 비명 소리를 메이슨이 듣는다. 선생님은 <<personPost "을">> 노려본다. "넌 크게 혼 좀 나봐야겠다. 옷 갈아입고 교장실로 가렴." <<personPost "은">> 금방이라도 울 것 같다.
 	<</if>>
 	<br><br>
 
-<<tearful>> 당신은 몸을 추스른다.
-<br><br>
+	<<tearful>> 당신은 몸을 추스른다.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
+	<<clotheson>>
+	<<endcombat>>
 
-<<link [[다음|Swimming Lesson]]>><</link>>
-
+	<<link [[다음|Swimming Lesson]]>><</link>>
 <</if>>
 
-:: Events Swimming Swim Away [nobr]
+:: Events Swimming Swim Away
 <<set $outside to 0>><<set $location to "pool">><<schooleffects>><<effects>>
 
 <<if $swimmingSuccess>>
@@ -375,7 +344,7 @@
 	<</if>>
 <</if>>
 
-:: Evens Swimming Endure [nobr]
+:: Events Swimming Swim Endure
 <<set $outside to 0>><<set $location to "pool">><<schooleffects>><<effects>>
 
 그들은 잠시동안 당신을 계속해서 희롱하다가, 곧 다른 사람을 찾아 떠난다.
@@ -383,232 +352,202 @@
 <br><br>
 <<link [[다음|Swimming Lesson]]>><<endevent>><</link>>
 
-:: Events Swimming Nude Molestation [nobr]
+:: Events Swimming Nude Molestation
 <<if $molestationstart is 1>>
-<<set $molestationstart to 0>>
-<<controlloss>>
-<<violence 1>>
-<<neutral 1>>
-<<molested>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
 
-<<maninit>>
-	<<if $delinquency lt 400>><<set $rescue to 1>><</if>>
-<<set $timer to 20>>
+	<<maninit>>
+	<<if $swimall is 1>>
+		<<npcexpose>>
+	<</if>>
+	<<if $delinquency lt 400>><<enable_rescue>><</if>>
+	<<set $timer to 20>>
 <</if>>
 
 <<effects>>
-
-<<if $alarm is 1 and $rescue is 0>>
-	<<set $alarm to 0>>
-	불량학생으로서의 명성 때문에 메이슨은 당신을 무시한다.
-	<br><br>
-<</if>>
-
-<<effectsman>><<man>>
-
+<<effectsman>>
+<<alarmstate "<span class='red'>불량학생으로서의 명성 때문에, 메이슨은 당신을 무시한다.</span>">>
+<<man>>
 <<stateman>>
 <br><br>
 <<actionsman>>
 
-<<if $enemyhealth lte 0>>
-	<span id="next"><<link [[다음|Events Swimming Nude Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[다음|Events Swimming Nude Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $rescue is 1 and $alarm is 1>>
-	<span id="next"><<link [[다음|Events Swimming Nude Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $timer lte 1>>
+<<if _combatend or $timer lte 0>>
 	<span id="next"><<link [[다음|Events Swimming Nude Molestation Finish]]>><</link>></span><<nexttext>>
 <<else>>
 	<span id="next"><<link [[다음|Events Swimming Nude Molestation]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Events Swimming Strip Molestation [nobr]
+:: Events Swimming Strip Molestation
 <<if $molestationstart is 1>>
-<<set $molestationstart to 0>>
-<<controlloss>>
-<<violence 1>>
-<<neutral 1>>
-<<molested>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
 
-<<maninit>><<npcstrip>>
-	<<if $delinquency lt 400>><<set $rescue to 1>><</if>>
+	<<maninit>><<npcstrip>>
+	<<if $swimall is 1>>
+		<<npcexpose>>
+	<</if>>
+	<<if $delinquency lt 400>><<enable_rescue>><</if>>
 <</if>>
 <<set $timer to 20>>
 
 <<effects>>
-
-<<if $alarm is 1 and $rescue is 0>>
-	<<set $alarm to 0>>
-	불량학생으로서의 명성 때문에 메이슨은 당신을 무시한다.
-	<br><br>
-<</if>>
-
-<<effectsman>><<man>>
-
+<<effectsman>>
+<<alarmstate "<span class='red'>불량학생으로서의 명성 때문에, 메이슨은 당신을 무시한다.</span>">>
+<<man>>
 <<stateman>>
 <br><br>
 <<actionsman>>
 
-<<if $enemyhealth lte 0>>
-	<span id="next"><<link [[다음|Events Swimming Strip Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[다음|Events Swimming Strip Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $rescue is 1 and $alarm is 1>>
-	<span id="next"><<link [[다음|Events Swimming Strip Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $timer lte 1>>
-	<span id="next"><<link [[다음|Events Swimming Strip Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $worn.under_upper.type.includes("naked") and $worn.under_lower.type.includes("naked")>>
+<<if _combatend or $timer lte 0 or ($worn.under_upper.type.includes("naked") and $worn.under_lower.type.includes("naked"))>>
 	<span id="next"><<link [[다음|Events Swimming Strip Molestation Finish]]>><</link>></span><<nexttext>>
 <<else>>
 	<span id="next"><<link [[다음|Events Swimming Strip Molestation]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Events Swimming Strip Molestation Finish [nobr]
+:: Events Swimming Strip Molestation Finish
 <<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
-<<ejaculation>>
+	<<ejaculation>>
 
-<<person1>><<personPost "과">> <<person2>><<personPost "은">> 하이파이브를 하더니, 물 위에 누운 당신을 두고는 떠난다.
-<br><br>
+	<<person1>><<personPost "과">> <<person2>><<personPost "은">> 하이파이브를 하더니, 물 위에 누운 당신을 두고는 떠난다.
+	<br><br>
 
-<<tearful>> 당신은 몸을 추스른다.
-<br><br>
+	<<tearful>> 당신은 몸을 추스른다.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
+	<<clotheson>>
+	<<endcombat>>
 
-<<link [[다음|Swimming Lesson]]>><</link>>
-
+	<<link [[다음|Swimming Lesson]]>><</link>>
 <<elseif $enemyhealth lte 0>>
+	세 명은 고통에 몸을 움찔거리며 당신에게서 떨어진다. <<tearful>> 당신은 그 기회를 틈타 도망친다.
+	<br><br>
 
-세 명은 고통에 몸을 움찔거리며 당신에게서 떨어진다. <<tearful>> 당신은 그 기회를 틈타 도망친다.
-<br><br>
+	<<clotheson>>
+	<<endcombat>>
 
-<<clotheson>>
-<<endcombat>>
-
-<<link [[다음|Swimming Lesson]]>><</link>>
-
+	<<link [[다음|Swimming Lesson]]>><</link>>
 <<elseif $alarm is 1 and $rescue is 1>>
-<<set $rescued += 1>>
+	<<set $rescued += 1>>
 
 	<<if $delinquency gte 200>>
-	당신의 비명 소리를 메이슨이 듣는다. "어떻게든 너랑 연관된 일일줄 알았다. 다른 학생들을 그만 괴롭혀." 셋은 어떻게든 웃음을 참으며 그 말에 동조한다.
-	<<gdelinquency>><<detention 1>>
+		당신의 비명 소리를 메이슨이 듣는다. "어떻게든 너랑 연관된 일일줄 알았다. 다른 학생들을 그만 괴롭혀." 셋은 어떻게든 웃음을 참으며 그 말에 동조한다.
+		<<gdelinquency>><<detention 1>>
 	<<else>>
-	당신의 비명 소리를 메이슨이 듣는다. 선생님은 세 명을 노려본다. "너네는 크게 혼 좀 나봐야겠다. 옷 갈아입고 교장실로 가렴." 그들은 잡담하고 웃으며 수영장에서 나간다.
+		당신의 비명 소리를 메이슨이 듣는다. 선생님은 세 명을 노려본다. "너네는 크게 혼 좀 나봐야겠다. 옷 갈아입고 교장실로 가렴." 그들은 잡담하고 웃으며 수영장에서 나간다.
 	<</if>>
 	<br><br>
 
-<<tearful>> 당신은 몸을 추스른다.
-<br><br>
+	<<tearful>> 당신은 몸을 추스른다.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
+	<<clotheson>>
+	<<endcombat>>
 
-<<link [[다음|Swimming Lesson]]>><</link>>
+	<<link [[다음|Swimming Lesson]]>><</link>>
 
 <<elseif $timer lte 0>>
-메이슨의 목소리가 들려온다. "무슨 일이야?" 그들은 시치미를 뗀다. "아무 것도 아녜요!" <<person3>><<personPost "이">> 말한다. 메이슨은 뭔가 의심스럽다는 듯 그들을 바라보지만, 아무 말도 하지 않는다. 공격자들은 곤경에 처하고 싶지 않아 당신에게서 멀어진다.
-<br><br>
+	메이슨의 목소리가 들려온다. "무슨 일이야?" 그들은 시치미를 뗀다. "아무 것도 아녜요!" <<person3>><<personPost "이">> 말한다. 메이슨은 뭔가 의심스럽다는 듯 그들을 바라보지만, 아무 말도 하지 않는다. 공격자들은 곤경에 처하고 싶지 않아 당신에게서 멀어진다.
+	<br><br>
 
-<<tearful>> 당신은 몸을 추스른다.
-<br><br>
+	<<tearful>> 당신은 몸을 추스른다.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
+	<<clotheson>>
+	<<endcombat>>
 
-<<link [[다음|Swimming Lesson]]>><</link>>
-
+	<<link [[다음|Swimming Lesson]]>><</link>>
 <<else>>
-<<person1>><<personPost "이">> 머리 위에 떠있는 당신의 수영복을 잡는다. 돌려받으려 가까이 헤엄쳐가자, <<hePost "은">> 그걸 <<person2>><<personPost>>에게 던지고, <<hePost "은">> 그걸 <<person3>><<personPost>>에게 던진다. 셋은 한동안 웃으며 그걸 반복한다. "이거 재밌네. 그치만 더 좋은 생각이 있어." <<personPost "이">> 말한다. 당신의 수영복을 친구에게 던지지 않고, <<hePost "은">> 그걸 근처에 있는 스키머에 던져넣는다. 곧 뭔가 찢어지는 소리와 함께 수영복이 사라진다. "자. 앞으로는 좀 더 우릴 존중하도록 해." 만족스럽다는듯, 그들은 알몸인 당신을 수영장 한가운데에 내버려둔 채로 괴롭힐 다른 사람을 찾아 떠난다.
-<<set $stealtextskip to 1>>
-<br><br>
-<<stealclothes>>
+	<<person1>><<personPost "이">> 머리 위에 떠있는 당신의 수영복을 잡는다. 돌려받으려 가까이 헤엄쳐가자, <<hePost "은">> 그걸 <<person2>><<personPost>>에게 던지고, <<hePost "은">> 그걸 <<person3>><<personPost>>에게 던진다. 셋은 한동안 웃으며 그걸 반복한다. "이거 재밌네. 그치만 더 좋은 생각이 있어." <<personPost "이">> 말한다. 당신의 수영복을 친구에게 던지지 않고, <<hePost "은">> 그걸 근처에 있는 스키머에 던져넣는다. 곧 뭔가 찢어지는 소리와 함께 수영복이 사라진다. "자. 앞으로는 좀 더 우릴 존중하도록 해." 만족스럽다는듯, 그들은 알몸인 당신을 수영장 한가운데에 내버려둔 채로 괴롭힐 다른 사람을 찾아 떠난다.
+	<<set $stealtextskip to 1>>
+	<br><br>
+	<<stealclothes>>
 
-<<clotheson>>
-<<endcombat>>
+	<<clotheson>>
+	<<endcombat>>
 
-<<link [[다음|Swimming Lesson]]>><</link>>
-<br>
-
+	<<link [[다음|Swimming Lesson]]>><</link>>
+	<br>
 <</if>>
 
-:: Events Swimming Nude Molestation Finish [nobr]
+:: Events Swimming Nude Molestation Finish
 <<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
-<<ejaculation>>
+	<<ejaculation>>
 
-<<person1>><<personPost "과">> <<person2>><<personPost "은">> 하이파이브를 하더니, 물 위에 누운 당신을 두고는 떠난다.
-<br><br>
+	<<person1>><<personPost "과">> <<person2>><<personPost "은">> 하이파이브를 하더니, 물 위에 누운 당신을 두고는 떠난다.
+	<br><br>
 
-<<tearful>> 당신은 몸을 추스른다.
-<br><br>
+	<<tearful>> 당신은 몸을 추스른다.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
+	<<clotheson>>
+	<<endcombat>>
 
-<<link [[다음|Swimming Lesson]]>><</link>>
-
+	<<link [[다음|Swimming Lesson]]>><</link>>
 <<elseif $enemyhealth lte 0>>
+	세 명은 고통에 몸을 움찔거리며 당신에게서 떨어진다. <<tearful>> 당신은 그 기회를 틈타 도망친다.
+	<br><br>
 
-세 명은 고통에 몸을 움찔거리며 당신에게서 떨어진다. <<tearful>> 당신은 그 기회를 틈타 도망친다.
-<br><br>
+	<<clotheson>>
+	<<endcombat>>
 
-<<clotheson>>
-<<endcombat>>
-
-<<link [[다음|Swimming Lesson]]>><</link>>
-
+	<<link [[다음|Swimming Lesson]]>><</link>>
 <<elseif $alarm is 1 and $rescue is 1>>
-<<set $rescued += 1>>
+	<<set $rescued += 1>>
 
 	<<if $delinquency gte 200>>
-	당신의 비명 소리를 메이슨이 듣는다. "어떻게든 너랑 연관된 일일줄 알았다. 다른 학생들을 그만 괴롭혀." 셋은 어떻게든 웃음을 참으며 그 말에 동조한다.
-	<<gdelinquency>><<detention 1>>
+		당신의 비명 소리를 메이슨이 듣는다. "어떻게든 너랑 연관된 일일줄 알았다. 다른 학생들을 그만 괴롭혀." 셋은 어떻게든 웃음을 참으며 그 말에 동조한다.
+		<<gdelinquency>><<detention 1>>
 	<<else>>
-	당신의 비명 소리를 메이슨이 듣는다. 선생님은 세 명을 노려본다. "너네는 크게 혼 좀 나봐야겠다. 옷 갈아입고 교장실로 가렴." 그들은 잡담하고 웃으며 수영장에서 나간다.
+		당신의 비명 소리를 메이슨이 듣는다. 선생님은 세 명을 노려본다. "너네는 크게 혼 좀 나봐야겠다. 옷 갈아입고 교장실로 가렴." 그들은 잡담하고 웃으며 수영장에서 나간다.
 	<</if>>
 	<br><br>
-<<tearful>> 당신은 몸을 추스른다.
-<br><br>
+	<<tearful>> 당신은 몸을 추스른다.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
+	<<clotheson>>
+	<<endcombat>>
 
-<<link [[다음|Swimming Lesson]]>><</link>>
-
+	<<link [[다음|Swimming Lesson]]>><</link>>
 <<else>>
-메이슨의 목소리가 들려온다. "무슨 일이야?" 그들은 시치미를 뗀다. "아무 것도 아녜요!" <<person3>><<personPost "이">> 말한다. 메이슨은 뭔가 의심스럽다는 듯 그들을 바라보지만, 아무 말도 하지 않는다. 공격자들은 곤경에 처하고 싶지 않아 당신에게서 멀어진다.
-<br><br>
+	메이슨의 목소리가 들려온다. "무슨 일이야?" 그들은 시치미를 뗀다. "아무 것도 아녜요!" <<person3>><<personPost "이">> 말한다. 메이슨은 뭔가 의심스럽다는 듯 그들을 바라보지만, 아무 말도 하지 않는다. 공격자들은 곤경에 처하고 싶지 않아 당신에게서 멀어진다.
+	<br><br>
 
-<<tearful>> 당신은 몸을 추스른다.
-<br><br>
+	<<tearful>> 당신은 몸을 추스른다.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
+	<<clotheson>>
+	<<endcombat>>
 
-<<link [[다음|Swimming Lesson]]>><</link>>
-
+	<<link [[다음|Swimming Lesson]]>><</link>>
 <</if>>
 
-:: Swimming Lesson Shove [nobr]
+:: Swimming Lesson Shove
 <<set $outside to 0>><<set $location to "pool">><<schooleffects>><<effects>>
 
 <<if $delinquency gte 400>>
-<<endevent>><<npc Mason>><<person1>>당신은 둘을 밀친다. 그들은 깜짝 놀라 비명을 지르고, 그걸 메이슨이 듣는다. "어떻게든 너랑 연관된 일일줄 알았다. 다른 학생들을 그만 괴롭혀." <<HePost "은">> 당신의 항의는 들은 척도 하지 않는다.
-<<gdelinquency>><<detention 1>>
-<br><br>
-<<link [[다음|Swimming Lesson]]>><<endevent>><</link>>
-<br>
+	<<endevent>><<npc Mason>><<person1>>당신은 둘을 밀친다. 그들은 깜짝 놀라 비명을 지르고, 그걸 메이슨이 듣는다. "어떻게든 너랑 연관된 일일줄 알았다. 다른 학생들을 그만 괴롭혀." <<HePost "은">> 당신의 항의는 들은 척도 하지 않는다.
+	<<gdelinquency>><<detention 1>>
+	<br><br>
+	<<link [[다음|Swimming Lesson]]>><<endevent>><</link>>
+	<br>
 <<else>>
-<<endevent>><<npc Mason>><<person1>>당신은 둘을 밀친다. 그들은 깜짝 놀라 비명을 지르고, 그걸 메이슨이 듣는다. <<HePost "은">> 둘을 바라본다. "또 너네 둘이구나. 다른 학생들을 그만 괴롭혀." <<HePost "은">> 그들을 당신에게서 떼어놓는다.
-<br><br>
-<<link [[다음|Swimming Lesson]]>><<endevent>><</link>>
-<br>
+	<<endevent>><<npc Mason>><<person1>>당신은 둘을 밀친다. 그들은 깜짝 놀라 비명을 지르고, 그걸 메이슨이 듣는다. <<HePost "은">> 둘을 바라본다. "또 너네 둘이구나. 다른 학생들을 그만 괴롭혀." <<HePost "은">> 그들을 당신에게서 떼어놓는다.
+	<br><br>
+	<<link [[다음|Swimming Lesson]]>><<endevent>><</link>>
+	<br>
 <</if>>
 
-:: Events Swimming NPC Dive [nobr]
+:: Events Swimming NPC Dive
 <<set $outside to 0>><<set $location to "pool">><<schooleffects>><<effects>>
 <<if $phase is 1>><<personPost "은">>
 	<<if $rng gte 80>>
@@ -628,7 +567,7 @@
 		박수를 친다.
 	<</if>>
 	<<if $rng % 4 is 0 and $swimall is 1>>
-		Several blush while staring at the <<person>>'s genitals.
+		다수의 학생들이 <<persons_ yi>> <<genitals_ rul>> 지켜보며 얼굴을 붉힌다.
 	<<elseif $rng % 4 is 0>>
 		불운하게도, <<hePost "은">> 다이빙하는 와중에 수영복을 잃어버린다. 학생 몇 명이 <<hePost "을">> 희롱하기 시작한다.
 	<</if>>
@@ -642,7 +581,7 @@
 <<elseif $phase is 2>>/*secret dive*/
 	메이슨이 수영장 가장자리에서 수영 테크닉 시범을 보여주기 시작한다.
 	<<if $awareness gte 200 or ($rng % 3 is 0)>>
-		<<if $awareness gte 300 or $skulduggery gte 400>>
+		<<if $awareness gte 300 or currentSkillValue('skulduggery') gte 400>>
 			메이슨이 당신의 시선을 무언가로부터 돌리려 한다는 것을 느끼고
 		<<else>>
 			<<if $rng % 2>>뒤쪽에서 뭔가 소리가 들려와<<else>>메이슨이 당신의 뒤쪽을 쳐다보는 것을 보고<</if>>
@@ -689,26 +628,26 @@
 	<br>
 
 <<else>>
-중력이 잠시 역전되더니 <<hePost "은">> 팔다리를 버둥거리며 지붕 위까지 올라갔다가 불행히도 수영장에 떨어진다. (오류입니다. 보고해주세요)/*error*/
+	중력이 잠시 역전되더니 <<hePost "은">> 팔다리를 버둥거리며 지붕 위까지 올라갔다가 불행히도 수영장에 떨어진다. (오류입니다. 보고해주세요)/*error*/
 
-<br><br>
-<<link [[다음|Swimming Lesson]]>><<endevent>><</link>>
-<br>
+	<br><br>
+	<<link [[다음|Swimming Lesson]]>><<endevent>><</link>>
+	<br>
 <</if>>
 
-:: Events Swimming NPC Nude Dive [nobr]
+:: Events Swimming NPC Nude Dive
 <<set $outside to 0>><<set $location to "pool">><<schooleffects>><<effects>>
-<<set $rng to random(1, 100)>>
+<<rng>>
 <<if $rng gte 80>>
-<<set _dives_into to "우아하게 물 속으로 다이빙한다.">>
+	<<set _dives_into to "우아하게 물 속으로 다이빙한다.">>
 <<elseif $rng gte 60>>
-<<set _dives_into to "고통스럽게 배로 수면을 치며 뛰어든다.">>
+	<<set _dives_into to "고통스럽게 배로 수면을 치며 뛰어든다.">>
 <<elseif $rng gte 40>>
-<<set _dives_into to "능숙하게 물 속으로 다이빙한다.">>
+	<<set _dives_into to "능숙하게 물 속으로 다이빙한다.">>
 <<elseif $rng gte 20>>
-<<set _dives_into to "재빠르게 물에 뛰어든다.">>
+	<<set _dives_into to "재빠르게 물에 뛰어든다.">>
 <<else>>
-<<set _dives_into to "어색하게 물을 튀기며 물에 뛰어든다.">>
+	<<set _dives_into to "어색하게 물을 튀기며 물에 뛰어든다.">>
 <</if>>
 <<if $phase is 1>>
 	당신은 메이슨을 돌아보며 계속해서 귀를 기울인다. 잠시 뒤, 뒤쪽에서 물 튀기는 소리가 들려온다. 아무도 보지 않는 사이에 <<personPost "이">> 다이빙을 한 것 같다.
@@ -722,7 +661,7 @@
 
 	곧, 메이슨이 시범을 마치고 당신은 계속해서 수영한다.
 <<elseif $phase is 3>>
-	"선생님! 쟤 좀 보세요!" 당신이 손가락질을 하며 외친다. "아무 것도 안 입고 있어요!"<<status 1>>
+	"선생님! 저 <<personsimplePost>> 좀 보세요!" 당신이 손가락질을 하며 외친다. "아무 것도 안 입고 있어요!"<<status 1>>
 	<br>
 	모든 학생들이 뒤로 돌아 <<personPost "을">> 멍하니 쳐다본다.
 	<<if $rng % 2>>
@@ -738,4 +677,3 @@
 <</if>>
 <br><br>
 <<link [[다음|Swimming Lesson]]>><<endevent>><</link>>
-<br>

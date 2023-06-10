@@ -1,16 +1,53 @@
 :: Widgets trWeather [widget nobr]
-<<widget "trWeather">>
+<<widget "trWeather">><<silently>>
     <<if _weatherList is undefined>>
         <<set _weatherList to {
-            "clear":"맑음",
-            "overcast":"흐림",
-            "rain":"비",
-            "snow":"눈"
+            "clear":{ko:"맑음",post:0},
+            "overcast":{ko:"흐림",post:0},
+            "rain":{ko:"비",post:1},
+            "snow":{ko:"눈",post:0},
         }>>
     <</if>>
-    <<set _trResult to _weatherList[$args[0]]>>
+    <<set _trResult to _weatherList[_args[0]].ko>>
 
-    <<if $args[1] isnot undefined>>
-        <<trPost _trTemp.post $args[1] $args[2]>>
+    <<if _args[1] isnot undefined>>
+        <<trPost _weatherList[_args[0]].post _args[1] _args[2]>>
     <</if>>
-<</widget>>
+<</silently>><</widget>>
+
+<<widget "trSeason">><<silently>>
+	<<if _args[0] isnot undefined>>
+		<<if _seasonList is undefined>>
+			<<set _seasonList to {
+					"spring":{ko:"봄",post:0},
+					"summer":{ko:"여름",post:0},
+					"autumn":{ko:"가을",post:2},
+					"winter":{ko:"겨울",post:2},
+				}>>
+		<</if>>
+		<<set $_trSeasonArray to []>>
+		<<if typeof _args[0] is "string">>
+			<<set $_trSeason to _seasonList[_args[0]].ko>>
+			<<if $_trSeason>>
+				<<set $_trSeasonArray.push($_trSeason)>>
+				<<set _postNum to _seasonList[_args[0]].post>>
+			<<else>>
+				<<set $_trSeasonArray.push("[에러] trSeason에 정의되지 않음 :" + _args[0])>>
+			<</if>>
+		<<else>>
+			<<for $_i, $_season range _args[0]>>
+				<<set $_trSeason to _seasonList[$_season].ko>>
+				<<if $_trSeason>>
+					<<set $_trSeasonArray.push($_trSeason)>>
+					<<set _postNum to _seasonList[$_season].post>>
+				<<else>>
+					<<set $_trSeasonArray.push("[에러] trSeason에 정의되지 않음 :" + $_season)>>
+				<</if>>
+			<</for>>
+		<</if>>
+		<<set _trResult to $_trSeasonArray.join(", ")>>
+		<<if _postNum isnot undefined>>
+			<<trPost _postNum _args[1] _args[2]>>
+		<</if>>
+	<</if>>
+<</silently>><</widget>>

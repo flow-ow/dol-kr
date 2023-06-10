@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget 
     id="dol" 
-    version="0.2.22.7" 
+    version="0.3.13.5" 
     xmlns="http://www.w3.org/ns/widgets" 
     xmlns:cdv="http://cordova.apache.org/ns/1.0"
     android-packageName="com.vrelnir.DegreesOfLewdityKr"
 >
-    <name short="DoL">Degrees of Lewdity</name>
-    <description>Degrees of Lewdity</description>
+    <name short="DoL-KR">Degrees of Lewdity KR</name>
+    <description>Degrees of Lewdity KR</description>
     <author email="9096-Vrelnir@users.noreply.gitgud.io" href="https://gitgud.io/Vrelnir/degrees-of-lewdity">
         Vrelnir
     </author>

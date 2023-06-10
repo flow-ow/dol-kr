@@ -13,7 +13,7 @@ function echoMessage() {
 }
 
 function compile() {
-	export TWEEGO_PATH=devTools/tweeGo/storyFormats
+	export TWEEGO_PATH=devTools/tweego/storyFormats
 	if [ -z ${FORCE_VERSION+true} ]; then
 		VERSION="$(git describe --tags --always --dirty)"
 	else
@@ -56,14 +56,14 @@ function compile() {
 		esac
 	fi
 
-	$TWEEGO_EXE "$@" -o  "$TARGET" --head "devTools/head.html" game/ || build_failed="true"
+	$TWEEGO_EXE "$@" -o  "$TARGET" --head "devTools/head.html" --module "modules" game/ || build_failed="true"
 
 	if [ "$build_failed" = "true" ]; then
 		echoError "Build failed."
 		exit 1
 	else
 		echo "Done: \"$TARGET\""
-		exit 1
+		exit 0
 	fi
 }
 

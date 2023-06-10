@@ -1,5 +1,5 @@
 :: Widgets Cafe [widget]
-<<widget "eventschef">><<nobr>>
+<<widget "eventschef">>
 
 <<if $rng gte 81>>
 <<generatey1>><<person1>>
@@ -127,9 +127,9 @@
 	<<chefwork>>
 <</if>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "chefwork">><<nobr>>
+<<widget "chefwork">>
 
 도우가 완성되어 오븐에 들어갔으니, 크림을 만들 차례다.
 <br><br>
@@ -142,9 +142,9 @@
 <br>
 <</if>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "sellbuns">><<nobr>>
+<<widget "sellbuns">>
 <<set _bun_money to (1000 + (($bun_value * $bun_cut) * _buns_sold))>>
 판매한 빵: _buns_sold개
 <br>
@@ -164,25 +164,25 @@
 	<<print '<div class="redbar" style="width:' + $percent + '%"></div>'>>
 </div>
 <br><br>
-<<if $images is 1>>
+<<if $options.images is 1>>
 	<<set _buns_sold to Math.clamp(_buns_sold, 0, 200)>>
 	<<for _i to 0; _i lt _buns_sold; _i++>>
-		<img id="icon" src="img/misc/icon/food_creambun.png">
+		<<icon "food_creambun.png">>
 	<</for>>
 <br><br>
 <</if>>
 
-<</nobr>><</widget>>
+<</widget>>
 
 :: Cafe Exhibitionimsm Legs Part Widgets [widget]
-<<widget "CafeExhibitionimsmLegsPartSuccessS1">><<nobr>>
-	스스로 노출하고 있자니 등골이 살짝 오싹거리나, 당신은 최대한 흥분하고 있다는 티를 내지 않으려 한다. <<hisPost "의">> 관심이 커지는 걸 확인하자 당신은 조금 더 애태우기로 한다.  <<Seatedflashcrotchunderskirt>>. 그 바람에 <<hePost "은">> <<trClothes "under_lower" $worn.under_lower.name "name" "으로">>_trResult 가려진 당신의 가랑이를 뚜렷이 볼 수 있다.
+<<widget "CafeExhibitionimsmLegsPartSuccessS1">>
+	스스로 노출하고 있자니 등골이 살짝 오싹거리나, 당신은 최대한 흥분하고 있다는 티를 내지 않으려 한다. <<hisPost "의">> 관심이 커지는 걸 확인하자 당신은 조금 더 애태우기로 한다. <<Seatedflashcrotchunderskirt>>. 그 바람에 <<hePost "은">> <<trClothes "under_lower" $worn.under_lower.name "name" "으로">>_trResult 가려진 당신의 가랑이를 뚜렷이 볼 수 있다.
 	<br><br>
 	카페에서 처음 보는 사람에게 속옷을 노출하는 것에서 음란한 스릴이 느껴진다.
 	<<exhibitionism2>>
 
 	/* check for photo scene */
-	<<set $rng to random(0, 10)>>
+	<<rng 10>>
 	<<if $rng gte 8>>
 		/* person attempts to take photo */
 		<<CafeExhibitionismLegsPartPhotoDecision>>
@@ -194,9 +194,9 @@
 	<<else>>
 		<<CafeExhibitionismLegsPartEnd>>
 	<</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "CafeExhibitionimsmLegsPartSuccessS2">><<nobr>>
+<<widget "CafeExhibitionimsmLegsPartSuccessS2">>
 	/* else check for panties takeoff scene */
 	<<if $exhibitionism gte 75>>
 		<<CafeExhibitionismLegsPartPantyTakeoffDecision>>
@@ -204,54 +204,54 @@
 	<<else>>
 		<<CafeExhibitionismLegsPartEnd>>
 	<</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "CafeExhibitionismLegsPartPhotoDecision">><<nobr>>
+<<widget "CafeExhibitionismLegsPartPhotoDecision">>
 	<<personPost "은">> 조심스레 휴대전화를 꺼내 잠시동안 만지작거리더니, 천천히 당신 쪽으로 향하게 한다. 노출된 <<trClothes "under_lower" $worn.under_lower.name "name" "을">>_trResult 찍으려는 의도가 너무나도 확연하다.
 	<br><br>
 	<<link [[찍게 내버려 둔다|Cafe Exhibitionism Legs Part Photo]]>><</link>>
 	<br>
 	<<link [[찍지 못하게 한다|Cafe Exhibitionism Legs Part No Photo]]>><</link>>
 	<br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "CafeExhibitionismLegsPartPantyTakeoffDecision">><<nobr>>
-	짖궂은 생각이 떠오른다. 카페에는 화장실이 있어서, 원한다면 아무 것도 모르는 <<personPost "을">> 가지고 재미를 더 볼 수 있을 것이다.
+<<widget "CafeExhibitionismLegsPartPantyTakeoffDecision">>
+	짓궂은 생각이 떠오른다. 카페에는 화장실이 있어서, 원한다면 아무 것도 모르는 <<personPost "을">> 가지고 재미를 더 볼 수 있을 것이다.
 	<br><br>
 	<<link [[화장실에서 팬티를 벗고 온다|Cafe Exhibitionism Legs Part Panty Takeoff]]>><</link>> <<exhibitionist5>>
 	<br>
 	<<link [[여기까지 한다|Cafe Exhibitionism Legs Part Premature End]]>><</link>>
 	<br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "CafeExhibitionismLegsPartEnd">><<nobr>>
-	시간이 갈수록 시선을 감추려는 시도가 점차 사라지고 있다는 것에 당신은 접시를 비운 뒤 <<hePost "이">> 당신이 일부러 보여주고 있다는 것을 깨닫기 전에 떠나기로 한다.
+<<widget "CafeExhibitionismLegsPartEnd">>
+	시간이 갈수록 <<His_ yi>> 시선을 감추려는 시도가 점차 사라지고 있다. 당신은 접시를 비운 뒤 <<hePost "이">> 당신이 일부러 보여주고 있다는 것을 깨닫기 전에 떠나기로 한다.
 	<br><br>
 	<<CafeExhibitionismLegsPartNormalTerminate>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "CafeExhibitionismLegsPartNormalTerminate">><<nobr>>
+<<widget "CafeExhibitionismLegsPartNormalTerminate">>
 	<<endevent>>
 	<<link [[다음|Cliff Street]]>><</link>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "CafeExhibitionismLegsPartPantilessPhotoDecision">><<nobr>>
+<<widget "CafeExhibitionismLegsPartPantilessPhotoDecision">>
 	<<personPost "은">> 조심스레 휴대전화를 꺼내 잠시동안 만지작거리더니, 천천히 당신 쪽으로 향하게 한다. 노출된 <<trClothes "under_lower" $worn.under_lower.name "name" "을">>_trResult 찍으려는 의도가 너무나도 확연하다.
 	<br><br>
 	<<link [[찍게 내버려 둔다|Cafe Exhibitionism Legs Part Pantiless Photo]]>><</link>>
 	<br>
 	<<link [[찍지 못하게 한다|Cafe Exhibitionism Legs Part Pantiless No Photo]]>><</link>>
 	<br>
-<</nobr>><</widget>>
+<</widget>>
 
 :: Cafe Exhibitionism Window Widgets [widget]
-<<widget "cafecoffeeflasharousal">><<nobr>>
+<<widget "cafecoffeeflasharousal">>
 이토록 많은
 <<if ($worn.under_lower.exposed and $uncomfortable.nude is true) or (!$worn.under_lower.exposed and $uncomfortable.underwear is true)>>
-	모르는 사람들이 대놓고 <<undiesPost "을">> 볼 수 있게 노출하자 매우 당황스러우나, 거기서 느껴지는 <<print ["난처함", "굴욕감", "취약함", "노출감"].pluck()>>에도 불구하고 당신은 더더욱 탐닉하게 된다.
+	모르는 사람들에게 대놓고 <<undiesPost "을">> 볼 수 있게 노출하자 매우 당황스러우나, 거기서 느껴지는 <<print ["난처함", "굴욕감", "취약함", "노출감"].pluck()>>에도 불구하고 당신은 더더욱 탐닉하게 된다.
 <<else>>
-	모르는 사람들이 대놓고 <<undiesPost "을">> 볼 수 있게 노출하자 당신은 <<print ["흥분된다", "신이 난다", "발정한다", "스릴이 느껴진다", "꼴린다", "음란한 기분이 든다"].pluck()>>.
-	<<if $assertiveaction is "trauma">> 참 짖궂기도 하지. <<trauma -2>><<ltrauma>> <</if>>
+	모르는 사람들에게 대놓고 <<undiesPost "을">> 볼 수 있게 노출하자 당신은 <<print ["흥분된다", "신이 난다", "발정한다", "스릴이 느껴진다", "꼴린다", "음란한 기분이 든다"].pluck()>>.
+	<<if $assertiveaction is "trauma">> 참 짓궂기도 하지. <<trauma -2>><<ltrauma>> <</if>>
 <</if>>
 
 <<switch $phase>>
@@ -271,24 +271,24 @@
 <<else>>
 	<br><br>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>
 
 :: Chef Speech Options [widget]
-<<widget "chefspeechoptions">><<nobr>>
+<<widget "chefspeechoptions">>
 
-<<link [[지역 엘리트들과 어울린다|Chef Opening Local]]>><<pass 240>><<if $chef_speech is "refuse">><<famesocial 100>><</if>><<famebusiness 50>><</link>>
+<<link [[지역 엘리트들과 어울린다 (4:00)|Chef Opening Local]]>><<pass 240>><<if $chef_speech is "refuse">><<famesocial 100>><</if>><<famebusiness 50>><</link>>
 <br>
-<<link [[해외 방문객들과 어울린다|Chef Opening Foreign]]>><<pass 240>><<if $chef_speech is "refuse">><<famebusiness 50>><<famesocial 50>><</if>><<famebusiness 50>><</link>>
+<<link [[해외 방문객들과 어울린다 (4:00)|Chef Opening Foreign]]>><<pass 240>><<if $chef_speech is "refuse">><<famebusiness 50>><<famesocial 50>><</if>><<famebusiness 50>><</link>>
 <br>
-<<link [[직원들과 잡담한다|Chef Opening Staff]]>><<pass 240>><<trauma -18>><<stress -6>><</link>><<lltrauma>><<lstress>>
+<<link [[직원들과 잡담한다 (4:00)|Chef Opening Staff]]>><<pass 240>><<trauma -18>><<stress -6>><</link>><<lltrauma>><<lstress>>
 <br>
-<<link [[그냥 혼자서 즐긴다|Chef Opening Enjoy]]>><<pass 240>><<stress -18>><<trauma -6>><</link>><<llstress>><<ltrauma>>
+<<link [[그냥 혼자서 즐긴다 (4:00)|Chef Opening Enjoy]]>><<pass 240>><<stress -18>><<trauma -6>><</link>><<llstress>><<ltrauma>>
 <br>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "cafecoffeesip">><<nobr>>
+<<widget "cafecoffeesip">>
 	<<stress -1>><<lstress>>
 	<<set $coffee_sips -= 1>>
-<</nobr>><</widget>>
+<</widget>>
 

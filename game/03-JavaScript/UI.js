@@ -1,49 +1,56 @@
-window.overlayShowHide = function (elementId) {
-	var div = document.getElementById(elementId);
-	if (div != undefined) {
+/* eslint-disable jsdoc/require-description-complete-sentence */
+function overlayShowHide(elementId) {
+	const div = document.getElementById(elementId);
+	if (div != null) {
 		div.classList.toggle("hidden");
 		if (elementId === "debugOverlay") {
-			SugarCube.State.variables.debugMenu[0] = !SugarCube.State.variables.debugMenu[0];
+			V.debugMenu[0] = !V.debugMenu[0];
 		}
 	}
+	window.cacheDebugDiv();
 }
+window.overlayShowHide = overlayShowHide;
 
-window.overlayMenu = function (elementId, type) {
-	switch (type) {
-		case "debug":
-			var debug = ["debugMain", "debugCharacter", "debugEvents"]
-			for (var i = 0, l = debug.length; i < l; i++) {
-				var div = document.getElementById(debug[i]);
-				if (div != undefined) {
-					SugarCube.State.variables.debugMenu[1] = elementId;
-					if (elementId === debug[i]) {
-						div.classList.remove("hidden");
-					} else {
-						div.classList.add("hidden");
-					}
-				}
-			}
-			break;
+function overlayMenu(elementId, type) {
+	if (type === "debug") {
+		window.toggleClassDebug(elementId + "Button", "bg-color");
+		V.debugMenu[1] = elementId;
+		if (document.getElementById(elementId) != null) {
+			if (V.debugMenu[2].length > 0) window.toggleClassDebug(elementId, "hideWhileSearching");
+			else window.toggleClassDebug(elementId, "classicHide");
+		}
+		if ((elementId === "debugFavourites" || elementId === "debugAdd") && V.debugMenu[2] != null && V.debugMenu[2].length > 0) {
+			V.debugMenu[2] = "";
+			document.getElementById("searchEvents").value = "";
+			window.researchEvents("");
+		}
+		if (elementId === "debugFavourites") {
+			window.patchDebugMenu();
+		}
 	}
+	window.cacheDebugDiv();
 }
+window.overlayMenu = overlayMenu;
 
-/*Sidebar swipe*/
-document.addEventListener('touchstart', handleTouchStart, false);
-document.addEventListener('touchmove', handleTouchMove, false);
+/* Sidebar swipe */
+document.addEventListener("touchstart", handleTouchStart, false);
+document.addEventListener("touchmove", handleTouchMove, false);
 
-var xDown = null;
-var yDown = null;
+let xDown = null;
+let yDown = null;
 
 function getTouches(evt) {
-	return evt.touches ||			 // browser API
-		evt.originalEvent.touches; // jQuery
+	return (
+		evt.touches || // browser API
+		evt.originalEvent.touches // jQuery
+	);
 }
 
 function handleTouchStart(evt) {
-	var firstTouch = getTouches(evt)[0];
+	const firstTouch = getTouches(evt)[0];
 	xDown = firstTouch.clientX;
 	yDown = firstTouch.clientY;
-};
+}
 
 function handleTouchMove(evt) {
 	if (!xDown || !yDown) {
@@ -55,7 +62,7 @@ function handleTouchMove(evt) {
 	 * 50px - +/- width of unstowed UI Bar
 	 * 280px - +/- width of unstowed UI bar
 	 */
-	if (isUIBarStowed()) {
+	if (UIBar.isStowed()) {
 		if (xDown > 50) {
 			return;
 		}
@@ -65,289 +72,344 @@ function handleTouchMove(evt) {
 		}
 	}
 
-	var xUp = evt.touches[0].clientX;
-	var yUp = evt.touches[0].clientY;
+	const xUp = evt.touches[0].clientX;
+	const yUp = evt.touches[0].clientY;
 
-	var xDiff = xDown - xUp;
-	var yDiff = yDown - yUp;
+	const xDiff = xDown - xUp;
+	const yDiff = yDown - yUp;
 
-	if (Math.abs(xDiff) > Math.abs(yDiff)) {/*most significant*/
+	if (Math.abs(xDiff) > Math.abs(yDiff)) {
+		// most significant
 		if (xDiff > 0) {
-			UIBar.stow();/* left swipe */
+			UIBar.stow(); // left swipe
 		} else {
-			UIBar.unstow();/* right swipe */
+			UIBar.unstow(); // right swipe
 		}
 	} else {
 		if (yDiff > 0) {
-			/* up swipe */
+			// up swipe
 		} else {
-			/* down swipe */
+			// down swipe
 		}
 	}
-	/* reset values */
+	// reset values
 	xDown = null;
 	yDown = null;
-};
-
-function isUIBarStowed() {
-	return $('#ui-bar').hasClass('stowed');
 }
 
-var disableNumberifyInVisibleElements = [
-	'#passage-testing-room',
-];
+const disableNumberifyInVisibleElements = ["#passage-testing-room"];
 
 // Number-ify links
 window.Links = window.Links || {};
 Links.currentLinks = [];
 
 function getPrettyKeyNumber(counter) {
-	var str = "";
+	let str = "";
 
-	if (counter > 30)
-		str = "Ctrl + ";
-	else if (counter > 20)
-		str = "Alt + ";
-	else if (counter > 10)
-		str = "Shift + ";
+	if (counter > 30) str = "Ctrl + ";
+	else if (counter > 20) str = "Alt + ";
+	else if (counter > 10) str = "Shift + ";
 
-	if (counter % 10 === 0)
-		str += "0";
-	else if (counter < 10)
-		str += counter;
+	if (counter % 10 === 0) str += "0";
+	else if (counter < 10) str += counter;
 	else {
-		var c = Math.floor(counter / 10);
-		str += (counter - (10 * c)).toString();
+		const c = Math.floor(counter / 10);
+		str += (counter - 10 * c).toString();
 	}
 
 	return str;
 }
 
-$(document).on(':passagerender', function (ev) {
+$(document).on(":passagerender", function (ev) {
 	Links.currentLinks = [];
 
-	if (passage() == "GiveBirth") {
-		$(ev.content).find("[type=checkbox]").on('propertychange change', function () {
-			new Wikifier(null, '<<resetPregButtons>>');
-			Links.generateLinkNumbers(ev.content);
-		});
+	if (passage() === "GiveBirth") {
+		$(ev.content)
+			.find("[type=checkbox]")
+			.on("propertychange change", function () {
+				Wikifier.wikifyEval("<<resetPregButtons>>");
+				Links.generateLinkNumbers(ev.content);
+			});
 	}
 
 	Links.generateLinkNumbers(ev.content);
 });
 
-Links.keyNumberMatcher = /^\([^\)]+\)/
+Links.keyNumberMatcher = /^\([^)]+\)/;
 
-Links.generateLinkNumbers = function generateLinkNumbers(content) {
-	if (!State.variables.numberify_enabled || !StartConfig.enableLinkNumberify)
-		return;
+Links.generateLinkNumbers = content => {
+	if (!V.numberify_enabled || !StartConfig.enableLinkNumberify) return;
 
-	for (var i = 0; i < disableNumberifyInVisibleElements.length; i++) {
-		if ($(content).find(disableNumberifyInVisibleElements[i]).length || $(content).is(disableNumberifyInVisibleElements[i]))
-			return; // simply skip this render
+	for (let i = 0; i < disableNumberifyInVisibleElements.length; i++) {
+		if ($(content).find(disableNumberifyInVisibleElements[i]).length || $(content).is(disableNumberifyInVisibleElements[i])) return; // simply skip this render
 	}
 
 	// wanted to use .macro-link, but wardrobe and something else doesn't get selected, lmao
-	Links.currentLinks = $(content)
-		.find(".link-internal")
-		.not(".no-numberify *, .no-numberify");
+	Links.currentLinks = $(content).find(".link-internal").not(".no-numberify *, .no-numberify");
 
 	$(Links.currentLinks).each(function (i, el) {
 		if (Links.keyNumberMatcher.test(el.innerHTML)) {
-			el.innerHTML = el.innerHTML.replace(Links.keyNumberMatcher, `(${getPrettyKeyNumber(i + 1)})`)
+			el.innerHTML = el.innerHTML.replace(Links.keyNumberMatcher, `(${getPrettyKeyNumber(i + 1)})`);
 		} else {
 			$(el).html("(" + getPrettyKeyNumber(i + 1) + ") " + $(el).html());
 		}
 	});
-}
+};
 Links.generate = () => Links.generateLinkNumbers(document.getElementsByClassName("passage")[0] || document);
 
-$(document).on('keyup', function (ev) {
-	if (!State.variables.numberify_enabled || !StartConfig.enableLinkNumberify || State.variables.tempDisable)
+$(document).on("keyup", function (ev) {
+	if (!V.numberify_enabled || !StartConfig.enableLinkNumberify || V.tempDisable) return;
+
+	if (document.activeElement.tagName === "INPUT" && document.activeElement.type !== "radio" && document.activeElement.type !== "checkbox")
 		return;
 
 	if ((ev.keyCode >= 48 && ev.keyCode <= 57) || (ev.keyCode >= 96 && ev.keyCode <= 105)) {
-		var fixedKeyIndex = (ev.keyCode < 60 ? ev.keyCode - 48 : ev.keyCode - 96);
+		const fixedKeyIndex = ev.keyCode < 60 ? ev.keyCode - 48 : ev.keyCode - 96;
 
-		var requestedLinkIndex = [
-			9,
-			0,
-			1,
-			2,
-			3,
-			4,
-			5,
-			6,
-			7,
-			8
-		][fixedKeyIndex];
+		let requestedLinkIndex = [9, 0, 1, 2, 3, 4, 5, 6, 7, 8][fixedKeyIndex];
 
-		if (ev.ctrlKey)
-			requestedLinkIndex += 30;
-		else if (ev.altKey)
-			requestedLinkIndex += 20;
-		else if (ev.shiftKey)
-			requestedLinkIndex += 10;
+		if (ev.ctrlKey) requestedLinkIndex += 30;
+		else if (ev.altKey) requestedLinkIndex += 20;
+		else if (ev.shiftKey) requestedLinkIndex += 10;
 
-		if ($(Links.currentLinks).length >= requestedLinkIndex + 1)
-			$(Links.currentLinks[requestedLinkIndex]).click();
+		if ($(Links.currentLinks).length >= requestedLinkIndex + 1) $(Links.currentLinks[requestedLinkIndex]).click();
 	}
 });
 
-var defaultSkinColorRanges = {
-	"hStart": 45, "hEnd": 45,
-	"sStart": 0.2, "sEnd": 0.4,
-	"bStart": 4.5, "bEnd": 0.7,
+const defaultSkinColorRanges = {
+	hStart: 45,
+	hEnd: 45,
+	sStart: 0.2,
+	sEnd: 0.4,
+	bStart: 4.5,
+	bEnd: 0.7,
 };
 
-window.skinColor = function (enabled, percent, overwrite) {
-	if (enabled === "f") {
+function ensureIsArray(x, check = false) {
+	if (check) x = x != null ? x : [];
+	if (Array.isArray(x)) return x;
+	return [x];
+}
+window.ensureIsArray = ensureIsArray;
+
+function skinColor(enabled, percent, overwrite) {
+	if (enabled === false) {
 		return "";
 	}
 
-	var ranges = ensureIsArray(overwrite || defaultSkinColorRanges);
-	var totalProgress = percent / 100;
+	const ranges = ensureIsArray(overwrite || defaultSkinColorRanges);
+	const totalProgress = percent / 100;
 
-	var scaledProgress = ranges.length * totalProgress;
-	var rangeIndex = totalProgress === 1
-		? ranges.length - 1
-		: Math.floor(scaledProgress);
-	var progress = totalProgress === 1
-		? 1
-		: scaledProgress - rangeIndex;
+	const scaledProgress = ranges.length * totalProgress;
+	const rangeIndex = totalProgress === 1 ? ranges.length - 1 : Math.floor(scaledProgress);
+	const progress = totalProgress === 1 ? 1 : scaledProgress - rangeIndex;
 
-	var { hStart, hEnd, sStart, sEnd, bStart, bEnd } = ranges[rangeIndex];
+	const { hStart, hEnd, sStart, sEnd, bStart, bEnd } = ranges[rangeIndex];
 
-	var hue = (hEnd - hStart) * progress + hStart;
-	var saturation = (sEnd - sStart) * progress + sStart;
-	var brightness = (bEnd - bStart) * progress + bStart;
+	const hue = (hEnd - hStart) * progress + hStart;
+	const saturation = (sEnd - sStart) * progress + sStart;
+	const brightness = (bEnd - bStart) * progress + bStart;
 
-	var hueCss = `hue-rotate(${hue}deg)`;
-	var saturationCss = `saturate(${saturation.toFixed(2)})`;
-	var brightnessCss = `brightness(${brightness.toFixed(2)})`;
+	const hueCss = `hue-rotate(${hue}deg)`;
+	const saturationCss = `saturate(${saturation.toFixed(2)})`;
+	const brightnessCss = `brightness(${brightness.toFixed(2)})`;
 
 	return `${hueCss} ${saturationCss} ${brightnessCss}`;
 }
+window.skinColor = skinColor;
 
-window.closeFeats = function (id) {
-	var div1 = document.getElementById("feat-" + id);
-	var div2 = document.getElementById("closeFeat-" + id);
+// feats related widgets
+function closeFeats(id) {
+	const div1 = document.getElementById("feat-" + id);
+	const div2 = document.getElementById("closeFeat-" + id);
 	div1.style.display = "none";
 	div2.style.display = "none";
 }
+window.closeFeats = closeFeats;
 
-window.filterFeats = function () {
-	new Wikifier(null, '<<replace #featsList>><<featsList>><</replace>>');
-}
-
-window.getTimeNumber = function (t) {
-	var time = new Date(t);
-	var result = time.getTime();
+function getTimeNumber(t) {
+	const time = new Date(t);
+	const result = time.getTime();
 	if (isNaN(result)) {
-		return 9999999999999999;
+		return 999999999999999;
 	}
 	return result;
 }
+window.getTimeNumber = getTimeNumber;
 
-window.extendStats = function () {
-	SugarCube.State.variables.extendedStats = !SugarCube.State.variables.extendedStats;
-	var captionDiv = document.getElementById('storyCaptionDiv'),
-		statsDiv = document.getElementById('stats');
-	if (SugarCube.State.variables.extendedStats === true) {
-		captionDiv.classList.add("storyCaptionDivExtended");
-		statsDiv.classList.add("statsExtended");
+function extendStats() {
+	V.extendedStats = !V.extendedStats;
+	const captionDiv = document.getElementById("storyCaptionDiv");
+	if (captionDiv === null) return;
+	if (V.extendedStats === true) {
+		captionDiv.classList.add("statsExtended");
 	} else {
-		captionDiv.classList.remove("storyCaptionDivExtended");
-		statsDiv.classList.remove("statsExtended");
+		captionDiv.classList.remove("statsExtended");
 	}
-	new Wikifier(null, '<<replace #stats>><<statsCaption>><</replace>>');
+	Wikifier.wikifyEval("<<replace #stats>><<statsCaption>><</replace>>");
 }
+window.extendStats = extendStats;
 
-window.customColor = function (color, saturation, brightness, contrast, sepia) {
-	return 'filter: hue-rotate(' + color + 'deg) saturate(' + saturation + ') brightness(' + brightness + ') contrast(' + contrast + ') sepia(' + sepia + ')';
+function customColour(color, saturation, brightness, contrast, sepia) {
+	return (
+		// eslint-disable-next-line prettier/prettier
+		"filter: hue-rotate(" + color + "deg) saturate(" + saturation + ") brightness(" + brightness + ") contrast(" + contrast + ") sepia(" + sepia + ")"
+	);
 }
+window.customColour = customColour;
 
 window.zoom = function (size, set) {
-	if (size === undefined) {
-		size = document.getElementById("numberslider-input-zoom").value;
-	}
-	var parsedSize = parseInt(size);
-	var body = document.getElementsByTagName("body")[0];
-	if (parsedSize >= 50 && parsedSize <= 200 && parsedSize !== 100) {
-		body.style.zoom = size + "%";
-		if (set === true) {
-			SugarCube.State.variables.zoom = size;
-		}
-	} else {
-		body.style.zoom = "";
-		if (set === true) {
-			SugarCube.State.variables.zoom = 100;
-		}
-	}
+    if (size === undefined) {
+        size = document.getElementById("numberslider-input-zoom").value;
+    }
+    var parsedSize = parseInt(size);
+    var body = document.getElementsByTagName("body")[0];
+    if (parsedSize >= 50 && parsedSize <= 200 && parsedSize !== 100) {
+        body.style.zoom = size + "%";
+        if (set === true) {
+            V.zoom = size;
+        }
+    } else {
+        body.style.zoom = "";
+        if (set === true) {
+            V.zoom = 100;
+        }
+    }
 }
 
-// Checks if image was loaded with errors, input is the id: '#idOfImg'
-window.isImageOk = function (id) {
-	return jQuery(id).naturalWidth !== 0 || true;
-}
-
-window.beastTogglesCheck = function () {
-	let vars = SugarCube.State.variables; 
-	let temp = SugarCube.State.temporary;
-	temp.beastVars = [ 
-		"bestialitydisable", 
-		"swarmdisable", 
-		"parasitedisable", 
-		"analpregdisable", 
-		"tentacledisable", 
-		"slimedisable", 
-		"voredisable", 
-		"spiderdisable", 
-		"slugdisable", 
-		"waspdisable"
+function beastTogglesCheck() {
+	T.beastVars = [
+		"bestialitydisable",
+		"swarmdisable",
+		"parasitedisable",
+		"analpregdisable",
+		"tentacledisable",
+		"slimedisable",
+		"voredisable",
+		"spiderdisable",
+		"slugdisable",
+		"waspdisable",
+		"beedisable",
+		"lurkerdisable",
+		"horsedisable",
+		"plantdisable",
 	];
-	temp.anyBeastOn = temp.beastVars.some(x => vars[x] == 'f');
+	T.anyBeastOn = T.beastVars.some(x => V[x] === "f");
 }
+window.beastTogglesCheck = beastTogglesCheck;
 
-window.settingsAsphyxiation = function () {
-	let updateText = () => {
-		let val = SugarCube.State.variables.asphyxiaLvl;
+function settingsAsphyxiation() {
+	const updateText = () => {
+		let val = V.asphyxiaLvl;
 		let text = null;
 		switch (val) {
 			case 0:
-				text = "내 목 건들지 마!"; break;
+				text = "내 목 절대 건들지 마!";
+				break;
 			case 1:
-				text = "NPC들이 당신의 목을 <span class='blue' style='margin-left: unset; min-width: unset;'>잡을</span> 지도 모릅니다. 숨 쉬는 데 영향을 주진 않아요."; break;
+				text = "NPC들이 당신의 목을 <span class='blue inline-colour'>잡을</span> 지도 모릅니다. 숨 쉬는 데 영향을 주진 않아요.";
+				break;
 			case 2:
-				text = "합의된 교제 중에, NPC들이 당신의 <span class='purple' style='margin-left: unset; min-width: unset;'>숨을 막히게</span> 할지도 모릅니다."; break;
+				text = "합의된 교제 중에, NPC들이 당신의 <span class='purple inline-colour'>숨을 막히게</span> 할지도 모릅니다.";
+				break;
 			case 3:
-				text = "합의되지 않은 교제 중에, NPC들이 당신의 <span class='red' style='margin-left: unset; min-width: unset;'>목을 졸라 질식시킬지도</span> 모릅니다."; break;
+				text = "합의되지 않은 교제 중에, NPC들이 당신의 <span class='red inline-colour'>목을 졸라 질식시킬지도</span> 모릅니다.";
+				break;
+			case 4:
+				text = "합의되지 않은 교제 중에, NPC들이 <span class='red inline-colour'>자주</span> 당신의 <span class='red inline-colour'>목을 졸라 질식시키려</span> 시도합니다.";
+				break;
 			default:
 				text = "Error: bad value: " + val;
 				val = 0;
 		}
-		jQuery('#numberslider-value-asphyxialvl').text('').append(text).addClass('small-description')
-												 .css('text-align', 'left')
-												 .css('margin-left', '-7em');
+		jQuery("#numberslider-value-asphyxialvl").text("").append(text).addClass("small-description");
 	};
-	jQuery(document).ready(() => {
+
+	$(() => {
 		updateText();
-		jQuery('#numberslider-input-asphyxialvl').on('input change', function (e) { updateText(); })
-												 .css('width', '83%')
-												 .css('min-height', 'unset')
-												 .css('height', '0.75em')
-												 .css('margin-left', '1em');
+		$("#numberslider-input-asphyxialvl").on("input change", function (e) {
+			updateText();
+		});
 	});
 }
+window.settingsAsphyxiation = settingsAsphyxiation;
 
-window.settingsNamedNpcBreastSize = function () {	
-	const breastSizes = ["유두","약간 솟아오른","조그마한","작은","앙증맞은","평범한","봉긋한","큰","풍만한","커다란","매우 큰","엄청난","거대한"];
-	
-	let updateText = () => {
-		const npcId = SugarCube.State.temporary.npcId;
-		const npc = SugarCube.State.variables.NPCName[npcId];
+function settingsNudeGenderAppearance() {
+	const updateText = () => {
+		let val = V.NudeGenderDC;
+		let text = null;
+		switch (val) {
+			case 0:
+				text = "NPC들은 당신의 성별을 파악할 때 당신의 생식기를 <span class='blue inline-colour'>무시할</span> 것입니다.";
+				break;
+			case 1:
+				text = "NPC들은 당신의 성별을 파악할 때 당신의 생식기를 <span class='purple inline-colour'>고려할</span> 것입니다.";
+				break;
+			case 2:
+				text = "NPC들은 당신의 생식기로 당신의 성별을 <span class='red inline-colour'>판단할</span> 것입니다.";
+				break;
+			default:
+				text = "Error: bad value: " + val;
+				val = 0;
+		}
+		$("#numberslider-value-nudegenderdc").text("").append(text).addClass("small-description").css("margin-left", "1em");
+	};
+
+	$(() => {
+		updateText();
+		jQuery("#numberslider-input-nudegenderdc")
+			.on("input change", function (e) {
+				updateText();
+			})
+			.css("width", "100%");
+	});
+}
+window.settingsNudeGenderAppearance = settingsNudeGenderAppearance;
+
+function settingsBodywriting() {
+	const updateText = () => {
+		let val = V.bodywritingLvl;
+		let text = null;
+		switch (val) {
+			case 0:
+				text = "NPC들은 당신 몸에 무언가를 쓰지 <span class='green inline-colour'>않을</span> 것입니다.";
+				break;
+			case 1:
+				text = "NPC들은 당신 몸에 무언가를 써도 되는지 <span class='blue inline-colour'>물어볼</span> 것입니다.";
+				break;
+			case 2:
+				text = "NPC들은 당신 몸에 무언가를 <span class='purple inline-colour'>강제로</span> 쓰려 할 것입니다.";
+				break;
+			case 3:
+				text = "NPC들은 당신 몸에 무언가를 <span class='red inline-colour'>강제로</span> 쓰고 <span class='red inline-colour'>문신으로 새기려</span> 할 것입니다.";
+				break;
+			default:
+				text = "Error: bad value: " + val;
+				val = 0;
+		}
+		// delete the below code when $bodywritingdisable is fully replaced by $bodywritingLvl
+		V.bodywritingdisable = "f";
+		if (val === 0) V.bodywritingdisable = "t";
+
+		$("#numberslider-value-bodywritinglvl").text("").append(text).addClass("small-description");
+	};
+
+	$(() => {
+		updateText();
+		$("#numberslider-input-bodywritinglvl").on("input change", function (e) {
+			updateText();
+		});
+	});
+}
+window.settingsBodywriting = settingsBodywriting;
+
+function settingsNamedNpcBreastSize(id, persist) {
+	const breastSizes = ["유두", "약간 솟아오른", "조그마한", "작은", "앙증맞은", "평범한", "봉긋한", "큰", "풍만한", "커다란", "매우 큰", "엄청난", "거대한"];
+
+	const updateText = () => {
+		const npc = persist ? V.per_npc[T.pNPCId] : V.NPCName[T.npcId];
 		const val = npc.breastsize;
-		
+
 		const text = breastSizes[val];
 
 		if (val > 0) {
@@ -358,11 +420,155 @@ window.settingsNamedNpcBreastSize = function () {
 			npc.breastsdesc = text;
 		}
 
-		jQuery('#numberslider-value-npcname-npcidbreastsize').text('').append(npc.breastsdesc);
+		$("#numberslider-value-" + id).text(npc.breastsdesc);
 	};
 
-	jQuery(document).ready(() => {
+	$(() => {
 		updateText();
-		jQuery('#numberslider-input-npcname-npcidbreastsize').on('input change', function (e) { updateText(); });
+		$("#numberslider-input-" + id).on("input change", function (e) {
+			updateText();
+		});
 	});
 }
+window.settingsNamedNpcBreastSize = settingsNamedNpcBreastSize;
+
+// Checks current settings page for data attributes
+// Run only when settings tab is changed (probably in "displaySettings" widget)
+// data-target is the target element that needs to be clicked for the value to be updated
+// data-disabledif is the conditional statement (e.g. data-disabledif="V.per_npc[T.pNPCId].gender==='f'")
+// Conditional statement uses V and T instead of $ and _
+
+function settingsDisableElement() {
+	$(() => {
+		$("[data-target]").each(function () {
+			const updateButtonsActive = () => {
+				$(() => {
+					try {
+						const evalStr = "'use strict'; return " + disabledif;
+						// eslint-disable-next-line no-new-func
+						const cond = Function(evalStr)();
+						const style = cond ? "var(--500)" : "";
+						orig.css("color", style).children().css("color", style);
+						orig.find("input").prop("disabled", cond);
+					} catch (e) {
+						console.log(e);
+					}
+				});
+			};
+			const orig = $(this);
+			const target = orig.data("target");
+			const disabledif = orig.data("disabledif");
+			if (orig.data("target") && disabledif) {
+				updateButtonsActive();
+				$(document).on(
+					"click.evt",
+					"[name*='" + (Array.isArray(target) ? target.map(x => Util.slugify(x)).join("'], [name*='") : Util.slugify(target)) + "']",
+					function () {
+						updateButtonsActive();
+					}
+				);
+			}
+		});
+	});
+}
+window.settingsDisableElement = settingsDisableElement;
+
+// Adds event listeners to input on current page
+// mainly used for options overlay
+function onInputChanged(func) {
+	if (!func || typeof func !== "function") return;
+	$(() => {
+		$("input").on("change", function () {
+			func();
+		});
+	});
+}
+window.onInputChanged = onInputChanged;
+
+function closeOverlay() {
+	updateOptions();
+	delete T.currentOverlay;
+	T.buttons.reset();
+	$("#customOverlay").addClass("hidden").parent().addClass("hidden");
+}
+window.closeOverlay = closeOverlay;
+
+function updatehistorycontrols() {
+	if (V.options.maxStates === undefined || V.options.maxStates > 20) {
+		/* initiate new variable based on engine config and limit it to 20 */
+		V.options.maxStates = Math.clamp(1, 20, Config.history.maxStates);
+	}
+	if (V.options.maxStates === 1) {
+		/* when disabled, irreversibly delete history controls the way sugarcube intended */
+		Config.history.maxStates = 1;
+		jQuery("#ui-bar-history").remove();
+	} else {
+		/* set actual maxStates in accordance with our new variable */
+		Config.history.maxStates = V.options.maxStates;
+		/* ensure that controls are enabled so sugarcube won't destroy them on reload */
+		Config.history.controls = true;
+		/* if irreversibly deleted, restore #ui-bar-history from oblivion and pop it after #ui-bar-toggle */
+		if (jQuery("#ui-bar-history").length === 0) {
+			jQuery("#ui-bar-toggle").after(`
+				<div id="ui-bar-history">
+					<button id="history-backward" tabindex="0" title="'+t+'" aria-label="'+t+'">\uE821</button>
+					<button id="history-forward" tabindex="0" title="'+n+'" aria-label="'+n+'">\uE822</button>
+				</div>`);
+			/* make buttons active/inactive based on the available history states */
+			jQuery(document).on(
+				":historyupdate.ui-bar",
+				(($backward, $forward) => () => {
+					$backward.ariaDisabled(State.length < 2);
+					$forward.ariaDisabled(State.length === State.size);
+				})(jQuery("#history-backward"), jQuery("#history-forward"))
+			);
+			jQuery("#history-backward")
+				.ariaDisabled(State.length < 2)
+				.ariaClick({
+						label: L10n.get("uiBarBackward"),
+					},
+					() => Engine.backward()
+				);
+			jQuery("#history-forward")
+				.ariaDisabled(State.length === State.size)
+				.ariaClick({
+						label: L10n.get("uiBarForward"),
+					},
+					() => Engine.forward()
+				);
+		}
+		jQuery("#ui-bar-history").show();
+	}
+}
+window.updatehistorycontrols = updatehistorycontrols;
+DefineMacro("updatehistorycontrols", updatehistorycontrols);
+
+function updateOptions() {
+	if (T.currentOverlay === "options" && T.optionsRefresh && V.passage !== "Start") {
+		updatehistorycontrols();
+		const optionsData = clone(V.options);
+		const tmpButtons = T.buttons;
+		const tmpKey = T.key;
+
+		State.restore();
+		V.options = optionsData;
+		State.show();
+
+		T.key = tmpKey;
+		T.buttons = tmpButtons;
+		T.buttons.setupTabs();
+		if (T.key !== "options") {
+			T.buttons.setActive(T.buttons.activeTab);
+		}
+	}
+}
+window.updateOptions = updateOptions;
+
+$(document).on("click", "#cbtToggleMenu .cbtToggle", function (e) {
+	$("#cbtToggleMenu").toggleClass("visible");
+});
+
+function elementExists(selector) {
+	return document.querySelector(selector) !== null;
+}
+window.elementExists = elementExists;

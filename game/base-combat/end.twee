@@ -1,10 +1,12 @@
 :: Widgets End Combat [widget]
 
-<<widget "endcombat">><<nobr>>
+<<widget "endcombat">>
+
+<<set $enemytrust to 0>>
 
 <<if $enemyhealth lte 0>>
 	<<if $enemytype is "man">>
-		<<famescrap $enemyno>>
+		<<famescrap $enemynomax>>
 	<</if>>
 	<<if $audiencepresent is 1>>
 		<<famescrap 10>>
@@ -13,13 +15,14 @@
 
 <<if $demonabsorb gte 1>>
 	<<if $enemytype is "tentacles" or $enemytype is "struggle">>
-		<<set $pain -= (20 * $demonabsorb)>>
+		<<pain `-(5 * $demonabsorb)`>>
 		<<set $stress -= (300 * $demonabsorb)>>
 	<<else>>
 		<<set $trauma -= (150 * $demonabsorb)>>
 	<</if>>
 	<span class="lewd">당신은 성적인 정기를 흡수한다. 당신은 편안함을 느낀다.</span>
 	<<set $demonabsorb to 0>>
+	<<traumaclamp>>
 	<br>
 <</if>>
 
@@ -47,6 +50,7 @@
 			<<set $trauma -= $assertive>>
 			<span class="meek">난 나쁜 아이야.</span>
 			<<ltrauma>>
+			<<traumaclamp>>
 			<br>
 		<<elseif $assertiveaction is "stress">>
 			<<set $stress -= ($assertive * 10)>>
@@ -54,7 +58,7 @@
 			<<lstress>>
 			<br>
 		<<elseif $assertiveaction is "submissive">>
-			<<set $submissive += ($assertive / 10)>>
+			<<sub `($assertive / 40)`>>
 			<<if $enemytype is "beast">>
 				<<if $NPCList[0].type is "wolf">>
 					<<set _plural_beast_type to "wolves">>
@@ -66,21 +70,23 @@
 				<span class="meek"> _plural_beast_type을 기분 좋게 만들어 줄 수 있어서 좋았어.</span>
 			<<elseif $enemytype is "tentacles">>
 				<span class="meek">촉수들을 기분 좋게 만들어 줄 수 있어서 좋았어.</span>
+			<<elseif $enemytype is "struggle">>
+				<span class="meek">저런 생물체들을 기분 좋게 만들어 줄 수 있어서 좋았어.</span>
 			<<else>>
 				<span class="meek">사람들을 기분 좋게 만들어 줄 수 있어서 좋았어.</span>
 			<</if>>
 			<br>
 		<<elseif $assertiveaction is "defiant">>
-			<<set $submissive -= ($assertive / 10)>>
+			<<def `($assertive / 40)`>>
 			<span class="brat">상황을 통제할 수 있어서 좋았어.</span>
 			<br>
 		<</if>>
-	<<set $assertive to 0>>
+		<<set $assertive to 0>>
 	<</if>>
 
 <</if>>
 
-
+<<unset $enemytype>>
 
 <<endevent>>
 <<struggle_end>>
@@ -95,7 +101,17 @@
 <<unset $deepthroating>>
 <<unset $bodywriting_special>>
 <<unset $machine_tattoo_success>>
-
+<<unset $dodging>>
+<<unset $feet_planted>>
+<<unset $left_guard>>
+<<unset $right_guard>>
+<<unset $speechspraycycleplant>>
+<<unset $newlyWritten>>
+<<unset $combatBegun>>
+<<unset $combatPhase>>
+<<unset $fightTargets>>
+<<unset $pounce_delay>>
+<<unset $hypnosis_deviancy_check>>
 
 <<switch $player.gender>>
 <<case "f">>
@@ -120,10 +136,24 @@
 	<<set $vaginause to 0>>
 	<<set $penisuse to 0>>
 <</switch>>
+<<if playerHasStrapon()>>
+	<<set $penisstate to 0>>
+	<<set $penisuse to 0>>
+	<<if $playerPenisSizeBackup isnot undefined>>
+		<<set $player.penissize to $playerPenisSizeBackup>>
+	<</if>>
+<</if>>
 
 <<set $anusstate to 0>>
 <<set $mouthstate to 0>>
 <<set $finish to 0>>
+<<unset $stalk_end>>
+<<unset $stalk_event>>
+<<unset $stalk_clothes>>
+<<unset $stalk>>
+<<unset $stalk_assess>>
+<<unset $audience_active>>
+<<unset $combat_end_text>>
 <<set $gloryhole to 0>>
 <<set $mouthuse to 0>>
 <<set $anususe to 0>>
@@ -153,12 +183,11 @@
 
 <<set $walltype to 0>>
 
-<<set $understruggle to 0>>
+<<set $underlowerstruggle to 0>>
 <<set $lowerstruggle to 0>>
 <<set $upperstruggle to 0>>
 <<set $overlowerstruggle to 0>>
 <<set $overupperstruggle to 0>>
-<<set $enemytrust to 0>>
 <<set $alarm to 0>>
 <<set $rescue to 0>>
 <<set $phase to 0>>
@@ -172,6 +201,14 @@
 <<set $novaginal to 0>>
 <<set $noanal to 0>>
 <<set $nopenile to 0>>
+<<set $nochoke to 0>>
+<<unset $npcCondoms>>
+<<unset $condomUse>>
+<<unset $condomAsk>>
+<<set $player.condom to false>>
+<<unset $condomVaginalImg>>
+<<unset $condomAnalImg>>
+<<unset $condomPlayerPenisImg>>
 <<unset $noupper>>
 <<unset $noupperasked>>
 <<set $askedtochoke to 0>>
@@ -187,12 +224,18 @@
 <</if>>
 <<set $walltype to "wall">>
 <<set $angelforgive to 0>>
+<<unset $banishDisable>>
 <<unset $penisfucked>>
 <<unset $vaginafucked>>
 <<unset $anusfucked>>
 <<set $speechdisable to 0>>
-<<unset $stealstate>>
+<<unset $stealstateleft>>
+<<unset $stealstateright>>
 <<unset $position_lock>>
+<<unset $handGuideLeft>>
+<<unset $handGuideRight>>
+<<unset $easySteal>>
+
 
 <<set $leftactiondefault to $leftaction>>
 <<set $rightactiondefault to $rightaction>>
@@ -219,6 +262,24 @@
 <<set $chestaction to 0>>
 <<set $mockaction to "none">>
 <<set $bodyaction to 0>>
+<<set $stealdifficulty to 1>>
+
+<<set $lefttarget to 0>>
+<<set $righttarget to 0>>
+<<set $feettarget to 0>>
+<<set $mouthtarget to 0>>
+<<if $player.penisExist>>
+	<<set $penistarget to 0>>
+<</if>>
+<<if $player.vaginaExist>>
+	<<set $vaginatarget to 0>>
+	<<unset $vaginadoubletarget>>
+<</if>>
+<<set $anustarget to 0>>
+<<unset $anusdoubletarget>>
+<<set $chesttarget to 0>>
+<<set $thightarget to 0>>
+<<set $stealtarget to "">>
 
 <<set $carryblock to 0>>
 
@@ -244,9 +305,16 @@
 <<set $tentacles.max to 0>>
 <<set $tentacles.active to 0>>
 <<set _tentacles to $tentacles>>
-<<for _i to 1; _i lt 20; _i++>>
+<<for _i to 0; _i lt 20; _i++>>
 	<<set _tentacles[_i] to null>>
 <</for>>
+<<set $abomination to 0>>
+<<unset $tentacleColour>>
+<<set $tentacleMouth to 0>>
+<<set $tentacleAnus to 0>>
+<<set $tentacleAnusBaby to 0>>
+<<set $tentacleVagina to 0>>
+<<set $tentaclePenis to 0>>
 
 <<set $leftaction to 0>>
 <<set $rightaction to 0>>
@@ -254,7 +322,7 @@
 <<set $front to 0>>
 <<set $chest to 0>>
 
-<<set $claws to 1>>
+<!-- <<set $claws to 1>> -->
 <<set $water to 0>>
 
 <<set $vorestrength to 0>>
@@ -267,7 +335,6 @@
 
 <<set $leftleg to 0>>
 <<set $rightleg to 0>>
-<<set $breastuse to 0>>
 <<set $leftnipple to 0>>
 <<set $rightnipple to 0>>
 <<set $leftarmstate to 0>>
@@ -298,6 +365,12 @@
 <<set $speechhermaroused to 0>>
 <<set $speechhermshock to 0>>
 <<set $speechhermdisappointed to 0>>
+
+<<set $speechsextoyangry to 0>>
+<<set $speechsextoyshocked to 0>>
+<<set $speechsextoyaroused to 0>>
+<<set $speechsextoydisappointed to 0>>
+<<set $speechsextoy to 0>>
 
 <<set $prop to []>>
 
@@ -337,7 +410,7 @@
 <<if $analskillup gte 1>>
 	<<set $analskillup to 0>>
 	<<if $analskill lt 1000>>
-		<span class="gold">당신은 후장으로 기분 좋게 해주는 능력에 더 자신감을 느낀다 anus.</span>
+		<span class="gold">당신은 항문으로 기분 좋게 해주는 능력에 더 자신감을 느낀다.</span>
 		<br>
 	<</if>>
 <</if>>
@@ -365,7 +438,7 @@
 <<if $thighskillup gte 1>>
 	<<set $thighskillup to 0>>
 	<<if $thighskill lt 1000>>
-		<span class="gold">당신은 허벅지로 기분 좋게 해주는 능력에 더 자신감을 느낀다.</span>
+		<span class="gold">당신은 넓적다리로 기분 좋게 해주는 능력에 더 자신감을 느낀다.</span>
 		<br>
 	<</if>>
 <</if>>
@@ -379,61 +452,33 @@
 <<if $penileskillup gte 1>>
 	<<set $penileskillup to 0>>
 	<<if $penileskill lt 1000>>
-		<span class="gold">당신은 자지로 다른 사람들을 기쁘게 해주는 능력에 더 자신감을 느낀다.</span>
+		<span class="gold">당신은 <<= $player.penisExist ? "자지" : "페니스 밴드 자지">>로 다른 사람들을 기쁘게 해주는 능력에 더 자신감을 느낀다.</span>
 		<br>
 	<</if>>
 <</if>>
 <<set $enemyArousalLossReduction to 1>>
 
-
+<<unset $phalluscolorA>>
+<<unset $phalluscolorB>>
+<<unset $currentSexToyLeft>>
+<<unset $currentSexToyRight>>
+<<unset $selectedItemLeft>>
+<<unset $selectedItemRight>>
 
 <<manend>>
 <<turnend>>
 <<getCombatDefaultsTypeClear>>
 <br>
-<</nobr>><</widget>>
+<</widget>>
 
 :: Widgets Clear NPC [widget]
 
-<<widget "clearnpc">><<nobr>>
+<<widget "clearnpc">>
 
-<<for _i = 0; _i < $NPCList.length ; _i++>>
-	<<set $NPCList[_i].lefthand to "none">>
-	<<set $NPCList[_i].righthand to "none">>
-	<<set $NPCList[_i].penis to "none">>
-	<<set $NPCList[_i].vagina to "none">>
-	<<set $NPCList[_i].mouth to "none">>
-	<<set $NPCList[_i].chest to "none">>
-	<<set $NPCList[_i].gender to 0>>
-	<<set $NPCList[_i].pronoun to 0>>
-	<<set $NPCList[_i].description to 0>>
-	<<set $NPCList[_i].fullDescription to 0>>
-	<<set $NPCList[_i].insecurity to 0>>
-	<<set $NPCList[_i].lactation to 0>>
-	<<set $NPCList[_i].intro to 0>>
-	<<set $NPCList[_i].speechanusescape to 0>>
-	<<set $NPCList[_i].speechpenisescape to 0>>
-	<<set $NPCList[_i].speechvaginaescape to 0>>
-	<<set $NPCList[_i].type to 0>>
-	<<set $NPCList[_i].stance to 0>>
-	<<set $NPCList[_i].monster to 0>>
-	<<set $NPCList[_i].maxOrgasms to 1>>
-	<<set $NPCList[_i].orgasms to 0>>
-	<<set $NPCList[_i].paid to 0>>
-	<<if _i < 1>>
-		<<set $NPCList[_i].breastsize to 3>>
-		<<set $NPCList[_i].breastsdesc to "breasts">>
-		<<set $NPCList[_i].breastdesc to "breast">>
-		<<set $NPCList[_i].penisdesc to "penis">>
-		<<set $NPCList[_i].penissize to 2>>
-		<<set $NPCList[_i].health to 200>><!-- This is set for compatibility elsewhere if needed, v2.2.0... -->
-	<<else>>
-		<<set $NPCList[_i].breastsize to 0>>
-		<<set $NPCList[_i].breastsdesc to 0>>
-		<<set $NPCList[_i].breastdesc to 0>>
-		<<set $NPCList[_i].penisdesc to 0>>
-		<<set $NPCList[_i].penissize to 0>>
-		<<set $NPCList[_i].health to 0>>
+<<for _i = 0; _i < $NPCList.length; _i++>>
+	<<set $NPCList[_i] to clone(setup.baseNPC)>>
+	<<if $NPCList[_i].strapon isnot undefined>>
+		<<run delete $NPCList[_i].strapon>>
 	<</if>>
 <</for>>
 
@@ -442,32 +487,68 @@
 <<set $beastgenderoverride to 0>>
 
 <<set $enemyno to 0>>
+<<set $enemynomax to 0>>
 
 <<set $combattype to 0>>
+<!-- Clear the arrays but don't unset them. -->
+<<set $npc.splice(0)>>
+<<set $npcnum.splice(0)>>
+<<set $npcrow.splice(0)>>
+<<if $endeventerror is undefined>>
+	<<run EventSystem.clear()>>
+<</if>>
+<</widget>>
 
-<<unset $npcdescription>>
-<<set $npc to 0>>
-<<unset $npcnum>>
+:: Widgets Clear Single NPC [widget]
 
-<</nobr>><</widget>>
+<!-- usage tip: if you want to clear an npc and copy another into its position, don't forget to use clone(). example:
+	<<set $NPCList[1] to clone($NPCList[2])>>
+	<<clearsinglenpc 2>>
+-->
+<<widget "clearsinglenpc">>
+
+<<if typeof _args[0] isnot "number">>
+	<span class="red">Widget "clearsinglenpc" used incorrectly! Please report this!</span>
+<</if>>
+
+<<set _i to _args[0]>>
+<<set $NPCList[_i] to clone(setup.baseNPC)>>
+<<if $enemyno gt 0>>
+	<<set $enemyno -= 1>>
+<</if>>
+<<if $endeventerror is undefined>>
+	<<run EventSystem.pop(_i)>>
+<</if>>
+<<if $enemyno is 0>>
+	<<set $pronoun to 0>>
+	<<if $endeventerror is undefined>>
+		<<run EventSystem.clear()>>
+	<</if>>
+<</if>>
+<<if $NPCList[_i].strapon isnot undefined>>
+	<<run delete $NPCList[_i].strapon>>
+<</if>>
+<</widget>>
 
 :: Widgets End Event [widget]
 
-<<widget "endevent">><<nobr>>
+<<widget "endevent">>
 
 <<if $dancing is 1>>
 	<<famedance>>
+	<<unset $dance_place>>
+	<<unset $dance_stage_cum>>
 <</if>>
 
 <<set $molestavoid to 1>>
 
-<<if $args[0] isnot "phaseless">>
+<<if _args[0] isnot "phaseless">>
 	<<set $phaselast to $phase>>
 	<<set $phase to 0>>
 	<<set $phase2 to 0>>
 <</if>>
 <<endnpc>>
-<<clearnpc>>
+/*<<clearnpc>> is already called in endnpc */
 <<set $dancelocation to 0>>
 <<set $forceddance to 0>>
 
@@ -490,17 +571,34 @@
 <<unset $tip_add>>
 <<unset $monster>>
 <<set $enemyno to 0>>
-<<set $enemynomax to 1>>
+<<set $enemynomax to 0>>
 <<unset $noFinish>>
+<<unset $promiscuityIgnore>>
+<<unset $npcSub>>
+<<unset $purityEvent>>
+<<unset $corruptionEvent>>
+<<unset $speechNPCKissVirgin>>
+<<unset $speechNPCHandholdingVirgin>>
+<<unset $sydneyComments>>
+<<unset $sydneyUniqueComments>>
+<<unset $noBodyWriting>>
+<<unset $noAdmire>>
+<<unset $breakIgnore>>
+<<unset $eventforced>>
+
+<<unset $internalejac>>
 
 <<set $orgasmcurrent to 0>>
 
 <<set $beastname to "none">>
 
-<<set $action_unclad_outfit to 0>>
-<<set $action_unclad_upper to 0>>
-<<set $action_unclad_lower to 0>>
-<<set $action_unclad_under_lower to 0>>
+<<unset $action_unclad_over_outfit>>
+<<unset $action_unclad_over_upper>>
+<<unset $action_unclad_over_lower>>
+<<unset $action_unclad_outfit>>
+<<unset $action_unclad_upper>>
+<<unset $action_unclad_lower>>
+<<unset $action_unclad_under_lower>>
 <<set $clothingselector to 0>>
 <<unset $stealtextskip>>
 <<set $trueconsensual to 0>>
@@ -511,10 +609,16 @@
 <<set $npc_named to 0>>
 <<unset $setupMidOrgasm>>
 
-<</nobr>><</widget>>
+<<unset $childSelected>>
+<<unset $childrenPassage>>
+
+<<set $index to 0>>
+<<set $modeloptionsOverride to {}>>
+
+<</widget>>
 
 :: Widgets End Speech [widget]
-<<widget "manend">><<nobr>>
+<<widget "manend">>
 <<unset $speechpenispenetrated>>
 <<unset $speechvaginapenetrated>>
 <<unset $speechanuspenetrated>>
@@ -543,6 +647,12 @@
 <<unset $speechhit>>
 <<unset $speechtribentrance>>
 <<unset $speechfacesit>>
+<<unset $speechmouthotheranus>>
+<<unset $speechanallick>>
+<<unset $speechanalkiss>>
+
+<<unset $speechfencingentrance>>
+<<unset $speechpenispenis>>
 
 <<unset $speechheadbreasts>>
 <<unset $speechheadchest>>
@@ -556,11 +666,16 @@
 <<unset $speechcheeks>>
 <<unset $speechhandjobpenis>>
 <<unset $speechhandjobvagina>>
+<<unset $speechmasturbate>>
+<<unset $speechdildovagina>>
+<<unset $speechdildoanus>>
+<<unset $speechstroker>>
 
 <<unset $speechthroat>>
 <<unset $speechvaginafoot>>
 <<unset $speechpenisfoot>>
 <<unset $speechchastity>>
+<<unset $speechNPCChastity>>
 <<unset $speechstruggle>>
 <<unset $speechstripstruggle>>
 <<unset $speechspank>>
@@ -573,29 +688,37 @@
 <<unset $speechchestrub>>
 <<unset $speechbreastrub>>
 <<unset $speechvaginaflaunt>>
-<<unset $speechvaginavirgin>>
-<<unset $speechanusvirgin>>
-<<unset $speechmouthvirgin>>
-<<unset $speechpenisvirgin>>
-<<unset $speechkissvirgin>>
 <<unset $speechpenisbig>>
 <<unset $speechpenisescape>>
 <<unset $speechvaginaescape>>
 <<unset $speechanusescape>>
 <<unset $speechsteal>>
 <<unset $speechnamedrop>>
+<<unset $speechadmired>>
+<<unset $speechaskrough>>
+
+<<unset $speechNPCPenisVirgin>>
+<<unset $speechNPCVaginaVirgin>>
+<<unset $speechNPCAnusVirgin>>
+<<unset $speechNPCOralVirgin>>
+<<unset $speechNPCKissVirgin>>
+<<unset $speechNPCHandholdingVirgin>>
 
 <<set $npcspeechcycle += 1>>
 <<if $npcspeechcycle gte 7>>
 	<<set $npcspeechcycle to 0>>
 <</if>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "turnend">><<nobr>>
+<<widget "turnend">>
 
-<<unset $speechcum>>
-<<unset $speechorgasmrepeat>>
+<<if $enemyarousal lt 0>>
+	<<set $enemyarousal to 0>>
+<</if>>
+
+<<set $speechcum to 0>>
+<<set $speechorgasmrepeat to 0>>
 
 <<unset $speechgenitals>>
 <<unset $speechbreasts>>
@@ -610,6 +733,13 @@
 <<unset $speechapologiseno>>
 <<unset $speechforgive>>
 <<unset $speechspray>>
+<<unset $speechvaginavirgin>>
+<<unset $speechanusvirgin>>
+<<unset $speechmouthvirgin>>
+<<unset $speechpenisvirgin>>
+<<unset $speechkissvirgin>>
+<<unset $speechgrowl>>
+
 
 <<if $speechcrossdressangry is 2>>
 	<<set $speechcrossdressangry to 1>>
@@ -659,10 +789,10 @@
 	<<unset $speechhermdisappointed>>
 <</if>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "manspeech">><<nobr>>
-<<set _n to $args[0]>>
+<<widget "manspeech">>
+<<set _n to _args[0]>>
 <<if $NPCList[_n].speechpenisescape is 1>>
 <<set $speechpenisescape to 1>>
 <</if>>
@@ -672,4 +802,4 @@
 <<if $NPCList[_n].speechanusescape is 1>>
 <<set $speechanusescape to 1>>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>

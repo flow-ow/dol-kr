@@ -1,37 +1,117 @@
-:: Widgets testroom widget [widget nobr]
-<<widget "Testroom">>
+:: Widgets customTestroom widget [widget nobr]
+<<widget "customTestroom">>
+<br><br>
+= custom test widget =
+<br>
+<<generate1>><<person1>>
+hePost : <<hePost>><br>
+he_ : <<he_>><br>
+he_ rul: <<he_ rul>><br>
+he_ rul "sep": <<he_ rul "sep">><br>
+NPCname_ ul: <<NPCname_ ul>><br>
+<<endevent>>
+bodywriting_ "animal" : <<bodywriting_ "animal">><br>
+bodywriting_ ul "animal" : <<bodywriting_ ul "animal">><br>
+bodywriting_ 을 "animal" : <<bodywriting_ 을 "animal">><br>
+bodywriting_ 를 "animal" : <<bodywriting_ 를 "animal">><br>
+bodywriting_ ul "animal" "sep": <<bodywriting_ ul "animal" "sep">><br>
+bodywriting_ 를 "animal" "sep": <<bodywriting_ 를 "animal" "sep">><br>
+creature_ rul "tentacle" : <<creature_ rul "tentacle">><br>
+plants_plural_ i "daisy" : <<plants_plural_ i "daisy">><br>
+<br><br>
+<<customScriptTestroom "a", "b", "c">>
+<br><br>
 <</widget>>
 
+:: customScriptTestroom [script]
+function customScriptTestroom(arg1,arg2,arg3)
+{
+	let ret = "customScriptTestroom:";
+	let conjunction;
+	let test = ["수박", "사과", "귤", "딸기"];
+	try {if (1)  conjunction = (conjunction === "그리고"?["과", "와", "과"]:["이나", "나", "이나"])[getPostNum(test[test.length-2])]; conjunction += " "; getPostNum(test[test.length-1]);	/* useOxfordComma가 false일 때는 조사처리, 아니면 conjunction 사용. 끝으로 출력후의 조사처리를 위해 마지막 글자의 _postNum을 계산해둔다 */} catch(e) { return `<span class='red'>에러: formatList: ${e}: typeof(test)=${typeof(test)}${Array.isArray(test)?"= "+test.toString():""}</span>`}
+	ret += test[test.length-2]+conjunction + test[test.length-1]+", postNum=" + T.postNum;
+	return ret;
+}
+DefineMacroS("customScriptTestroom",customScriptTestroom);
 
-:: custom Testroom [nobr]
+:: custom Testroom [nobr exitCheckBypass]
 테스트 룸
 <br>
-<<npc Gwylan>><<person1>>
-원본: <<He>> ripped your $worn.under_lower.name and shove <<his>> <<penis>> into your <<pussy>>.
+navigator.userAgent=<<print navigator.userAgent>><br><br>
+<<if $money lt 20000000>>
+	<<moneyGain 200000>>를 얻었다!
+<</if>>
 <br><br>
-기존번역: <<HePost "은">> 당신의 <<trClothes "under_lower" $worn.under_lower.name "name" "을">>_trResult 찢고 <<hisPost "의">> <<penisPost "을">> 당신의 <<pussyPost "으로">> 집어넣는다.
+kylarClothesPost "all" "yellow briefs" : <<kylarClothesPost "all" "yellow briefs" "을">><br>
+kylarClothesPost "all" "crop top and miniskirt" : <<kylarClothesPost "all" "crop top and miniskirt" "을">><br>
+kylarClothesPost "upper" "shirt" : <<kylarClothesPost "upper" "shirt" "을">><br>
+kylarClothesPost "lower" "skirt" : <<kylarClothesPost "lower" "skirt" "을">><br>
+kylarClothesPost "underwear" "red brief" : <<kylarClothesPost "underwear" "red briefs" "을">><br>
+kylarClothesPost "undies" "panties with pink and white stripes" : <<kylarClothesPost "undies" "panties with pink and white stripes" "을">><br>
+kylarClothesPost "all" "blue and black striped panties" : <<kylarClothesPost "all" "blue and black striped panties" "을">><br>
+
+
 <br>
-EasyPost: <<He_nun>> 당신의 <<worn_under_lower_name_ul>> 찢고 <<his_yi>> <<penis_rul>> 당신의 <<pussy_ro>> 집어넣는다.
+[[Underground Dance Intro]]<br>
+[[Avery Date 2]]<br>
+<<generatem1>><<person1>><<trNPCdesc $NPCList[0].fullDescription "이">>_trResult<br>
+<<endevent>>
+outfitPost = <<outfitPost "을">><br>
+underoutfitPost = <<underoutfitPost "을">><br>
+<<nudityPost "을">> 가린다.<<nudityPostend>><br>
+<<livestock_horse>><br>
+
+<<print formatList(
+		["semen", "goo", "nectar"].filter(stuff => $player.bodyliquid["hair"][stuff] gte 1)
+		.join(',').replace(/([^,]+)(,|$)/g, (match, p1, p2) => {return {"semen": "정액", "goo": "점액", "nectar": "꿀"}[p1] + p2}).split(','))
+>><br>
+/*<<set $chef_avery to 1>>[[Chef Opening 6]]<br>*/
 <br><br>
-
-<<He_ga>> 사다리를 떨구고는 걸어온다. <<He_nun>> 앞치마에 손을 닦는다. <br>
-상의는 <<worn_upper_name_ida>>. 하의는 <<worn_lower_name_ida>>.<br>
-속옷상의는 <<worn_under_upper_name_ida>>. 속옷하의는 <<worn_under_lower_name_ida>>.
+<<trBeasttypeFun "horned girl" "을">>_trResult<br>
+" fleshy strap-on fist dildo" : <<trPenisdesc " fleshy strap-on fist dildo">>_trResult<br>
 <br><br>
-
-<<beastNEWinit 1 wolf>>
-<<beasttype_i>> 나왔다. 당신은 <<breasts_rul>> 감싸안았다.
-
+[[Prison Intro Boat]]
 <br><br>
-
-
-
+<<customTips>>
+<br><br>
+Clothes Traits test: [[customTest clothesTraits]]
+<br><br>
+[[customTest Get All Feats]] <span style="color:red;font-style:bold">!경고!: 도전과제 테스트용입니다. 세이브 파일, 도전과제와 게임의욕을 망칠 수 있습니다. 도전과제 리셋/세이브 삭제로만 되돌릴 수 있습니다.</span>
+<br><br>
+pregnancyTesting : <span id="preg-test"><<print ($pregnancyTesting ? "true":"false")>></span> <<link "change">><<set $pregnancyTesting to ($pregnancyTesting? false:true)>><<replace "#preg-test">><<print ($pregnancyTesting ? "true":"false")>><</replace>><</link>>
+<br><br>
+<<customTestroom>>
+<br><br>
 <<if $custom.test gt 10>>
     <<goto "custom Test1">>
 <</if>>
 123
 [[custom Testroom]]
+<br>
+[[ScopedVarTest]]
+<br>
+[[Bedroom]]
 
-:: custom Test1 [nobr]
+:: custom Test1 [nobr exitCheckBypass]
 abc
 [[abcd|custom Testroom]]
+
+:: customTest Get All Feats [exitCheckBypass]
+	<<featsData>>
+	<<for $_name, $_value range _feats>>
+
+		<<if $feats.currentSave[$_name] is undefined>>
+			<<set $feats.currentSave[$_name] to Date()>>
+				<<print $_name>> earned.<br>
+		<</if>>
+	<</for>>
+[[custom Testroom]]
+
+:: customTest clothesTraits [exitCheckBypass]
+<<set _traitsInThisShop = [...new Set(Object.keys(setup.clothes).flatMap(x => setup.clothes[x]).flatMap(x => x.type))]>>
+<<for _trait range _traitsInThisShop>>
+			<span class="capitalize"><<trClothingTrait _trait>>_trResult</span><br>
+<</for>>
+<br>
+[[custom Testroom]]

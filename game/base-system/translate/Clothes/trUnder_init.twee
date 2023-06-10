@@ -1,10 +1,10 @@
 :: Widgets trUnder [widget nobr]
 <<widget "init_trUnder">>
-    <<set _trClothes.under_lower to [
+    <<set setup.trClothes.under_lower to [
         {
             index: 0,
             name: "naked",
-            name_ko: "알몸",
+            name_ko: "벗음",
             variable: "naked",
             description: "naked",
             post: 0
@@ -15,7 +15,7 @@
             name: "plain panties",
             name_ko: "평범한 팬티",
             variable: "plainpanties",
-            description: "간단명료하다.",
+            description: "건전하다.",
             post: 1
         },
 
@@ -96,7 +96,7 @@
             name: "skimpy leotard bottom",
             name_ko: "노출 많은 레오타드 하의",
             variable: "leotardskimpy",
-            description: "몸에 딱 달라붙는다. 허벅지를 과시한다.",
+            description: "몸에 딱 달라붙는다. 넓적다리를 과시한다.",
             post: 1
         },
 
@@ -213,7 +213,7 @@
             name: "classic plain panties",
             name_ko: "클래식 평범한 팬티",
             variable: "classicplainpanties",
-            description: "간단명료하다. 빈티지.",
+            description: "건전하다. 빈티지.",
             post: 1
         },
 
@@ -260,6 +260,87 @@
             variable: "jockstrap",
             description: "너무 꽉 조이진 않는다.",
             post: 0
-        }
+        },
+		
+        {
+            index: 29,
+            name: "boxers",
+            name_ko: "사각 팬티",
+            variable: "boxers",
+            description: "숨 쉴만한 여유를 준다.",
+            post: 1
+        },
+
+        {
+            index: 30,
+            name: "long johns",
+            name_ko: "내복",
+            variable: "longjohns",
+            description: "추위를 버티는 데 도움을 준다.",
+            post: 0
+        },
+
+        {
+            index: 31,
+            name: "school swim bottoms",
+            name_ko: "학교 수영복 하의",
+            variable: "schoolswimbottoms",
+            description: "학교용 수영복으로는 놀랄만큼 노출이 심하다.",
+            post: 1
+        },
+
+        {
+            index: 32,
+            name: "cow panties",
+            name_ko: "소 팬티",
+            variable: "cow",
+            description: "귀여운 소 발자국.",
+            post: 1
+        },
+		
+        {
+            index: 33,
+            name: "strap-on",
+            name_ko: "페니스 밴드",
+            variable: "straponlower",
+            description: "엉덩이에 착용한다. 삽입 섹스에 사용한다.",
+            post: 1
+        },
+
+        {
+            index: 34,
+            name: "strap-on horse cock",
+            name_ko: "말자지 페니스 밴드",
+            variable: "straponhorse",
+            description: "진기한 말자지 모양의 성기. 엉덩이에 착용한다. 삽입 섹스에 사용한다.",
+            post: 1
+        },
+
+        {
+            index: 35,
+            name: "strap-on knotted cock",
+            name_ko: "혹이 달린 페니스 밴드",
+            variable: "straponknotted",
+            description: "진기한 개자지 모양의 혹이 달린 성기. 엉덩이에 착용한다. 삽입 섹스에 사용한다.",
+            post: 1
+        },
+
+        {
+            index: 36,
+            name: "strap-on studded cock",
+            name_ko: "징이 박힌 페니스 밴드",
+            variable: "straponstudded",
+            description: "엉덩이에 착용한다. 삽입 섹스에 사용한다.",
+            post: 1
+        },
+
+        {
+            index: 37,
+            name: "see-through swim bottoms",
+            name_ko: "속이 비치는 수영복 하의",
+            variable: "seethroughswimsuit",
+            description: "당신의 몸통 모양을 잡는다.",
+            post: 1
+        },
     ]>>
 <</widget>>

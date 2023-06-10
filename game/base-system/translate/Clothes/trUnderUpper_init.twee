@@ -1,10 +1,10 @@
 :: Widgets trUnderUpper [widget nobr]
 <<widget "init_trUnderUpper">>
-    <<set _trClothes.under_upper to [
+    <<set setup.trClothes.under_upper to [
         {
             index: 0,
             name: "naked",
-            name_ko: "알몸",
+            name_ko: "벗음",
             variable: "naked",
             description: "naked",
             post: 0
@@ -51,7 +51,7 @@
             name: "skimpy leotard",
             name_ko: "노출 많은 레오타드",
             variable: "leotardskimpy",
-            description: "몸에 딱 달라붙는다. 허벅지를 과시한다.",
+            description: "몸에 딱 달라붙는다. 넓적다리를 과시한다.",
             post: 1
         },
 
@@ -114,7 +114,7 @@
             name: "plain bra",
             name_ko: "평범한 브라",
             variable: "plainbra",
-            description: "간단명료하다.",
+            description: "건전하다.",
             post: 1
         },
 
@@ -186,7 +186,7 @@
             name: "classic school swimsuit",
             name_ko: "클래식 학교 수영복",
             variable: "classicschoolswimsuit",
-            description: "참된 학교 수영복. 빈티지.",
+            description: "진짜 학교 수영복. 빈티지.",
             post: 0
         },
 
@@ -197,6 +197,87 @@
             variable: "swimshirt",
             description: "수영하는 동안 태양으로부터 보호한다.",
             post: 1
-        }
-    ]>>
+        },
+
+        {
+            index: 22,
+            name: "vest",
+            name_ko: "런닝셔츠",
+            variable: "vest",
+            description: "건전하다.",
+            post: 1
+        },
+
+        {
+            index: 23,
+            name: "strapless bra",
+            name_ko: "끈없는 브라",
+            variable: "straplessbra",
+            description: "어깨가 자유롭다.",
+            post: 1
+        },
+
+        {
+            index: 24,
+            name: "school swim top",
+            name_ko: "학교 수영복 상의",
+            variable: "schoolswimtop",
+            description: "외국의 학교 수영복을 모방했다.",
+            post: 1
+        },
+
+        {
+            index: 25,
+            name: "tape",
+            name_ko: "테이프",
+            variable: "tape",
+            description: "간신히 거기에 붙어있다.",
+            post: 1
+        },
+
+        {
+            index: 26,
+            name: "cow bra",
+            name_ko: "소 브라",
+            variable: "cow",
+            description: "잘 지탱해준다.",
+            post: 1
+        },
+
+        {
+            index: 27,
+            name: "chest binder",
+            name_ko: "가슴 압박대",
+            variable: "chestbinder",
+            description: "평평하게 만드는 동시에 보호해준다.",
+            post: 1
+        },
+
+        {
+            index: 28,
+            name: "undershirt",
+            name_ko: "속셔츠",
+            variable: "undershirt",
+            description: "따뜻하고 몸에 꼭 맞는다.",
+            post: 1
+        },
+
+        {
+            index: 29,
+            name: "see-through swimsuit",
+            name_ko: "속이 비치는 수영복",
+            variable: "seethroughswimsuit",
+            description: "당신의 몸통 모양을 잡는다.",
+            post: 0
+        },
+
+        {
+            index: 30,
+            name: "push up bra",
+            name_ko: "보정 브라",
+            variable: "pushupbra",
+            description: "가슴을 크게 보이게 한다.",
+            post: 1
+        },
+		]>>
 <</widget>>

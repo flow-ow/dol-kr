@@ -1,4 +1,4 @@
-:: Eerie Mirror [nobr]
+:: Eerie Mirror
 
 <<effects>>
 당신은 거울에 다가가서, 거울의 깊이를 들여다 본다. 거울은 더 이상 반사된 주변을 보이지 않고, 기이한 빛을 발한다. 보라색이나 분홍색, 어쩌면 빨간색으로.
@@ -10,15 +10,15 @@
 <<link [[물러난다|Eerie Mirror Stop]]>><</link>>
 <br>
 
-:: Eerie Mirror Stop [nobr]
+:: Eerie Mirror Stop
 
 <<effects>>
 당신은 거울에서 물러난다. 빛이 곧 꺼진다.
 <br><br>
-<<link [[물러난다|Bedroom]]>><<unset $mirrorMenu>><</link>>
+<<link [[물러난다|Bedroom]]>><<unset $mirrorMenu>><<unset $bodywritingSet>><</link>>
 <<mirror>>
 
-:: Eerie Mirror 2 [nobr]
+:: Eerie Mirror 2
 
 <<effects>>
 촉수가 당신의 볼을 어루만진다. 녀석이 맥동한다. 각각의 파동이 당신의 피부 속에 스며들어, 당신의 몸에 잔물결을 일으킨다. 당신은 떨고 있다. 냄새가 달콤한다.
@@ -28,7 +28,7 @@
 <<link [[물러난다|Eerie Mirror Stop]]>><</link>>
 <br>
 
-:: Eerie Mirror 3 [nobr]
+:: Eerie Mirror 3
 
 <<effects>>
 당신은 혀를 내밀고 촉수가 더 가까이 움직이기 시작하자, 가슴이 설레인다. 촉수는 몸 주변에 얽힐 때까지 빠르게 움직인다.
@@ -37,13 +37,13 @@
 끝부분에서 분홍색 액체가 떨어진다.
 <br><br>
 <<if $deviancy gte 15>>
-	<<link [[핥는다|Eerie Mirror 4]]>><</link>><<set $drugged += 60>><<deviant2>>
+	<<link [[핥는다|Eerie Mirror 4]]>><</link>><<drugs 60>><<deviant2>>
 	<br>
 <</if>>
 <<link [[물러난다|Eerie Mirror Stop]]>><</link>>
 <br>
 
-:: Eerie Mirror 4 [nobr]
+:: Eerie Mirror 4
 
 <<effects>>
 당신은 촉수의 끝을 핥아, 분홍색 액체의 맛을 본다. 달콤하고, 따뜻하다. 당신은 핥짝거리면서, 오싹한 따뜻함을 느낀다.
@@ -52,13 +52,13 @@
 다른 촉수 몇 개가 빛에서 형성된다. 녀석들은 가까이에서 춤을 추고 있다.
 <br><br>
 <<if $deviancy gte 15>>
-	<<link [[핥는다|Eerie Mirror 5]]>><<set $drugged += 60>><</link>><<deviant2>>
+	<<link [[핥는다|Eerie Mirror 5]]>><<drugs 60>><</link>><<deviant2>>
 	<br>
 <</if>>
 <<link [[물러난다|Eerie Mirror Stop]]>><</link>>
 <br>
 
-:: Eerie Mirror 5 [nobr]
+:: Eerie Mirror 5
 <<effects>>
 <<if $moonstate is "morning">>
 	당신은 계속해서 촉수의 끝을 핥짝거리며, 달콤한 액체를 맛본다. 녀석은 원하는 것처럼 당신의 혀를 밀어낸다.
@@ -85,14 +85,14 @@
 	<<deviancy2>>
 	빛이 희미해지고, 촉수가 그와 함께 사라진다.
 	<br><br>
-	<<link [[물러난다|Bedroom]]>><<unset $mirrorMenu>><</link>>
+	<<link [[물러난다|Bedroom]]>><<unset $mirrorMenu>><<unset $bodywritingSet>><</link>>
 	<br><br>
 
 	<br><br>
 	<<mirror>>
 <</if>>
 
-:: Eerie Mirror 6 [nobr]
+:: Eerie Mirror 6
 <<effects>>
 당신은 첫번째 촉수를 
 <<if $lostOral>>
@@ -102,14 +102,17 @@
 	입
 <</if>>
 으로 받아 들이고, 빤다. 당신은 달콤하고 따뜻한 액체를 꿀꺽 마신다.
+<<oralstat>>
+<<oralejacstat>>
+<<ejacstat>>
 <<deviancy5>>
 <<undress "wardrobe">>
 다른 촉수들은 화려한 솜씨로 당신의 옷을 벗기고, 당신의 팔과 다리, 엉덩이에 더욱 휘감기는 동시에,
- 당신의 <<genitalsPost>> 가까이에서 꿈틀댄다.
+당신의 <<genitalsPost>> 가까이에서 꿈틀댄다.
 <br><br>
 <<link [[다음|Eerie Mirror Tentacles]]>><<set $sexstart to 1>><</link>>
 
-:: Eerie Mirror Tentacles [nobr]
+:: Eerie Mirror Tentacles
 <<if $sexstart is 1>>
 	<<set $sexstart to 0>>
 	<<consensual>>
@@ -118,12 +121,12 @@
 
 	<<set $enemytrust += 100>>
 	<<tentaclestart 10 15>>
-	<<set $mouthstate to "tentacledeep">><<set $mouthuse to "tentacle">><<set $tentacles[0].shaft to "shoulders">><<set $tentacles[0].head to "mouthdeep">>
+	<<set $mouthstate to "tentacledeep">><<set $mouthuse to "tentacle">><<set $tentacles[0].shaft to "shoulders">><<set $tentacles[0].head to "mouthdeep">><<set $mouthtarget to "tentacles">>
 <</if>>
-<span class="lewd">붉은 안개가 거울에서 나와 당신의 기분을 좋게 만들고 있다.</span><<set $drugged++>>
+<span class="lewd">붉은 안개가 거울에서 나와, 당신의 기분을 이상하게 만들고 있다.</span><<drugs 1>>
 <br>
 <<statetentacles>>
-당신은 주변에 둘러싸고 있는 $tentacles.active개의 촉수를 세아린다.
+
 
 <<effects>>
 <<effectstentacles>>
@@ -135,7 +138,7 @@
 	<span id="next"><<link [[다음|Eerie Mirror Tentacles]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Eerie Mirror Tentacles Finish [nobr]
+:: Eerie Mirror Tentacles Finish
 <<effects>>
 
 아무런 경고 없이, 촉수가 당신을 꽉 잡고 거울 쪽으로 끌어당긴다.
@@ -146,8 +149,8 @@
 
 <<link [[다음|Eerie Mirror Tentacle Plains]]>><<set $sexstart to 1>><</link>>
 
-:: Eerie Mirror Tentacle Plains [nobr]
-<<set $outside to 0>><<set $location to "tentworld">><<effects>>
+:: Eerie Mirror Tentacle Plains
+<<location "tentworld">><<effects>>
 <<tentacleworldintro>>
 거울을 들여다 보자, 이질적인 풍경을 발견한다.
 거대한 촉수가, 하늘을 향해 몸을 비틀고 있다. <span class="red">여기에서 오르가즘을 느끼는 것은 위험할 것이다.</span>

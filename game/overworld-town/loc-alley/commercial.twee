@@ -1,12 +1,26 @@
-:: Commercial alleyways [nobr]
+:: Commercial alleyways
 
-<<set $outside to 1>><<set $location to "alley">><<effects>><<set $bus to "commercial">>
+<<set $outside to 1>><<set $location to "alley">><<effects>><<set $bus to "commercial">><<getTarget true>>
 당신은 상업 지구의 골목길에 있다.
 <<if $daystate is "day">>
-	번화가에서 소란스러운 소리가 들린다.
+	<<if $weather is "rain">>
+		비가 내리는 소리 조차 너머, 하이 가의 소란스러운 소리가 들린다.
+	<<elseif $weather is "snow">>
+		내리는 눈에 묻혀, 하이 가의 소란스러운 소리가 들린다.
+	<<else>>
+		하이 가의 소란스러운 소리가 들린다.
+	<</if>>
 <<elseif $daystate is "night">>
-	근처 건물에서 웃음소리가 들린다.
-<<else>>
+	<<if $weather is "rain">>
+		빗물이 홈통에서 쏟아져 떨어지고 있다.
+	<<elseif $weather is "snow">>
+		눈이 길을 걷는 것을 방해하고 있다.
+	<<else>>
+		근처 건물에서 웃음소리가 들린다.
+	<</if>>
+<<elseif $daystate is "dawn">>
+	문들이 많이 열려있고 안에서는 목소리가 들려온다.
+<<elseif $daystate is "dusk">>
 	문들이 많이 열려있고 안에서는 목소리가 들려온다.
 <</if>>
 왼쪽에는 사다리가 있다. 당신은 그게 당신을 지붕까지 데려다줄 거라고 생각한다.
@@ -19,17 +33,17 @@
 		<br><br>
 	<</if>>
 <</if>>
-<<if $arousal gte 10000>>
+<<if $arousal gte $arousalmax>>
 	<<orgasmstreet>>
 <</if>>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax and !$possessed>>
 	<<passoutalley>>
 <<else>>
 	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
 		<<eventsstreet>>
 	<<else>>
-		<<if $map.top is true>>
+		<<if $options.mapTop is true>>
 			<<map "commercial">>
 			<br>
 		<</if>>
@@ -40,13 +54,13 @@
 			<br>
 			<<if $exposed gte 2>>
 				<<if $exhibitionism gte 75>>
-					<<link [[번화가를 가로질러 공원으로 들어간다 (0:05)|Cream Ex Naked]]>><</link>><<if $ex_cream isnot 1>><<exhibitionist5>><</if>>
+					<<link [[하이 가를 가로질러 공원으로 들어간다 (0:05)|Cream Ex Naked]]>><</link>><<if $daily.ex.cream isnot 1>><<exhibitionist5>><</if>>
 					<br>
 				<</if>>
 			<</if>>
 			<<if $exposed is 1>>
 				<<if $exhibitionism gte 35>>
-					<<link [[번화가를 가로질러 공원으로 들어간다 (0:05)|Cream Ex Undies]]>><</link>><<if $ex_cream isnot 1>><<exhibitionist3>><</if>>
+					<<link [[하이 가를 가로질러 공원으로 들어간다 (0:05)|Cream Ex Undies]]>><</link>><<if $daily.ex.cream isnot 1>><<exhibitionist3>><</if>>
 					<br>
 				<</if>>
 			<</if>>
@@ -55,14 +69,14 @@
 		<br><br>
 		<<if $daystate isnot "night" and $exposed gte 1>>
 		<<else>>
-			<<add_link "Travel<br>">><<hideDisplay>>
+			<<add_link "이동<br>">><<hideDisplay>>
 			<<connudatus>>
 			<<cliff>>
 			<<wolf>>
 			<<high>>
 			<<loiter>>
 		<</if>>
-		<<add_link "<br>Alternate routes<br>">><<hideDisplay>>
+		<<add_link "<br>다른 경로<br>">><<hideDisplay>>
 		<<if $exposed gte 1 and $daystate isnot "night">>
 		<<else>>
 			<<residential>>
@@ -70,7 +84,7 @@
 		<</if>>
 		<<stormdrain>>
 		<<displayLinks>>
-		<<if $map.top isnot true>>
+		<<if $options.mapTop isnot true>>
 			<br>
 			<<map "commercial">>
 		<</if>>

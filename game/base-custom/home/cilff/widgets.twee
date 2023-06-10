@@ -1,8 +1,0 @@
-:: Widget custom home cliff [widget nobr]
-<<widget "customHomeCliff">>
-    <<if $custom.home.cliff.buy is false>>
-        <<link [[목조 주택|custom home cliff buy]]>><</link>>
-    <<else>>
-        <<link [[집|custom home cliff]]>><<set $outside to 0>><</link>>
-    <</if>>
-<</widget>>

@@ -1,0 +1,412 @@
+:: custom home cliff buy [nobr]
+<<if $custom.home.cliff.firstdetect is false>>
+	작은 목조 주택을 매매하고 있다는 글자가 적혀있는 표지판을 본다.<br>
+	매매가는 <span class="gold">£<<print $custom.home.cliff.price/100>></span>다.<br>
+	<br>
+	<<if $id is 0>>
+		신분증 없이 살 수 있을 것 같진 않다.<br>
+		<<link [[다음|Cliff Street]]>><</link>>
+	<<else>>
+		<<if $money lt $custom.home.cliff.price>>
+			자신이 갖고 있는 돈 보다 비싸다.<br>
+			<<link [[다음|Cliff Street]]>><</link>>
+		<<else>>
+			<<link [[산다|custom home cliff buy2]]>><<set $money -= $custom.home.cliff.price>><<set $custom.home.cliff.buy to true>><<trauma -24>><<stress -36>><<control 50>><</link>><<lltrauma>><<lllstress>><<gggcontrol>><br>
+			<<link [[포기한다|custom home cliff dontbuy]]>><</link>>
+		<</if>>
+	<</if>>
+<<else>>
+	당신은 지나가다가 문득 표지판이 세워져 있는 목조주택을 본다.<br>
+	표지판에 매매중이라고 써져있는 것을 발견한다.<br>
+	매매가는 <span class="gold">£<<print $custom.home.cliff.price/100>></span>다.<br>
+	<<link [[목조 주택 (0:03)|custom home cliff buy]]>><<pass 3>><<set $custom.home.cliff.firstdetect to false>><</link>>
+<</if>>
+
+:: custom home cliff buy2
+당신은 매우 큰 돈을 지불하고 집을 샀다.
+당신은 드디어 안전한 곳을 마련했다는 생각으로 행복해한다.
+<br><br>
+<<link [[집 (0:03)|custom home cliff]]>><<pass 3>><<set $outside to 0>><</link>>
+
+:: custom home cliff dontbuy
+당신은 이 만큼 큰 돈을 함부로 사용할 수 없었다.
+언젠가 당신은 이 집을 사리라 다짐하고 발을 뒤로 했다.
+<br><br>
+<<link [[다음|Cliff Street]]>><</link>>
+
+
+
+/*bedroom event*/
+:: custom home cliff bed [nobr]
+<<set $wardrobe_location to "bed">>
+<<effects>>
+<<wearoutfit>>
+당신은 이불 밑으로 파고들어간다.
+<br><br>
+
+<<if $sleeptrouble is 1 and $controlled is 0>>
+	<<link [[10시간 잔다|custom home cliff sleep]]>><<set $sleephour to 10>><<set $saveDetails.auto.count++>><</link>> (<<timeAfterXHours 10>>)<<ltiredness>>
+	<br>
+	<<link [[9시간 잔다|custom home cliff sleep]]>><<set $sleephour to 9>><<set $saveDetails.auto.count++>><</link>> (<<timeAfterXHours 9>>)<<ltiredness>>
+	<br>
+<</if>>
+<<link [[8시간 잔다|custom home cliff sleep]]>><<set $sleephour to 8>><<set $saveDetails.auto.count++>><</link>> (<<timeAfterXHours 8>>)<<ltiredness>>
+<br>
+<<link [[7시간 잔다|custom home cliff sleep]]>><<set $sleephour to 7>><<set $saveDetails.auto.count++>><</link>> (<<timeAfterXHours 7>>)<<ltiredness>>
+<br>
+<<link [[6시간 잔다|custom home cliff sleep]]>><<set $sleephour to 6>><<set $saveDetails.auto.count++>><</link>> (<<timeAfterXHours 6>>)<<ltiredness>>
+<br>
+<<link [[5시간 잔다|custom home cliff sleep]]>><<set $sleephour to 5>><<set $saveDetails.auto.count++>><</link>> (<<timeAfterXHours 5>>)<<ltiredness>>
+<br>
+<<link [[4시간 잔다|custom home cliff sleep]]>><<set $sleephour to 4>><<set $saveDetails.auto.count++>><</link>> (<<timeAfterXHours 4>>)<<ltiredness>>
+<br>
+<<link [[3시간 잔다|custom home cliff sleep]]>><<set $sleephour to 3>><<set $saveDetails.auto.count++>><</link>> (<<timeAfterXHours 3>>)<<ltiredness>>
+<br>
+<<link [[2시간 잔다|custom home cliff sleep]]>><<set $sleephour to 2>><<set $saveDetails.auto.count++>><</link>> (<<timeAfterXHours 2>>)<<ltiredness>>
+<br>
+<<link [[1시간 잔다|custom home cliff sleep]]>><<set $sleephour to 1>><<set $saveDetails.auto.count++>><</link>> (<<timeAfterXHours 1>>)<<ltiredness>>
+<br>
+<<link [[그냥 잔다(능력부족으로 구현 불가)|custom home cliff sleep]]>><<set $sleephour to -1>><<set $saveDetails.auto.count++>><</link>> (??:??)<<ltiredness>>
+<br><br>
+
+<<link [[침대에서 나온다|custom home cliff bedroom]]>><</link>>
+
+
+:: custom home cliff sleep [nobr]
+<<run Save.autosave.save(null, {"saveId":$saveId, "saveName":$saveName})>>
+<<if _preventUpdate is undefined>>
+	<<run setSaveDetail("autosave",{"saveId":$saveId,"saveName":$saveName},Story.get($passage).description())>>
+<<else>>
+	
+<</if>>
+<<customsleep>><<effects>>
+<<sleepeffects>>
+
+<<if $custom.location is "cliff" and $slimeWake is 1>>
+	<<set $slimeWake to 0>>
+	<<set _newLocations to ["Residential alleyways", "Commercial alleyways", "Park", "Industrial alleyways"]>><<set _newLocations_ko to ["거주구 골목길", "상업구 골목길", "공원", "공업구 골목길"]>>
+	<<set _newLocation to _newLocations[random(0,3)]>><<set _newLocation_ko to _newLocations_ko[_newLocations.indexOf(_newLocation)]>>
+	<<set $eventskip to 1>><<set $slimeSleepEvent to 3>>
+	<<if $hour lt 24 and $hour gt 12>>
+		<<set $slimeSleepEvent += 1>>
+	<</if>>
+	당신은 혼란스럽고 정신없는 상태로 깨어난다. 마지막으로 기억하는 건 평소처럼 침대에 들어가는 것이지만, 여긴 분명 다른 장소다. 귀에 들어간 슬라임이 이 일과 뭔가 연관이 있다는 느낌이 든다.
+	<br><br>
+	<<set _coveredIn to "">>
+	<<if random(0,100) gt 80>>
+		<<set _coveredIn to "점액">>
+		<<if $player.penisExist and $player.virginity.penile isnot true and !$worn.genitals.type.includes("chastity")>>
+			<<set $penisgoo += random(1,3)>>
+		<</if>>
+		<<if $player.vaginaExist and $player.virginity.vaginal isnot true and !$worn.genitals.type.includes("chastity")>>
+			<<set $vaginagoo += random(1,3)>>
+		<</if>>
+		<<if $player.virginity.anal isnot true and $worn.genitals.anal_shield isnot 1 and $analdisable is "f">>
+			<<set $anusgoo += random(1,3)>>
+		<</if>>
+		<<if $player.virginity.oral isnot true>>
+			<<set $mouthgoo += random(1,3)>>
+		<</if>>
+		<<set $hairgoo += random(1,3)>>
+		<<set $facegoo += random(1,3)>>
+		<<set $neckgoo += random(1,3)>>
+		<<set $chestgoo += random(1,3)>>
+		<<set $leftarmgoo += random(1,3)>>
+		<<set $rightarmgoo += random(1,3)>>
+		<<set $thighgoo += random(1,3)>>
+		<<set $feetgoo += random(1,3)>>
+	<</if>>
+	<<if random(0,100) gt 80>>
+		<<if _coveredIn is "점액">>
+			<<set _coveredIn += "과 정액">>
+		<<else>>
+			<<set _coveredIn to "정액">>
+		<</if>>
+		<<if $player.penisExist and $player.virginity.penile isnot true and !$worn.genitals.type.includes("chastity")>>
+			<<set $penissemen += random(1,3)>>
+		<</if>>
+		<<if $player.vaginaExist and $player.virginity.vaginal isnot true and !$worn.genitals.type.includes("chastity")>>
+			<<set $vaginasemen += random(1,3)>>
+		<</if>>
+		<<if $player.virginity.anal isnot true and $worn.genitals.anal_shield isnot 1 and $analdisable is "f">>
+			<<set $anussemen += random(1,3)>>
+		<</if>>
+		<<if $player.virginity.oral isnot true>>
+			<<set $mouthsemen += random(1,3)>>
+		<</if>>
+		<<set $hairsemen += random(1,3)>>
+		<<set $facesemen += random(1,3)>>
+		<<set $necksemen += random(1,3)>>
+		<<set $chestsemen += random(1,3)>>
+		<<set $leftarmsemen += random(1,3)>>
+		<<set $rightarmsemen += random(1,3)>>
+		<<set $thighsemen += random(1,3)>>
+		<<set $feetsemen += random(1,3)>>
+	<</if>>
+	<<if _coveredIn isnot "">>
+		<<set $slimeSleepEvent += 2>>
+		당장의 곤경에 더해, 몸이 <<print _coveredIn>>으로 뒤덮여 있다. 이게 슬라임이 한 짓이라면, 당신이 자고 있는 동안 몸을 가지고 재미를 본 것이 분명하다.
+		<br><br>
+	<</if>>
+	주변을 둘러보니, 어떻게 된 일인지는 몰라도 <<print _newLocation_ko>>에 와있는 것 같다.
+	<br><br>
+	<<link [[다음|_newLocation]]>><</link>>
+<<else>>
+    <<if $nightmares is 1 and $controlled is 0>>
+        <<if $schoolwake is 1>>
+            <<set $schoolwake to 0>>
+            <<if $motherwake is 1>>
+                당신은 다시 잠에 들려 하지만, 이미 잠이 달아난 뒤다.
+            <<else>>
+                당신은 뭔가 어둡고 끔찍한 것에 뒤를 쫓기는 꿈을 꾼다. 악몽은 알람 소리에 끝난다. 학교에 가야 할 시간이다.
+            <</if>>
+            <br><br>
+            <<set $motherwake to 1>>
+        <<else>>
+            당신은 뭔가 어둡고 끔찍한 것에 뒤를 쫓기는 꿈을 꾼다. 금방 자세한 내용은 까먹어 버렸지만, 흐릿한 공포가 남아있다.
+            <br><br>
+        <</if>>
+    <<else>>
+        <<if $schoolwake is 1>>
+            <<set $schoolwake to 0>>
+            <<if $motherwake is 1>>
+                당신은 다시 잠에 들려 하지만, 이미 잠이 달아난 뒤다.
+            <<else>>
+                당신은 편안하게 잠을 자다가, 알람 소리에 일찍 잠에서 깬다. 학교에 가야 할 시간이다.
+            <</if>>
+            <br><br>
+            <<set $motherwake to 1>>
+        <<else>>
+            <<if $specialClothesEffects.bimboTotal gte random(100,1000) or $arousal gte 9000>>
+                당신은 자는 동안 추잡한 꿈 때문에 괴로워한다.
+                <<arousal `$specialClothesEffects.bimboTotal / 10 * $sleepHoursTotal`>>
+                <<arousal `100 * $sleepHoursTotal`>>
+                <<if $arousal gte $arousalmax>>
+                    그러한 꿈들로 인해 한계까지 내몰린다.
+                    <<orgasm>><<set _orgasm to true>>
+                <<else>>
+                    <br><br>
+                <</if>>
+            <<else>>
+                당신은 편안히 잠을 잤고, 상쾌한 기분으로 일어난다.
+                <br><br>
+            <</if>>
+        <</if>>
+    <</if>>
+<</if>>
+<<radiooutfits>>
+<br><br>
+<<link [[침대에서 나온다|custom home cliff bedroom]]>><</link>>
+
+
+
+/*wardrobe event*/
+:: custom home cliff wardrobe [exitCheckBypass]
+<<effects>>
+<<set $wardrobe_location to "wardrobe">>
+<<wardrobeSelection>>
+당신은 옷장을 들여다본다.
+<br><br>
+<div id="wardrobewear"><<wardrobewear>></div>
+<div>/*<div id="wardrobeExits"><<wardrobeExits>>*/<<link [[옷장을 닫는다|custom home cliff bedroom]]>><<unset $saveColor>><<unset $wardrobeRepeat>><<unset $tempDisable>><<set $delete_outfit to "none">><<unset $forceWardrobeLocation>><</link>></div>
+<br><br>
+<<wardrobe>>
+
+/*mirror event*/
+:: custom home cliff mirror [exitCheckBypass]
+<<effects>>
+
+<<link [[물러선다|custom home cliff bedroom]]>><<unset $mirrorMenu>><</link>>
+<br>
+
+<<mirror>>
+<br><br>
+
+
+
+/*bath event*/
+:: custom home cliff bath [nobr]
+<<effects>><<set $location to "home">><<set $outside to 0>>
+
+당신은 몸이 깨끗해질 때까지 씻는다.<<wash>>
+<br><br>
+
+<<link [[나온다|custom home cliff bath Finish]]>><<clotheson>><</link>>
+<br>
+<<link [[자위한다|custom home cliff bath Masturbation]]>><<set $masturbationstart to 1>><</link>>
+<br>
+
+
+:: custom home cliff bath Finish
+<<effects>><<set $location to "home">><<set $outside to 0>>
+
+피부가 아직 축축하다.
+<br><br>
+<<link [[벗어둔 옷을 입는다.|custom home cliff bathroom]]>><<clotheson>><</link>>
+<br>
+<<link [[수건으로 몸을 감싼다.|custom home cliff bathroom]]>>
+	<<if $player.gender == "f" or $breastsize > 0>>
+		<<set $wear_upper = "large_towel">>
+	<<else>>
+		<<set $wear_lower = "towel">>
+	<</if>>
+	<<returnCarried>>
+	<<wardrobewear>>
+<</link>>
+
+<<if $wardrobe.upper.findIndex(x => x.name == "bathrobe") >= 0 or $carried.upper.name == "bathrobe">>
+	<br>
+	<<link [[목욕 가운을 입는다.|custom home cliff bathroom]]>>
+		<<returnCarried>>
+		<<set $wear_upper = $wardrobe.upper.findIndex(x => x.name == "bathrobe")>>
+		<<wardrobewear>>
+	<</link>>
+<</if>>
+
+
+:: custom home cliff Shave
+<<effects>>
+<<dontHideForNow>><<shavestrip>>
+당신은 옷을 벗고, 당신의 <<genitalsPost "을">> 본다.
+<br>
+<<if $worn.genitals.name is "chastity belt" or $worn.genitals.name is "gold chastity belt">>
+벨트가 몸에 딱 붙어 있어서 면도날이 음모에 닿는 건 불가능해 보인다.
+<br>
+<<link [[옷을 입는다->custom home cliff bath]]>><<clotheson>><<dontHideRevert>><</link>>
+<<else>>
+<<if $worn.genitals.name is "chastity cage">>
+당신의 자지가 정조대 안에 갇혀 있어서 주변을 면도하는 것은 까다롭겠지만, 큰 문제가 되지는 않는다.
+<br>
+<</if>>
+<<if $pblevel gte 2 or $pbstrip gte 1 or $pblevelballs gte 2>>
+	<<link [[깨끗이 면도한다 (0:15)->custom home cliff bath Shave clean]]>><<pass 15>><<arousal 100>><<set $pblevel to 0>><<set $pbgrowth to 0>><<set $pblevelballs to 0>><<set $pbgrowthballs to 0>><<set $pbstrip to 0>><<set $makeup.pbcolour to 0>><</link>>
+	<br>
+<</if>>
+<<if $pblevel gte 5 or $pbstrip gte 2 or ($pbstrip is 1 and $pblevel gte 2)>>
+	<<link [[활주로를 만든다 (0:15)->custom home cliff bath Shave strip]]>><<pass 15>><<arousal 100>><<set $pbstripName to "깔끔한 활주로로">><<set $pblevel to 0>><<set $pbgrowth to 0>><<set $pbstrip to 1>><</link>>
+	<br>
+<</if>>
+<<if $pblevel gte 5 or $pbstrip gte 3 or ($pbstrip gte 2 and $pblevel gte 2)>>
+	<<link [[하트를 만든다 (0:15)->custom home cliff bath Shave strip]]>><<pass 15>><<arousal 100>><<set $pbstripName to "귀여운 하트 모양으로">><<set $pblevel to 0>><<set $pbgrowth to 0>><<set $pbstrip to 2>><</link>>
+	<br>
+<</if>>
+<<if $pblevel gte 5 or $pbstrip gte 4 or ($pbstrip gte 3 and $pblevel gte 2)>>
+	<<link [[삼각형을 만든다 (0:15)->custom home cliff bath Shave strip]]>><<pass 15>><<arousal 100>><<set $pbstripName to "깔끔한 삼각형으로">><<set $pblevel to 0>><<set $pbgrowth to 0>><<set $pbstrip to 3>><</link>>
+	<br>
+<</if>>
+<<if $player.ballsExist is true>>
+	<<if $pblevel gte 2 or $pbstrip gte 1>>
+		<<link [[음부만 면도한다 (0:10)->custom home cliff bath Shave pubis]]>><<pass 10>><<arousal 50>><<set $pblevel to 0>><<set $pbgrowth to 0>><<set $pbstrip to 0>><<if $pblevelballs is 0>><<set $makeup.pbcolour to 0>><</if>><</link>>
+		<br>
+	<</if>>
+	<<if $pblevelballs gte 3>>
+		<<link [[불알만 면도한다 (0:05)->custom home cliff bath Shave balls]]>><<pass 5>><<arousal 50>><<set $pblevelballs to 0>><<set $pbgrowthballs to 0>><<if $pblevel is 0 and $pbstrip is 0>><<set $makeup.pbcolour to 0>><</if>><</link>>
+		<br>
+	<</if>>
+<</if>>
+<<if $pblevel gt 5 or $pblevelballs gt 5>>
+	<<link [[짧게 자른다 (0:10)->custom home cliff bath Shave trim]]>><<pass 10>><<arousal 100>>
+		<<if $pblevel gte 5>>
+			<<set $pblevel to 5>><<set $pbgrowth to 7>><<set $pbstrip to 0>>
+		<</if>>
+		<<if $pblevelballs gte 5>>
+			<<set $pblevelballs to 5>><<set $pbgrowthballs to 10>>
+		<</if>>
+	<</link>>
+	<br>
+<</if>>
+<<if $worn.genitals.name isnot "chastity belt">>
+	/*<<link [[Dye pubic hair->Dye pubic hair]]>><</link>><br> 아직 지원않음*/
+<</if>>
+<<link [[면도하지 않는다->custom home cliff bath]]>><<clotheson>><<dontHideRevert>><</link>>
+<</if>>
+
+:: custom home cliff bath Shave clean
+<<effects>>
+
+당신은 면도 크림과 면도기를 들고 앉는다.
+<br>
+당신은 다리를 벌리고 조심스럽게 음모를 밀기 시작한다. 시간이 지나자 당신의 <<genitals_arePost "은" 2>> 매끈하고 깔끔하게 바뀌어 있다.
+<br><br>
+<<link [[다음|custom home cliff bathroom]]>><<clotheson>><<dontHideRevert>><</link>>
+
+:: custom home cliff bath Shave pubis
+<<effects>>
+
+당신은 면도 크림과 면도기를 든다.
+<br>
+당신은 조심스럽게 털을 민다. 시간이 지나자 당신의 음부는 매끈하고 깔끔하게 바뀌어 있다.
+<br><br>
+<<link [[다음|custom home cliff bathroom]]>><<clotheson>><<dontHideRevert>><</link>>
+
+:: custom home cliff bath Shave balls
+<<effects>>
+
+당신은 면도 크림과 면도기를 든다.
+<br>
+당신은 욕조에 한쪽 다리를 올려 놓고, 조심스럽게 당신의 불알을 면도하기 시작한다. 시간이 지나자 당신의 고환은 매끈하고 깔끔하게 바뀌어 있다.
+<br><br>
+<<link [[다음|custom home cliff bathroom]]>><<clotheson>><<dontHideRevert>><</link>>
+
+:: custom home cliff bath Shave strip
+<<effects>>
+
+당신은 면도 크림과 면도기를 들고 앉는다.
+<br>
+당신은 다리를 벌리고 조심스럽게 음모를 밀기 시작한다. 시간이 지나자 당신의 <<genitals_arePost "은" 2>> 이제 매끄럽고 깨끗하게 <<print $pbstripName>> 장식되어 있다.
+<br><br>
+<<link [[다음|custom home cliff bathroom]]>><<clotheson>><<dontHideRevert>><</link>>
+
+:: custom home cliff bath Shave trim
+<<effects>>
+
+당신은 면도 크림과 면도기를 들고 앉는다.
+<br>
+다리를 벌리고 조심스럽게 음부를 다듬기 시작한다. 시간이 지나자 당신의 <<genitalsPost "은" 2>> 깔끔하게 다듬어졌다.
+<br><br>
+<<link [[다음|custom home cliff bathroom]]>><<clotheson>><<dontHideRevert>><</link>>
+
+
+:: custom home cliff bath Masturbation [nobr]
+
+<<effects>>
+<<if $masturbationstart is 1>>
+	<<set $masturbationstart to 0>>
+	<<set $masturbationstat += 1>>
+	<<masturbationstart>>
+<</if>>
+<<masturbationeffects>>
+<<masturbationactions>>
+<<link [[계속 한다|custom home cliff bath Masturbation]]>><</link>><<nexttext>>
+<br>
+<<if $corruptionMasturbation isnot true and random(0,3) gt $orgasmcurrent and $corruption_slime gt ($willpower / 10)>>
+	<<link [[그만한다|$passage]]>><<set $corruptionMasturbation to true>><</link>>
+<<elseif $corruptionMasturbation isnot true>>
+	<<link [[그만한다|custom home cliff bath Masturbation Finish]]>><<set $finish to 1>><</link>>
+<<else>>
+	슬라임이 당신이 그만 하도록 허락하지 않는다.
+<</if>>
+<br>
+
+
+:: custom home cliff bath Masturbation Finish [nobr]
+
+<<effects>>
+<br>
+
+<<endmasturbation>>
+<<endcombat>>
+
+당신은 마저 씻는다.<<wash>>
+<br><br>
+
+<<link [[다음|custom home cliff bath Finish]]>><<clotheson>><</link>>
+<br>
+
+
+
+/*passout event*/
+:: custom home cliff passout [nobr]
+<<custompassout>>
+정신을 차리고 보니 복도에 쓰러져 있었다.
+<<link [[custom home cliff]]>><</link>>

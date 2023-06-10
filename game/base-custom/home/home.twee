@@ -1,13 +1,13 @@
 :: Widget custom home [widget nobr]
 <<widget "customHome">>
-    <<set _location to $args[0]>>
+    <<set _location to _args[0]>>
     <<init_customHome>>
     <<if $custom.homeActive is true>>
         <<switch _location>>
             <<case "cliff">>
                 <<customHomeCliff>>
             <<default>>
-                <<print "customHome 버그입니다: "+$args[0]>>
+                <<print "customHome 버그입니다: "+_args[0]>>
         <</switch>>
     <</if>>
 <</widget>>
@@ -22,6 +22,7 @@
                 firstdetect:true,
                 buy : false,
                 price : 12000000,
+				flowers_intro : 1,
                 haveitem : {
                 tv : false,
                 computer : false,
@@ -29,6 +30,11 @@
                 }
             }
         }>>
+	
+		<<if $custom.home.flowers_intro is undefined>>
+			<<set $custom.home.flowers_intro to 1>>
+		<</if>>
+
     <<else>>
         <<update_customHome>>
     <</if>>
@@ -54,5 +60,11 @@
     /*set*/
 
     <<set $custom.home.version to _custom_home_version>>
+<</if>>
+<<if !$custom.home.cliff.hasOwnProperty("flowers_intro")>>
+	<<set $custom.home.cliff.flowers_intro to 1>>
+	<<if $custom.home.flowers_intro isnot undefined>>
+		<<delete "$custom.home.flowers_intro">>
+	<</if>>
 <</if>>
 <</widget>>

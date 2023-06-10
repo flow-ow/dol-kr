@@ -1,10 +1,10 @@
 :: Widgets trOverLower [widget nobr]
 <<widget "init_trOverLower">>
-    <<set _trClothes.over_lower to [
+    <<set setup.trClothes.over_lower to [
         {
             index: 0,
             name: "naked",
-            name_ko: "알몸",
+            name_ko: "벗음",
             variable: "naked",
             post: 0,
             description: "naked"
@@ -26,6 +26,6 @@
             variable: "cream",
             post: 0,
             description: "오래 남아있진 않을 것이다."
-        }
+        },
     ]>>
 <</widget>>

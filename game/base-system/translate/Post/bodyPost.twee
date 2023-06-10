@@ -1,249 +1,409 @@
 :: Widgets bodyPost [widget nobr]
-<<widget "breastsPost">>
-    <<switch $breastsize>>
-        <<case 0>>
-            <<set _trResult to "유두">>
-        <<case 1>>
-            <<set _trResult to "약간 솟아오른 가슴">>
-        <<case 2>>
-            <<set _trResult to "조그마한 가슴">>
-        <<case 3>>
-            <<set _trResult to "작은 가슴">>
-        <<case 4>>
-            <<set _trResult to "앙증맞은 가슴">>
-        <<case 5>>
-            <<set _trResult to "평범한 가슴">>
-        <<case 6>>
-            <<set _trResult to "봉긋한 가슴">>
-        <<case 7>>
-            <<set _trResult to "큰 가슴">>
-        <<case 8>>
-            <<set _trResult to "풍만한 가슴">>
-        <<case 9>>
-            <<set _trResult to "커다란 가슴">>
-        <<case 10>>
-            <<set _trResult to "매우 큰 가슴">>
-        <<case 11>>
-            <<set _trResult to "엄청난 가슴">>
-        <<case 12>>
-            <<set _trResult to "거대한 가슴">>
-        <<default>>
-            <<set _trResult to "가슴">>
-    <</switch>>
-    <<if $args[0] isnot undefined>>
-        <<if $breastsize is 0>>
-            <<trPost 1 $args[0] $args[1]>>
+<<widget "breastsPost">><<silently>>
+	<<if Number.isInteger($player.breastsize)>>
+		<<if $player.breastsize lte 0>>
+			<<set _trResult to "유두">>
+		<<else>>
+			<<set _trResult to setup.breastsizes[$player.breastsize] + " 가슴">>
+		<</if>>
+	<<elseif $debugdisable is "f">>
+		<<set _trResult to "ERROR - $$player.breastsize 가 숫자가 아님: $player.breastsize">>
+	<</if>>
+    <<if _args[0] isnot undefined>>
+        <<if $player.breastsize is 0>>
+            <<trPost 1 _args[0] _args[1]>>
         <<else>>
-            <<trPost 0 $args[0] $args[1]>>
+            <<trPost 0 _args[0] _args[1]>>
         <</if>>
     <</if>>
+<</silently>><<breastsensitivity>><<print _trResult>><</widget>>
 
-    <<print _trResult>>
-<</widget>>
+<<widget "nipplePost">><<silently>>
+	<<set _trResult to "젖꼭지">><<if _args[0] isnot undefined>><<trPost 1 _args[0] _args[1]>><</if>>
+<</silently>><<breastsensitivity>><<print _trResult>><</widget>>
 
+<<widget "nipplesPost">><<nipplePost _args[0] _args[1]>><</widget>>
 
-<<widget "bottomPost">><<nobr>><<silently>>
-    <<if $bottomsize gte 8>>
-        <<set _trResult to "거대한">>
-    <<elseif $bottomsize is 7>>
-        <<set _trResult to "큰">>
-    <<elseif $bottomsize is 6>>
-        <<set _trResult to "포동포동한">>
-    <<elseif $bottomsize is 5>>
-        <<set _trResult to "둥근">>
-    <<elseif $bottomsize is 4>>
-        <<set _trResult to "부드러운">>
-    <<elseif $bottomsize is 3>>
-        <<set _trResult to "푹신한">>
-    <<elseif $bottomsize is 2>>
-        <<set _trResult to "평범한">>
-    <<elseif $bottomsize is 1>>
-        <<set _trResult to "날씬한">>
-    <<else>>
-        <<set _trResult to "호리호리한">>
+<<widget "bottomPost">><<silently>>
+	<<set _trResult to ["호리호리한", "날씬한", "평범한", "푹신한", "부드러운", "둥근", "포동포동한", "큰", "거대한"][Math.clamp(0, 8, $player.bottomsize)]>>
+    <<set _trResult to _trResult + [" 엉덩이", " 궁둥이", " 엉덩이"].pluck()>>
+    <<if _args[0] isnot undefined>>
+        <<trPost 1 _args[0] _args[1]>>
     <</if>>
-    <<set _trResult to _trResult + " 엉덩이">>
-    <<if $args[0] isnot undefined>>
-        <<trPost 1 $args[0] $args[1]>>
-    <</if>>
-<</silently>><<print _trResult>><</nobr>><</widget>>
+<</silently>><<bottomsensitivity>><<print _trResult>><</widget>>
 
 
-<<widget "pussyPost">><<nobr>><<silently>>
-    <<if $devstate gte 1>>
-        <<if $orgasmcount gte 23>>
-            <<if $orgasmdown gte 1>>
-            <<set _trResult to "고문당한 보지">>
-            <<else>>
-            <<set _trResult to "기진맥진한 보지">>
-            <</if>>
-        <<elseif $orgasmcount gte 9>>
-            <<if $orgasmdown gte 1>>
-            <<set _trResult to "꿈틀거리는 보지">>
-            <<else>>
-            <<set _trResult to "지친 보지">>
-            <</if>>
-        <<else>>
-            <<if $orgasmdown gte 1>>
-            <<set _trResult to "움찔거리는 보지">>
-            <<else>>
-                <<if $arousal gte 8000>>
-                <<set _trResult to "따끔거리는 보지">>
-                <<elseif $arousal gte 6000>>
-                <<set _trResult to "보지">>
-                <<elseif $arousal gte 4000>>
-                <<set _trResult to "보지">>
-                <<elseif $arousal gte 2000>>
-                <<set _trResult to "보지">>
-                <<else>>
-                <<set _trResult to "보지">>
-                <</if>>
-            <</if>>
-        <</if>>
-    <<else>>
-        <<if $orgasmcount gte 23>>
-            <<if $orgasmdown gte 1>>
-            <<set _trResult to "고문당한 작은 보지">>
-            <<else>>
-            <<set _trResult to "기진맥진한 작은 보지">>
-            <</if>>
-        <<elseif $orgasmcount gte 9>>
-            <<if $orgasmdown gte 1>>
-            <<set _trResult to "움찔거리는 보지">>
-            <<else>>
-            <<set _trResult to "지친 작은 보지">>
-            <</if>>
-        <<else>>
-            <<if $orgasmdown gte 1>>
-            <<set _trResult to "움찔거리는 보지">>
-            <<else>>
-                <<if $arousal gte 8000>>
-                <<set _trResult to "따끔거리는 보지">>
-                <<elseif $arousal gte 6000>>
-                <<set _trResult to "조그마한 보지">>
-                <<elseif $arousal gte 4000>>
-                <<set _trResult to "조그마한 보지">>
-                <<elseif $arousal gte 2000>>
-                <<set _trResult to "조그마한 보지">>
-                <<else>>
-                <<set _trResult to "조그마한 보지">>
-                <</if>>
-            <</if>>
-        <</if>>
-    <</if>>
-    <<if $args[0] isnot undefined>>
-        <<trPost 1 $args[0] $args[1]>>
-    <</if>>
-<</silently>><<print _trResult>><</nobr>><</widget>>
+<<widget "pussyPost">><<silently>>
+	<<if _args[0] isnot undefined and typeof _args[0] is "string" and _args[0].substring(0,1).search("[가-힣]") gte 0>>
+		<<unset $_arg>><<set $_post to _args[0]>><<set $_sep to _args[1]>>
+	<<else>>
+		<<set $_arg to _args[0]>><<set $_post to _args[1]>><<set $_sep to _args[2]>>
+	<</if>>
 
-
-<<widget "genitalsPost">><<nobr>><<silently>>
-<<if $worn.genitals.type.includes("chastity") and isNaN($arg[0])>>
-	<<trClothes "genitals" $worn.genitals.name $args[0] $args[1]>>
-<<else>>
+	<<genitalstate>><<set _genital_state_text to _text_output>>
 	<<set _trResult to "">>
-	<<if $penisexist is 1>>
-		<<if $player.virginity.penile is true and $args[0] isnot 2>>
-			<<set _trResult += "동정 ">>
-		<</if>>
-		<<set _trResult += "자지">>
+	<<if !$_arg>>
+		<<genitalsensitivity>><<set _trResult += _text_output>>
 	<</if>>
-	<<if $penisexist is 1 and $vaginaexist is 1>>
-		<<trPost 1 "과">>
-    <<else>>
-        <<trPost 1 $args[1] $args[2]>>
+	<<set _trResult += _genital_state_text + ["보지","보지","보지","씹"].pluck()>>
+    <<if $_post isnot undefined>>
+        <<getPostNum _trResult>><<trPost _postNum $_post $_sep>>
+    <</if>>
+<</silently>><<print _trResult>><</widget>>
+
+<<widget "genitalsPost">><<silently>>
+	<<if _args[0] isnot undefined and typeof _args[0] is "string" and _args[0].substring(0,1).search("[가-힣]") gte 0>>
+		<<unset $_arg>><<set $_post to _args[0]>><<set $_sep to _args[1]>>
+	<<else>>
+		<<set $_arg to _args[0]>><<set $_post to _args[1]>><<set $_sep to _args[2]>>
 	<</if>>
-	<<if $vaginaexist is 1>>
-		<<if $pblevel is 9 and $vaginaWetness gte 75 and $pbdisable is "f">>
-			<<set _trResult += "흥분한 것이 보이는, 털이 무성한 ">>
-		<<elseif $vaginaWetness gte 75>>
-			<<set _trResult += "흥분한 것이 눈에 보이는 ">>
-		<<elseif $pblevel is 9>>
-			<<set _trResult += "털이 무성한 " and $pbdisable is "f">>
+
+	<<set $_virgin to "">>
+	
+	<<if $worn.genitals.type.includes("chastity") and !$_arg and _chastityBreak isnot 1>>
+		<<trClothes "genitals" $worn.genitals.name "name" $_post $_sep>>
+	<<else>>
+		<<genitalsensitivity>><<set _trResult to _text_output>>
+		<<if $player.penisExist>>
+			<<if $player.virginity.penile is true and $_arg isnot 2>>
+				<<set _trResult += "동정 ">>
+			<</if>>
+			<<set _trResult += "자지">>
 		<</if>>
-		<<if $player.virginity.vaginal is true and $args[0] isnot 2>>
-			<<set _trResult += "처녀 ">>
+		<<if $player.vaginaExist>>
+			<<if $player.penisExist>>
+				<<set _trResult += "와 ">>
+			<</if>>
+			<<if $player.virginity.vaginal is true and $_arg isnot 2>>
+				<<set $_virgin to "처녀 ">>
+			<</if>>
+			<<if $vaginaWetness gte 75 and $pbdisable is "f" and $pblevel gte 8>>
+				<<set _trResult += "흥분한 것이 보이며 털이 무성한 ">>
+			<<elseif $vaginaWetness gte 75>>
+				<<set _trResult += "흥분한 것이 눈에 보이는 ">>
+			<<elseif $pbdisable is "f" and $pblevel gte 8>>
+				<<set _trResult += "털이 무성한 ">>
+			<</if>>
+			<<set _trResult += $_virgin + ["보지", "보지", "보지", "씹"].pluck()>>
 		<</if>>
-		<<set _trResult += "보지">>
-        <<trPost 1 $args[1] $args[2]>>
 	<</if>>
-<</if>>
-<</silently>><<print _trResult>><</nobr>><</widget>>
-<<widget "genitals_arePost">><<genitalsPost $args[0] $args[1] $args[2]>><</widget>>
+
+	<<if $_post isnot undefined>>
+		<<getPostNum _trResult>><<trPost _postNum $_post $_sep>>
+	<</if>>
+<</silently>><<print _trResult>><</widget>>
+
+<<widget "genitals_arePost">><<genitalsPost _args[0] _args[1] _args[2]>><</widget>>
+
+<<widget "genitalsandbreastsPost">><<silently>>
+	<<set $_args to []>>
+	<<for $_i, $_arg range _args>>
+		<<if $_arg.substring(0,1).search("[가-힣]") gte 0 or $_arg eq "sep">>/* ignore singular/plural */
+			<<set $_args.push($_arg)>>
+		<</if>>
+	<</for>>
+	<<if $player.breastsize gte 1>><<genitalsPost "과">> <<breastsPost $_args[0] $_args[1]>><<else>><<genitalsPost $_args[0] $_args[1]>><</if>>
+<</silently>><<print _trResult>><</widget>>
 
 
-<<widget "clitPost">><<nobr>><<silently>>
-    <<if $penisexist is 1>>
-        <<penisPost $args[0] $args[1]>>
+<<widget "clitPost">><<silently>>
+	<<if _args[0] isnot undefined and typeof _args[0] is "string" and _args[0].substring(0,1).search("[가-힣]") gte 0>>
+		<<unset $_arg>><<set $_post to _args[0]>><<set $_sep to _args[1]>>
+	<<else>>
+		<<set $_arg to _args[0]>><<set $_post to _args[1]>><<set $_sep to _args[2]>>
+	<</if>>
+    <<if $player.penisExist>>
+        <<penisPost $_post $_sep>>
     <<else>>
-        <<set _trResult to "클리토리스">>
-        <<if $args[0] isnot undefined>>
-            <<trPost 1 $args[0] $args[1]>>
+		<<set _trResult to "">>
+		<<if !$_arg>>
+			<<genitalsensitivity>><<set _trResult += _text_output>>
+		<</if>>
+        <<set _trResult += "클리토리스">>
+        <<if $_post isnot undefined>>
+            <<trPost 1 $_post $_sep>>
         <</if>>
     <</if>>
-<</silently>><<print _trResult>><</nobr>><</widget>>
+<</silently>><<print _trResult>><</widget>>
 
 
-<<widget "penisPost">><<nobr>><<silently>>
-    <<trPenissize>>
-    <<set _penissize_text to _trResult>>
+<<widget "penisPost">><<silently>>
+	<<if _args[0] isnot undefined and typeof _args[0] is "string" and _args[0].substring(0,1).search("[가-힣]") gte 0>>
+			<<set $_post to _args[0]>><<set $_sep to _args[1]>>
+	<<else>>
+		<<set $_arg to _args[0]>><<set $_post to _args[1]>><<set $_sep to _args[2]>>
+	<</if>>
+
+    <<penissize>><<set _penissize_text to _text_output>>
     <<if _penissize_text isnot "">>
         <<set _penissize_text to _penissize_text + " ">>
     <</if>>
+	<<genitalstate>><<set _genital_state_text to _text_output>>
+	<<set _trResult to "">>
+	<<if !$_arg>>
+		<<genitalsensitivity>><<set _trResult += _text_output>>
+	<</if>>
 
-    <<if $orgasmcount gte 23>>
-        <<if $orgasmdown gte 1>>
-            <<set _trResult to _penissize_text + "고문당한 자지">>
-        <<else>>
-        <<set _trResult to _penissize_text + "기진맥진한 자지">>
-        <</if>>
-    <<elseif $orgasmcount gte 9>>
-        <<if $orgasmdown gte 1>>
-        <<set _trResult to _penissize_text + "움찔거리는 자지">>
-        <<else>>
-        <<set _trResult to _penissize_text + "지친 자지">>
-        <</if>>
-    <<else>>
-        <<if $orgasmdown gte 1>>
-        <<set _trResult to _penissize_text + "움찔거리는 자지">>
-        <<else>>
-            <<if $arousal gte 8000>>
-            <<set _trResult to _penissize_text + "따끔거리는 자지">>
-            <<elseif $arousal gte 6000>>
-            <<set _trResult to _penissize_text + "자지">>
-            <<elseif $arousal gte 4000>>
-            <<set _trResult to _penissize_text + "자지">>
-            <<elseif $arousal gte 2000>>
-            <<set _trResult to _penissize_text + "자지">>
-            <<else>>
-            <<set _trResult to _penissize_text + "자지">>
-            <</if>>
-        <</if>>
+    <<set _trResult += _penissize_text + _genital_state_text + "자지">>
+
+	<<if playerHasStrapon()>>
+		<<if $_arg isnot undefined and $_arg is "strap-on" and $player.penisExist>>
+			<!-- Do nothing. This is an override for wacky cases such as player masturbation -->
+		<<else>>
+			<<set _trResult to _penissize_text + "페니스 밴드 자지">>
+		<</if>>
+	<</if>>
+	
+    <<if $_post isnot undefined>>
+        <<trPost 1 $_post $_sep>>
     <</if>>
-    <<if $args[0] isnot undefined>>
-        <<trPost 1 $args[0] $args[1]>>
-    <</if>>
-<</silently>><<print _trResult>><</nobr>><</widget>>
+<</silently>><<print _trResult>><</widget>>
 
+<<widget "penisSimplePost">><<silently>>
+    <<set _trResult to (playerHasStrapon() ? "페니스 밴드 자지": "자지")>><<trPost 1 _args[0] _args[1]>>
+<</silently>><<print _trResult>><</widget>>
 
-<<widget "glansPost">><<nobr>><<silently>>
+<<widget "glansPost">><<silently>>
 <<if $penisuse is 0>>
 	<<set _trResult to "귀두">>
-    <<if $args[0] isnot undefined>>
-        <<trPost 1 $args[0] $args[1]>>
+    <<if _args[0] isnot undefined>>
+        <<trPost 1 _args[0] _args[1]>>
     <</if>>
 <<else>>
 	<<set _trResult to "기둥">>
-    <<if $args[0] isnot undefined>>
-        <<trPost 0 $args[0] $args[1]>>
+    <<if _args[0] isnot undefined>>
+        <<trPost 0 _args[0] _args[1]>>
     <</if>>
 <</if>>
-<</silently>><<print _trResult>><</nobr>><</widget>>
+<<if playerHasStrapon()>>
+	<<set _trResult to "페니스 밴드 자지">>
+	<<trPost 1 _args[0] _args[1]>>
+<</if>>
+<</silently>><<print _trResult>><</widget>>
 
 
-<<widget "testiclesPost">><<nobr>><<silently>>
-	<<set _trResult to "불알">>
-    <<if $args[0] isnot undefined>>
-        <<trPost 0 $args[0] $args[1]>>
+<<widget "testiclesPost">><<silently>>
+	<<if _args[0] isnot undefined and typeof _args[0] is "string" and _args[0].substring(0,1).search("[가-힣]") gte 0>>
+		<<unset $_type>><<set $_post to _args[0]>><<set $_sep to _args[1]>>
+	<<else>>
+		<<set $_type to _args[0]>><<set $_post to _args[1]>><<set $_sep to _args[2]>>
+	<</if>>
+	<<if $_type is "clinical">>
+		<<set $_pool to ["고환", "음낭", "정소"]>>
+	<<else>>
+		<<set $_pool to ["불알", "붕알", "고환"]>>
+	<</if>>
+	<<set _trResult to $_pool.pluck()>>
+	<<if $_post isnot undefined>>
+		<<getPostNum _trResult>><<trPost _postNum $_post $_sep>>
+	<</if>>
+<</silently>><<print _trResult>><</widget>>
+
+<<widget "testiclePost">><<testiclesPost _args[0] _args[1] _args[2]>><</widget>>
+
+<<widget "handPost">><<silently>>
+	<<set $_preword to "">>
+	<<if _args[0] isnot undefined>>
+		<<if _args[0].substring(0,1).search("[가-힣]") gte 0>>
+			<<set $_postStr to _args[0]>><<set $_postOpt to _args[1]>>
+		<<else>>
+			<<set $_tempArray to _args[0].split(' ')>>
+			
+			<<set $_hand to $_tempArray.pop()>>
+			<<if $_hand is "hand">>	/* ex. "left hand" */
+				<<set $_hand to $_tempArray.pop()>>
+			<</if>>
+			<<if $_tempArray.length>>
+				<<set $_preword to $_tempArray.join(" ")>>
+			<</if>>
+			<<set $_postStr to _args[1]>><<set $_postOpt to _args[2]>>
+		<</if>>
+	<</if>>
+	<<if $_hand is "left">>
+		<<set _trResult to $_preword + " 왼손">>
+	<<elseif $_hand is "right">>
+		<<set _trResult to $_preword + " 오른손">>
+	<<elseif $_hand is "both">>
+		<<set _trResult to $_preword + " 양손">>
+	<<else>>
+		<<set _trResult to $_preword + " 손">>
+	<</if>>
+    <<if $_postStr isnot undefined>>
+        <<trPost 0 $_postStr $_postOpt>>
     <</if>>
-<</silently>><<print _trResult>><</nobr>><</widget>>
+<</silently>><<print _trResult>><</widget>>
+
+<<widget "mouthPost">><<silently>>
+	<<set _trResult to "입술">><<trPost 2 _args[0] _args[1]>>
+<</silently>><<mouthsensitivity>><<print _trResult>><</widget>>
+
+
+<<widget "npcPenisPost">><<silently>>
+<<if _args[0] is undefined>>/* !_args[0] 이라고 하지 말것 */
+	<<set $_npcGen to $index>><<unset $_post>><<unset $_sep>>
+<<else>>
+	<<if typeof _args[0] is "number">>
+		<<set $_npcGen to _args[0]>><<set $_post to _args[1]>><<set $_sep to _args[2]>>
+	<<else>>
+		<<set $_npcGen to $index>><<set $_post to _args[0]>><<set $_sep to _args[1]>>
+	<</if>>
+<</if>>
+<<if $NPCList[$_npcGen].chastity.penis is "chastity cage">>
+	<<set _trResult to "갇혀있는 자지">><<trPost 1 $_post $_sep>>
+<<elseif $NPCList[$_npcGen].chastity.penis.includes("chastity")>>
+	<<trClothes "genitals" $NPCList[$_npcGen].chastity.penis "name" $_post $_sep>>
+<<else>>
+	<<trPenisdesc $NPCList[$_npcGen].penisdesc $_post $_sep>>
+<</if>>
+<</silently>><<print _trResult>><</widget>>
+
+<<widget "npcPenisSimplePost">><<silently>>
+	<<if _args[0] is undefined>>
+		<<set $_npcGen to $index>><<unset $_post>><<unset $_sep>>
+	<<else>>
+		<<if typeof _args[0] is "number">>
+			<<if $enemynomax is 1>>
+				<<set _args[0] to 0>>
+			<</if>>
+			<<set $_npcGen to _args[0]>><<set $_post to _args[1]>><<set $_sep to _args[2]>>
+		<<else>>
+			<<set $_npcGen to $index>><<set $_post to _args[0]>><<set $_sep to _args[1]>>
+		<</if>>
+	<</if>>
+	<<if $NPCList[$_npcGen].chastity.penis is "chastity cage">>
+		<<set _trResult to "갇혀있는 자지">><<trPost 1 $_post $_sep>>
+	<<elseif $NPCList[$_npcGen].chastity.penis.includes("chastity")>>
+		<<trClothes "genitals" $NPCList[$_npcGen].chastity.penis "name" $_post $_sep>>
+	<<elseif npcHasStrapon($_npcGen)>>
+		<<set _trResult to either("페니스 밴드","페니스 밴드 자지")>><<trPost 1 $_post $_sep>>
+	<<else>>
+		<<set _trResult to either("자지","음경","육봉")>><<if _trResult is "자지">><<trPost 1 $_post $_sep>><<else>><<trPost 0 $_post $_sep>><</if>>
+	<</if>>
+<</silently>><<print _trResult>><</widget>>
+
+<<widget "npcPenisColoredPost">><<silently>>
+	<<if _args[0] is undefined>>
+		<<set $_npcGen to $index>><<unset $_post>><<unset $_sep>>
+	<<else>>
+		<<if typeof _args[0] is "number">>
+			<<if $enemynomax is 1>>
+				<<set _args[0] to 0>>
+			<</if>>
+			<<set $_npcGen to _args[0]>><<set $_post to _args[1]>><<set $_sep to _args[2]>>
+		<<else>>
+			<<set $_npcGen to $index>><<set $_post to _args[0]>><<set $_sep to _args[1]>>
+		<</if>>
+	<</if>>
+	<<set $_ppcolor to "tan">>
+	<<if $NPCList[$_npcGen].chastity.penis.includes("chastity")>>
+		<<set $_ppcolor to "gray">>
+		<<trClothes "genitals" $NPCList[$_npcGen].chastity.penis "name" $_post "sep">>
+	<<elseif npcHasStrapon($_npcGen)>>
+		/*<<set $_straponcolor to $NPCList[$_npcGen].penisdesc.split(" ")>>
+		<<set $_ppcolor to $_straponcolor[1]>>*/
+		<<set $_ppcolor to $NPCList[$_npcGen].strapon.color>>
+		<<if $_ppcolor is "fleshy">><<set $_ppcolor to "tan">><</if>>
+		<<trPenisdesc $NPCList[$_npcGen].penisdesc $_post "sep">>
+	<<else>>
+		<<trPenisdesc $NPCList[$_npcGen].penisdesc $_post "sep">>
+	<</if>>
+<</silently>><span @class=$_ppcolor><b><<print _trResult>></b></span><<if $_sep is undefined>><<print _trPost>><</if>><</widget>>
+
+<<widget "npcVaginaPost">><<silently>>
+<<if _args[0] is undefined>>
+	<<set _npcGen to $index>><<unset $_post>><<unset $_sep>>
+<<else>>
+	<<if typeof _args[0] is "number">>
+		<<set _npcGen to _args[0]>><<set $_post to _args[1]>><<set $_sep to _args[2]>>
+	<<else>>
+		<<set _npcGen to $index>><<set $_post to _args[0]>><<set $_sep to _args[1]>>
+	<</if>>
+<</if>>
+<<if $NPCList[_npcGen].chastity.vagina.includes("chastity")>>
+	<<trClothes "genitals" $NPCList[_npcGen].chastity.vagina "name" $_post $_sep>>
+<<else>>
+	<<set _trResult to "보지">><<trPost 1 $_post $_sep>>
+<</if>>
+<</silently>><<print _trResult>><</widget>>
+
+<<widget "npcAnusPost">><<silently>>
+<<if _args[0] is undefined>>
+	<<set _npcGen to $index>><<unset $_post>><<unset $_sep>>
+<<else>>
+	<<if typeof _args[0] is "number">>
+		<<set _npcGen to _args[0]>><<set $_post to _args[1]>><<set $_sep to _args[2]>>
+	<<else>>
+		<<set _npcGen to $index>><<set $_post to _args[0]>><<set $_sep to _args[1]>>
+	<</if>>
+<</if>>
+<<if $NPCList[_npcGen].chastity.anus.includes("shield")>>
+	<<trClothes "genitals" $NPCList[_npcGen].chastity.anus "name" $_post $_sep>>
+<<else>>
+	<<set _trResult to "엉덩이">><<trPost 1 $_post $_sep>>
+<</if>>
+<</silently>><<print _trResult>><</widget>>
+
+<<widget "npcGenitalsPost">>/* 주의: silently 사용하지 말 것 */
+	<<set _npcGen to $index>>
+	<<for $_i to 0; $_i lt _args.length; $_i++>>
+		<<if typeof _args[$_i] is "number">>
+			<<set _npcGen to _args[$_i]>>
+		<<elseif _args[$_i] is "simple">>
+			<<set $_simple to _args[$_i]>>
+		<<elseif ndef _args[$_i]>>
+			<<continue>>
+		<<else>>
+			<<set $_post to _args[$_i]>><<set $_sep to _args[$_i+1]>>
+			<<break>>
+		<</if>>
+	<</for>>
+	<<if $NPCList[_npcGen].penis isnot "none" and $NPCList[_npcGen].vagina isnot "none">>
+		<<if $_simple is "simple">>
+			<<npcPenisSimplePost _npcGen "과">> <<npcVaginaPost _npcGen $_post $_sep>>
+		<<else>>
+			<<npcPenisPost _npcGen "과">> <<npcVaginaPost _npcGen $_post $_sep>>
+		<</if>>
+	<<elseif $NPCList[_npcGen].penis isnot "none">>
+		<<if $_simple is "simple">>
+			<<npcPenisSimplePost _npcGen $_post $_sep>>
+		<<else>>
+			<<npcPenisPost _npcGen $_post $_sep>>
+		<</if>>
+	<<else>>
+		<<npcVaginaPost _npcGen $_post $_sep>>
+	<</if>>
+<</widget>>
+
+<<widget "npcChestPost">><<silently>>
+	<<if _args[0] is undefined>>
+		<<set _npcGen to $index>><<unset $_post>><<unset $_sep>>
+	<<else>>
+		<<if typeof _args[0] is "number">>
+			<<set _npcGen to _args[0]>><<set $_post to _args[1]>><<set $_sep to _args[2]>>
+		<<else>>
+			<<set _npcGen to $index>><<set $_post to _args[0]>><<set $_sep to _args[1]>>
+		<</if>>
+	<</if>>
+	<<if $NPCList[_npcGen].pronoun is "m" or $NPCList[_npcGen].breastsize is 0>>
+		<<set _trResult to "가슴">><<trPost 0 $_post $_sep>>
+	<<else>>
+		<<trBreastsdesc $NPCList[_npcGen].breastsdesc $_post $_sep>>
+	<</if>>
+<</silently>><<print _trResult>><</widget>>
+
+<<widget "body_size_textPost">><<silently>>
+	<<switch $physiquesize>>
+		<<case lte 6000>>
+			<<set _trResult to either("조그마한", "앙증맞은", "자그마한", "연약한", "여린") + " ">>
+		<<case lte 10000>>
+			<<set _trResult to either("키 작은", "작은", "가는", "여리여리한") + " ">>
+		<<case lte 12000>>
+			<<set _trResult to either("평균 크기의", "일반적인 크기의", "균형잡힌") + " ">>
+		<<case lte 16000>>
+			<<set _trResult to either("키 큰", "튼튼한", "힘이 넘치는", "커다란") + " ">>
+		<<default>>
+	<</switch>>
+	<<set _trResult to _trResult + either("신체","몸매","몸", "몸통")>>
+	<<getPostNum _trResult>>
+	<<trPost _postNum _args[0] _args[1]>>
+<</silently>><<print _trResult>><</widget>>

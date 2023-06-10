@@ -1,10 +1,10 @@
-:: Bedroom Robin Wrap [nobr]
+:: Bedroom Robin Wrap
 <<effects>>
 <<switch $christmas_gift_robin>>
 	<<case "shirt">>
 		포장지와 마커를 손에 들고, 당신은 로빈의 셔츠와 바지를 준비한다. 당신은 가능한 그것들을 조심스럽게 포장한다. 그 선물의 한쪽 표면에 한면 휘갈겨 써본 로빈의 이름이 뭔가 매혹적인 느낌을 준다.
 	<<case "sundress">>
-		포장지와 마커를 손에 들고, 당신은 로빈의 선 드레스를 준비한다. 당신은 가능한 그것을 조심스럽게 포장한다. 그 선물의 한쪽 표면에 한면 휘갈겨 써본 로빈의 이름이 뭔가 매혹적인 느낌을 준다.
+		포장지와 마커를 손에 들고, 당신은 로빈의 선드레스를 준비한다. 당신은 가능한 그것을 조심스럽게 포장한다. 그 선물의 한쪽 표면에 한면 휘갈겨 써본 로빈의 이름이 뭔가 매혹적인 느낌을 준다.
 	<<case "kimono">>
 		포장지와 마커를 손에 들고, 당신은 로빈의 기모노를 준비한다. 당신은 가능한 그것을 조심스럽게 포장한다. 그 선물의 한쪽 표면에 한면 휘갈겨 써본 로빈의 이름이 뭔가 매혹적인 느낌을 준다.
 	<<case "tuxedo">>
@@ -12,7 +12,7 @@
 	<<case "gothic gown">>
 		포장지와 마커를 손에 들고, 당신은 로빈의 고딕 드레스를 준비한다. 당신은 가능한 그것을 조심스럽게 포장한다. 그 선물의 한쪽 표면에 한면 휘갈겨 써본 로빈의 이름이 뭔가 매혹적인 느낌을 준다.
 	<<case "christmas">>
-		With the wrapping paper and marker in hand, you prepare Robin's Christmas outfit. You wrap it as carefully as you can. The gift has a fetching look to it once done, with Robin's name scawled across one surface.
+		With the wrapping paper and marker in hand, you prepare Robin's Christmas outfit. You wrap it as carefully as you can. The gift has a fetching look to it once done, with Robin's name scrawled across one surface.
 <</switch>>
 <br><br>
 
@@ -23,7 +23,7 @@
 <br>
 
 <!--Old passage to be removed at a later date-->
-:: Bedroom Robin Shirt Wrap [nobr]
+:: Bedroom Robin Shirt Wrap
 <<effects>>
 
 포장지와 마커를 손에 들고, 당신은 로빈의 셔츠와 바지를 준비한다. 당신은 가능한 그것들을 조심스럽게 포장한다. 그 선물의 한쪽 표면에 한면 휘갈겨 써본 로빈의 이름이 뭔가 매혹적인 느낌을 준다.
@@ -36,10 +36,10 @@
 <br>
 
 <!--Old passage to be removed at a later date-->
-:: Bedroom Robin Sundress Wrap [nobr]
+:: Bedroom Robin Sundress Wrap
 <<effects>>
 
-포장지와 마커를 손에 들고, 당신은 로빈의 선 드레스를 준비한다. 당신은 가능한 그것을 조심스럽게 포장한다. 그 선물의 한쪽 표면에 한면 휘갈겨 써본 로빈의 이름이 뭔가 매혹적인 느낌을 준다.
+포장지와 마커를 손에 들고, 당신은 로빈의 선드레스를 준비한다. 당신은 가능한 그것을 조심스럽게 포장한다. 그 선물의 한쪽 표면에 한면 휘갈겨 써본 로빈의 이름이 뭔가 매혹적인 느낌을 준다.
 <br><br>
 
 당신은 선물을 메인 홀의 플라스틱 나무 아래에 놓는다.
@@ -49,7 +49,7 @@
 <br>
 
 <!--Old passage to be removed at a later date-->
-:: Bedroom Robin Kimono Wrap [nobr]
+:: Bedroom Robin Kimono Wrap
 <<effects>>
 
 포장지와 마커를 손에 들고, 당신은 로빈의 기모노를 준비한다. 당신은 가능한 그것을 조심스럽게 포장한다. 그 선물의 한쪽 표면에 한면 휘갈겨 써본 로빈의 이름이 뭔가 매혹적인 느낌을 준다.
@@ -62,7 +62,7 @@
 <br>
 
 <!--Old passage to be removed at a later date-->
-:: Bedroom Robin Christmas Wrap [nobr]
+:: Bedroom Robin Christmas Wrap
 <<effects>>
 
 
@@ -75,7 +75,7 @@
 <<link [[다음|Bedroom]]>><</link>>
 <br>
 
-:: Bedroom Orphans Clothes Wrap [nobr]
+:: Bedroom Orphans Clothes Wrap
 <<effects>>
 
 당신은 옷을 분류하고, 누구에게 무엇을 줄지 결정하는데 많은 시간을 소비한다. 많은 고아들이 있고, 당신은 그 모두를 다 잘 알진 못하지만, 당신은 그들의 크기를 추측할 순 있다고 생각한다.
@@ -90,13 +90,12 @@
 <<link [[다음|Bedroom]]>><</link>>
 <br>
 
-
 :: Widgets Orphanage Christmas [widget]
-<<widget "christmas_robin_visit">><<nobr>>
-<<if $robinmissing is 1>>
+<<widget "christmas_robin_visit">>
+<<if $robinmissing isnot 0>>
 	당신은 손님을 예상하듯, 당신의 방문을 향해 눈을 돌린다. 하지만 거기엔 아무도 없다.
 	<br><br>
-	
+
 	<<link [[다음|Bedroom]]>><</link>>
 	<br>
 <<elseif $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 60>>
@@ -104,37 +103,37 @@
 	<br><br>
 	"메리 크리스마스. <span class="gold">널 위해 트리 아래에 선물을 뒀어."</span> - 로빈
 	<br><br>
-	
+
 	포장된 물건을 푸니, 안에 쿠키가 들어 있다. 덜 익었고, 달다.<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
 	<br><br>
-	
+
 	<<link [[다음|Bedroom]]>><</link>>
 	<br>
 <<elseif $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 20>>
 	<<npc Robin>><<person1>>
 	당신은 방문을 두드리는 소리를 듣는다. 로빈은 모퉁이에서 머리를 빼꼼 내민다. "들어가도 괜찮아?"
 	<br><br>
-	
-	<<HePost "이">>. <<HePost "은">> 지쳐보인다. "메리 크리스마스." 고아들이 축하하고 있다. <span class="gold">"나무 밑에 네게 줄 뭔가를 두고 왔어."</span> <<HePost "은">> 미소를 지으려고 하면서, 은박지로 싸인 작은 물건을 침대 위에 둔다. "준비가 되면 같이 하자."
+
+	<<HePost "이">> 들어온다. <<HePost "은">> 지쳐보인다. "메리 크리스마스." 고아들이 축하하고 있다. <span class="gold">"나무 밑에 네게 줄 뭔가를 두고 왔어."</span> <<HePost "은">> 미소를 지으려고 하면서, 은박지로 싸인 작은 물건을 침대 위에 둔다. "준비가 되면 같이 하자."
 	<br><br>
-	
+
 	<<HePost "은">> 방을 나갔다. 포장된 물건을 푸니, 안에 쿠키가 들어 있다. 덜 익었고, 달다.<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
 	<br><br>
-	
+
 	<<link [[다음|Bedroom]]>><<endevent>><</link>>
 	<br>
-	
+
 <<else>>
 	<<npc Robin>><<person1>>
 	당신은 요란스럽게 문을 두드리는 소리를 듣는다. 로빈이 머리를 안으로 들이밀었다. "들어가도 돼?"
 	<br><br>
-	
+
 	"메리 크리스마스!" <<hePost "이">> 거의 뛰어들다 싶이 들어오면서 말한다. <<HePost "이">> 은박지로 싸인 작은 물건을 침대 위에 둔다. "고아들은 장식을 걸면서 서로 축하하고 있어! 너도 같이 하자"
 	<br><br>
-	
-	"아," <<hePost "이">> 덧붙인다. <span class="gold">"널 위해 트리 아레에 선물을 뒀어!"</span>
+
+	"아," <<hePost "이">> 덧붙인다. <span class="gold">"널 위해 트리 아래에 선물을 뒀어!"</span>
 	<br><br>
-	
+
 	<<if $robinromance is 1>>
 		<<HePost "은">> 당신의 손을 꼭 쥐고, 당신의 볼에 부드럽게 입술을 대고는 방에서 서둘러 빠져나간다.
 	<<else>>
@@ -142,13 +141,13 @@
 	<</if>>
 	포장된 물건을 푸니, 안에 쿠키가 들어 있다. 덜 익었고, 달다.<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
 	<br><br>
-	
+
 	<<link [[다음|Bedroom]]>><<endevent>><</link>>
 	<br>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "christmas_robin">><<nobr>>
+<<widget "christmas_robin">>
 
 <<npc Robin>><<person1>><<generatey2>><<person2>>
 로빈은 어린 고아들을 돌보느라 바쁘다. 한 <<personPost "이">> <<person1>><<hisPost "의">> 소매를 당기며, 선물을 내민다. "이건 내가 주는건 아닌데," <<person2>><<personPost "이">> 말한다. "트리 밑에서 찾았어."
@@ -156,25 +155,36 @@
 
 로빈은 <<personPost>>에게 감사를 표하고, 포장된 물건을 확인한다. <<person1>><<HePost "은">> 당신을 흘깃 보고 미소 짓는다. <<HePost "은">> 당신의 필적을 알아본다.
 
+<<switch $christmas_gift_robin>>
+	<<case "shirt">><<set _robinPush to "robinGiftShirt">>
+	<<case "sundress">><<set _robinPush to "robinGiftSundress">>
+	<<case "kimono">><<set _robinPush to "robinGiftKimono">>
+	<<case "tuxedo">><<set _robinPush to "robinGiftTux">>
+	<<case "gothic gown">><<set _robinPush to "robinGiftGown">>
+	<<case "christmas">><<set _robinPush to "robinGiftChristmas">>
+<</switch>>
+
 <<if $christmas_gift_robin is undefined>>
 <<elseif $NPCName[$NPCNameList.indexOf("Robin")].outfits is undefined>>
-	<<set $NPCName[$NPCNameList.indexOf("Robin")].outfits = [clone($christmas_gift_robin)]>>
+	<<set $NPCName[$NPCNameList.indexOf("Robin")].outfits = [_robinPush]>>
 <<else>>
-	<<run $NPCName[$NPCNameList.indexOf("Robin")].outfits.pushUnique(clone($christmas_gift_robin))>>
+	<<run $NPCName[$NPCNameList.indexOf("Robin")].outfits.pushUnique(_robinPush)>>
 <</if>>
 
 <<if $christmas_gift_robin is "shirt" and $NPCName[$NPCNameList.indexOf("Robin")].pronoun is "m" or $christmas_gift_robin is "sundress" and $NPCName[$NPCNameList.indexOf("Robin")].pronoun is "f">>
 	들떠하며, <<hePost "은">> 포장지를 뜯는다. <<hePost "은">> 안에 들어있는 옷을 보고 점점 미소가 커진다. <<HePost "은">> 가슴에 옷을 꼭 붙들고, 당신에게 미소를 짓는다.<<ltrauma>><<trauma -6>>
 	<br><br>
-	
+
 	<<if $robinromance is 1 and $NPCName[$NPCNameList.indexOf("Robin")].dom gte 40>>
 		<<set $christmas_robin_lewd to 1>>
 		"마음에 들어!" <<hePost "이">> 말한다. "정말 고마워." <<HePost "은">> 당신에게 두 팔로 당신을 껴안고 속삭인다. <span class="gold">"내 방에서 만나자."</span>
 		<br><br>
-		<<HePost "은">> 복도의 한 곳, <<hisPost "의">> 방으로 사라진다.<<ggglove>><<npcincr Robin love 10>>
+		<<HePost "은">> 복도의 한 곳, <<hisPost "의">> 방으로 사라진다.
+		<<ggglove>><<npcincr Robin love 10>>
 		<br><br>
 	<<else>>
-		"마음에 들어!" <<hePost "이">> 말한다. "정말 고마워." <<HePost "은">> 복도의 한 곳, <<hisPost "의">> 방으로 사라진다.<<ggglove>><<npcincr Robin love 10>>
+		"마음에 들어!" <<hePost "이">> 말한다. "정말 고마워." <<HePost "은">> 복도의 한 곳, <<hisPost "의">> 방으로 사라진다.
+		<<ggglove>><<npcincr Robin love 10>>
 		<br><br>
 	<</if>>
 <<elseif $christmas_gift_robin is "shirt" and $NPCName[$NPCNameList.indexOf("Robin")].pronoun is "f" or $christmas_gift_robin is "sundress" and $NPCName[$NPCNameList.indexOf("Robin")].pronoun is "m">>
@@ -207,14 +217,20 @@
 		로빈은 고민하는 것 같다. "그-그렇게 생각해줘서 고마워." <<HePost "은">> 옷을 접고, <<hisPost "의">> 방으로 돌아간다.
 		<br><br>
 	<</if>>
+	<<if $NPCName[$NPCNameList.indexOf("Robin")].crossdress is undefined>>
+		<<set $NPCName[$NPCNameList.indexOf("Robin")].crossdress to 1>>
+	<</if>>
+	<<if $NPCName[$NPCNameList.indexOf("Robin")].cdstart is undefined>>
+		<<set $NPCName[$NPCNameList.indexOf("Robin")].cdstart to "christmas">>
+	<</if>>
 
 <<elseif $christmas_gift_robin is "kimono">>
 	들떠하며, <<hePost "은">> 포장지를 뜯는다. <<HePost "은">> 천을 보고 웃다가, 꺼내는 순간 얼굴을 찡그린다. 당신은 <<himPost "을">> 당황하게 만들었다.
 	<br><br>
-	"이건 평상복이 아니야." <<hePost "이">> 조심스럽게 기모노를 피면서 말한다. "이거에 얼마 썻어?"
+	"이건 평상복이 아니야." <<hePost "이">> 조심스럽게 기모노를 펴면서 말한다. "이거에 얼마 썼어?"
 	<br><br>
-	
-		
+
+
 	<<if $robinromance is 1 and $NPCName[$NPCNameList.indexOf("Robin")].dom gte 40>>
 		<<set $christmas_robin_lewd to 1>>
 		당신은 어깨를 으쓱하며 웃는다. "너무 예뻐," 로빈이 이어서 말한다. "정말 고마워!" 당신에게 두 팔로 당신을 껴안고 속삭인다. <span class="gold">"내 방에서 만나자."</span>
@@ -228,9 +244,9 @@
 <<elseif $christmas_gift_robin is "tuxedo" and $NPCName[$NPCNameList.indexOf("Robin")].pronoun is "m" or $christmas_gift_robin is "gothic gown" and $NPCName[$NPCNameList.indexOf("Robin")].pronoun is "f">>
 	들떠하며, <<hePost "은">> 포장지를 뜯는다. <<hePost "은">> 포장지를 뜯는다. <<HePost "은">> 천을 보고 웃다가, 꺼내는 순간 숨을 삼킨다. 당신은 <<himPost "을">> 당황하게 만들었다.
 	<br><br>
-	"이건 평상복이 아니야." <<hePost "이">> 조심스럽게 <<print ($christmas_gift_robin is "tuxedo"?"턱시도를":"고딕 드레스를")>> 조심스럽게 기모노를 피면서 말한다. "이거에 얼마 썻어? 이거 엄청, 엄~~~청 비싸보이는데!"
+	"이건 평상복이 아니야." <<hePost "이">> 특히 조심스럽게 <<print ($christmas_gift_robin is "tuxedo"?"턱시도를":"고딕 드레스를")>> 펴면서 말한다. "이거에 얼마 썼어? 이거 엄청, 엄~청 비싸보이는데!"
 	<br><br>
-		
+
 	<<if $robinromance is 1 and $NPCName[$NPCNameList.indexOf("Robin")].dom gte 40>>
 		<<set $christmas_robin_lewd to 1>>
 		당신은 어깨를 으쓱하며 웃는다. "너무 아름다워, 빨리 입은 모습을 너한테 보여주고 싶어." 로빈이 이어서 말한다. <<if $NPCName[$NPCNameList.indexOf("Robin")].dom gte 80>> "아니면 입는거 네가 도와줘." <<else>> "정말 고마워!" <</if>> 당신에게 두 팔로 당신을 껴안고 속삭인다. <span class="gold">"내 방에서 만나자."</span>
@@ -244,7 +260,7 @@
 <<elseif $christmas_gift_robin is "tuxedo" and $NPCName[$NPCNameList.indexOf("Robin")].pronoun is "f" or $christmas_gift_robin is "gothic gown" and $NPCName[$NPCNameList.indexOf("Robin")].pronoun is "m">>
 	들떠하며, <<hePost "은">> 포장지를 뜯는다. <<HePost "은">> 천을 보고 웃다가, 꺼내는 순간 얼굴을 찡그린다. 당신은 <<himPost "을">> 당황하게 만들었다.
 	<br><br>
-	"이건 평상복이 아니야." <<hePost "이">> 조심스럽게 <<print ($christmas_gift_robin is "tuxedo"?"턱시도를":"고딕 드레스를")>> 조심스럽게 기모노를 피면서 말한다. "이거에 얼마 썻어?"
+	"이건 평상복이 아니야." <<hePost "이">> 조심스럽게 <<print ($christmas_gift_robin is "tuxedo"?"턱시도를":"고딕 드레스를")>> 펴면서 말한다. "이거에 얼마 썼어?"
 	<br><br>
 	"잠깐! 대답하지마. 그전에 우선," <<hePost "이">> 당혹해하며 말한다. "이건 <<if $NPCName[$NPCNameList.indexOf("Robin")].pronoun is "m">>여성<<else>>남성<</if>>용이잖아, 그치?"
 	<br><br>
@@ -259,7 +275,7 @@
 
 	<<if $robinromance is 1 and $NPCName[$NPCNameList.indexOf("Robin")].dom gte 40>>
 		<<set $christmas_robin_lewd to 1>>
-		로빈의 얼굴이 밝아진다. "정말? 고-고마워."  당신에게 두 팔로 당신을 껴안고 속삭인다. <span class="gold">"내 방에서 만나자."</span>
+		로빈의 얼굴이 밝아진다. "정말? 고-고마워." 두 팔로 당신을 껴안고 당신에게 속삭인다. <span class="gold">"내 방에서 만나자."</span>
 		<br><br>
 		<<HePost "은">> 복도의 한 곳으로 사라진다.<<ggglove>><<npcincr Robin love 10>>
 		<br><br>
@@ -270,24 +286,33 @@
 		로빈은 고민하는 것 같다. "그-그렇게 생각해줘서 고마워." <<HePost "은">> 옷을 접고, <<hisPost "의">> 방으로 돌아간다.
 		<br><br>
 	<</if>>
+
+	<<if $NPCName[$NPCNameList.indexOf("Robin")].crossdress is undefined>>
+		<<set $NPCName[$NPCNameList.indexOf("Robin")].crossdress to 1>>
+	<</if>>
+	<<if $NPCName[$NPCNameList.indexOf("Robin")].cdstart is undefined>>
+		<<set $NPCName[$NPCNameList.indexOf("Robin")].cdstart to "christmas">>
+	<</if>>
+
 <<else>>
 	들떠하며, <<hePost "은">> 포장지를 뜯는다. <<hePost "은">> 안에 들어있는 옷을 보고 점점 미소가 커진다. <<HePost "은">> 가슴에 옷을 꼭 붙들고, 당신에게 미소를 짓는다.<<ltrauma>><<trauma -6>>
 	<br><br>
-	
+
 	<<if $robinromance is 1 and $NPCName[$NPCNameList.indexOf("Robin")].dom gte 40>>
 		<<set $christmas_robin_lewd to 1>>
 		"마음에 들어!" <<hePost "이">> 말한다. "마치 깜짝 파티같아. 정말 고마워." 당신에게 두 팔로 당신을 껴안고 속삭인다. <span class="gold">"내 방에서 만나자."</span>
 		<br><br>
 		<<HePost "은">> 복도의 한 곳으로 사라진다.<<ggglove>><<npcincr Robin love 10>>
+		<br><br>
 	<<else>>
 		"마음에 들어!" <<hePost "이">> 말한다. "마치 깜짝 파티같아. 정말 고마워." <<HePost "은">> 복도의 한 곳, <<hisPost "의">> 방 앞으로 사라진다.<<ggglove>><<npcincr Robin love 10>>
 		<br><br>
-	<</if>>	
+	<</if>>
 <</if>>
 
 <<link [[다음|Orphanage]]>><<endevent>><</link>>
 <br>
 
 
-<</nobr>><</widget>>
+<</widget>>
 

@@ -1,5 +1,5 @@
 :: Widgets School Projects [widget]
-<<widget "scienceprojectstart">><<nobr>>
+<<widget "scienceprojectstart">>
 <<set $sciencelichentemple to 0>>
 <<set $sciencelichenpark to 0>>
 <<set $sciencelichenlake to 0>>
@@ -25,9 +25,9 @@
 
 <<set $sciencefaircheat to 0>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "scienceprojectfinish">><<nobr>>
+<<widget "scienceprojectfinish">>
 <<unset $sciencelichentemple>>
 <<unset $sciencelichenpark>>
 <<unset $sciencelichenlake>>
@@ -58,9 +58,9 @@
 
 <<unset $scienceprojectwarning>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "mathsprojectstart">><<nobr>>
+<<widget "mathsprojectstart">>
 
 <<set $mathschance to 0>>
 	<<if $mathsstim is undefined>>
@@ -71,9 +71,9 @@
 <<set $mathsstimstolen to 0>>
 <<set $mathsinfo to 0>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "mathsprojectfinish">><<nobr>>
+<<widget "mathsprojectfinish">>
 
 <<unset $mathschance>>
 
@@ -88,31 +88,30 @@
 <<unset $mathsstimbeg>>
 <<unset $mathsprojectwhitney>>
 <<unset $mathschancestart>>
+<<unset $river_help>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "projectoptions">><<nobr>>
+<<widget "projectoptions">>
+	<<if $scienceproject is "ongoing">>
+		<<ind>><<link [[과학 프로젝트에 몰두한다|Science Project]]>><</link>>
+		<br>
+	<</if>>
+	<<if $mathsproject is "ongoing">>
+		<<ind>><<link [[수학 프로젝트에 몰두한다|Maths Project]]>><</link>>
+		<br>
+	<</if>>
+<</widget>>
 
-<<if $scienceproject is "ongoing">>
-<<link [[과학 프로젝트에 몰두한다|Science Project]]>><</link>>
-<br>
-<</if>>
-<<if $mathsproject is "ongoing">>
-<<link [[수학 프로젝트에 몰두한다|Maths Project]]>><</link>>
-<br>
-<</if>>
-<br>
-<</nobr>><</widget>>
-
-<<widget "scienceprojectchance">><<nobr>>
+<<widget "scienceprojectchance">>
 
 <<set $sciencelichenchance to $sciencelichenparkready * 25 + $sciencelichenlakeready * 25 + $sciencelichendrainready * 25 + $sciencelichentempleready * 25>>
 <<set $scienceshroomchance to $scienceshroomwolfready * 10 + $scienceshroomheartready * 10>>
 <<set $sciencephalluschance to $sciencephallusready * 10>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "mathsphone">><<nobr>>
+<<widget "mathsphone">>
 
 그들은 찍은 사진들을 비교한다. 그 중 둘이 당신의 눈 앞에 핸드폰 화면을 들이민다.
 <br><br>
@@ -146,4 +145,4 @@
 <</if>>
 <br><br>
 
-<</nobr>><</widget>>
+<</widget>>

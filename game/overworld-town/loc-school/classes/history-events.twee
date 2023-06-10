@@ -1,13 +1,20 @@
-:: History Tease [nobr]
+:: History Tease
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 당신은 느긋하게 몸을 펴며, <<trClothes "upper" $worn.upper.name "name" "을">>_trResult 올려 가슴팍을 노출시킨다. <<personPost>>에게는 과한 자극이었는지 얼굴을 붉힌 채로 고개를 돌린다.
 <<exhibitionism1>>
-<br><br>
+<<if $robinhistory is "seat">>
+	<<if $NPCName[$NPCNameList.indexOf("Robin")].dom gte 30>>
+		로빈이 당신 <<worn_upper_name_ ul>> 잡아당긴다. "누가 널 볼 거야!" <<nnpc_he_ ga Robin>> 당신의 허리를 가리면서 말한다.
+	<<else>>
+		로빈은 얼굴을 붉히지만, <<nnpc_he_ nun Robin>> 당신을 무시하기 위해 최선을 다한다.
+	<</if>>
+	<br><br>
+<</if>>
 <<link [[다음|History Lesson]]>><<endevent>><</link>>
 <br>
 
-:: History Flash [nobr]
+:: History Flash
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 
@@ -17,24 +24,34 @@
 <<else>>
 	<<exhibitionism4>>
 <</if>>
-<<if $rng gte 51>>
+<<if $robinhistory is "seat" and $NPCName[$NPCNameList.indexOf("Robin")].dom gte 30>>
+	로빈이 끼어들어 당신의 치마를 다시 내린다. "누가 널 볼 거야!" <<nnpc_he_ ga Robin>> 말한다. <<person_ un>> 웃으며 시선을 돌린다.
+	<br><br>
+<<elseif $rng gte 51>>
 	<<personPost>>에게는 과도한 자극이었던 것 같다. 그들은 얼굴을 붉히고는 고개를 돌린다.
 	<br><br>
 <<else>>
+	<<if $robinhistory is "seat">>
+		로빈은 시선을 돌린다.
+	<</if>>
 	<<personPost "은">> 당신의 모습에 넋이 나가, 눈을 떼질 못한다. <<HePost "은">> 당신의 모습에 지나치게 열중하고 있어, 윈터가 문제에 답을 하라고 부르는 것조차 듣지 못한다.
 	<br><br>
 	당황한 탓에 <<hePost "은">> 오답을 말한다. 쉬운 문제였음에도 불구하고 말이다. 다른 학생들이 그 광경에 웃는다.
 	<br><br>
 	<<if $winterromance is 1>>
+	<!-- note: impossible condition -->
 		<<npc Winter>> 윈터가 당신이 무슨 짓을 하고 있었는지 알고 있다라고 하는듯 바라본다. <<HePost "은">> 고개를 내젓는다. <<hisPost "의">> 입술이 희미한 미소를 짓고 있었다는 느낌이 든다.
-		<<set $winterpunish to += 1>>
+		<<set $winterpunish += 1>>
 		<br><br>
 	<</if>>
 <</if>>
 <<link [[다음|History Lesson]]>><<endevent>><</link>>
 <br>
 
-:: History Cleanup [nobr]
+
+
+
+:: History Cleanup
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 <<if $phase lte 1>><<pass 10>>
 	당신은 의자에서 뛰쳐나와
@@ -44,16 +61,36 @@
 	<br><br>
 	전부 털어냈다고 확신한 뒤에야 당신은 옷을 다시 입고는 교실로 돌아간다.
 	<br><br>
-	당신이 돌아오자 교실 안에는 침묵이 내려앉아 있었다.
-	<<if $phase is 0>>
-		윈터가 당신을 노려본다.
+	<<if $schoolstate isnot "fourth">>
+		당신이 돌아왔을 때에는, 학생들이 가방을 싸고 있다.
+		<<if $phase is 0>>
+			윈터가 문 앞에서, 팔짱을 끼고 서 있다.
+			<br>
+			"네가 돌아오기까지 꽤나 시간을 잡아먹었구나. 아마 징계시간에 교장 선생님께 뭐가 그렇게 중요했었는지 말 해 드릴 수 있을 거다."
+		<<else>>
+			<br><br>
+			다른 학생들이 당신에게 뚱한 눈빛을 보내며 복도로 나간다. 당신이 없을 동안 그들에게 어떤 문제가 있었음이 틀림없다.
+		<</if>>
+		<br><br>
+
+		<<link [[다음|Hallways]]>><<endevent>><</link>>
 		<br>
-		"다시 돌아왔다니 기쁘구나. 뭐가 그리 중요한 일이 있었는지는 징계를 받는 동안 교장 선생님께 말씀드리도록 하거라."
-		<br><br>
 	<<else>>
-		교실 전체가 당신을 노려본다. 당신이 나가있는 동안 혼나고 있었던 것이 분명하다.
+		당신이 돌아오자 교실 안에는 침묵이 내려앉아 있었다.
+		<<if $phase is 0>>
+			윈터가 당신을 노려본다.
+			<br>
+			"다시 돌아왔다니 기쁘구나. 뭐가 그리 중요한 일이 있었는지는 징계를 받는 동안 교장 선생님께 말씀드리도록 하거라."
+			<br><br>
+		<<else>>
+			교실 전체가 당신을 노려본다. 당신이 나가있는 동안 혼나고 있었던 것이 분명하다.
+			<br><br>
+			윈터는 당신에게 자리에 앉으라고 손짓을 한다.
+		<</if>>
 		<br><br>
-		윈터는 당신에게 자리에 앉으라고 손짓을 한다.
+
+		<<link [[다음|History Lesson]]>><<endevent>><</link>>
+		<br>
 	<</if>>
 <<elseif $phase is 2>>/*strip*/
 	자리에 앉은 채로, 당신은 옷을 벗거나 옆으로 제쳐 가루를 털어낸다.
@@ -64,36 +101,43 @@
 		한 명이 그 광경에 휘파람을 불고, 그 바람에 교실 전체에서 웃음이 터진다.
 		<br><br>
 		"당장 가리렴." 윈터가 명령한다. "이에 대해서는 징계 시간에 교장 선생님과 이야기를 좀 나누고."
-	<<elseif $worn.under_upper.type.includes("naked") and $breastsize gte 1>>
+		<<detention 2>>
+	<<elseif $worn.under_upper.type.includes("naked") and $player.breastsize gte 1>>
 		그러다가, <<trClothes "upper" $worn.upper.name "name" "을">>_trResult 매만지는 와중에, 당신의 <<breastsPost "이">> 내보여진다.
 		한 학생이 그 광경에 휘파람을 불고, 그 바람에 교실 전체에서 웃음이 터진다.
 		<br><br>
 		"당장 가리렴." 윈터가 명령한다. "이에 대해서는 징계 시간에 교장 선생님과 이야기를 좀 나누고."
+		<<detention 2>>
 	<<else>>아마도 이전 활동에서 뭔가 옷장이 말썽을 일으킨 탓이라고 생각하고 있으리라.
 	<</if>>
 	<br><br>
 	가려움은 곧 진정된다.
+	<br><br>
+
+	<<link [[다음|History Lesson]]>><<endevent>><</link>>
+	<br>
 <<else>>
 	가려움이 진정되는데 시간이 꽤 걸린다.
 	<<pain 5>><<stress 20>>
+	<br><br>
+
+	<<link [[다음|History Lesson]]>><<endevent>><</link>>
+	<br>
 <</if>>
-<br><br>
 
-<<link [[다음|History Lesson]]>><<endevent>><</link>>
-
-:: History Events Dress [nobr]
+:: History Events Dress
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 <<if $uncomfortable.nude is false>>
-당신은 스크린 뒤에서 걸어나온다. 곧 당신의 모습을 보고는 학생들이 웃음으로 맞이하지만, 윈터의 근엄한 얼굴에 빠르게 조용해진다. 당신은 전혀 신경쓰지 않고, 할 수 있는한 최대한 몸을 과시한다.
+	당신은 스크린 뒤에서 걸어나온다. 곧 당신의 모습을 보고는 학생들이 웃음으로 맞이하지만, 윈터의 근엄한 얼굴에 빠르게 조용해진다. 당신은 전혀 신경쓰지 않고, 할 수 있는한 최대한 몸을 과시한다.
 <<else>>
-당신은 <<nervously>> 스크린 뒤에서 걸어나온다. 곧 당신의 모습을 보고는 학생들이 웃음으로 맞이하지만, 윈터의 근엄한 얼굴에 빠르게 조용해진다. 뭔가를 배우기에는 다른 학생이 보고 있는 상황에 너무 당황하지만, 그 시간도 곧 끝이 난다.
+	당신은 <<nervously>> 스크린 뒤에서 걸어나온다. 곧 당신의 모습을 보고는 학생들이 웃음으로 맞이하지만, 윈터의 근엄한 얼굴에 빠르게 조용해진다. 뭔가를 배우기에는 다른 학생이 보고 있는 상황에 너무 당황하지만, 그 시간도 곧 끝이 난다.
 <</if>>
 <br><br>
 <<link [[다음|History Lesson]]>><<endevent>><</link>>
 <br>
 
-:: History Events Refusal [nobr]
+:: History Events Refusal
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 이건 말도 안된다. 저런 걸 입을 수 있을 리가 없다. 당신이 자리에 앉자 윈터가 당신을 노려본다.
@@ -101,22 +145,22 @@
 <<link [[다음|History Lesson]]>><<endevent>><</link>>
 <br>
 
-:: History Events Revealing Dress [nobr]
+:: History Events Revealing Dress
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 <<if $uncomfortable.underwear is false>>
-당신은 자랑스레 스크린 뒤에서 걸어나온다. 입고 있는 옷은 <<genitalsPost "을">> 거의 내보인다. 당신의 옷을 덮고 있는 옷의 면적이 상당히 적다는 것을 깨달은 학생들 사이에 침묵이 흐른다.
-		<<if $fameexhibitionism gte 400>> 당신이 이렇게 적게 차려입은 걸 보는게 처음도 아닐텐데 말이다.<</if>>
-		<br><br>
-		윈터는 만족스러운 미소를 짓는다. <<HePost "이">> 이 복장이 어떤 의식에서 사용되었는지를 설명하는 동안 당신은 모델로서 서있는다. 보아하니 전부 음란한 특성을 가진 의식들에서 사용된 것 같다. 당신은 학생들의 표정을 기꺼이 받아들이며 좀 더 유혹적인 방식으로 자세를 취한다. 당신의 희망보다 더 빠르게 시간이 지나간다.
+	당신은 자랑스레 스크린 뒤에서 걸어나온다. 입고 있는 옷은 <<genitalsPost "을">> 거의 내보인다. 당신의 옷을 덮고 있는 옷의 면적이 상당히 적다는 것을 깨달은 학생들 사이에 침묵이 흐른다.
+	<<if $fame.exhibitionism gte 400>> 당신이 이렇게 적게 차려입은 걸 보는게 처음도 아닐텐데 말이다.<</if>>
+	<br><br>
+	윈터는 만족스러운 미소를 짓는다. <<HePost "이">> 이 복장이 어떤 의식에서 사용되었는지를 설명하는 동안 당신은 모델로서 서있는다. 보아하니 전부 음란한 특성을 가진 의식들에서 사용된 것 같다. 당신은 학생들의 표정을 기꺼이 받아들이며 좀 더 유혹적인 방식으로 자세를 취한다. 당신의 희망보다 더 빠르게 시간이 지나간다.
 <<else>>
-당신은 <<nervously>> 스크린 뒤에서 걸어나온다. 당신의 옷을 덮고 있는 옷의 면적이 상당히 적다는 것을 깨달은 학생들 사이에 침묵이 흐른다. <<HePost "이">> 이 복장이 어떤 의식에서 사용되었는지를 설명하는 동안 당신은 모델로서 서있는다. 보아하니 전부 음란한 특성을 가진 의식들에서 사용된 것 같다. 뭔가를 배우기에는 다른 학생이 보고 있는 상황에 너무 당황하지만, 그 시간도 곧 끝이 난다.
+	당신은 <<nervously>> 스크린 뒤에서 걸어나온다. 당신의 옷을 덮고 있는 옷의 면적이 상당히 적다는 것을 깨달은 학생들 사이에 침묵이 흐른다. <<HePost "이">> 이 복장이 어떤 의식에서 사용되었는지를 설명하는 동안 당신은 모델로서 서있는다. 보아하니 전부 음란한 특성을 가진 의식들에서 사용된 것 같다. 뭔가를 배우기에는 다른 학생이 보고 있는 상황에 너무 당황하지만, 그 시간도 곧 끝이 난다.
 <</if>>
 <br><br>
 <<link [[다음|History Lesson]]>><<endevent>><</link>>
 <br>
 
-:: History Events Trick [nobr]
+:: History Events Trick
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 
 <<if $submissive lte 850>>
@@ -140,12 +184,7 @@
 		<<lstress>><<stress -1>>
 		<br><br>
 
-			<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-			<<skulduggeryskilluse>>
-			<<else>>
-			<span class="blue">너무 쉬웠다. 아무 것도 배우지 못했다.</span>
-			<br><br>
-			<</if>>
+		<<skulduggeryuse>>
 
 		<<link [[다음|History Lesson]]>><<endevent>><</link>>
 		<br>
@@ -160,17 +199,11 @@
 		<<detention 2>><<stress 2>><<gstress>><<gdelinquency>>
 		<br><br>
 
-			<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-			<<skulduggeryskilluse>>
-			<<else>>
-			<span class="blue">너무 쉬웠다. 아무 것도 배우지 못했다.</span>
-			<br><br>
-			<</if>>
+		<<skulduggeryuse>>
 
 		<<link [[다음|History Lesson]]>><<endevent>><</link>>
 		<br>
 	<</if>>
-
 <<else>>
 	당신은 <<hisPost "의">> 뒤쪽을 가리킨다. "레이턴이 봤을텐데."
 	<br><br>
@@ -191,12 +224,7 @@
 		<<stress -2>><<lstress>>
 		<br>
 
-			<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-			<<skulduggeryskilluse>>
-			<<else>>
-			<span class="blue">너무 쉬웠다. 아무 것도 배우지 못했다.</span>
-			<br><br>
-			<</if>>
+		<<skulduggeryuse>>
 
 		<<link [[다음|History Lesson]]>><<endevent>><</link>>
 		<br>
@@ -206,12 +234,7 @@
 		<<personPost "이">> 코웃음을 친다. "내가 뭐 어제 태어나기라도 한 것 같아? 책이나 주워."
 		<br>
 
-			<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-			<<skulduggeryskilluse>>
-			<<else>>
-			<span class="blue">너무 쉬웠다. 아무 것도 배우지 못했다.</span>
-			<br><br>
-			<</if>>
+		<<skulduggeryuse>>
 
 		<<link [[줍는다|History Events Pick]]>><<trauma 2>><<stress 2>><<status -10>><</link>><<gtrauma>><<gstress>><<lcool>>
 		<br>
@@ -221,27 +244,73 @@
 
 <</if>>
 
-:: History Events Pick [nobr]
+:: History Events Pick
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
-<<if $cool lt 39>>
-	당신은 몸을 숙여 책을 집어든다. 그러자, <<personPost "이">> 당신의 머리 뒷쪽을 잡고는 얼굴을 제 사타구니 쪽으로 끌어당긴다. 당신은 <<hePost "을">> 밀어내려 하나, <<hisPost "의">> 손 힘이 너무 센 바람에 어떻게 할 수가 없다. <<HePost "은">> 자신의 <<if $pronoun is "m">>바지 지퍼를 내린다.<<else>>치마를 들춘다. 속옷을 입지 않았다.<</if>> "누가 가서 선생님 시선 좀 돌려." <<HePost "이">> 말한다. 교실의 학생 대다수가 지켜보기 위해 주변에 다가온다.
+
+당신은 몸을 숙여 책을 집어든다. 그러자, <<personPost "이">> 당신의 머리 뒷쪽을 잡고는 얼굴을 <<his_ yi>> 사타구니 쪽으로 끌어당긴다.
+<<if $robinhistory is "seat" and $NPCName[$NPCNameList.indexOf("Robin")].dom gte 50>>
+	당신은 <<hePost "을">> 밀어내려 하나, <<hisPost "의">> 손 힘이 너무 센 바람에 어떻게 할 수가 없다. <<his_ yi>> 머리에 책이 꽂히기 전까지는. <<He_ nun>> 비틀거리며 뒤로 물러나고, 모두의 시선이 범인에게 쏠린다. 로빈이다.
+	<br><br>
+
+	"개자식이," <<person_ i>> 말한다. <<He_ nun>> <<his_ yi>> 관자놀이를 움켜쥐고 있다. "대가를 치르게 될 거다." 로빈이 반항적으로 쏘아본다.
+	<br><br>
+
+	상황이 악화되기 전에 윈터가 돌아온다. <<nnpc_His_ yi Winter>> 시선이 바닥에 떨어진 닳은 교과서로 향한다. "책 주워," <<nnpc_he_ ga Winter>> <<personPost "에게">> 명령한다. "어쩌면 징계 시간에 학교 비품을 정중히 다루는 법을 배울 수 있겠구나."
+	<br><br>
+
+	<<person_ un>> 반박하지는 않지만, 로빈을 향해 사악한 시선을 던진다.
+	<br><br>
+
+	<<link [[다음|History Lesson]]>><<endevent>><</link>>
+	<br>
+<<elseif $cool lt 39>>
+	<<if $robinhistory is "seat">>
+		<br><br>
+		"<<phim_ ul>> 내버려둬!" 로빈이 소리치지만 다른 학생이 <<nnpc_his_ yi Robin>> 입을 막는다.
+		<br><br>
+	<<elseif $robinhistory is "active">>
+		<br><br>
+		당신은 로빈 쪽을 힐끗 쳐다보지만, 모인 군중들 사이로 <<nnpc_him_ ul Robin>> 볼 수 없었다.
+		<br><br>
+	<</if>>
+	당신은 <<hePost "을">> 밀어내려 하나, <<hePost "은">> 당신을 꽉 잡고, <<his_ yi>> <<if $pronoun is "m">>바지 지퍼를 내린다.<<else>>치마를 들춘다. 속옷을 입지 않았다.<</if>>"누가 가서 선생님 시선 좀 돌려." <<HePost "이">> 말한다.
+
+	교실의 학생 대다수가 지켜보기 위해 주변에 다가온다.
 	<br><br>
 	<<link [[다음|History Lesson Molestation]]>><<set $molestationstart to 1>><<set $phase to 2>><</link>>
 	<br>
 <<elseif $cool lt 119>>
-	당신은 몸을 숙여 책을 집어든다. 그러자, <<personPost "이">> 당신의 머리 뒷쪽을 잡고는 얼굴을 제 사타구니 쪽으로 끌어당긴다. 당신은 <<hePost "을">> 밀어내려 하나, <<hisPost "의">> 손 힘이 너무 센 바람에 어떻게 할 수가 없다. <<HePost "은">> 자신의 <<if $pronoun is "m">>바지 지퍼를 내린다.<<else>>치마를 들춘다. 속옷을 입지 않았다.<</if>>
+	<<if $robinhistory is "seat">>
+		<br><br>
+		"<<phim_ ul>> 내버려둬!" 로빈이 소리치지만 다른 학생이 <<nnpc_his_ yi Robin>> 입을 막는다.
+		<br><br>
+	<<elseif $robinhistory is "active">>
+		<br><br>
+		당신은 로빈 쪽을 힐끗 쳐다보지만, 모인 군중들 사이로 <<nnpc_him_ ul Robin>> 볼 수 없었다.
+		<br><br>
+	<</if>>
+	당신은 <<hePost "을">> 밀어내려 하나, <<hePost "은">> 당신을 꽉 잡고, <<his_ yi>> <<if $pronoun is "m">>바지 지퍼를 내린다.<<else>>치마를 들춘다. 속옷을 입지 않았다.<</if>>
 	<br><br>
 	<<link [[다음|History Lesson Molestation]]>><<set $molestationstart to 1>><<set $phase to 1>><</link>>
 	<br>
 <<else>>
-	신은 몸을 숙여 책을 집어든다. 그러자, <<personPost "이">> 당신의 머리 뒷쪽을 잡고는 얼굴을 제 사타구니 쪽으로 끌어당긴다. 당신이 <<hePost "을">> 밀어내자 다른 학생들이 웃음을 터트린다. "내가 실수를 했네!" <<personPost "이">> 미소를 지은 채로 말한다. "그래도 그렇게 공격적으로 굴 필욘 없잖아." <<HePost "은">> 맡은 일을 계속하고, 곧 윈터가 돌아온다.
+	<<if $robinhistory is "seat">>
+		<br><br>
+		"<<phim_ ul>> 내버려둬!" 로빈이 소리치지만 다른 학생이 <<nnpc_his_ yi Robin>> 입을 막는다.
+		<br><br>
+	<<elseif $robinhistory is "active">>
+		<br><br>
+		당신은 로빈 쪽을 힐끗 쳐다보지만, 모인 군중들 사이로 <<nnpc_him_ ul Robin>> 볼 수 없었다.
+		<br><br>
+	<</if>>
+	교실 한 편에서 웃음소리가 들려오자 당신은 가해자를 밀어낸다. "나도 참 덜렁댄다니까!" <<person_ i>> 이제 활짝 웃으며 말한다. "그렇다고 그렇게 심하게 굴 필요는 없잖아." <<He_ nun>> <<his_ yi>> 일을 계속하고, 곧 윈터가 돌아온다.
 	<br><br>
 	<<link [[다음|History Lesson]]>><<endevent>><</link>>
 	<br>
 <</if>>
 
-:: History Events Leave [nobr]
+:: History Events Leave
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 <<personPost>>의 의도를 믿지 않기에, 당신은 몸을 숙여 책을 집어들기를 거부한다. <<HePost "은">> 고개를 옆으로 기울이고는 조롱하듯 얼굴을 찌푸린다. "뭐가 문제야? 내가 뭔가 짓궂은 짓이라도 할까봐 무서워?" <<hisPost "의">> 친구들이 웃는다.
@@ -251,7 +320,7 @@
 <<link [[다음|History Lesson]]>><<endevent>><</link>>
 <br>
 
-:: History Lesson Molestation [nobr]
+:: History Lesson Molestation
 
 <<if $molestationstart is 1>>
 	<<set $molestationstart to 0>>
@@ -261,66 +330,115 @@
 	<<molested>>
 	<<maninit>><<npcoral>>
 	<<if $phase is 1>>
-		<<set $timer to 6>><<set $rescue to 1>>
+		<<set $timer to 6>><<enable_rescue>>
 	<<elseif $phase is 2>>
 		<<set $timer to 24>><<set $rescue to 0>>
 	<</if>>
 <</if>>
+
 <<effects>>
+<<effectsman>>
+
 <<if $rescue is 0 and $alarm is 1>>
 	<<set $alarm to 0>>
-	<span class="red">아무도 당신을 도와주지 않는다. 윈터의 주의가 다른 곳으로 돌아가 있다.</span>
+	<span class="red">누구도 당신을 도우러 오지 않는다. 윈터의 주의가 다른 곳으로 돌아가 있다.</span>
 	<br><br>
 <</if>>
-<<effectsman>><<man>>
+
+<<man>>
 <<audience>>
 <<stateman>>
 <br><br>
 <<actionsman>>
-<<if $alarm is 1 and $rescue is 1>>
+
+<<if _combatend or $timer lte 0>>
 	<span id="next"><<link [[다음|History Lesson Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $enemyhealth lte 0>>
-	<span id="next"><<link [[다음|History Lesson Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[다음|History Lesson Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $timer gte 1>>
-	<span id="next"><<link [[다음|History Lesson Molestation]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[다음|History Lesson Molestation Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|History Lesson Molestation]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: History Lesson Molestation Finish [nobr]
+:: History Lesson Molestation Finish
 
 <<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>><<famerape 10>>
-	만족스럽다는듯, <<personPost "은">> 당신을 바닥으로 밀친다. 다가오는 발소리가 들리자, 다른 학생들은 재빨리 제자리로 돌아간다. 바닥에 누워있는 모습을 들키면 곤란한 상황에 처할 것이다. <<tearful>> 당신은 윈터가 돌아오기 직전에 어떻게든 자리로 돌아간다.
-	<br><br>
+	<<if $robinhistory is "seat">>
+		<<He_ nun>> 당신을 바닥으로 밀친다. 로빈도 같이 풀려나고, 곧장 당신 곁으로 달려온다. 다가오는 발소리가 들리자, 다른 학생들은 재빨리 제자리로 돌아간다.
+		<br><br>
+
+		"괜찮아," <<nnpc_he_ ga Robin>> 말한다. <<nnpc_He_ nun Robin>> <<nnpc_his_ yi Robin>> 주머니에서 티슈를 찾는다. 윈터가 들어오자, 로빈이 <<nnpc_him_ ul Winter>> 향해 몸을 돌린다.
+		<br><br>
+
+		"<<He_ ga>> 제 친구를 공격했어요," 로빈이 <<person_ ul>> 가리키며 말한다.
+		<br><br>
+
+		윈터가 문을 가리키고, <<person_ un>> 나가면서 당신에게 윙크를 한다.
+		<br><br>
+	<<else>>
+		만족스럽다는듯, <<personPost "은">> 당신을 바닥으로 밀친다. 다가오는 발소리가 들리자, 다른 학생들은 재빨리 제자리로 돌아간다. 바닥에 누워있는 모습을 들키면 곤란한 상황에 처할 것이다. <<tearful>> 당신은 윈터가 돌아오기 직전에 어떻게든 자리로 돌아간다.
+		<br><br>
+	<</if>>
 	<<clothesontowel>>
 	<<endcombat>>
 	<<link [[다음|History Lesson]]>><</link>>
 <<elseif $enemyhealth lte 0>>
-	<<personPost "은">> 고통에 몸을 움찔거린다. <<HePost "은">> 당신을 노려보고, <<hisPost "의">> 친구들도 가세해서 당신에게 벌을 줄 생각으로 보이지만, 바로 그때 교실로 다가오는 발소리가 들려온 탓에 그들은 생각을 고쳐먹는다. <<tearful>> 당신은 자리에 앉는다. 윈터는 무슨 일이 있었는지 전혀 모르는 채로 돌아온다.
-	<br><br>
+	<<if $robinhistory is "seat">>
+		<<person_ i>> 고통에 몸을 움츠린다. <<He_ nun>> 당신을 노려보고, <<he_ wa>> <<his_ yi>> 친구는 당신을 괴롭힐 마음이 있는 것 처럼 보이지만, 교실로 다가오는 발소리가 들린다. 그들은 생각을 바꾼다.
+		<br><br>
+		그들이 로빈을 놓아주자, <<nnpc_he_ ga Robin>> 곧장 당신 곁으로 달려온다. "괜찮아," <<nnpc_he_ ga Robin>> 말한다. 윈터가 돌아오고, <<nnpc_his_ yi Winter>> 시선이 로빈을 향해 고정된다. "<<He_ ga>> 제 친구를 공격했어요," 로빈이 <<person_ ul>> 가리키며 말한다.
+		<br><br>
+		윈터가 문을 가리키고, <<person_ un>> 다친 부위를 쓰다듬으며 나간다.
+		<br><br>
+	<<else>>
+		<<person_ i>> 고통에 몸을 움츠린다. <<He_ nun>> 당신을 노려보고, <<he_ wa>> <<his_ yi>> 친구들은 당신을 괴롭힐 마음이 있는 것 처럼 보이지만, 교실로 다가오는 발소리가 들린다. 그들은 생각을 바꾼다. <<tearful>> 당신은 자리에 앉는다. 윈터는 무슨 일이 일어났는지 모른 채, 교실로 돌아온다.
+		<br><br>
+	<</if>>
 	<<clothesontowel>>
 	<<endcombat>>
 	<<link [[다음|History Lesson]]>><</link>>
 <<elseif $alarm is 1 and $rescue is 1>>
 	<<set $rescued += 1>>
-	빠른 속도로 교실에 다가오는 발소리가 들려온다. <<personPost "은">> 당신을 밀쳐낸 뒤 제자리로 돌아가고, 다른 학생들도 마찬가지다. <<tearful>> 당신은 자리로 돌아간다. 윈터가 화난 표정으로 나타난다. "정말이지 5분도 너네들을 그냥 내버려둔 채로 둘 수 없구나." 어쨌든 공격도 끝이 났고 비명을 지른 것이 당신이라는 것을 윈터가 모르기를 바라기에, 남은 수업시간 동안 당신은 머리를 들지 않고 있는다.
-	<br><br>
+	<<if $robinhistory is "seat">>
+		교실로 다가오는 발소리가 들린다. <<person_ i>> 당신을 밀쳐내고 <<his_ yi>> 자리로 돌아간다. 로빈도 함께 풀려난다. <<nnpc_He_ nun Robin>> 곧장 당신 곁으로 달려온다.
+		<br><br>
+		"괜찮아," <<nnpc_he_ ga Robin>> 말한다.
+		<br><br>
+		윈터가 들어온다. <<nnpc_His_ yi Winter>> 눈이 로빈을 향한다. "정말이지 5분도 너네들을 그냥 내버려둔 채로 둘 수 없구나."
+		<br><br>
+		"<<He_ ga>> 제 친구를 공격했어요," 로빈이 <<person_ ul>> 가리키며 말한다.
+		<br><br>
+		윈터가 문을 가리키고, <<person_ un>> 나가면서 당신에게 윙크를 한다.
+		<br><br>
+	<<else>>
+		빠른 속도로 교실에 다가오는 발소리가 들려온다. <<personPost "은">> 당신을 밀쳐낸 뒤 제자리로 돌아가고, 다른 학생들도 마찬가지다. <<tearful>> 당신은 자리로 돌아간다. 윈터가 화난 표정으로 나타난다. "정말이지 5분도 너네들을 그냥 내버려둔 채로 둘 수 없구나." 어쨌든 공격도 끝이 났고 비명을 지른 것이 당신이라는 것을 윈터가 모르기를 바라기에, 남은 수업시간 동안 당신은 머리를 들지 않고 있는다.
+		<br><br>
+	<</if>>
 	<<clothesontowel>>
 	<<endcombat>>
 	<<link [[다음|History Lesson]]>><</link>>
 <<else>>
-	교실로 다가오는 발소리가 들린다. <<personPost "은">> 당신을 밀쳐낸 뒤 제자리로 돌아가고, 다른 학생들도 마찬가지다. <<tearful>> 당신은 자리로 돌아간다. 윈터가 위축된 모습의 <<personPost>>의 친구 한 명을 뒤에 데리고 들어온다. "다신 내 시간을 낭비하지 마. 안 그러면 끝없는 징계를 보여줄테니까." 어쨌든 공격도 끝이 났기에, 남은 수업시간 동안 당신은 머리를 들지 않고 있는다.
-	<br><br>
+	<<if $robinhistory is "seat">>
+		교실로 다가오는 발소리가 들린다. <<person_ i>> 당신을 밀쳐내고 <<his_ yi>> 자리로 돌아간다. 로빈도 함께 풀려난다. <<nnpc_He_ nun Robin>> 곧장 당신 곁으로 달려온다.
+		<br><br>
+		"괜찮아," <<nnpc_he_ ga Robin>> 말한다. 윈터가 기가 죽은 모습의 <<persons_ yi>> 친구를 뒤에 데리고 돌아온다.
+		<br><br>
+		"다시는 내 시간을 낭비시키지 말아라," 윈터가 말한다. "아니면 징계 시간이 끝나는 걸 못보게 될 거다." <<nnpc_He_ nun Winter>> 당신과 로빈을 차례대로 쳐다본다.
+		<br><br>
+		"<<He_ ga>> 제 친구를 공격했어요," 로빈이 <<person_ ul>> 가리키며 말한다.
+		<br><br>
+		윈터가 문을 가리키고, <<person_ un>> 나가면서 당신에게 윙크를 한다.
+		<br><br>
+	<<else>>
+		교실에 다가오는 발소리가 들려온다. <<personPost "은">> 당신을 밀쳐낸 뒤 제자리로 돌아가고, 다른 학생들도 마찬가지다. <<tearful>> 당신은 자리로 돌아간다. 윈터가 기가 죽은 모습의 <<persons_ yi>> 친구를 뒤에 데리고 돌아온다. "다시는 내 시간을 낭비시키지 말아라, 아니면 징계 시간이 끝나는 걸 못보게 될 거다." 공격이 끝난 것에 안심하면서, 남은 수업시간 동안 당신은 머리를 들지 않고 있는다.
+		<br><br>
+	<</if>>
+
 	<<clothesontowel>>
 	<<endcombat>>
 	<<link [[다음|History Lesson]]>><</link>>
 <</if>>
 
-:: History Lesson Pillory [nobr]
+:: History Lesson Pillory
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 당신은 교실 맨앞으로 걸어나오고, 윈터는 구속대의 아랫부분에 몸을 굽히라는 손짓을 한다. 당신이 그 지시에 따르자, <<hePost "은">> 구속대의 나머지 부분을 들어올린 뒤 당신을 거기에 가둔다. 당신의 양손과 얼굴은 작은 구멍을 통해 나와 다른 학생들을 향하고 있다. 이 골동품은 바닥에 접합되어있어, 딱히 움직힐 방법이 보이지 않는다.
@@ -328,13 +446,53 @@
 <<bind>>
 <<if $rng gte 51>>
 	<<endevent>>
-	<<npc Leighton>><<person1>>윈터가 뭐라고 말을 더 하기도 전에, 문이 열리더니 레이턴이 들어온다. <<HePost "은">> 구속대에 갇힌 <<girlPost>>에겐 딱히 눈길도 주지 않으며 윈터를 본다. "얘기할 것이 있네." 윈터는 고개를 끄덕인 뒤 아무런 말도 없이 교실에서 나간다.
+	윈터가 뭐라고 말을 더 하기도 전에, 문이 열리더니 레이턴이 들어온다. <<npc Leighton>><<person1>><<HePost "은">> 구속대에 갇힌 <<girlPost>>에겐 딱히 눈길도 주지 않는다. <<He_ nun>> 윈터를 본다. "얘기할 것이 있네." 윈터는 고개를 끄덕인 뒤 아무런 말도 없이 교실에서 나간다.
 	<<endevent>>
 	<br><br>
-	<<generates1>><<person1>>잠시 교실은 조용히 있지만, 곧 교실 밖에서 들리는 발소리가 사라져간다. 그러자 <<personPost "이">> 자리에서 일어나, 설렁설렁 당신에게로 다가온다. "수업이 계속되어야 한다고 생각하는 사람?" <<HePost "은">> 교활하게 웃으며 다른 학생들에게 묻는다. 그들의 성원에 힘입어, <<hePost "은">> 당신의 뒤로 걸어간다.
-	<br><br>
-	<<link [[다음|History Lesson Pillory Molestation]]>><<set $molestationstart to 1>><</link>>
-	<br>
+	<<if $robinhistory is "active" or $robinhistory is "seat">>
+		<<if $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 20>>
+			<<generates1>><<person1>>잠시 교실은 조용히 있지만, 곧 교실 밖에서 들리는 발소리가 사라져간다. 그러자 <<personPost "이">> 자리에서 일어나, 설렁설렁 당신에게로 다가온다. "수업이 계속되어야 한다고 생각하는 사람?" <<HePost "은">> 교활하게 웃으며 다른 학생들에게 묻는다. 그들의 성원에 힘입어, <<hePost "은">> 당신의 뒤로 걸어간다.
+			<br><br>
+			로빈이 고개를 저으며 시선을 돌린다.
+			<br><br>
+			<<link [[다음|History Lesson Pillory Molestation]]>><<set $molestationstart to 1>><</link>>
+			<br>
+		<<elseif $NPCName[$NPCNameList.indexOf("Robin")].dom gte 60>>
+			<<generates1>><<person1>>잠시 교실은 조용히 있지만, 곧 교실 밖에서 들리는 발소리가 사라져간다. 그러자 <<personPost "이">> 자리에서 일어나, 설렁설렁 당신에게로 다가온다. "수업이 계속되어야 한다고 생각하는 사람?" <<HePost "은">> 교활하게 웃으며 다른 학생들에게 묻는다.
+			<br><br>
+
+			<<if random(1, 2) is 2>>
+				로빈이 뭔가 말하려 하지만, 다른 학생들의 환호 소리에 <<nnpc_his_ yi Robin>> 목소리가 묻힌다. 그들의 성원에 힘입어, <<personPost "은">> 당신의 뒤로 걸어간다.
+				<br><br>
+				상황이 악화되기 전에, 책이 <<persons_ yi>> 머리에 꽂힌다. <<He_ nun>> 비틀거리며 당신에게서 떨어진다. 학생들의 시선이 범인에게로 향한다. 로빈이 교실 너머에서 노려보고 있다.
+				<br><br>
+				"좆같은 <<bitch_ ga>>," <<person_ i>> 교실 너머로 향하며 말한다. 로빈은 약간 떨고 있지만, 여전히 반항적이다.
+				<br><br>
+
+				<<link [[다음|History Lesson Pillory Robin Save]]>><<unbind>><</link>>
+				<br>
+			<<else>>
+				로빈이 뭔가 말하려 하지만, 다른 학생들이 <<nnpc_him_ ul Robin>> 뒤에서 제지하고, 손으로 <<nnpc_his_ yi Robin>> 입을 꽉 막는다. <<nnpc_He_ nun Robin>> 몸을 꿈틀대지만, 떨쳐낼 수 없다.
+				<br><br>
+
+				<<link [[다음|History Lesson Pillory Molestation]]>><<set $molestationstart to 1>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			<<generates1>><<person1>>잠시 교실은 조용히 있지만, 곧 교실 밖에서 들리는 발소리가 사라져간다. 그러자 <<personPost "이">> 자리에서 일어나, 설렁설렁 당신에게로 다가온다. "수업이 계속되어야 한다고 생각하는 사람?" <<hePost "은">> 교활하게 웃으며 다른 학생들에게 묻는다.
+			<br><br>
+			로빈이 뭔가 말하려 하지만, 다른 학생들의 환호 소리에 <<nnpc_his_ yi Robin>> 목소리가 묻힌다. 다른 학생들이 <<nnpc_him_ ul Robin>> 뒤에서 제지하고, 손으로 <<nnpc_his_ yi Robin>> 입을 꽉 막는다. 그들의 성원에 힘입어, <<personPost "은">> 당신의 뒤로 걸어간다.
+			<br><br>
+
+			<<link [[다음|History Lesson Pillory Molestation]]>><<set $molestationstart to 1>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<generates1>><<person1>>잠시 교실은 조용히 있지만, 곧 교실 밖에서 들리는 발소리가 사라져간다. 그러자 <<personPost "이">> 자리에서 일어나, 설렁설렁 당신에게로 다가온다. "수업이 계속되어야 한다고 생각하는 사람?" <<HePost "은">> 교활하게 웃으며 다른 학생들에게 묻는다. 그들의 성원에 힘입어, <<hePost "은">> 당신의 뒤로 걸어간다..
+		<br><br>
+		<<link [[다음|History Lesson Pillory Molestation]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<</if>>
 <<else>>
 	윈터는 구속대의 역사적인 사용처는 물론 구식 처벌들에 대해서도 강의한다. 당신은 <<hePost "이">> 그런 것들에 왜 그리 열광하는지 궁금해한다. 얼마 지나지 않아, <<hePost "은">> 당신을 풀어준다. "조수 역할을 훌륭하게 해줬구나." 윈터는 쾌활하게 말했고, 당신은 자리로 돌아간다.<<unbind>>
 	<br><br>
@@ -342,7 +500,31 @@
 	<br>
 <</if>>
 
-:: History Lesson Pillory Molestation [nobr]
+
+:: History Lesson Pillory Robin Save
+<<effects>>
+
+빠른 속도로 교실에 다가오는 발소리가 들려온다. 윈터가 벌컥 들어온다. <<nnpc_His_ yi Winter>> 시선이 바닥에 떨어진 훼손된 책으로 휙 움직이고, <<person_ ul>> 향해 옮겨간다.
+<br><br>
+"나가라," <<nnpc_he_ ga Winter>> 말한다. "나는 학교 비품을 함부로 다루는 것을 용인할 수 없다."
+<br><br>
+<<person_ i>> 변명하려 하지만, 윈터는 들으려 하지 않는다. <<He_ nun>> 방을 나가면서 <<his_ yi>> 머리를 긁는다.
+<br><br>
+"미안하다," 윈터가 한숨을 내쉬며 당신을 구속대에서 풀어준다. "오늘은 이걸 계속할 시간이 없겠구나." <<nnpc_He_ nun Winter>> 실망한 눈치다. <<tearful>> 당신은 자리로 돌아간다.
+<br><br>
+
+<<if $robinhistory is "active">>
+	<<if $pain gte 20>>
+		로빈이 당신에게 티슈를 건네고, 진정시키려 노력한다.<<lpain>><<pain -4>>
+		<br><br>
+	<</if>>
+<</if>>
+<<unbind>>
+<<link [[다음|History Lesson]]>><<endevent>><</link>>
+<br>
+
+
+:: History Lesson Pillory Molestation
 
 <<if $molestationstart is 1>>
 	<<set $molestationstart to 0>>
@@ -353,32 +535,25 @@
 	<<maninit>><<npcspank>>
 	<<set $timer to 18>>
 	<<set $position to "wall">><<set $walltype to "cleanpillory">><<set $leftarm to "bound">><<set $rightarm to "bound">><<set $head to "bound">><<set $NPCList[0].lefthand to 0>>
-	<<if $delinquency lt 400>><<set $rescue to 1>><</if>>
+	<<if $delinquency lt 400>><<enable_rescue>><</if>>
 <</if>>
+
 <<effects>>
-<<if $alarm is 1 and $rescue is 0>>
-	<<set $alarm to 0>>
-	당신의 불량학생으로서의 명성 때문에 아무도 당신을 도와주지 않는다.
-	<br><br>
-<</if>>
-<<effectsman>><<man>>
+<<effectsman>>
+<<alarmstate "<span class='red'>당신의 불량학생으로서의 명성 때문에, 누구도 당신을 도우러 오지 않는다.</span>">>
+<<man>>
 <<audience>>
 <<stateman>>
 <br><br>
 <<actionsman>>
-<<if $enemyhealth lte 0>>
-	<span id="next"><<link [[다음|History Lesson Pillory Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[다음|History Lesson Pillory Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $timer lte 0>>
-	<span id="next"><<link [[다음|History Lesson Pillory Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $rescue is 1 and $alarm is 1>>
+
+<<if _combatend or $timer lte 0>>
 	<span id="next"><<link [[다음|History Lesson Pillory Molestation Finish]]>><</link>></span><<nexttext>>
 <<else>>
 	<span id="next"><<link [[다음|History Lesson Pillory Molestation]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: History Lesson Pillory Molestation Finish [nobr]
+:: History Lesson Pillory Molestation Finish
 
 <<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
@@ -387,9 +562,26 @@
 	<br><br>
 	<<exposure>>
 	<<if $exposed gte 1>>
-		윈터가 교실로 돌아오자, 당신의 옷이 벗겨진 걸 본다. 선생님은 당신의 몸을 수건으로 가려준 뒤 구속대에서 풀어준다. "누가 이런 짓을 한 거냐?" 다들 <<personPost "을">> 바라본다. <<HePost "은">> 몸을 낮추고 있다. "수업 끝나고 남거라." <<tearful>> 당신은 자리로 돌아가, 마음을 가라앉힌다.
+		윈터가 교실로 돌아오고, 당신의 옷이 벗겨져 있는 것을 본다. 선생님은 당신을 구속대에서 풀어주고 수건으로 당신의 몸을 가린다. "누구 탓이지?"
+		<br><br>
+		<<if $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 20 or $robinhistory is "missing">>
+			모두의 시선이 <<his_ yi>> 자리에서 몸을 숙이고 있는 <<person_ uro>> 향한다.
+		<<else>>
+			로빈이 일어서서 가리킨다. "<<himPost "이">> 그랬어요," <<nnpc_he_ ga Robin>> 말한다. <<person_ i>> <<his_ yi>> 자리에서 몸을 숙이자, 다른 학생들도 웅성이며 동의한다.
+		<</if>>
+		<br><br>
+		윈터가 <<him_ ul>> 노려본다. "수업이 끝나면 남거라." <<tearful>> 당신은 자리로 돌아가, 마음을 가라앉힌다.
+		<br><br>
 	<<else>>
 		<<endevent>><<npc Winter>><<person1>>윈터가 교실로 돌아온다. "미안하지만, 오늘은 이걸 계속할 시간이 없겠구나." <<HePost "은">> 구속대에서 당신을 풀어준다. <<HePost "은">> 정말로 실망한 눈치다. <<tearful>> 당신은 자리로 돌아가, 마음을 가라앉힌다.
+		<br><br>
+	<</if>>
+	<<if $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 20 and $robinhistory is "seat">>
+		로빈은 <<nnpc_his_ yi Robin>> 자리에서 몸을 떨며, 흐느껴 운다.
+		<br><br>
+	<<elseif $robinhistory is "seat" and $pain gte 20>>
+		로빈은 당신을 진정시키려 노력한다. <<nnpc_He_ nun Robin>> 티슈를 꺼내 당신의 눈을 닦아준다.<<lpain>><<pain -4>>
+		<br><br>
 	<</if>>
 	<<clothesontowel>>
 	<<endcombat>>
@@ -398,34 +590,70 @@
 	<<personPost "은">> 고통에 몸을 움찔거리고, 다른 학생들은 <<hePost "에게">>서 등을 돌려 묶여있는 <<girlPost>>조차 제대로 희롱하지 못한다는 것을 비웃는다. <<HePost "은">> 위축된 모습으로 자리로 돌아간다.
 	<br><br>
 
+
 	<<exposure>>
 	<<if $exposed gte 1>>
-		윈터가 교실로 돌아오자, 당신의 옷이 벗겨진 걸 본다. 선생님은 당신의 몸을 수건으로 가려준 뒤 구속대에서 풀어준다. "누가 이런 짓을 한 거냐?" 다들 <<personPost "을">> 바라본다. <<HePost "은">> 몸을 낮추고 있다. "수업 끝나고 남거라." <<tearful>> 당신은 자리로 돌아가, 마음을 가라앉힌다.
+		윈터가 교실로 돌아오고, 당신의 옷이 벗겨져 있는 것을 본다. 선생님은 당신을 구속대에서 풀어주고 수건으로 당신의 몸을 가린다. "누구 탓이지?"
+		<br><br>
+		<<if $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 20 or $robinhistory is "missing">>
+			모두의 시선이 <<his_ yi>> 자리에서 몸을 숙이고 있는 <<person_ uro>> 향한다.
+		<<else>>
+			로빈이 일어서서 가리킨다. "<<himPost "이">> 그랬어요," <<nnpc_he_ ga Robin>> 말한다. <<person_ i>> <<his_ yi>> 자리에서 몸을 숙이자, 다른 학생들도 웅성이며 동의한다.
+		<</if>>
+		<br><br>
+		윈터가 <<him_ ul>> 노려본다. "수업이 끝나면 남거라." <<tearful>> 당신은 자리로 돌아가, 마음을 가라앉힌다.
+		<br><br>
 	<<else>>
-		윈터가 교실로 돌아온다. "미안하지만, 오늘은 이걸 계속할 시간이 없겠구나." <<HePost "은">> 구속대에서 당신을 풀어준다. <<HePost "은">> 정말로 실망한 눈치다. <<tearful>> 당신은 자리로 돌아가, 마음을 가라앉힌다.
+		윈터가 교실로 돌아온다. "미안하지만, 오늘은 이걸 계속할 시간이 없겠구나." <<nnpc_he_ nun Winter>> 구속대에서 당신을 풀어준다. <<nnpc_he_ nun Winter>> 정말로 실망한 눈치다. <<tearful>> 당신은 자리로 돌아가, 마음을 가라앉힌다.
+		<br><br>
+	<</if>>
+	<<if $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 20 and $robinhistory is "seat">>
+		로빈은 <<nnpc_his_ yi Robin>> 자리에서 몸을 떨며, 흐느껴 운다.
+		<br><br>
+	<<elseif $robinhistory is "seat" and $pain gte 20>>
+		로빈은 당신을 진정시키려 노력한다. <<nnpc_He_ nun Robin>> 티슈를 꺼내 당신의 눈을 닦아준다.<<lpain>><<pain -4>>
+		<br><br>
 	<</if>>
 	<<clothesontowel>>
 	<<endcombat>>
 	<<link [[다음|History Lesson]]>><</link>>
 <<elseif $alarm is 1 and $rescue is 1>>
-<<set $rescued += 1>>
+	<<set $rescued += 1>>
 	빠른 속도로 교실에 다가오는 발소리가 들려온다. <<personPost "은">> 재빨리 제자리로 돌아간다. 윈터가 화난 표정으로 나타난다. "정말이지 5분도 너네들을 그냥 내버려둔 채로 둘 수 없구나."
 	<br><br>
 	<<exposure>>
 	<<if $exposed gte 1>>
-		윈터는 당신의 몸을 수건으로 가려준 뒤 구속대에서 풀어준다. "누가 이런 짓을 한 거냐?" 다들 <<personPost "을">> 바라본다. <<HePost "은">> 몸을 낮추고 있다. "수업 끝나고 남거라." <<tearful>> 당신은 자리로 돌아가, 마음을 가라앉힌다.
+		윈터는 당신을 구속대에서 풀어주고 수건으로 당신의 몸을 가린다.
+		<br><br>
+		<<if $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 20 or $robinhistory is "missing">>
+			모두의 시선이 <<his_ yi>> 자리에서 몸을 숙이고 있는 <<person_ uro>> 향한다.
+		<<else>>
+			로빈이 일어서서 가리킨다. "<<himPost "이">> 그랬어요," <<nnpc_he_ ga Robin>> 말한다. <<person_ i>> <<his_ yi>> 자리에서 몸을 숙이자, 다른 학생들도 웅성이며 동의한다.
+		<</if>>
+		<br><br>
+		윈터가 <<him_ ul>> 노려본다. "수업이 끝나면 남거라." <<tearful>> 당신은 자리로 돌아가, 마음을 가라앉힌다.
+		<br><br>
 	<<else>>
 		<<endevent>><<npc Winter>><<person1>>"미안하지만, 오늘은 이걸 계속할 시간이 없겠구나." <<HePost "은">> 구속대에서 당신을 풀어준다. <<HePost "은">> 정말로 실망한 눈치다. <<tearful>> 당신은 자리로 돌아가, 마음을 가라앉힌다.
+	<</if>>
+	<<if $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 20 and $robinhistory is "seat">>
+		로빈은 <<nnpc_his_ yi Robin>> 자리에서 몸을 떨며, 흐느껴 운다.
+		<br><br>
+	<<elseif $robinhistory is "seat" and $pain gte 20>>
+		로빈은 당신을 진정시키려 노력한다. <<nnpc_He_ nun Robin>> 티슈를 꺼내 당신의 눈을 닦아준다.<<lpain>><<pain -4>>
+		<br><br>
 	<</if>>
 	<<clothesontowel>>
 	<<endcombat>>
 	<<link [[다음|History Lesson]]>><</link>>
 <<else>>
-	교실로 다가오는 발소리가 들려온다. <<personPost "은">> 재빨리 제자리로 돌아간다. 문이 열리자 윈터가
+	교실에 다가오는 발소리가 들려온다. <<personPost "은">> 재빨리 제자리로 돌아간다. 문이 열리고 윈터가 나타난다.
 	<br><br>
 	<<exposure>>
 	<<if $exposed gte 1>>
-		들어오고, 당신의 옷이 벗겨진 걸 본다. 선생님은 당신의 몸을 수건으로 가려준 뒤 구속대에서 풀어준다. "누가 이런 짓을 한 거냐?" 다들 <<personPost "을">> 바라본다. <<HePost "은">> 몸을 낮추고 있다. "수업 끝나고 남거라." <<tearful>> 당신은 자리로 돌아가, 마음을 가라앉힌다.
+		선생님은 당신을 구속대에서 풀어주고 수건으로 당신의 몸을 가린다. "누구 탓이지?"
+
+		모두의 시선이 <<his_ yi>> 자리에서 몸을 숙이고 있는 <<person_ uro>> 향한다. "수업이 끝나면 남거라." <<tearful>> 당신은 자리로 돌아가, 마음을 가라앉힌다.
 	<<else>>
 		들어온다. <<endevent>><<npc Winter>><<person1>>"미안하지만, 오늘은 이걸 계속할 시간이 없겠구나." <<HePost "은">> 구속대에서 당신을 풀어주며 그렇게 말한다. <<HePost "은">> 정말로 실망한 눈치다. <<tearful>> 당신은 자리로 돌아가, 마음을 가라앉힌다.
 	<</if>>
@@ -435,7 +663,7 @@
 <</if>>
 <<unbind>>
 
-:: History Lesson Answer [nobr]
+:: History Lesson Answer
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 <<npc Winter>><<person1>>당신이 손을 들자, 윈터가 당신 쪽을 바라본다. 당신은 질문에 답을 하고, <<hePost "은">> 퉁명스럽게 고개를 끄덕이고는 다음으로 넘어간다. 그게 이 수업에서 받을 수 있는 최고의 찬사이다.
@@ -443,7 +671,7 @@
 <<link [[다음|History Lesson]]>><<endevent>><</link>>
 <br>
 
-:: History Lesson Conceal [nobr]
+:: History Lesson Conceal
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 <<if $submissive gte 1150>>
@@ -456,13 +684,13 @@
 	"말씀드릴 수 없어요." 당신이 말한다.
 	<br><br>
 <</if>>
-"알았다." 윈터가 말한다. "그게 뭔진 몰라도, 징계 시간 때 교장 선생님께 보여드리면 되겠지."
+"좋아," 윈터가 말한다. "무엇이 됐든, 징계를 받을 때 레이턴에게 보여줄 수 있을 거다."
 <br><br>
 <<endevent>>
 <<link [[다음|History Lesson]]>><</link>>
 <br>
 
-:: History Lesson Collar [nobr]
+:: History Lesson Collar
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 <<if $submissive gte 1150>>
@@ -475,13 +703,18 @@
 	"그냥 목걸이에요." 당신이 말한다.
 	<br><br>
 <</if>>
-<<HePost "은">> 팔을 아래로 뻗어 목줄을 집어올린다. "그럼 이건? 도대체 무슨 생각으로 그런 걸 걸고 다니는 거니?" 분명 교실 내의 모든 학생들이 당신을 보고 있을 것이다. "개처럼 행동하는 걸 좋아하기라도 하는 거냐?" 누군가 키득거리고, 거기로 윈터의 시선이 쏠린다. "조용! 자, 내가 어디까지 했더라..." <<HePost "은">> 다시 웅얼거리기 시작한다.
+<<if $worn.neck.name is "collar with leash" or $worn.neck.name is "leather collar with leash">>
+	<<HePost "은">> 팔을 아래로 뻗어 목줄을 집어올린다. "그럼 이건? 
+<<else>>
+	<<He_ nun>> 손가락 하나를 목걸이 사이에 집어넣고는, 세게 잡아당긴다. "꽤나 꽉 조이는구나, 그렇지 않니?
+<</if>>
+도대체 무슨 생각으로 그런 걸 걸고 다니는 거지?" 분명 교실 내의 모든 학생들이 당신을 보고 있을 것이다. "개처럼 행동하는 걸 좋아하기라도 하는 거냐?" 누군가 키득거리고, 거기로 윈터의 시선이 쏠린다. "조용! 자, 내가 어디까지 했더라..." <<HePost "은">> 다시 웅얼거리기 시작한다.
 <br><br>
 <<endevent>>
 <<link [[다음|History Lesson]]>><</link>>
 <br>
 
-:: History Lesson Horns [nobr]
+:: History Lesson Horns
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 <<if $submissive gte 1150>>
@@ -494,13 +727,13 @@
 당신은 그렇게 말하며 뿔을 잡아당긴다. "보이시죠?"
 <br><br>
 
-윈터가 눈썹을 치켜뜬다. "별 희안한 일이 다 있구나." <<HePost "이">> 말한다. 당신의 말을 믿는 것인지는 알 수 없다. "하던 거 계속 하도록 하렴."
+윈터가 눈썹을 치켜뜬다. "별 희한한 일이 다 있구나." <<HePost "이">> 말한다. 당신의 말을 믿는 것인지는 알 수 없다. "하던 거 계속 하도록 하렴."
 <br><br>
 <<endevent>>
 <<link [[다음|History Lesson]]>><</link>>
 <br>
 
-:: History Lesson Ears [nobr]
+:: History Lesson Ears
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 <<if $submissive gte 1150>>
@@ -513,13 +746,13 @@
 당신은 그렇게 말하며 귀를 잡아당긴다. "보이시죠?"
 <br><br>
 
-윈터가 눈썹을 치켜뜬다. "별 희안한 일이 다 있구나." <<HePost "이">> 말한다. 당신의 말을 믿는 것인지는 알 수 없다. "하던 거 계속 하도록 하렴."
+윈터가 눈썹을 치켜뜬다. "별 희한한 일이 다 있구나." <<HePost "이">> 말한다. 당신의 말을 믿는 것인지는 알 수 없다. "하던 거 계속 하도록 하렴."
 <br><br>
 <<endevent>>
 <<link [[다음|History Lesson]]>><</link>>
 <br>
 
-:: History Lesson Excuse [nobr]
+:: History Lesson Excuse
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 <<if $submissive gte 1150>>
@@ -538,3 +771,284 @@
 <<endevent>>
 <<link [[다음|History Lesson]]>><</link>>
 <br>
+
+:: History Robin Defend
+<<effects>><<person1>>
+
+<<if $submissive gte 1150>>
+	"로-로빈은 결백해요," 당신이 항의한다.
+<<elseif $submissive lte 850>>
+	당신은 로빈의 팔에 당신의 손을 얹고, 윈터에게 시선을 고정하며 <<him_ i>> 일어나는 것을 막는다. "그걸 믿을 거예요?" 당신이 묻는다. "저는 선생님이 멍청이라고 생각하지 않았는데요."
+<<else>>
+	"로빈이 한 게 아니에요," 당신이 말한다. "선생님은 <<him_ ul>> 처벌하면 안돼요."
+<</if>>
+<br><br>
+
+"말대꾸하지 마라," 윈터가 말한다. <<nnpc_He_ nun Winter>> 어쨌든 로빈을 내보냈지만, 당신의 도움으로 로빈은 어찌저찌 진정된 것 같다.
+<br><br>
+
+잠시 후 또 다른 비행기가 윈터의 머리에 떨어져, 로빈이 정말로 범인이 아니었다는 것을 시사하고, 윈터는 <<him_ ul>> 다시 불러들인다. <<He_ nun>> 당신의 옆에 앉으며 웃는다.
+<br><br>
+
+<<link [[다음|History Lesson]]>><<endevent>><</link>>
+<br>
+
+:: History Robin Quiet
+<<effects>>
+
+당신은 로빈이 나가는 동안 조용히 있는다. 잠시 후 또 다른 비행기가 윈터의 머리에 떨어져, 로빈이 정말로 범인이 아니었다는 것을 시사하고, 윈터는 <<him_ ul>> 다시 불러들인다. <<He_ nun>> 약간 떨며 당신의 옆에 앉는다.
+<br><br>
+
+<<link [[다음|History Lesson]]>><<endevent>><</link>>
+<br>
+
+
+:: History Robin Silent
+<<effects>>
+
+당신은 조용히 있는다.
+<<if $robinromance is 1>>
+	<<if $NPCName[$NPCNameList.indexOf("Robin")].dom gte 40>>
+		로빈이 당신의 손을 <<person1>><<his_ yi>> 손으로 잡는다. "우리 사생활은 너희들이 상관할 바가 아니야," <<he_ ga>> 손을 꽉 쥐며 말한다.
+		<br><br>
+		"왜 이래," <<person2>><<person_ i>> 끈질기게 계속한다. "말할 수 있잖아."
+		<br><br>
+
+		교과서가 책상 위로 쿵하고 떨어진다. <<person_ i>> 올려다보자, 윈터의 시선과 마주한다. <<He_ nun>> <<his_ yi>> 자리에 털썩 앉는다.
+		<br><br>
+	<<else>>
+		로빈은 당신을 보고, 머뭇거리다가 말한다. "맞아," <<person1>><<he_ ga>> 말한다. "우린 사귀는 사이야."
+		<br><br>
+		<<person2>><<person_ i>> 가까이 몸을 기울인다. "키스해서 증명하는 건 어때?"
+		<br><br>
+		로빈이 얼굴을 붉히지만, 책상 위로 교과서가 쿵하고 떨어지며 무마할 수 있었다. <<person_ i>> 올려다보자, 윈터의 시선과 마주한다. <<He_ nun>> <<his_ yi>> 자리에 털썩 앉는다.
+		<br><br>
+	<</if>>
+<<else>>
+	<<if $NPCName[$NPCNameList.indexOf("Robin")].dom gte 50>>
+		로빈은 <<person1>><<his_ yi>> 고개를 젓는다. "<<pShe_ nun>> 내 절친이야," <<he_ ga>> 말한다. "근데 그건 너희들이 상관할 바가 아니야."
+		<br><br>
+
+		<<person2>><<person_ i>> 당신을 바라본다. "그냥 친구?" <<he_ ga>> 끈질기게 계속한다. "그거 진짜야?"
+		<br><br>
+
+		교과서가 책상 위로 쿵하고 떨어진다. <<person_ i>> 올려다보자, 윈터의 시선과 마주한다. <<He_ nun>> <<his_ yi>> 자리에 털썩 앉는다.
+		<br><br>
+	<<else>>
+		로빈이 <<person1>><<his_ yi>> 고개를 젓는다. "아니, 그런 거 아니야."
+		<br><br>
+		<<person2>><<person_ i>> 당신을 쳐다본다. "너는? <<person1>><<he_ ga>> 거짓말하는 거 아니야?"
+		<br><br>
+
+		교과서가 책상 위로 쿵하고 떨어진다. <<person_ i>> 올려다보자, 윈터의 시선과 마주한다. <<He_ nun>> <<his_ yi>> 자리에 털썩 앉는다.
+		<br><br>
+	<</if>>
+<</if>>
+
+<<link [[다음|History Lesson]]>><<endevent>><</link>>
+<br>
+
+
+
+:: History Robin Yes
+<<effects>><<person1>>
+
+<<if $submissive gte 1150>>
+	"마-맞아," 당신이 말한다. "나는 <<his_ yi>> <<girlfriend_ iya>>."
+<<elseif $submissive lte 850>>
+	"당연히 사귀고 있지," 당신이 말한다. "질투하는 거야?"
+<<else>>
+	"응," 당신이 말한다. "우리 커플이야."
+<</if>>
+<br><br>
+
+<<if $NPCName[$NPCNameList.indexOf("Robin")].dom gte 20>>
+	로빈이 웃으며 고개를 끄덕인다. "나는 이보다 더 행복할 수 없어," <<he_ ga>> 말한다. <<person2>><<person_ un>> 인상을 찌푸리며 <<his_ yi>> 자리로 돌아간다.
+	<br><br>
+<<else>>
+	로빈이 당신의 말에 웃으며 얼굴을 붉힌다. <<He_ nun>> 끄덕이고, <<his_ yi>> 무릎을 쳐다본다. <<person2>><<person_ un>> 인상을 찌푸리며 <<his_ yi>> 자리로 돌아간다.
+	<br><br>
+<</if>>
+
+<<link [[다음|History Lesson]]>><<endevent>><</link>>
+<br>
+
+:: History Robin No
+<<effects>>
+
+<<if $submissive gte 1150>>
+	"아-아니야," 당신이 말한다. "우리는 커플이 아니야."
+<<elseif $submissive lte 850>>
+	"뭐 때문에 그렇게 생각하는 거야?" 당신이 묻는다. "당연히 안 사귀지."
+<<else>>
+	"아니," 당신이 말한다. "우린 안 사귀고 있어."
+<</if>>
+<br><br>
+
+<<if $NPCName[$NPCNameList.indexOf("Robin")].dom gte 20>>
+	로빈이 끄덕인다. "<<pShe_ nun>> 내 친구야," <<person1>><<he_ ga>> 말한다. "그게 다야."
+<<else>>
+	로빈은 불편해보이지만, 끄덕인다.
+<</if>>
+<br><br>
+"오우," <<person2>><<person_ i>> 즐거운 듯이 말한다. "근데 너희 둘은 정말 귀여운 걸." <<He_ ga>> 당신을 바라본다. "어서. 그냥 뺨에 한 번 입맞춰줘."
+<<if random(1, 2) is 2>>
+	교과서가 책상 위로 쿵하고 떨어진다. <<person_ i>> 올려다보자, 윈터의 날카로운 시선과 마주한다. <<He_ nun>> <<his_ yi>> 자리에 털썩 앉는다.
+	<br><br>
+	<<link [[다음|History Lesson]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<br><br>
+	<<link [[입을 맞춘다|History Robin Peck]]>><<npcincr Robin love 1>><<npcincr Robin lust 1>><</link>><<glove>><<glust>>
+	<br>
+	<<link [[거절한다|History Robin Peck Refuse]]>><</link>>
+	<br>
+<</if>>
+<br>
+
+
+
+:: History Robin Yes Lie
+<<effects>><<person1>>
+
+<<if $submissive gte 1150>>
+	"마-맞아," 당신이 말한다. "나는 <<his_ yi>> <<girlfriend_ iya>>."
+<<elseif $submissive lte 850>>
+	"당연히 사귀고 있지," 당신이 말한다. "질투하는 거야?"
+<<else>>
+	"응," 당신이 말한다. "우리 커플이야."
+<</if>>
+<br><br>
+
+
+<<if $NPCName[$NPCNameList.indexOf("Robin")].dom gte 20>>
+	"잠깐," 로빈이 말한다. "그건 사실이 아니야. 난 아직 준비가 안됐어." <<person2>><<person_ un>> 로빈의 불확실함에 웃지만, 윈터의 화난 시선과 마주하고, 슬그머니 <<his_ yi>> 자리로 돌아간다.
+	<br><br>
+	로빈은 한동안 조용히 있는다.
+	<br><br>
+<<else>>
+	로빈이 헉 하고 말을 제대로 하지 못한다. "자-잠깐," <<he_ ga>> 말한다. "그건 사실이-". <<He_ nun>> 윈터의 화난 시선과 마주하고, 조용히 있는다. <<person2>><<person_ un>> 웃고는 슬그머니 <<his_ yi>> 자리로 돌아간다.
+	<br><br>
+<</if>>
+
+<<link [[다음|History Lesson]]>><<endevent>><</link>>
+<br>
+
+:: History Robin No Lie
+<<effects>>
+
+<<if $submissive gte 1150>>
+	"아-아니야," 당신이 말한다. "우리는 커플이 아니야."
+<<elseif $submissive lte 850>>
+	"뭐 때문에 그렇게 생각하는 거야?" 당신이 묻는다. "당연히 안사귀지."
+<<else>>
+	"아니," 당신이 말한다. "우린 안 사귀고 있어."
+<</if>>
+<br><br>
+<<person1>>
+<<if $NPCName[$NPCNameList.indexOf("Robin")].dom gte 20>>
+	로빈은 혼란스러워 하며 당신을 향해 몸을 돌린다. "그게 무슨 뜻이야?" <<he_ ga>> 묻는다. "당연히 우리는 사귀고 있잖아. 왜 아니라고 말하는 거야?"
+	<br><br>
+
+	당신이 대답하기도 전에, 로빈이 <<his_ yi>> 입을 연다.
+	<<if $cool gte 160>>
+		"내가 부끄러워?" <<he_ ga>> 묻는다. <<He_ nun>> 눈물을 참는 것처럼 보인다.
+		<br><br>
+		<<person2>><<person_ i>> 몸을 가까이 기울여, 로빈이 들을 수 없을 정도로 조용히 속삭인다. "저 루저는 그냥 버리고, 나랑-"
+		<br><br>
+		교과서가 책상 위로 쿵하고 떨어진다. <<person_ i>> 올려다보자, 윈터의 날카로운 시선과 마주한다. <<He_ nun>> <<his_ yi>> 자리에 털썩 앉는다.
+		<br><br>
+	<<else>>
+		"나-나는 더 잘하려고 노력하고 있어," <<he_ ga>> 말한다. <<He_ nun>> 눈물을 참는 것처럼 보인다.
+		<br><br>
+		"너희 둘 사이의 관계에 뭔가 문제가 있는 것 같네," <<person2>><<person_ i>> 끼어든다. "알아서 잘 해봐." <<He_ nun>> 슬그머니 <<his_ yi>> 자리로 돌아간다.
+		<br><br>
+	<</if>>
+<<else>>
+	"뭐-뭐라고?" 로빈이 말한다, <<his_ yi>> 목소리가 떨리고 있다. "그-그건 사실이 아니야!" <<He_ nun>> 말을 더듬거리다가, 대신 고개를 돌린다.
+	<br><br>
+	"너희 둘 사이의 관계에 뭔가 문제가 있는 것 같네," <<person2>><<person_ i>> 말한다. "알아서 잘 해봐." <<He_ nun>> 슬그머니 <<his_ yi>> 자리로 돌아간다.
+	<br><br>
+<</if>>
+
+<<link [[로빈에게 사과한다|History Robin Apologise]]>><<npcincr Robin love 1>><</link>><<glove>>
+<br>
+<<link [[아무 말도 하지 않는다|History Lesson]]>><<endevent>><</link>>
+<Br>
+
+:: History Robin Apologise
+<<effects>>
+
+<<if $submissive gte 1150>>
+	"미-미안해," 당신이 로빈에게 말한다. "나는 그-그냥 관심을 끌고 싶지 않았어."
+<<elseif $submissive lte 850>>
+	"그런 뜻은 아니었어," 당신이 로빈에게 말한다. "그냥 관심을 끌고 싶지 않았어."
+<<else>>
+	"미안해," 당신이 말한다. "나는 그냥 관심을 끌고 싶지 않았어."
+<</if>>
+<br><br>
+로빈은 고개를 끄덕이지만, 눈을 마주치지는 않는다.
+<br><br>
+
+<<link [[다음|History Lesson]]>><<endevent>><</link>>
+<br>
+
+
+:: History Robin Peck
+<<effects>>
+
+당신은 로빈에게로 시선을 돌린다. <<person1>><<His_ yi>> 뺨이 붉어지지만, <<he_ nun>> 당신이 몸을 기울여 <<his_ yi>> 뺨에 키스할 때까지 아무 말도 하지 않는다.
+
+<<if random(1, 2) is 2>>
+	만족한 <<person2>><<person_ un>> 슬그머니 <<his_ yi>> 자리로 돌아간다.
+	<br><br>
+	<<person1>>
+	로빈의 얼굴은 한동안 붉게 물들었고, <<he_ nun>> 수업에 집중하기 위해 안간힘을 쓴다. 당신은 <<him_ i>> 여러 번 웃는 모습을 발견한다.
+	<br><br>
+
+	<<link [[다음|History Lesson]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	"그걸론 부족해," <<person2>><<person_ i>> 말한다. "입술에 해."
+	<br><br>
+
+	<<link [[키스한다|History Robin Peck 2]]>><</link>><<promiscuous1>><<kissvirginitywarning>>
+	<br>
+	<<link [[거절한다|History Robin Peck Refuse]]>><</link>>
+	<br>
+<</if>>
+
+:: History Robin Peck 2
+<<effects>>
+
+당신은 로빈의 턱을 잡고, <<person1>><<him_ i>> 당신과 마주보도록 돌린다. 당신은 <<his_ yi>> 입술에 키스한다. 당신이 떨어지자 <<His_ yi>> 눈은 감겨있고, 황홀함에 빠져있는 것 같다.
+<<takeKissVirginity "Robin" "romantic">><<promiscuity1>>
+
+"멋진데," <<person2>><<person_ i>> 말한다. <<He_ nun>> 로빈을 바라본다. "정말 즐거웠나봐." 로빈은 눈을 파르르 떨며 뜨고, <<person1>><<he_ nun>> 고개를 돌린다, <<his_ yi>> 얼굴이 더욱 붉어진다.
+<br><br>
+
+만족한 <<person2>><<person_ un>> 슬그머니 <<his_ yi>> 자리로 돌아간다.
+<br><br>
+
+<<link [[다음|History Lesson]]>><<endevent>><</link>>
+<br>
+
+
+:: History Robin Peck Refuse
+<<effects>>
+
+<<if $submissive gte 1150>>
+	"시-싫어," 당신이 말한다. "난 안할 거야."
+<<elseif $submissive lte 850>>
+	"꺼져," 당신이 말한다. "우릴 내버려 둬."
+<<else>>
+	"우릴 내버려 둬," 당신이 말한다.
+<</if>>
+<br><br>
+<<person2>><<person_ i>> 대답하기 위해 <<his_ yi>> 입을 열지만, 교과서가 책상 위로 쾅 하고 내리찍힌다. <<He_ ga>> 올려다보자, 윈터의 날카로운 시선과 마주한다.
+<br><br>
+
+<<He_ nun>> <<his_ yi>> 자리에 털썩 앉는다.
+<br><br>
+
+<<link [[다음|History Lesson]]>><<endevent>><</link>>

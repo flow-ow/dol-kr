@@ -3,7 +3,7 @@
 /* word - widget will output "a" if "a", and nothing if "n". eg - You are wearing <<a>> hat. You are wearing <<a>> shorts.
 plural - widget will output "are" if 1, and "is" if 0. eg - Your hat <<upperplural>> wet. Your shorts <<upperplural>> wet.*/
 
-<<widget "init_over_upper">><<nobr>>
+<<widget "init_over_upper">>
 <<set setup.clothes.over_upper to [
 	{index: 0,
 	name: "naked",
@@ -13,6 +13,7 @@ plural - widget will output "are" if 1, and "is" if 0. eg - Your hat <<upperplur
 	integrity_max: 0,
 	fabric_strength: 0,
 	reveal: 1000,
+	bustresize: 0,
 	word: "n",
 	strap: 0,
 	open: 0,
@@ -23,7 +24,7 @@ plural - widget will output "are" if 1, and "is" if 0. eg - Your hat <<upperplur
 	state_top_base: 0,
 	plural: 0,
 	colour: 0,
-	colour_options: ["black", "blue", "brown", "green", "pink", "purple", "red", "tangerine", "teal", "white", "yellow", "custom"],
+	colour_options: [],
 	exposed: 2,
 	exposed_base: 2,
 	type: ["naked"],
@@ -52,6 +53,7 @@ plural - widget will output "are" if 1, and "is" if 0. eg - Your hat <<upperplur
 	integrity_max: 300,
 	fabric_strength: 30,
 	reveal: 100,
+	bustresize: -4,
 	word: "a",
 	one_piece: 1,
 	strap: 0,
@@ -95,6 +97,7 @@ plural - widget will output "are" if 1, and "is" if 0. eg - Your hat <<upperplur
 	integrity_max: 100,
 	fabric_strength: 30,
 	reveal: 1000,
+	bustresize: 0,
 	word: "n",
 	one_piece: 0,
 	strap: 0,
@@ -129,4 +132,13 @@ plural - widget will output "are" if 1, and "is" if 0. eg - Your hat <<upperplur
 }
 
 ]>>
-<</nobr>><</widget>>
+
+<!--
+	Clothes that modders add go into this array, this should be empty in the base game at all times.
+	These items should have a `modder` variable with a the modders name in a short string
+-->
+<<set setup.moddedClothes.over_upper to []>>
+
+<<run setup.moddedClothes.over_upper.forEach( (x,i) => x.index = setup.clothes.over_upper.length + i )>>
+<<run setup.clothes.over_upper.push(...setup.moddedClothes.over_upper)>>
+<</widget>>

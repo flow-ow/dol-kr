@@ -1,40 +1,40 @@
 :: Widgets Spa [widget]
-<<widget "spa_actions">><<nobr>>
+<<widget "spa_actions">>
 
-How do you want to behave?
+어떻게 행동할 것인가?
 <br><br>
 
 
-<<link [[Cute|Spa Work Cute]]>><<set $spa.behaviour to "cute">><</link>>
+<<link [[귀엽게 행동한다|Spa Work Cute]]>><<set $spa.behaviour to "cute">><</link>>
 <br>
-<<link [[Sophisticated|Spa Work Sophisticated]]>><<set $spa.behaviour to "sophisticated">><</link>>
+<<link [[세련되게 행동한다|Spa Work Sophisticated]]>><<set $spa.behaviour to "sophisticated">><</link>>
 <br>
-<<link [[Alluring|Spa Work Alluring]]>><<set $spa.behaviour to "alluring">><</link>><<promiscuous1>>
+<<link [[유혹하듯이 행동한다|Spa Work Alluring]]>><<set $spa.behaviour to "alluring">><</link>><<promiscuous1>>
 <br>
 
 
-<</nobr>><</widget>>
+<</widget>>
 
 
-<<widget "spa_work">><<nobr>>
+<<widget "spa_work">>
 
 <<spa_init>>
 <<generate1>><<person1>>
-A <<person>> enters,
+<<person_ i>>,
 <<if $pronoun is "m">>
-	wearing a towel around <<his>> waist.
+	<<his_ yi>> 허리에 수건을 두른 채 들어온다.
 <<else>>
-	wearing a towel around <<his>> body.
+	<<his_ yi>> 몸에 수건을 두른 채 들어온다.
 <</if>>
-<<set $rng to random(1, 5)>>
+<<rng 5>>
 <<switch $rng>>
 <<case 1>>
 	<<set $spa.personality to "hesitant">>
-	"Hello," <<he>> says. "I've not done this before. Do I just lie down?"
+	"안녕하세요." <<he_ ga>> 말한다. "제가 여긴 처음인데, 그냥 누우면 되나요?"
 	<br><br>
 <<case 2>>
 	<<set $spa.personality to "tired">>
-	<<He>> <span class="lewd">pulls off <<his>> towel</span> and lies down with barely a glance in your direction.
+	<<He_ nun>> <span class="lewd"><<his_ yi>> 수건을 벗고</span> 당신 쪽으로 거의 눈길 하나 주지 않고 눕는다.
 	<<if $awareness lte 100>>
 		<<awareness 1>><<gawareness>>
 	<</if>>
@@ -44,16 +44,16 @@ A <<person>> enters,
 	<br><br>
 <<case 3>>
 	<<set $spa.personality to "rude">>
-	<<He>> eyes you up.
+	<<he_ ga>> 당신을 올려다본다.
 	<<if $beauty gte 8000>>
-		"Nice," <<he>> says, before lying on the table.
+		"죽이는데." <<he_ ga>> 테이블에 눕기 전에 말한다.
 	<<else>>
-		"Was expecting better," <<he>> says, before lying on the table. "You better be good."<<gstress>><<stress 6>>
+		"기대 이하네," <<he_ ga>> 테이블에 눕기 전에 말한다. "제대로 하는 게 좋을 거야."<<gstress>><<stress 6>>
 	<</if>>
 	<br><br>
 <<case 4>>
 	<<set $spa.personality to "lewd">>
-	"You're a treat," <<he>> says, leering at your body. "How about I lose the towel." <<He>> lets it drop to the floor, and puts <<his>> hands on <<his>> hips. "Like what you see?"
+	"정말 멋지구나." <<he_ ga>> 당신의 몸을 음흉하게 쳐다보며 말한다. "내가 수건을 잃어버리면 어떨까." <<He_ nun>> 수건을 바닥에 떨어트리고, <<his_ yi>> 두 손을 <<his_ yi>> 엉덩이에 올린다. "지금 보이는 것처럼?"
 	<<if $awareness lte 100>>
 		<<awareness 1>><<gawareness>>
 	<</if>>
@@ -61,22 +61,22 @@ A <<person>> enters,
 		<<gstress>><<stress 6>>
 	<</if>>
 	<br><br>
-	<<He>> laughs, and lies on the table.
+	<<he_ ga>> 웃음을 터트리며 테이블에 눕는다.
 	<br><br>
 <<case 5>>
 	<<set $spa.personality to "polite">>
-	<<He>> nods at you, and lies on the table.
+	<<He_ nun>> 당신에게 가볍게 인사하고는, 테이블에 눕는다.
 	<br><br>
 <</switch>>
 <<spa_actions>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "spa_init">><<nobr>>
+<<widget "spa_init">>
 <<set $spa to {}>>
 <<set $spa.behaviour to "cute">>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "spa_end">><<nobr>>
+<<widget "spa_end">>
 <<unset $spa>>
 <<set $masseur_stat += 1>>
 <<famesocial 1>>
@@ -84,103 +84,103 @@ A <<person>> enters,
 <<endevent>>
 <<effects>>
 <<if $openinghours is 1>>
-	<<link [[Next customer (0:50)|Spa Work]]>><</link>>
+	<<link [[다음 손님을 받는다 (0:50)|Spa Work]]>><</link>>
 	<br>
-	<<link [[Leave|Danube Street]]>><<set $eventskip to 1>><</link>>
+	<<link [[떠난다|Danube Street]]>><<set $eventskip to 1>><</link>>
 	<br>
 <<else>>
-	The spa empties as the establishment closes for the night.
+	폐장 시간인 밤이 되어 스파는 텅 비어 있다.
 	<br><br>
 
-	<<link [[Next|Danube Street]]>><<set $eventskip to 1>><</link>>
+	<<link [[다음|Danube Street]]>><<set $eventskip to 1>><</link>>
 	<br>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "body_tip">><<nobr>>/*First arg: body part used. Second arg: $tipmod, or "add", relies on $tipmod being set previously if a string is used.*/
-	<<if typeof $args[1] is "number">>
-		<<set $tipmod to $args[1]>>
+<<widget "body_tip">>/*First arg: body part used. Second arg: $tipmod, or "add", relies on $tipmod being set previously if a string is used.*/
+	<<if typeof _args[1] is "number">>
+		<<set $tipmod to _args[1]>>
 	<</if>>
-	<<print '<<set $tipmod += (Math.trunc($' + $args[0] + 'skill / 100) / 10)>>'>>
-	<<tipset>>
-<</nobr>><</widget>>
+	<<print '<<set $tipmod += (Math.trunc($' + _args[0] + 'skill / 100) / 10)>>'>>
+	<<tipset "body">>
+<</widget>>
 
-<<widget "spa_breasts_strip">><<nobr>>
-"Not sure why I asked," the <<person>> scoffs. <<He>> lunges for you,
+<<widget "spa_breasts_strip">>
+"왜 부탁씩이나 했는지 모르겠군." <<person_ i>> 조롱한다. <<he_ ga>> 당신에게
 <<dancedifficulty 1 1100 true>>
 <<if $danceSuccess>>
-	<span class="green">but you duck and twirl out of the way.</span>
+	달려들지만, <span class="green">당신은 몸을 낮춰 빙글 돌며 피한다.</span>
 	<br><br>
 
-	<<link [[Slap|Spa Rude Slap]]>><<def 1>><<trauma -6>><<famescrap 1>><</link>><<ltrauma>>
+	<<link [[뺨을 때린다|Spa Rude Slap]]>><<def 1>><<trauma -6>><<famescrap 1>><</link>><<ltrauma>>
 	<br>
-	<<link [[Remain polite|Spa Rude Polite]]>><</link>>
+	<<link [[정중함을 유지한다|Spa Rude Polite]]>><</link>>
 	<br>
 <<else>>
-	<span class="red">and grasps your $worn.upper.name.</span>
+	달려들어, <span class="red">당신의 <<worn_upper_name_ ul>> 붙잡는다.</span>
 	<<if $worn.upper.open is 1 or $worn.upper.set isnot $worn.lower.set or $worn.upper.integrity lte 20>>
 
 		<<if $worn.under_upper.type.includes("naked")>>
 			<<fameexhibitionism 1>>
 			<<if $worn.upper.open is 1>>
-				<<He>> tugs it down,
+				<<He_ nun>> 그걸 끌어내려, 
 			<<elseif $worn.upper.integrity gt 20>>
-				<<He>> pulls it up,
+				<<He_ nun>> 그걸 위로 잡아당겨, 
 			<<else>>
-				<<He>> tears it off your body,
+				<<He_ nun>> 그걸 찢어내, 
 				<<set $worn.upper.integrity -= 20>>
 				<<integritycheck>><<exposure>>
 			<</if>>
-			<span class="pink">revealing your <<breasts>>.</span><<ggtrauma>><<gstress>><<stress 6>><<trauma 12>>
+			<span class="pink">당신의 <<breasts_ rul>> 드러낸다.</span><<ggtrauma>><<gstress>><<stress 6>><<trauma 12>>
 			<br><br>
 
-			"Nice," <<he>> says, releasing you after having a good look. <<covered>> <<He>> turns and leaves the room.
+			"멋진데." <<He_ nun>> 눈요기를 한 후 당신을 놓아주며 말한다. <<covered>> <<he_ ga>> 돌아서서 방을 나간다.
 			<br><br>
 			<<spa_end>>
 		<<else>>
 			<<if $worn.upper.open is 1>>
-				<<He>> tugs it down,
+				<<He_ nun>> 그걸 끌어내려, 
 			<<elseif $worn.upper.integrity gt 20>>
-				<<He>> pulls it up,
+				<<He_ nun>> 그걸 위로 잡아당겨, 
 			<<else>>
-				<<He>> tears it off your body,
+				<<He_ nun>> 그걸 찢어내, 
 				<<set $worn.upper.integrity -= 20>>
 				<<integritycheck>><<exposure>>
 			<</if>>
-			<span class="pink">revealing your <<undertop>>.</span><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+			<span class="pink">당신의 <<undertop_ ul>> 드러낸다.</span><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
 			<br><br>
 
-			<<link [[Next|Spa Rude Under Top]]>><</link>>
+			<<link [[다음|Spa Rude Under Top]]>><</link>>
 			<br>
 		<</if>>
 	<<else>>
-		<<He>> tries to tear it from your body, but only damages the fabric before you manage to twist away.
+		<<He_ nun>> 그걸 찢어버리려 했지만, 당신이 간신히 몸을 비틀어 빠져나올 때까지 천에 약간의 손상만을 입힌다.
 		<<set $worn.upper.integrity -= 20>>
 		<br><br>
 
-		<<He>> looks set to try again, but another member of staff bangs on the door. "Everything okay in there?"
+		<<He_ nun>> 다시금 달려들려는 듯한 자세를 취하나, 다른 직원이 문을 쾅 열고 들어온다. "다들 괜찮으신가요?"
 		<br>
-		"Yes," the <<person>> responds. "I'm just leaving." <<He>> shoots you a last look before exiting the room.
+		"네." <<person_ i>> 대답한다. "막 나가려 그랬어요." <<he_ ga>> 방을 나가며 마지막으로 당신을 흘끗 쳐다본다.
 		<br><br>
 
 		<<spa_end>>
 	<</if>>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "spa_genitals_strip">><<nobr>>
-"Not sure why I asked," the <<person>> scoffs. <<He>> lunges for you,
+<<widget "spa_genitals_strip">>
+"왜 부탁씩이나 했는지 모르겠군." <<person_ i>> 조롱한다. <<he_ ga>> 당신에게
 <<dancedifficulty 1 1100 true>>
 <<if $danceSuccess>>
-	<span class="green">but you duck and twirl out of the way.</span>
+	달려들지만, <span class="green">당신은 몸을 낮춰 빙글 돌며 피한다.</span>
 	<br><br>
 
-	<<link [[Slap|Spa Rude Slap]]>><<def 1>><<trauma -6>><<famescrap 1>><</link>><<ltrauma>>
+	<<link [[뺨을 때린다|Spa Rude Slap]]>><<def 1>><<trauma -6>><<famescrap 1>><</link>><<ltrauma>>
 	<br>
-	<<link [[Remain polite|Spa Rude Polite]]>><</link>>
+	<<link [[정중함을 유지한다|Spa Rude Polite]]>><</link>>
 	<br>
 <<else>>
-	<span class="red">and grasps your $worn.lower.name.</span>
+	달려들어, <span class="red">당신의 <<worn_lower_name_ ul>> 붙잡는다.</span>
 	<<if $worn.lower.outfitSecondary is undefined>>
 		<<set _broken to true>>
 	<<elseif $worn.lower.outfitSecondary[1] is "broken">>
@@ -190,178 +190,193 @@ A <<person>> enters,
 
 		<<if $worn.under_lower.type.includes("naked")>>
 			<<fameexhibitionism 1>>
-			<<if $worn.lower.skirt is 1>>
-				<<He>> flips it up,
+			<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+				<<He_ nun>> 그걸 위로 젖혀, 
 			<<elseif $worn.lower.integrity gt 20>>
-				<<He>> tugs it down,
+				<<He_ nun>> 그걸 끌어내려, 
 			<<else>>
-				<<He>> tears it off your body,
+				<<He_ nun>> 그걸 찢어내, 
 				<<set $worn.lower.integrity -= 20>>
 				<<integritycheck>>
 			<</if>>
-			<span class="pink">revealing your <<genitals>>.</span><<ggtrauma>><<gstress>><<stress 6>><<trauma 12>>
+			<span class="pink">당신의 <<genitals_ rul>> 드러낸다.</span><<ggtrauma>><<gstress>><<stress 6>><<trauma 12>>
 			<br><br>
 
 			<<spa_genitals_reaction>>
-			<<covered>> <<He>> turns and leaves the room.
+			<<covered>> <<He_ nun>> 돌아서서 방을 나간다.
 			<br><br>
 			<<spa_end>>
 		<<else>>
-			<<if $worn.lower.skirt is 1>>
-				<<He>> flips it up,
+			<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+				<<He_ nun>> 그걸 위로 젖혀, 
 			<<elseif $worn.lower.integrity gt 20>>
-				<<He>> tugs it down,
+				<<He_ nun>> 그걸 끌어내려, 
 			<<else>>
-				<<He>> tears it off your body,
+				<<He_ nun>> 그걸 찢어내, 
 				<<set $worn.lower.integrity -= 20>>
 				<<integritycheck>>
 			<</if>>
-			<span class="pink">revealing your <<undies>>.</span><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+			<span class="pink">당신의 <<undies_ rul>> 드러낸다.</span><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
 			<br><br>
 
-			<<link [[Next|Spa Rude Under]]>><</link>>
+			<<link [[다음|Spa Rude Under]]>><</link>>
 			<br>
 		<</if>>
 	<<else>>
-		<<He>> tries to tear it from your body, but only damages the fabric before you manage to twist away.
+		<<He_ nun>> 그걸 찢어버리려 했지만, 당신이 간신히 몸을 비틀어 빠져나올 때까지 천에 약간의 손상만을 입힌다.
 		<<set $worn.lower.integrity -= 20>>
 		<br><br>
 
-		<<He>> looks set to try again, but another member of staff bangs on the door. "Everything okay in there?"
+		<<He_ nun>> 다시금 달려들려는 듯한 자세를 취하나, 다른 직원이 문을 쾅 열고 들어온다. "다들 괜찮으신가요?"
 		<br>
-		"Yes," the <<person>> responds. "I'm just leaving." <<He>> shoots you a last look before exiting the room.
+		"네." <<person_ i>> 대답한다. "막 나가려 그랬어요." <<he_ ga>> 방을 나가며 마지막으로 당신을 흘끗 쳐다본다.
 		<br><br>
 
 		<<spa_end>>
 	<</if>>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "spa_genitals_reaction">><<nobr>>
+<<widget "spa_genitals_reaction">>
 <<if $player.gender_appearance is "m">>
-	<<if $penisexist is 1>>
-		<<if $penissize gte 3>>
-			"Damn <<girl>>," <<he>> says. "Why are you so bashful with a monster like that?" <<He>> releases you after having a good look.
-		<<elseif $penissize lte 1>>
-			"No wonder you're so bashful," <<he>> laughs, releasing you after having a good look.
+	<<if $player.penisExist>>
+		<<if $player.penissize gte 3>>
+			"제기랄 <<girlPost>>," <<he_ ga>> 말한다. "그런 괴물을 달고 있으면서 뭘 그리 부끄러워해?" <<He_ nun>> 눈요기를 한 후 당신을 놓아준다.
+		<<elseif $player.penissize lte 1>>
+			"그렇게 부끄러워할 만 하구만?" <<he_ ga>> 눈요기를 한 후 당신을 놓아주며, 웃음을 터트린다.
 		<<else>>
-			"Nice," <<he>> says, releasing you after having a good look.
+			"멋진데." <<he_ ga>> 눈요기를 한 후 당신을 놓아주며 말한다.
 		<</if>>
 	<<else>>
-		<<He>> stares for a moment, dumbfounded.
+		<<He_ nun>> 어안이 벙벙하여, 잠시 멍하니 쳐다본다.
 		<<if random(1, 2) is 2>>
-			"I'm more impressed than angry," <<he>> says, releasing you.
+			"화나기보단 오히려 인상적인데!" <<he_ ga>> 당신을 놓아주며 말한다.
 		<<else>>
-			"That's a surprise," <<he>> says, releasing you.
+			"놀라운걸." <<he_ ga>> 당신을 놓아주며 말한다.
 		<</if>>
 	<</if>>
 <<else>>
-	<<if $vaginaexist is 1>>
-		"Nice," <<he>> says, releasing you after having a good look.
+	<<if $player.vaginaExist>>
+		"멋진데." <<he_ ga>> 눈요기를 한 후 당신을 놓아주며 말한다.
 	<<else>>
-		<<He>> stares for a moment, dumbfounded.
+		<<He_ nun>> 어안이 벙벙하여, 잠시 멍하니 쳐다본다.
 		<<if random(1, 2) is 2>>
-			"I'm more impressed than angry," <<he>> says, releasing you.
+			"화나기보단 오히려 인상적인데!" <<he_ ga>> 당신을 놓아주며 말한다.
 		<<else>>
-			"That's a surprise," <<he>> says, releasing you.
+			"놀라운걸." <<he_ ga>> 당신을 놓아주며 말한다.
 		<</if>>
 	<</if>>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "spa_hand_failed">><<nobr>>
+<<widget "spa_hand_failed">>
 
 <<if $NPCList[0].penis isnot "none">>
-	<<handejacstat>><<ejacstat>><<set $leftarmsemen += 1>><<set $rightarmsemen += 1>>
-	<<His>> <<print $NPCList[0].penisdesc>> erupts over your hands while <<his>> body spasms and jerks.
+	<<handejacstat>><<ejacstat>><<bodyliquid "leftarm" "semen">><<bodyliquid "rightarm" "semen">>
+	<<his_ yi>> 몸이 떨리고 경련하며, <<his_ yi>> <<trPenisdesc $NPCList[0].penisdesc "이">> 당신의 손에 정액을 분출한다.
 <<else>>
-	<<His>> body spasms and jerks.
+	<<his_ yi>> 몸이 떨리고 경련한다.
 <</if>>
 <br><br>
 
-<<He>> lies on the table for a few moments, gasping and resting an arm over <<his>> eyes. "Thanks," <<he>> manages. "Well earned."<<tipreceive>><<pass 50>>
+<<He_ nun>> 팔을 <<his_ yi>> 눈 위에 올려놓고 숨을 헉 들이쉬며, 잠시동안 테이블 위에 누워 있다. "고맙다." <<he_ ga>> 간신히 말한다. "이 정도는 받을 자격이 있어."<<tipreceive>><<pass 50>>
 <br><br>
 
-<<He>> ties <<his>> towel around <<his>> waist, and walks from the room.
+<<He_ nun>> <<his_ yi>> 허리춤에 <<his_ yi>> 수건을 두르고, 방에서 걸어나간다.
 <br><br>
 
 <<spa_end>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "spa_rape_failed">><<nobr>>
+<<widget "spa_rape_failed">>
 <<if $NPCList[0].penis isnot "none">>
-	<<if $vaginaexist is 1 or $analdisable is "f">>
-		<<He>> grasps your <<bottom>>, and tries to force <<his>> cock inside you.
+	<<if $player.vaginaExist or $analdisable is "f">>
+		<<he_ ga>> 당신의 <<bottom_ ul>> 붙잡아, <<his_ yi>> 육봉을 당신에게 쑤셔넣으려 시도한다.
 	<<else>>
-		<<He>> grasps your <<bottom>>
+		<<he_ ga>> 당신의 <<bottom_ ul>> 붙잡는다.
 	<</if>>
 <<else>>
-	<<if $penisexist is 1>>
-		<<He>> grasps your <<bottom>>, and tries to force your <<penis>> inside <<him>>.
+	<<if $player.penisExist>>
+		<<he_ ga>> 당신의 <<bottom_ ul>> 붙잡아, 당신의 <<penis_ rul>> <<himPost "에게">> 넣으려 시도한다.
 	<<else>>
-		<<He>> grasps your <<bottom>>.
+		<<he_ ga>> 당신의 <<bottom_ ul>> 붙잡는다.
 	<</if>>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "spa_rob_options">><<nobr>>
+<<widget "spa_rob_options">>
 
 
-You move your hands back up the <<persons>> back. <<He>> occasionally moans, but is otherwise quiet. Then <<he>> starts to snore.
+당신은 손을 <<persons_ yi>> 등으로 옮긴다. <<He_ nun>> 가끔씩 신음하지만, 그 외에는 아무 소리도 내지 않는다. 그러고선 <<he_ ga>> 코를 골기 시작한다.
 <br><br>
 
-<<if $skulduggery gte 100>>
+<<if currentSkillValue('skulduggery') gte 100>>
 	<<if $rng gte 51>>
 		<<set $phase to 0>>
-		You spy a gold <<if $pronoun is "f">>necklace<<else>>chain<</if>> around <<his>> neck.
+		당신은 <<his_ yi>> 목에서 <<if $pronoun is "f">>금목걸이를<<else>>금 사슬을<</if>> 슬쩍 본다.
 	<<elseif $rng gte 2>>
 		<<set $phase to 1>>
-		You spy a gold ring on one of <<his>> fingers.
+		당신은 <<his_ yi>> 손가락에서 금반지 하나를 슬쩍 본다.
 	<<else>>
 		<<set $phase to 2>>
-		You spy a nice watch around <<his>> wrist. <span class="teal">It looks very valuable</span>
+		당신은 <<his_ yi>> 손목에서 멋진 시계 하나를 슬쩍 본다. <span class="teal">아주 비싸 보인다.</span>
 	<</if>>
 <br><br>
 	<</if>>
 
 
-<<link [[Keep working|Spa Tired Keep]]>><<handskill 5>><</link>><<ghandskill>>
+<<link [[계속 일한다|Spa Tired Keep]]>><<handskill 5>><</link>><<ghandskill>>
 <br>
-<<link [[Take a break|Spa Tired Break]]>><<stress -6>><<tiredness -6>><</link>><<ltiredness>><<lstress>>
+<<link [[휴식을 취한다|Spa Tired Break]]>><<stress -6>><<tiredness -6>><</link>><<ltiredness>><<lstress>>
 <br>
-<<if $skulduggery gte 100>>
+<<if currentSkillValue('skulduggery') gte 100>>
 	<<set $skulduggerydifficulty to 500>>
-	<<link [[Rob|Spa Tired Steal]]>><</link>><<skulduggerydifficulty>><<crime>>
+	<<link [[훔친다|Spa Tired Steal]]>><</link>><<skulduggerydifficulty>><<crime>>
 <</if>>
 <br>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "spa_job_init">><<nobr>>
+<<widget "spa_job_init">>
 <<set $spa_job to 1>>
 <<spa_event_select>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "spa_event_select">><<nobr>>
+<<widget "spa_event_select">>
 <<set _spa_event to random(1, 5)>>
 <<if _spa_event is 5>>
-	<<set $spa_event to "party">>
+	<<set $daily.spaEvent to "party">>
 <<else>>
-	<<set $spa_event to "normal">>
+	<<set $daily.spaEvent to "normal">>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "spa_tan_events">><<nobr>>
-<span class="red">You hear the door open.</span> You turn your head, and see a pair of legs rush in. They crouch a moment, then turn and leave the room.
-<br><br>
+<<widget "spa_tan_events">>
+<<rngWraith 1>>
+<<if _wraithEvent and $wraith.state is "haunt">>
+	갑자기 전등이 모두 꺼져, 당신을 완전한 암흑 속으로 몰아넣는다. 당신은 태닝 베드를 억지로 열려고 시도하지만, 꿈쩍도 하지 않는다.
+	<br><br>
 
-You push open the tanning bed. <span class="pink">Your clothes are gone!</span><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
-<br><br>
+	당신은 얼어죽을 정도의 추위를 느낀다. 당신은 비명을 지르려 하지만, 아무런 소리도 흘러나오지 않는다. 멀리서 <<if $wraith.seen gte 3>>익숙한 <</if>>웃음소리가 들려온다. <<stress 12>><<trauma 4>><<ggstress>><<gtrauma>>
+	<br><br>
 
-<<link [[Chase the culprit|Spa Tan Chase]]>><</link>><<athleticsdifficulty 1 1400>>
-<br>
-<<link [[Ask for help|Spa Tan Help]]>><</link>>
-<br>
-<<set $skulduggerydifficulty to 500>>
-<<link [[Look for towels|Spa Tan Sneak]]>><</link>><<skulduggerydifficulty>>
-<br>
-<</nobr>><</widget>>
+	전등이 깜빡이며 돌아와, 당신을 온기와 안도로 채운다. 당신은 시간이 다 되기까지 진정하려 노력하고, 전등이 다시 꺼진다.
+	<br><br>
+
+	<<link [[다음|Spa]]>><<clotheson>><</link>>
+	<br>
+<<else>>
+	<span class="red">문이 열리는 소리가 들린다.</span> 당신이 고개를 돌리자, 방 안으로 들어온 다리 한 쌍이 보인다. 그것들은 잠시 쭈그리고 있다가, 돌아서 방을 나간다.
+	<br><br>
+
+	당신은 태닝 베드를 밀어 열어젖힌다. <span class="pink">당신의 옷가지가 사라져 버렸다!</span><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+	<br><br>
+
+	<<link [[범인을 쫓는다|Spa Tan Chase]]>><</link>><<athleticsdifficulty 1 1400>>
+	<br>
+	<<link [[도움을 요청한다|Spa Tan Help]]>><</link>>
+	<br>
+	<<set $skulduggerydifficulty to 500>>
+	<<link [[수건을 찾는다|Spa Tan Sneak]]>><</link>><<skulduggerydifficulty>>
+	<br>
+<</if>>
+<</widget>>

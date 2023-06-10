@@ -1,0 +1,373 @@
+:: Farm Fields
+<<set $outside to 1>><<set $bus to "farm_fields">><<effects>>
+<<farm_work_update>>
+<<plot_effects>>
+<<if $farm_fields_intro is 1>>
+	<<unset $farm_fields_intro>>
+	그을린 냄새가 그들을 보기 전에 당신을 반긴다. 레미의 사보타주 때문에 들판은 여전히 검다. 감자 씨앗 한 자루가 대문 앞에 반쯤 쏟아져 있다.
+	<br><br>
+	<<set $plants_known.push("potato")>>
+	<span class="gold">당신은 이제 <<icon "tending/potato.png">> 감자를 재배할 수 있다.</span>
+	<br>
+	<<set $plants_known.push("turnip")>>
+	<span class="gold">당신은 이제 <<icon "tending/turnip.png">> 순무를 재배할 수 있다.</span>
+	<br><br>
+<<else>>
+	당신은 당신의 밭에 있다.
+<</if>>
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax>>
+	<<passoutfarmroad>>
+<<elseif $farm_attack_timer is 0 and $hour gte 21>>
+	<<npc Alex>><<person1>>
+	알렉스가 달려온다. <span class="red">"레미가 왔어,"</span> <<he_ ga>> 말한다. "우리는 할 수 있어. 가서 준비해, 나는
+	<<if $farm.tower_guard>>
+		<<NPCname_ ul $farm.tower_guard>> 확인할게."
+	<<else>>
+		그들을 찾을 수 있을지 알아볼게."
+	<</if>>
+	<br><br>
+
+	<<farm_assault_intro>>
+	<br><br>
+
+	<<link [[준비한다|Farm Assault Wardrobe]]>><<endevent>><<set $phase to 2>><</link>>
+	<br>
+<<elseif $danger gte (9900 - $allure) and $eventskip isnot 1>>
+	<<farm_tending_events>>
+<<else>>
+
+	<<if $farm.tower gte 1>>
+		<<if $farm.tower_guard>>
+			망루에는 경비원이 서 있다.
+			<<loadNPC 0 "farm_tower_guard">><<person1>>
+			<<if $NPCList[0].traits.includes("relaxed")>>
+				<<NPCname_ un $NPCList[0].name>> 난간에 기대어 서 있다. <<himPost>>에게서 연기가 한 줄기 피어오른다.
+			<<elseif $NPCList[0].traits.includes("sociable")>>
+				<<NPCname_ un $NPCList[0].name>> 꼭대기에서 당신에게 손을 흔든다.
+			<<elseif $NPCList[0].traits.includes("brooding")>>
+				당신은 꼭대기에 있는 <<NPCname_ yi $NPCList[0].name>> 실루엣을 볼 수 있다.
+			<<else>>
+				<<NPCname_ un $NPCList[0].name>> 난간에 기대어 서서, 당신을 보고 있다.
+			<</if>>
+			<<endevent>>
+		<<else>>
+			망루는 세워져 있지만, 지금은 사람이 없다.
+		<</if>>
+		<br>
+		<<link [[올라간다|Farm Tower]]>><</link>>
+		<br><br>
+	<</if>>
+	<<display_plot farm>>
+
+	<<link [[떠난다 (0:05)|Farm Work]]>><<pass 5>><</link>>
+	<br>
+<</if>>
+
+<<set $eventskip to 0>>
+
+
+
+:: Farm Tower
+<<effects>>
+
+당신은 망루를 올라간다.
+<<if $farm.tower_guard>>
+	<<loadNPC 0 "farm_tower_guard">><<person1>>
+
+
+	<<if $NPCList[0].traits.includes("relaxed")>>
+		<<NPCname_ un $NPCList[0].name>> <<his_ yi>> 담배를 내려놓는다. "뭘 도와줄까?"
+	<<elseif $NPCList[0].traits.includes("sociable")>>
+		<<NPCname_ un $NPCList[0].name>> 당신에게 미소를 짓는다. "무슨 일이야?"
+	<<elseif $NPCList[0].traits.includes("brooding")>>
+		<<NPCname_ un $NPCList[0].name>> 당신을 보고 고개를 끄덕인다. "무슨 문제라도 있어?"
+	<<else>>
+		<<NPCname_ un $NPCList[0].name>> 당신을 훑어본다. "네 섹시한 엉덩이를 여기까지 오게 한 건 뭐야?"
+	<</if>>
+	<br><br>
+
+	보안 스킬: <<guard_skill_text "tower">>
+	<br>
+	임금: <<printmoney $farm.tower_guard_wage>>
+	<br><br>
+
+	<<farm_guard_pay>>
+<<else>>
+	황무지는 한 방향으로는 지평선까지, 다른 방향으로는 바다까지 뻗어 있다.
+	<br><br>
+<</if>>
+<<link [[떠난다|Farm Fields]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Farm Tower Pay
+<<effects>>
+
+<<if $NPCList[0].traits.includes("relaxed")>>
+	"고마워," <<NPCname_ i $NPCList[0].name>> 말한다. "계속 감시할게."
+<<elseif $NPCList[0].traits.includes("sociable")>>
+	"고마워 내 사랑," <<NPCname_ yi $NPCList[0].name>> 입꼬리가 더욱 올라간다. "내가 기대했던 것보다 훨씬 좋은데."
+<<elseif $NPCList[0].traits.includes("brooding")>>
+	<<NPCname_ un $NPCList[0].name>> 다시 고래를 끄덕이고는, 황무지 너머를 응시한다.
+<<else>>
+	"좋아," <<NPCname_ i $NPCList[0].name>> 말한다. "다른 종류의 대가를 제안하고 싶지만, 현금이 필요하거든."
+<</if>>
+<br><br>
+
+
+
+<<if $bus is "farm_fields">>
+	당신은 망루를 내려간다.
+	<br><br>
+
+	<<link [[떠난다|Farm Fields]]>><<saveNPC 0 "farm_tower_guard">><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<<He_ nun>> 가버린다.
+	<br><br>
+
+	<<link [[떠난다|Farm Work]]>><<saveNPC 0 "farm_tower_guard">><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>
+
+
+
+
+:: Farm Guard Pay Refuse
+<<effects>>
+
+<<if $submissive gte 1150>>
+	"저- 저는 그럴 여유가 없어요," 당신은 말한다. "정말 죄송해요."
+<<elseif $submissive lte 850>>
+	"예산이 너무 빠듯해," 당신은 말한다. "다음 주에는 잘 쳐줄게."
+<<else>>
+	"저는 그럴 여유가 없어요," 당신은 말한다. "꼭 갚을게요."
+<</if>>
+<br><br>
+
+<<if $NPCList[0].trust gte 1>>
+	<<if $NPCList[0].traits.includes("relaxed")>>
+		<<NPCname_ un $NPCList[0].name>> 한숨을 쉰다. <span class="green">"괜찮아,"</span> <<he_ ga>> 말한다. "다음주에 보자."
+	<<elseif $NPCList[0].traits.includes("sociable")>>
+		<<NPCname_ un $NPCList[0].name>> 어깨를 으쓱인다. <span class="green">"기다릴 수 있어,"</span> <<he_ ga>> 말한다. "하지만 영원히는 아니야."
+	<<elseif $NPCList[0].traits.includes("brooding")>>
+		<span class="green">"이해한다,"</span> <<NPCname_ un $NPCList[0].name>> 말한다.
+	<<else>>
+		<<NPCname_ un $NPCList[0].name>> 흙더미를 발로 찬다. <span class="green">"기다릴게,"</span> <<he_ ga>> 말한다. "그렇지만 이건 너라서 해주는 거야."
+	<</if>>
+
+	<<He_ nun>> 가버린다.
+	<br><br>
+
+	<<set $NPCList[0].trust -= 3>>
+
+	<<link [[다음|Farm Work]]>><<saveNPC 0 "farm_tower_guard">><<set $farm.tower_guard_patience to 1>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<if $NPCList[0].traits.includes("relaxed")>>
+		<<NPCname_ un $NPCList[0].name>> <span class="red"><<his_ yi>> 고개를 젓는다.</span> "미안하구나," <<he_ ga>> 말한다. "무료로 도와주고 싶지만, 지불해야 할 청구서가 있거든. 나중에 보자."
+	<<elseif $NPCList[0].traits.includes("sociable")>>
+		<span class="red">"미안하지만 <<girl_ ya>>,"</span> <<NPCname_ i $NPCList[0].name>> 말한다. "영원히 친구들한테 빌붙어 살 순 없거든. 나중에 보자."
+	<<elseif $NPCList[0].traits.includes("brooding")>>
+		<span class="red">"내가 해줄 말은 없구나,</span> 그럼," <<NPCname_ i $NPCList[0].name>> 말한다. "행운을 빈다."
+	<<else>>
+		<span class="red">"미안하지만 <<girl_ ya>>,"</span> <<NPCname_ i $NPCList[0].name>> 말한다. "네 빛을 얻고 싶은 만큼, 나는 뭔가 확실한 것이 필요하거든. 잘 있거라."
+	<</if>>
+	<br><br>
+	<<He_ nun>> 농장을 떠난다.
+	<br><br>
+	<span class="purple">망루는 대체 인력을 구하기 전까지 더 이상 작동하지 않는다.</span>
+	<br><br>
+	<<link [[다음|Farm Work]]>><<endevent>><<clearNPC "farm_tower_guard">><<set $farm.tower_guard to 0>><</link>>
+	<br>
+<</if>>
+
+
+
+:: Farm Guard Pay Seduce
+<<effects>>
+
+<<if $NPCList[0].traits.includes("relaxed")>>
+	<<set $seductiondifficulty to 8000>>
+<<elseif $NPCList[0].traits.includes("sociable")>>
+	<<set $seductiondifficulty to 8000>>
+<<elseif $NPCList[0].traits.includes("brooding")>>
+	<<set $seductiondifficulty to 10000>>
+<<else>>
+	<<set $seductiondifficulty to 6000>>
+<</if>>
+
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>>
+	<span class="gold">당신은 유혹하는 데 좀 더 자신감이 붙었다.</span>
+	<br><br>
+<</if>>
+<<seductionskilluse>>
+
+<<if $submissive gte 1150>>
+	"제-제가 지불할 수 있는 다른 방법이 없는 게 확실해요?" 당신은 유혹하듯 말한다.
+<<elseif $submissive lte 850>>
+	"오, 내가 제대로 지불할게," 당신은 말한다. "당신이 등을 대고 있는 동안에 말야."
+<<else>>
+	"내가 당신에게 지불할 수 있는 다른 방법이 있어요," 당신은 유혹하듯 말한다.
+<</if>>
+<<promiscuity3>>
+
+<<if $seductionrating gte $seductionrequired>>
+	<<if $NPCList[0].traits.includes("relaxed")>>
+		<span class="green">"네가 그런 제안을 해주길 바라고 있었지,"</span> <<NPCname_ i $NPCList[0].name>> 말한다. "소심한 녀석이 되고 싶지는 않았거든." 당신은 <<his_ yi>> 손을 잡고, <<him_ ul>> 헛간 안의 한적한 곳으로 데려간다.
+	<<elseif $NPCList[0].traits.includes("sociable")>>
+		<<NPCname_ un $NPCList[0].name>> 말을 하려하지만, <span class="green">겨우 침을 꿀꺽 삼킬 뿐이다.</span> 당신은 <<his_ yi>> 손을 잡고, <<him_ ul>> 헛간 안의 한적한 곳으로 데려간다.
+	<<elseif $NPCList[0].traits.includes("brooding")>>
+		<span class="green">"이번 한번만이야,"</span> <<NPCname_ i $NPCList[0].name>> 말한다. "여기가 힘들다는 건 알고 있어." 당신은 <<his_ yi>> 손을 잡고, <<him_ ul>> 헛간 안의 한적한 곳으로 데려간다.
+	<<else>>
+		<span class="green">"좋네,"</span> <<NPCname_ i $NPCList[0].name>> 말한다. "헛간에서 하자."
+		<br><br>
+		당신은 뒷쪽의 한적한 곳을 찾아낸다.
+	<</if>>
+	<br><br>
+
+	<<link [[다음|Farm Guard Sex]]>><<set $sexstart to 1>><</link>>
+	<br>
+<<else>>
+	<<if $NPCList[0].traits.includes("relaxed")>>
+		<span class="red">"미안해,"</span> <<NPCname_ i $NPCList[0].name>> 말한다. "너는 귀엽지만, 나는 지불해야 할 청구서가 있어."
+	<<elseif $NPCList[0].traits.includes("sociable")>>
+		"넌 음란한 사람이구나," <<NPCname_ i $NPCList[0].name>> 말한다. <span class="red">"하지만 내가 모든 제안을 이렇게 받아들인다면, 나는 궁핍해질거야."</span>
+	<<elseif $NPCList[0].traits.includes("brooding")>>
+		<span class="red">"관심 없어,"</span> <<NPCname_ i $NPCList[0].name>> 말한다. "창부들은 마을에 널렸으니까."
+	<<else>>
+		"매력적이네," <<NPCname_ i $NPCList[0].name>> 말한다. <span class="red">"하지만 내 월급으로는 더 싼 <<girls_ rul>> 많이 살 수 있거든.</span> 미안해."
+	<</if>>
+	<br><br>
+	<<farm_guard_pay>>
+	<<link [[지금 당장은 돈이 없다고 말한다|Farm Guard Pay Refuse]]>><</link>><<lltrust>>
+	<br>
+
+<</if>>
+
+:: Farm Guard Sex
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $outside to 0>>
+	<<prop haybale>>
+	<<enable_rescue>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[다음|Farm Guard Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Farm Guard Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Farm Guard Sex Finish
+
+<<set $outside to 0>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<if $NPCList[0].traits.includes("relaxed")>>
+		"젠장," <<NPCname_ i $NPCList[0].name>> 말한다. "또 유혹당해버렸군. 빡빡한 일주일이 되겠네."
+	<<elseif $NPCList[0].traits.includes("sociable")>>
+		"고마워 내 사랑," <<NPCname_ i $NPCList[0].name>> 말한다. "널 만나기 전까지는 내가 건초더미에서 뒹굴 수 있는 타입인 줄 몰랐어."
+	<<elseif $NPCList[0].traits.includes("brooding")>>
+		"일할 준비할게," <<NPCname_ i $NPCList[0].name>> 말한다. "거래는 거래니까."
+	<<else>>
+		"빌어먹을 <<girlPost>>," <<NPCname_ i $NPCList[0].name>> 말한다. "넌 이거 진짜 잘하네. 내 친구들에게 자랑하고 싶지만, 나 자신에게서 너를 지키고 싶기도 해. 고민되네."
+	<</if>>
+	당신의 직원이 헛간을 떠난다.
+	<<note "+ 보안 능력" "green">><<note "+ 임금" "red">>
+	<br><br>
+	<<tearful>> 당신은 건초를 털어낸다.
+	<br><br>
+
+	<<farm_guard_paid>>
+	<<saveNPC 0 "farm_tower_guard">>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Farm Work]]>><</link>>
+<<elseif $enemyhealth lte 0>>
+	<<if $NPCList[0].traits.includes("relaxed")>>
+		"미안해," <<NPCname_ i $NPCList[0].name>> 뒤로 물러서며, 말한다. "내가 사람을 잘못 봤네. 내 돈을 줘, 난 바로 갈 거야."
+	<<elseif $NPCList[0].traits.includes("sociable")>>
+		"알겠어 알겠어!" <<NPCname_ i $NPCList[0].name>> <<his_ yi>> 두 손을 들어 보이며, 말한다. "이해했어. 더 이상 만지지 않을게. 그냥 내 돈을 받아가지."
+	<<elseif $NPCList[0].traits.includes("brooding")>>
+		"진정해 <<girlPost>>," <<NPCname_ i $NPCList[0].name>> 뒤로 물러서며, 말한다. "문명인답게 행동하자. 내 돈."
+	<<else>>
+		"나도 거칠게 하는 건 좋아하지만, 씨발 그래도 말야," <<NPCname_ i $NPCList[0].name>> 말한다. "네가 고집을 부린다면 다른 방법으로 지불하게 될 수도 있을거야."
+	<</if>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<loadNPC 0 "farm_tower_guard">><<person1>>
+	<<farm_guard_pay>>
+	<<link [[지금 당장은 돈이 없다고 말한다|Farm Guard Pay Refuse]]>><</link>><<lltrust>>
+	<br>
+<<elseif $alarm is 1 and $rescue is 1>>
+	<<set $rescued += 1>>
+	"내가 간다!" 알렉스가 헛간으로 들어온다.
+	<br><br>
+
+	<<if $NPCList[0].traits.includes("relaxed")>>
+		<<NPCname_ un $NPCList[0].name>> 당신에게서 물러난다. "이건 보는 것 같은 그런 게 아니야," <<he_ ga>> 말한다.
+	<<elseif $NPCList[0].traits.includes("sociable")>>
+		<<NPCname_ un $NPCList[0].name>> 당신에게서 멀어진다. "미안해 보스," <<he_ ga>> 말한다. "어, 보스들. 이건 아무 뜻도 없어."
+	<<elseif $NPCList[0].traits.includes("brooding")>>
+		<<NPCname_ un $NPCList[0].name>> <<his_ yi>> 팔을 들어 올린다. "내가 이성을 잃었었어," <<he_ ga>> 말한다. "미안해."
+	<<else>>
+		<<NPCname_ un $NPCList[0].name>> 비틀거리며 당신에게서 물러난다. "그건 <<his_ yi>> 생각이었어," <<he_ ga>> 말한다. "맹세해!"
+	<</if>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<npc Alex>>
+	<<loadNPC 1 "farm_tower_guard">>
+
+	"<<if $NPCName[$NPCNameList.indexOf("Alex")].dom gte 20>>내<<else>>우리<</if>> 농장에서 꺼져," 알렉스가 말한다. "넌 해고야."
+	<br>
+	<<person2>>
+	<<NPCname_ un $NPCList[0].name>> 항의하려고 <<his_ yi>> 입을 열었지만, 그러지 않기로 결정한다. <<He_ nun>> 헛간을 떠난다.
+	<br><br>
+	<<person1>>
+	"괜찮아?" 알렉스가 당신에게 붙은 건초를 털어내는 걸 도와주면서 묻는다. "나는 우리가 <<person2>><<him_ ul>><<person1>>믿을 수 있다고 생각했어. 앞으로는 내가 더 조심하도록 할게.<<ggdom>><<npcincr Alex dom 3>>
+	<br><br>
+
+	<span class="purple">망루는 대체 인력을 구하기 전까지 더 이상 작동하지 않는다.</span>
+	<br><br>
+	<<link [[다음|Farm Work]]>><<endevent>><<clearNPC "farm_tower_guard">><<set $farm.tower_guard to 0>><</link>>
+	<br>
+<<else>>
+	<<if $NPCList[0].traits.includes("relaxed")>>
+		"좋아," <<NPCname_ i $NPCList[0].name>> 말한다. "대신 돈을 가져갈게."
+	<<elseif $NPCList[0].traits.includes("sociable")>>
+		"마음대로 해," <<NPCname_ i $NPCList[0].name>> 말한다. "난 침착해. 돈은 어디 있지?"
+	<<elseif $NPCList[0].traits.includes("brooding")>>
+		"네가 나를 그렇게 쉽게 흥분시킬 줄은 몰랐어," <<NPCname_ i $NPCList[0].name>> 말한다. "자, 돈에 대해서 말해볼까."
+	<<else>>
+		"이 작은 장난꾸러기," <<NPCname_ i $NPCList[0].name>> 말한다. "날 그렇게 흥분시키다니. 이 일에 필요한 의지력을 알아줬으면 좋겠네. 내 돈은 받아갈게."
+	<</if>>
+	<br><br>
+	<<tearful>> 당신은 건초를 털어낸다.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<loadNPC 0 "farm_tower_guard">><<person1>>
+	<<farm_guard_pay>>
+	<<link [[지금 당장은 돈이 없다고 말한다|Farm Guard Pay Refuse]]>><</link>><<lltrust>>
+	<br>
+<</if>>
